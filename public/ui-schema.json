@@ -1,0 +1,17 @@
+{
+  "ui": [
+    {
+      "type": "v_stack",
+      "children": [
+        {
+          "type": "button",
+          "text": "Button 1"
+        },
+        {
+          "type": "button",
+          "text": "Button 2"
+        }
+      ]
+    }
+  ]
+}
