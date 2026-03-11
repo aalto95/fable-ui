@@ -24,8 +24,17 @@ export const Renderer: React.FC = () => {
   return (
     <>
       {schema?.ui.map((el) => {
+        if (el.children) {
+          return el.children.map((child) => {
+            if (child.type === "button") {
+              return <Button key={child.text}>{child.text}</Button>;
+            }
+            return `${child.type} not supported`;
+          });
+        }
         return el.type;
       })}
+      <Button>Hello</Button>
     </>
   );
 };
