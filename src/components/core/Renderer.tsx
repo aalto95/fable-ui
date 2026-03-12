@@ -1,40 +1,22 @@
 import type React from "react";
-import { useState } from "react";
+
 import { Button } from "../ui/button";
 
-interface Schema {
-  ui: {
+interface UI {
+  type: string;
+  children: {
     type: string;
-    children: {
-      type: string;
-      text: string;
-    }[];
+    text: string;
   }[];
 }
 
-export const Renderer: React.FC = () => {
-  const [schema, setSchema] = useState<Schema>();
-
-  fetch("./ui-schema.json").then((resp) => {
-    resp.json().then((jsonSchema) => {
-      setSchema(jsonSchema);
+export const Renderer: React.FC<{ ui: UI }> = ({ ui }) => {
+  if (ui.children) {
+    return ui.children.map((child) => {
+      if (child.type === "button") {
+        return <Button key={child.text}>{child.text}</Button>;
+      }
+      return `${child.type} not supported`;
     });
-  });
-
-  return (
-    <>
-      {schema?.ui.map((el) => {
-        if (el.children) {
-          return el.children.map((child) => {
-            if (child.type === "button") {
-              return <Button key={child.text}>{child.text}</Button>;
-            }
-            return `${child.type} not supported`;
-          });
-        }
-        return el.type;
-      })}
-      <Button>Hello</Button>
-    </>
-  );
+  }
 };
