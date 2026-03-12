@@ -2,27 +2,14 @@ import type React from "react";
 import { useState } from "react";
 import { Route, Routes } from "react-router";
 import { Renderer } from "./components/core/Renderer";
-import { Button } from "./components/ui/button";
-
-interface Page {
-  route: string;
-  ui: {
-    type: string;
-    children: {
-      type: string;
-      text: string;
-    }[];
-  };
-}
-
-type Pages = Page[];
+import type { Page } from "./models/interfaces/page";
 
 export const App: React.FC = () => {
-  const [pages, setPages] = useState<Pages>();
+  const [pages, setPages] = useState<Page[]>();
 
   fetch("./ui.json").then((resp) => {
-    resp.json().then((jsonSchema: Pages) => {
-      setPages(jsonSchema);
+    resp.json().then((uiSchema: Page[]) => {
+      setPages(uiSchema);
     });
   });
 
