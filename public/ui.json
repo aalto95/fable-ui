@@ -5,16 +5,18 @@
       {
         "id": "1",
         "type": "v_stack",
-        "children": [
+        "descendants": [
           {
             "id": "2",
             "type": "button",
-            "text": "Button 1"
+            "text": "Button 1",
+            "descendants": "Button 1"
           },
           {
             "id": "3",
             "type": "button",
-            "text": "Button 2"
+            "text": "Button 2",
+            "descendants": "Button 2"
           }
         ]
       }
@@ -26,7 +28,7 @@
       {
         "id": "4",
         "type": "v_stack",
-        "children": [
+        "descendants": [
           {
             "id": "5",
             "type": "button",

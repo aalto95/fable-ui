@@ -4,5 +4,5 @@ export interface IComponent {
   id: string;
   type: TComponent;
   text?: string;
-  children: IComponent[];
+  descendants?: IComponent[];
 }
