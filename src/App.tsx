@@ -23,7 +23,7 @@ export const App: React.FC = () => {
   return (
     <div className="flex flex-col h-screen">
     <Header />
-    <main className="h-full">
+    <main className="h-full flex-1">
     <Routes>
       {pages?.map((page) => {
         return (
