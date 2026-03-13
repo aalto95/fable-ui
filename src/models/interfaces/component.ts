@@ -16,4 +16,10 @@ export interface IComponent {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
+  /**
+   * Card-related configuration (used when type === "card").
+   */
+  title?: string;
+  description?: string;
+  footerText?: string;
 }

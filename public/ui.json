@@ -24,6 +24,20 @@
                 "text": "Save"
               }
             ]
+          },
+          {
+            "id": "welcome-card",
+            "type": "card",
+            "title": "Welcome",
+            "description": "This is a prebuilt card composed from atomic UI pieces.",
+            "footerText": "Card footer text",
+            "descendants": [
+              {
+                "id": "card-button",
+                "type": "button",
+                "text": "Learn more"
+              }
+            ]
           }
         ]
       }
