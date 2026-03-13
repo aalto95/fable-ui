@@ -7,15 +7,23 @@
         "type": "v_stack",
         "descendants": [
           {
-            "id": "2",
-            "type": "input",
-            "text": "ignored label or helper", 
-            "placeholder": "Enter your name"
-          },
-          {
-            "id": "3",
-            "type": "button",
-            "text": "Save"
+            "id": "form-1",
+            "type": "form",
+            "method": "POST",
+            "action": "/api/save",
+            "descendants": [
+              {
+                "id": "name-input",
+                "type": "input",
+                "name": "name",
+                "placeholder": "Enter your name"
+              },
+              {
+                "id": "save-button",
+                "type": "button",
+                "text": "Save"
+              }
+            ]
           }
         ]
       }
@@ -25,13 +33,27 @@
     "route": "/user",
     "ui": [
       {
-        "id": "4",
+        "id": "user-stack",
         "type": "v_stack",
         "descendants": [
           {
-            "id": "5",
-            "type": "button",
-            "text": "Button"
+            "id": "form-2",
+            "type": "form",
+            "method": "GET",
+            "action": "/api/search",
+            "descendants": [
+              {
+                "id": "query-input",
+                "type": "input",
+                "name": "q",
+                "placeholder": "Search..."
+              },
+              {
+                "id": "search-button",
+                "type": "button",
+                "text": "Search"
+              }
+            ]
           }
         ]
       }

@@ -1,1 +1,1 @@
-export type TComponent = "v_stack" | "button" | "input";
+export type TComponent = "v_stack" | "button" | "input" | "form";

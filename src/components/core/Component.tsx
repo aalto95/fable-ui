@@ -12,6 +12,7 @@ const ComponentInner: React.FC<ComponentProps> = ({
   text,
   descendants,
   children,
+  ...rest
 }) => {
   const MyComponent = COMPONENTS_MAP[type];
 
@@ -20,9 +21,10 @@ const ComponentInner: React.FC<ComponentProps> = ({
     return null;
   }
 
-  // Void-like components (e.g. "input") must not receive children.
+  // Void-like components (e.g. "input") must not receive children,
+  // but can receive additional props such as "name", "placeholder", etc.
   if (type === "input") {
-    return <MyComponent />;
+    return <MyComponent {...rest} />;
   }
 
   const hasDescendants = Array.isArray(descendants) && descendants.length > 0;
@@ -33,7 +35,11 @@ const ComponentInner: React.FC<ComponentProps> = ({
       ))
     : children ?? text;
 
-  return <MyComponent>{content}</MyComponent>;
+  return (
+    <MyComponent {...rest}>
+      {content}
+    </MyComponent>
+  );
 };
 
 const arePropsEqual = (prev: ComponentProps, next: ComponentProps): boolean => {
