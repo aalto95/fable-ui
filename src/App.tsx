@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Renderer } from "./components/core/Renderer";
 import type { Page } from "./models/interfaces/page";
+import { Header } from "./components/layout/header";
+import { Footer } from "./components/layout/footer";
 
 export const App: React.FC = () => {
   const [pages, setPages] = useState<Page[]>();
@@ -19,6 +21,9 @@ export const App: React.FC = () => {
   }, []);
 
   return (
+    <div className="flex flex-col h-screen">
+    <Header />
+    <main className="h-full">
     <Routes>
       {pages?.map((page) => {
         return (
@@ -30,5 +35,8 @@ export const App: React.FC = () => {
         );
       })}
     </Routes>
+    </main>
+    <Footer />
+    </div>
   );
 };
