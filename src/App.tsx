@@ -1,5 +1,5 @@
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Renderer } from "./components/core/Renderer";
 import type { Page } from "./models/interfaces/page";
@@ -7,11 +7,16 @@ import type { Page } from "./models/interfaces/page";
 export const App: React.FC = () => {
   const [pages, setPages] = useState<Page[]>();
 
-  fetch("./ui.json").then((resp) => {
-    resp.json().then((uiSchema: Page[]) => {
-      setPages(uiSchema);
-    });
-  });
+  useEffect(() => {
+    fetch("./ui.json")
+      .then((resp) => resp.json())
+      .then((uiSchema: Page[]) => {
+        setPages(uiSchema);
+      })
+      .catch((error) => {
+        console.error("Failed to load UI schema:", error);
+      });
+  }, []);
 
   return (
     <Routes>
