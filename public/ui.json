@@ -8,29 +8,14 @@
         "descendants": [
           {
             "id": "2",
-            "type": "button",
-            "text": "Button 1"
+            "type": "input",
+            "text": "ignored label or helper", 
+            "placeholder": "Enter your name"
           },
           {
             "id": "3",
             "type": "button",
-            "text": "Button 2"
-          }
-        ]
-      },
-      {
-        "id": "11",
-        "type": "v_stack",
-        "descendants": [
-          {
-            "id": "12",
-            "type": "button",
-            "text": "Button 1"
-          },
-          {
-            "id": "13",
-            "type": "button",
-            "text": "Button 2"
+            "text": "Save"
           }
         ]
       }
