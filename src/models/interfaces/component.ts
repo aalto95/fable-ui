@@ -5,6 +5,10 @@ export interface BaseComponent<T extends TComponent = TComponent> {
   type: T;
 }
 
+export interface HStackComponent extends BaseComponent<"h_stack"> {
+  descendants?: ComponentUnion[];
+}
+
 export interface VStackComponent extends BaseComponent<"v_stack"> {
   descendants?: ComponentUnion[];
 }
@@ -44,6 +48,7 @@ export interface CardComponent extends BaseComponent<"card"> {
 }
 
 export type ComponentsWithDescendants =
+  | HStackComponent
   | VStackComponent
   | FormComponent
   | CardComponent;

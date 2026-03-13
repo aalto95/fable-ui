@@ -5,6 +5,7 @@ import type {
   CardComponent,
   ComponentsWithDescendants,
   FormComponent,
+  HStackComponent,
   IComponent,
   VStackComponent,
 } from "../../models/interfaces/component";
@@ -23,6 +24,20 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
   }
 
   switch (type) {
+    case "h_stack": {
+      const { descendants } = rest as HStackComponent;
+      const hasDescendants =
+        Array.isArray(descendants) && descendants.length > 0;
+
+      return (
+        <MyComponent {...rest}>
+          {hasDescendants &&
+            descendants!.map((child) => (
+              <Component key={child.id} {...child} />
+            ))}
+        </MyComponent>
+      );
+    }
     case "v_stack": {
       const { descendants } = rest as VStackComponent;
       const hasDescendants =

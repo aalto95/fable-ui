@@ -7,16 +7,50 @@
         "type": "v_stack",
         "descendants": [
           {
-            "id": "welcome-card",
-            "type": "card",
-            "title": "Welcome",
-            "description": "This is a prebuilt card composed from atomic UI pieces.",
-            "footerText": "Card footer text",
+            "id": "h-stack",
+            "type": "h_stack",
             "descendants": [
               {
-                "id": "card-button",
+                "id": "welcome-card",
+                "type": "card",
+                "title": "Welcome",
+                "description": "This is a prebuilt card composed from atomic UI pieces.",
+                "footerText": "Card footer text",
+                "descendants": [
+                  {
+                    "id": "card-button",
+                    "type": "button",
+                    "text": "Learn more"
+                  }
+                ]
+              },
+              {
+                "id": "welcome-card-2",
+                "type": "card",
+                "title": "Welcome 2",
+                "description": "This is a prebuilt card composed from atomic UI pieces.",
+                "footerText": "Card footer text 2",
+                "descendants": [
+                  {
+                    "id": "card-button-2",
+                    "type": "button",
+                    "text": "Learn more 2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "welcome-card-3",
+            "type": "card",
+            "title": "Welcome 3",
+            "description": "This is a prebuilt card composed from atomic UI pieces.",
+            "footerText": "Card footer text 3",
+            "descendants": [
+              {
+                "id": "card-button-3",
                 "type": "button",
-                "text": "Learn more"
+                "text": "Learn more 3"
               }
             ]
           },
