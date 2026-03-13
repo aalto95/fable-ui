@@ -3,6 +3,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Form } from "../components/layout/form";
 import { CardLayout } from "../components/layout/card-layout";
+import { SelectField } from "../components/layout/select-field";
 
 export const COMPONENTS_MAP = {
   v_stack: VerticalStack,
@@ -10,4 +11,5 @@ export const COMPONENTS_MAP = {
   input: Input,
   form: Form,
   card: CardLayout,
+  select: SelectField,
 };

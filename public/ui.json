@@ -7,6 +7,20 @@
         "type": "v_stack",
         "descendants": [
           {
+            "id": "welcome-card",
+            "type": "card",
+            "title": "Welcome",
+            "description": "This is a prebuilt card composed from atomic UI pieces.",
+            "footerText": "Card footer text",
+            "descendants": [
+              {
+                "id": "card-button",
+                "type": "button",
+                "text": "Learn more"
+              }
+            ]
+          },
+          {
             "id": "form-1",
             "type": "form",
             "method": "POST",
@@ -19,23 +33,19 @@
                 "placeholder": "Enter your name"
               },
               {
+                "id": "query-input",
+                "type": "select",
+                "name": "status",
+                "placeholder": "Status of the user",
+                "options": [
+                  { "label": "Active", "value": "active" },
+                  { "label": "Inactive", "value": "inactive" }
+                ]
+              },
+              {
                 "id": "save-button",
                 "type": "button",
                 "text": "Save"
-              }
-            ]
-          },
-          {
-            "id": "welcome-card",
-            "type": "card",
-            "title": "Welcome",
-            "description": "This is a prebuilt card composed from atomic UI pieces.",
-            "footerText": "Card footer text",
-            "descendants": [
-              {
-                "id": "card-button",
-                "type": "button",
-                "text": "Learn more"
               }
             ]
           }
@@ -58,9 +68,14 @@
             "descendants": [
               {
                 "id": "query-input",
-                "type": "input",
+                "type": "select",
                 "name": "q",
-                "placeholder": "Search..."
+                "placeholder": "Choose query",
+                "options": [
+                  { "label": "Users", "value": "users" },
+                  { "label": "Posts", "value": "posts" },
+                  { "label": "Comments", "value": "comments" }
+                ]
               },
               {
                 "id": "search-button",

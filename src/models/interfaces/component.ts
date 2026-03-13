@@ -19,6 +19,17 @@ export interface InputComponent extends BaseComponent<"input"> {
   defaultValue?: string;
 }
 
+export interface SelectOption {
+  label: string;
+  value: string;
+}
+
+export interface SelectComponent extends BaseComponent<"select"> {
+  name?: string;
+  placeholder?: string;
+  options?: SelectOption[];
+}
+
 export interface FormComponent extends BaseComponent<"form"> {
   method?: string;
   action?: string;
@@ -32,9 +43,15 @@ export interface CardComponent extends BaseComponent<"card"> {
   descendants?: ComponentUnion[];
 }
 
-export type ComponentsWithDescendants = VStackComponent | FormComponent | CardComponent;
+export type ComponentsWithDescendants =
+  | VStackComponent
+  | FormComponent
+  | CardComponent;
 
-export type ComponentsWithoutDescendants = ButtonComponent | InputComponent;
+export type ComponentsWithoutDescendants =
+  | ButtonComponent
+  | InputComponent
+  | SelectComponent;
 
 export type ComponentUnion = ComponentsWithoutDescendants | ComponentsWithDescendants;
 
