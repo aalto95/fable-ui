@@ -17,7 +17,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 }) => {
   return (
     <Select {...rest}>
-      <SelectTrigger>
+      <SelectTrigger className="w-full">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
@@ -30,4 +30,3 @@ export const SelectField: React.FC<SelectFieldProps> = ({
     </Select>
   );
 };
-

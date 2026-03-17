@@ -1,4 +1,4 @@
-export const Footer = () => {
+export const Footer: React.FC = () => {
   return (
     <footer className="flex justify-between items-center p-4 border-t border-gray-200">
       <p className="text-sm text-gray-500">Footer</p>

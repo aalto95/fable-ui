@@ -77,6 +77,12 @@
                 ]
               },
               {
+                "id": "description-textarea",
+                "type": "textarea",
+                "name": "description",
+                "placeholder": "Enter the description"
+              },
+              {
                 "id": "save-button",
                 "type": "button",
                 "text": "Save"

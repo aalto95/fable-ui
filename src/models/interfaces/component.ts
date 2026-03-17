@@ -23,6 +23,12 @@ export interface InputComponent extends BaseComponent<"input"> {
   defaultValue?: string;
 }
 
+export interface Textarea extends BaseComponent<"textarea"> {
+  name?: string;
+  placeholder?: string;
+  defaultValue?: string;
+}
+
 export interface SelectOption {
   label: string;
   value: string;
@@ -56,10 +62,12 @@ export type ComponentsWithDescendants =
 export type ComponentsWithoutDescendants =
   | ButtonComponent
   | InputComponent
+  | Textarea
   | SelectComponent;
 
-export type ComponentUnion = ComponentsWithoutDescendants | ComponentsWithDescendants;
+export type ComponentUnion =
+  | ComponentsWithoutDescendants
+  | ComponentsWithDescendants;
 
 // Backwards-compatible alias used across the app code.
 export type IComponent = ComponentUnion;
-

@@ -22,7 +22,7 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
   ...rest
 }) => {
   return (
-    <Card {...rest}>
+    <Card {...rest} className="flex-1">
       {(title || description) && (
         <CardHeader>
           {title && <CardTitle>{title}</CardTitle>}
@@ -40,4 +40,3 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
     </Card>
   );
 };
-
