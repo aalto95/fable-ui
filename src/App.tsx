@@ -6,9 +6,14 @@ import type { Page } from "./models/interfaces/page";
 import { Header } from "./components/layout/header";
 import { Footer } from "./components/layout/footer";
 import { Toaster } from "./components/ui/sonner";
+import { DebugProvider } from "./contexts/debug";
 
 export const App: React.FC = () => {
   const [pages, setPages] = useState<Page[]>();
+  const [debugEnabled, setDebugEnabled] = useState<boolean>(() => {
+    const raw = localStorage.getItem("bdui.debug.enabled");
+    return raw === "true";
+  });
 
   useEffect(() => {
     fetch("./ui.json")
@@ -21,24 +26,30 @@ export const App: React.FC = () => {
       });
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("bdui.debug.enabled", String(debugEnabled));
+  }, [debugEnabled]);
+
   return (
-    <div className="flex flex-col h-screen">
-      <Header />
-      <main className="h-full p-4">
-        <Routes>
-          {pages?.map((page) => {
-            return (
-              <Route
-                key={page.route}
-                path={page.route}
-                element={<Renderer ui={page.ui} />}
-              />
-            );
-          })}
-        </Routes>
-      </main>
-      <Footer />
-      <Toaster />
-    </div>
+    <DebugProvider enabled={debugEnabled} setEnabled={setDebugEnabled}>
+      <div className="flex flex-col h-screen">
+        <Header />
+        <main className="p-4 flex-1">
+          <Routes>
+            {pages?.map((page) => {
+              return (
+                <Route
+                  key={page.route}
+                  path={page.route}
+                  element={<Renderer ui={page.ui} />}
+                />
+              );
+            })}
+          </Routes>
+        </main>
+        <Footer />
+        <Toaster />
+      </div>
+    </DebugProvider>
   );
 };

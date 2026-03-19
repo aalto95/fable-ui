@@ -15,6 +15,7 @@ export interface VStackComponent extends BaseComponent<"v_stack"> {
 
 export interface ButtonComponent extends BaseComponent<"button"> {
   text?: string;
+  expand?: boolean;
 }
 
 export interface InputComponent extends BaseComponent<"input"> {

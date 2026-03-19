@@ -30,7 +30,7 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
         </CardHeader>
       )}
 
-      {children && <CardContent>{children}</CardContent>}
+      {children && <CardContent className="flex flex-col gap-2">{children}</CardContent>}
 
       {footerText && (
         <CardFooter>

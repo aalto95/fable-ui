@@ -20,7 +20,8 @@
                   {
                     "id": "card-button",
                     "type": "button",
-                    "text": "Learn more"
+                    "text": "Learn more",
+                    "expand": false
                   }
                 ]
               },
@@ -34,7 +35,8 @@
                   {
                     "id": "card-button-2",
                     "type": "button",
-                    "text": "Learn more 2"
+                    "text": "Learn more 2",
+                    "expand": false
                   }
                 ]
               }
@@ -50,7 +52,8 @@
               {
                 "id": "card-button-3",
                 "type": "button",
-                "text": "Learn more 3"
+                "text": "Learn more 3",
+                "expand": false
               }
             ]
           },
@@ -88,7 +91,8 @@
               {
                 "id": "save-button",
                 "type": "button",
-                "text": "Save"
+                "text": "Save",
+                "expand": false
               }
             ]
           }
@@ -124,7 +128,206 @@
               {
                 "id": "search-button",
                 "type": "button",
-                "text": "Search"
+                "text": "Search",
+                "expand": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/showcase",
+    "ui": [
+      {
+        "id": "showcase-root",
+        "type": "v_stack",
+        "descendants": [
+          {
+            "id": "showcase-hero-row",
+            "type": "h_stack",
+            "descendants": [
+              {
+                "id": "hero-card",
+                "type": "card",
+                "title": "BDUI Showcase",
+                "description": "A single screen that exercises stacks, cards, buttons, inputs, selects, textareas, forms, required validation, and the submit confirmation dialog.",
+                "footerText": "Tip: try submitting each form to see the confirm dialog.",
+                "descendants": [
+                  { "id": "hero-btn-1", "type": "button", "text": "Primary action", "expand": false },
+                  { "id": "hero-btn-2", "type": "button", "text": "Secondary action", "expand": false }
+                ]
+              },
+              {
+                "id": "hero-card-2",
+                "type": "card",
+                "title": "Nested layout",
+                "description": "This card contains a nested vertical stack and a mini form.",
+                "footerText": "Everything below is rendered from ui.json",
+                "descendants": [
+                  {
+                    "id": "nested-v",
+                    "type": "v_stack",
+                    "descendants": [
+                      {
+                        "id": "mini-form",
+                        "type": "form",
+                        "method": "GET",
+                        "action": "/api/search",
+                        "descendants": [
+                          {
+                            "id": "mini-query",
+                            "type": "input",
+                            "name": "q",
+                            "placeholder": "Quick search (required)",
+                            "required": true
+                          },
+                          { "id": "mini-submit", "type": "button", "text": "Go", "expand": false }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "showcase-forms-row",
+            "type": "h_stack",
+            "descendants": [
+              {
+                "id": "post-form-card",
+                "type": "card",
+                "title": "POST form (JSON body)",
+                "description": "Required fields + native select + textarea. Submitting prompts for confirmation.",
+                "footerText": "Action points to the mock API save endpoint.",
+                "descendants": [
+                  {
+                    "id": "post-form",
+                    "type": "form",
+                    "method": "POST",
+                    "action": "http://localhost:3000/api/save",
+                    "descendants": [
+                      {
+                        "id": "post-name",
+                        "type": "input",
+                        "name": "name",
+                        "placeholder": "Name (required)",
+                        "required": true
+                      },
+                      {
+                        "id": "post-status",
+                        "type": "select",
+                        "name": "status",
+                        "placeholder": "Status (required)",
+                        "required": true,
+                        "options": [
+                          { "label": "Active", "value": "active" },
+                          { "label": "Inactive", "value": "inactive" },
+                          { "label": "Pending", "value": "pending" }
+                        ]
+                      },
+                      {
+                        "id": "post-desc",
+                        "type": "textarea",
+                        "name": "description",
+                        "placeholder": "Description (required)",
+                        "required": true
+                      },
+                      { "id": "post-submit", "type": "button", "text": "Submit POST", "expand": false }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "get-form-card",
+                "type": "card",
+                "title": "GET form (query params)",
+                "description": "Demonstrates URL building from form fields.",
+                "footerText": "Try selecting a resource then submitting.",
+                "descendants": [
+                  {
+                    "id": "get-form",
+                    "type": "form",
+                    "method": "GET",
+                    "action": "/api/search",
+                    "descendants": [
+                      {
+                        "id": "get-resource",
+                        "type": "select",
+                        "name": "q",
+                        "placeholder": "Resource (required)",
+                        "required": true,
+                        "options": [
+                          { "label": "Users", "value": "users" },
+                          { "label": "Posts", "value": "posts" },
+                          { "label": "Comments", "value": "comments" }
+                        ]
+                      },
+                      {
+                        "id": "get-filter",
+                        "type": "input",
+                        "name": "filter",
+                        "placeholder": "Optional filter (e.g. id=1)"
+                      },
+                      { "id": "get-submit", "type": "button", "text": "Submit GET", "expand": false }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "showcase-mixed-row",
+            "type": "h_stack",
+            "descendants": [
+              {
+                "id": "content-card-1",
+                "type": "card",
+                "title": "Card composition",
+                "description": "Cards can include arbitrary descendants like buttons and inputs.",
+                "footerText": "This is purely presentational content.",
+                "descendants": [
+                  {
+                    "id": "content-input",
+                    "type": "input",
+                    "name": "demo",
+                    "placeholder": "An input living inside a card"
+                  },
+                  { "id": "content-btn", "type": "button", "text": "Card button", "expand": false }
+                ]
+              },
+              {
+                "id": "content-card-2",
+                "type": "card",
+                "title": "Deep nesting",
+                "description": "A stack inside a card inside a stack.",
+                "footerText": "Useful for complex pages.",
+                "descendants": [
+                  {
+                    "id": "deep-h",
+                    "type": "h_stack",
+                    "descendants": [
+                      {
+                        "id": "deep-left",
+                        "type": "v_stack",
+                        "descendants": [
+                          { "id": "deep-btn-1", "type": "button", "text": "Left 1", "expand": false },
+                          { "id": "deep-btn-2", "type": "button", "text": "Left 2", "expand": false }
+                        ]
+                      },
+                      {
+                        "id": "deep-right",
+                        "type": "v_stack",
+                        "descendants": [
+                          { "id": "deep-btn-3", "type": "button", "text": "Right 1", "expand": false },
+                          { "id": "deep-btn-4", "type": "button", "text": "Right 2", "expand": false }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
