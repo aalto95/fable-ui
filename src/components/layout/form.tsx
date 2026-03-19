@@ -13,7 +13,7 @@ export const Form: React.FC<FormProps> = ({
   children,
   ...rest
 }) => {
-  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
     const formElement = event.currentTarget;
@@ -22,40 +22,60 @@ export const Form: React.FC<FormProps> = ({
     const targetAction = action ?? formElement.action;
     const targetMethod = (method ?? formElement.method ?? "GET").toUpperCase();
 
-    const searchParams = new URLSearchParams();
+    // Convert FormData to plain object
+    const jsonBody: Record<string, any> = {};
     formData.forEach((value, key) => {
-      searchParams.append(key, String(value));
+      // If multiple fields have the same name, you could handle arrays here
+      jsonBody[key] = value;
     });
 
+    let requestUrl = targetAction;
     const init: RequestInit = {
       method: targetMethod,
+      headers: {},
     };
 
-    let requestUrl = targetAction;
-
     if (targetMethod === "GET") {
-      const query = searchParams.toString();
-      if (query) {
+      const params = new URLSearchParams(
+        jsonBody as Record<string, string>,
+      ).toString();
+      if (params) {
         requestUrl = targetAction.includes("?")
-          ? `${targetAction}&${query}`
-          : `${targetAction}?${query}`;
+          ? `${targetAction}&${params}`
+          : `${targetAction}?${params}`;
       }
     } else {
-      init.body = formData;
+      // Send JSON for non-GET methods
+      init.headers = { "Content-Type": "application/json" };
+      init.body = JSON.stringify(jsonBody);
     }
 
-    if (requestUrl) {
-      // Fire-and-forget; callers can extend this to handle responses.
-      void fetch(requestUrl, init).catch((error) => {
-        console.error("Form submission failed:", error);
-      });
+    try {
+      const response = await fetch(requestUrl, init);
+      if (!response.ok) {
+        console.error(
+          "Form submission failed:",
+          response.status,
+          await response.text(),
+        );
+      } else {
+        console.log("Form submitted successfully:", await response.json());
+      }
+    } catch (error) {
+      console.error("Form submission failed:", error);
     }
 
     onSubmit?.(event);
   };
 
   return (
-    <form action={action} method={method} onSubmit={handleSubmit} {...rest} className="flex flex-col gap-2">
+    <form
+      action={action}
+      method={method}
+      onSubmit={handleSubmit}
+      {...rest}
+      className="flex flex-col gap-2"
+    >
       {children}
     </form>
   );
