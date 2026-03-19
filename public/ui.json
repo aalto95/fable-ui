@@ -58,7 +58,7 @@
             "id": "form-1",
             "type": "form",
             "method": "POST",
-            "action": "/api/save",
+            "action": "http://localhost:3000/api/save",
             "descendants": [
               {
                 "id": "name-input",
