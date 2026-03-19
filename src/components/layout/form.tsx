@@ -30,6 +30,51 @@ export const Form: React.FC<FormProps> = ({
       jsonBody[key] = value;
     });
 
+    const requiredNodes = Array.from(
+      formElement.querySelectorAll<HTMLElement>(
+        "[data-bdui-required='true'], [required]",
+      ),
+    );
+
+    const missingRequired = requiredNodes
+      .map((node) => {
+        const nameAttr =
+          (node as HTMLInputElement).name ??
+          node.getAttribute("name") ??
+          node.getAttribute("data-name") ??
+          undefined;
+
+        if (!nameAttr) return null;
+
+        const value = formData.get(nameAttr);
+        const isMissing =
+          value === null ||
+          (typeof value === "string" && value.trim().length === 0);
+
+        if (!isMissing) return null;
+
+        const label =
+          node.getAttribute("data-bdui-label") ??
+          (node as HTMLInputElement).placeholder ??
+          node.getAttribute("aria-label") ??
+          nameAttr;
+
+        return { name: nameAttr, label, node };
+      })
+      .filter((x): x is NonNullable<typeof x> => x !== null);
+
+    if (missingRequired.length > 0) {
+      toast(
+        `Please fill required fields: ${missingRequired
+          .map((x) => x.label)
+          .join(", ")}`,
+      );
+
+      const first = missingRequired[0]?.node as HTMLElement | undefined;
+      first?.focus?.();
+      return;
+    }
+
     let requestUrl = targetAction;
     const init: RequestInit = {
       method: targetMethod,

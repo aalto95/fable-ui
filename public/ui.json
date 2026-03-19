@@ -64,13 +64,15 @@
                 "id": "name-input",
                 "type": "input",
                 "name": "name",
-                "placeholder": "Enter your name"
+                "placeholder": "Enter your name",
+                "required": true
               },
               {
                 "id": "query-input",
                 "type": "select",
                 "name": "status",
                 "placeholder": "Status of the user",
+                "required": true,
                 "options": [
                   { "label": "Active", "value": "active" },
                   { "label": "Inactive", "value": "inactive" }
@@ -80,7 +82,8 @@
                 "id": "description-textarea",
                 "type": "textarea",
                 "name": "description",
-                "placeholder": "Enter the description"
+                "placeholder": "Enter the description",
+                "required": true
               },
               {
                 "id": "save-button",
@@ -111,6 +114,7 @@
                 "type": "select",
                 "name": "q",
                 "placeholder": "Choose query",
+                "required": true,
                 "options": [
                   { "label": "Users", "value": "users" },
                   { "label": "Posts", "value": "posts" },

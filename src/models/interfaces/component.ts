@@ -21,12 +21,14 @@ export interface InputComponent extends BaseComponent<"input"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
+  required?: boolean;
 }
 
 export interface Textarea extends BaseComponent<"textarea"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
+  required?: boolean;
 }
 
 export interface SelectOption {
@@ -38,6 +40,7 @@ export interface SelectComponent extends BaseComponent<"select"> {
   name?: string;
   placeholder?: string;
   options?: SelectOption[];
+  required?: boolean;
 }
 
 export interface FormComponent extends BaseComponent<"form"> {
