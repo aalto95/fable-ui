@@ -1,6 +1,8 @@
 import type { SubmitEventHandler } from "react";
 import type React from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
+import { Dialog } from "./dialog";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   action?: string;
@@ -14,6 +16,9 @@ export const Form: React.FC<FormProps> = ({
   children,
   ...rest
 }) => {
+  const submitAfterConfirmRef = useRef<null | (() => Promise<void>)>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
@@ -75,51 +80,81 @@ export const Form: React.FC<FormProps> = ({
       return;
     }
 
-    let requestUrl = targetAction;
-    const init: RequestInit = {
-      method: targetMethod,
-      headers: {},
+    submitAfterConfirmRef.current = async () => {
+      let requestUrl = targetAction;
+      const init: RequestInit = {
+        method: targetMethod,
+        headers: {},
+      };
+
+      if (targetMethod === "GET") {
+        const params = new URLSearchParams(
+          jsonBody as Record<string, string>,
+        ).toString();
+        if (params) {
+          requestUrl = targetAction.includes("?")
+            ? `${targetAction}&${params}`
+            : `${targetAction}?${params}`;
+        }
+      } else {
+        init.headers = { "Content-Type": "application/json" };
+        init.body = JSON.stringify(jsonBody);
+      }
+
+      try {
+        const response = await fetch(requestUrl, init);
+        if (!response.ok) {
+          let bodyText: string | undefined;
+          try {
+            bodyText = await response.text();
+          } catch {
+            bodyText = undefined;
+          }
+
+          toast(
+            bodyText?.trim()
+              ? bodyText
+              : `Form not submitted (status ${response.status})`,
+          );
+        } else {
+          toast("Form submitted successfully");
+          formElement.reset();
+        }
+      } catch (error) {
+        toast(`Form submission failed: ${String(error)}`);
+      }
+
+      onSubmit?.(event);
     };
 
-    if (targetMethod === "GET") {
-      const params = new URLSearchParams(
-        jsonBody as Record<string, string>,
-      ).toString();
-      if (params) {
-        requestUrl = targetAction.includes("?")
-          ? `${targetAction}&${params}`
-          : `${targetAction}?${params}`;
-      }
-    } else {
-      // Send JSON for non-GET methods
-      init.headers = { "Content-Type": "application/json" };
-      init.body = JSON.stringify(jsonBody);
-    }
-
-    try {
-      const response = await fetch(requestUrl, init);
-      if (!response.ok) {
-        toast("Form not submitted");
-      } else {
-        toast("Form submitted successfully");
-        formElement.reset();
-      }
-    } catch (error) {
-      toast("Form submission failed:" + error);
-    }
-
-    onSubmit?.(event);
+    setDialogOpen(true);
   };
 
   return (
-    <form
-      action={action}
-      method={method}
-      onSubmit={handleSubmit}
-      {...rest}
-      className="flex flex-col gap-2"
-    >
-      {children}
-    </form>
+    <>
+      <form
+        action={action}
+        method={method}
+        onSubmit={handleSubmit}
+        {...rest}
+        className="flex flex-col gap-2"
+      >
+        {children}
+      </form>
+
+      <Dialog
+        open={dialogOpen}
+        onOpenChange={(open) => {
+          if (!open) submitAfterConfirmRef.current = null;
+          setDialogOpen(open);
+        }}
+        onConfirm={async () => {
+          setDialogOpen(false);
+          const submit = submitAfterConfirmRef.current;
+          submitAfterConfirmRef.current = null;
+          await submit?.();
+        }}
+      />
+    </>
   );
 };
