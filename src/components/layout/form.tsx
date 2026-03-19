@@ -1,5 +1,6 @@
 import type { SubmitEventHandler } from "react";
 import type React from "react";
+import { toast } from "sonner";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   action?: string;
@@ -53,16 +54,13 @@ export const Form: React.FC<FormProps> = ({
     try {
       const response = await fetch(requestUrl, init);
       if (!response.ok) {
-        console.error(
-          "Form submission failed:",
-          response.status,
-          await response.text(),
-        );
+        toast("Form not submitted");
       } else {
-        console.log("Form submitted successfully:", await response.json());
+        toast("Form submitted successfully");
+        formElement.reset();
       }
     } catch (error) {
-      console.error("Form submission failed:", error);
+      toast("Form submission failed:" + error);
     }
 
     onSubmit?.(event);

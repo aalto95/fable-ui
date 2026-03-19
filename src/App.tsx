@@ -5,6 +5,7 @@ import { Renderer } from "./components/core/Renderer";
 import type { Page } from "./models/interfaces/page";
 import { Header } from "./components/layout/header";
 import { Footer } from "./components/layout/footer";
+import { Toaster } from "./components/ui/sonner";
 
 export const App: React.FC = () => {
   const [pages, setPages] = useState<Page[]>();
@@ -22,21 +23,22 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen">
-    <Header />
-    <main className="h-full p-4">
-    <Routes>
-      {pages?.map((page) => {
-        return (
-          <Route
-            key={page.route}
-            path={page.route}
-            element={<Renderer ui={page.ui} />}
-          />
-        );
-      })}
-    </Routes>
-    </main>
-    <Footer />
+      <Header />
+      <main className="h-full p-4">
+        <Routes>
+          {pages?.map((page) => {
+            return (
+              <Route
+                key={page.route}
+                path={page.route}
+                element={<Renderer ui={page.ui} />}
+              />
+            );
+          })}
+        </Routes>
+      </main>
+      <Footer />
+      <Toaster />
     </div>
   );
 };
