@@ -22,7 +22,7 @@ export const CardLayout: React.FC<CardLayoutProps> = ({
   ...rest
 }) => {
   return (
-    <Card {...rest} className="flex-1">
+    <Card {...rest} className="flex-1 h-fit">
       {(title || description) && (
         <CardHeader>
           {title && <CardTitle>{title}</CardTitle>}
