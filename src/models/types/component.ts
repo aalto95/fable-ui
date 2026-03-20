@@ -5,5 +5,6 @@ export type TComponent =
   | "input"
   | "textarea"
   | "form"
+  | "date_picker"
   | "card"
   | "select";

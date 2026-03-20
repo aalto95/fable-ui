@@ -32,6 +32,13 @@ export interface Textarea extends BaseComponent<"textarea"> {
   required?: boolean;
 }
 
+export interface DatePickerComponent extends BaseComponent<"date_picker"> {
+  name?: string;
+  placeholder?: string;
+  defaultValue?: string;
+  required?: boolean;
+}
+
 export interface SelectOption {
   label: string;
   value: string;
@@ -67,7 +74,8 @@ export type ComponentsWithoutDescendants =
   | ButtonComponent
   | InputComponent
   | Textarea
-  | SelectComponent;
+  | SelectComponent
+  | DatePickerComponent;
 
 export type ComponentUnion =
   | ComponentsWithoutDescendants

@@ -137,7 +137,7 @@ export const Form: React.FC<FormProps> = ({
         method={method}
         onSubmit={handleSubmit}
         {...rest}
-        className="flex flex-col gap-2"
+        className="flex flex-col gap-2 flex-1"
       >
         {children}
       </form>

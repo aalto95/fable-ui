@@ -17,17 +17,35 @@ type ComponentProps = IComponent & {
   children?: React.ReactNode;
 };
 
-const DEBUG_COLORS: Record<string, { border: string; bg: string; text: string }> =
-  {
-    h_stack: { border: "border-fuchsia-500", bg: "bg-fuchsia-500", text: "text-white" },
-    v_stack: { border: "border-sky-500", bg: "bg-sky-500", text: "text-white" },
-    card: { border: "border-emerald-500", bg: "bg-emerald-500", text: "text-white" },
-    form: { border: "border-amber-500", bg: "bg-amber-500", text: "text-black" },
-    input: { border: "border-rose-500", bg: "bg-rose-500", text: "text-white" },
-    textarea: { border: "border-indigo-500", bg: "bg-indigo-500", text: "text-white" },
-    select: { border: "border-lime-500", bg: "bg-lime-500", text: "text-black" },
-    button: { border: "border-orange-500", bg: "bg-orange-500", text: "text-black" },
-  };
+const DEBUG_COLORS: Record<
+  string,
+  { border: string; bg: string; text: string }
+> = {
+  h_stack: {
+    border: "border-fuchsia-500",
+    bg: "bg-fuchsia-500",
+    text: "text-white",
+  },
+  v_stack: { border: "border-sky-500", bg: "bg-sky-500", text: "text-white" },
+  card: {
+    border: "border-emerald-500",
+    bg: "bg-emerald-500",
+    text: "text-white",
+  },
+  form: { border: "border-amber-500", bg: "bg-amber-500", text: "text-black" },
+  input: { border: "border-rose-500", bg: "bg-rose-500", text: "text-white" },
+  textarea: {
+    border: "border-indigo-500",
+    bg: "bg-indigo-500",
+    text: "text-white",
+  },
+  select: { border: "border-lime-500", bg: "bg-lime-500", text: "text-black" },
+  button: {
+    border: "border-orange-500",
+    bg: "bg-orange-500",
+    text: "text-black",
+  },
+};
 
 function getDebugLayoutClass(): string {
   return "w-full";
@@ -86,7 +104,7 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
             descendants!.map((child) => (
               <Component key={child.id} {...child} />
             ))}
-        </MyComponent>
+        </MyComponent>,
       );
     }
     case "v_stack": {
@@ -100,7 +118,7 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
             descendants!.map((child) => (
               <Component key={child.id} {...child} />
             ))}
-        </MyComponent>
+        </MyComponent>,
       );
     }
     case "form": {
@@ -114,7 +132,7 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
             descendants!.map((child) => (
               <Component key={child.id} {...child} />
             ))}
-        </MyComponent>
+        </MyComponent>,
       );
     }
     case "card": {
@@ -128,7 +146,7 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
             descendants!.map((child) => (
               <Component key={child.id} {...child} />
             ))}
-        </MyComponent>
+        </MyComponent>,
       );
     }
     case "button": {
@@ -158,12 +176,8 @@ const arePropsEqual = (prev: ComponentProps, next: ComponentProps): boolean => {
     return false;
   }
 
-  const prevDesc =
-    (prev as ComponentsWithDescendants).descendants ??
-    [];
-  const nextDesc =
-    (next as ComponentsWithDescendants).descendants ??
-    [];
+  const prevDesc = (prev as ComponentsWithDescendants).descendants ?? [];
+  const nextDesc = (next as ComponentsWithDescendants).descendants ?? [];
 
   if (prevDesc === nextDesc) {
     return true;

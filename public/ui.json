@@ -7,92 +7,104 @@
         "type": "v_stack",
         "descendants": [
           {
-            "id": "h-stack",
+            "id": "2",
             "type": "h_stack",
             "descendants": [
               {
-                "id": "welcome-card",
-                "type": "card",
-                "title": "Welcome",
-                "description": "This is a prebuilt card composed from atomic UI pieces.",
-                "footerText": "Card footer text",
+                "id": "form",
+                "type": "form",
+                "method": "POST",
+                "action": "http://localhost:3000/api/save",
                 "descendants": [
                   {
-                    "id": "card-button",
+                    "id": "name-input",
+                    "type": "input",
+                    "name": "name",
+                    "placeholder": "Enter your name",
+                    "required": true
+                  },
+                  {
+                    "id": "birthday-input",
+                    "type": "date_picker",
+                    "name": "birthday",
+                    "placeholder": "Enter your birthday",
+                    "required": true
+                  },
+                  {
+                    "id": "query-input",
+                    "type": "select",
+                    "name": "status",
+                    "placeholder": "Status of the user",
+                    "required": true,
+                    "options": [
+                      { "label": "Active", "value": "active" },
+                      { "label": "Inactive", "value": "inactive" }
+                    ]
+                  },
+                  {
+                    "id": "description-textarea",
+                    "type": "textarea",
+                    "name": "description",
+                    "placeholder": "Enter the description",
+                    "required": true
+                  },
+                  {
+                    "id": "save-button",
                     "type": "button",
-                    "text": "Learn more",
+                    "text": "Save",
                     "expand": false
                   }
                 ]
               },
               {
-                "id": "welcome-card-2",
-                "type": "card",
-                "title": "Welcome 2",
-                "description": "This is a prebuilt card composed from atomic UI pieces.",
-                "footerText": "Card footer text 2",
+                "id": "form-2",
+                "type": "form",
+                "method": "POST",
+                "action": "http://localhost:3000/api/save",
                 "descendants": [
                   {
-                    "id": "card-button-2",
+                    "id": "name-input-2",
+                    "type": "input",
+                    "name": "name",
+                    "placeholder": "Enter your name",
+                    "defaultValue": "John",
+                    "required": true
+                  },
+                  {
+                    "id": "birthday-input-2",
+                    "type": "date_picker",
+                    "name": "birthday",
+                    "placeholder": "Enter your birthday",
+                    "defaultValue": "2026-03-19T10:00:00Z",
+                    "required": true
+                  },
+                  {
+                    "id": "query-input-2",
+                    "type": "select",
+                    "name": "status",
+                    "placeholder": "Status of the user",
+                    "required": true,
+                    "options": [
+                      { "label": "Active", "value": "active" },
+                      { "label": "Inactive", "value": "inactive" }
+                    ],
+                    "defaultValue": "active"
+                  },
+                  {
+                    "id": "description-textarea-2",
+                    "type": "textarea",
+                    "name": "description",
+                    "placeholder": "Enter the description",
+                    "required": true,
+                    "defaultValue": "This is a description"
+                  },
+                  {
+                    "id": "save-button-2",
                     "type": "button",
-                    "text": "Learn more 2",
+                    "text": "Save",
                     "expand": false
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "id": "welcome-card-3",
-            "type": "card",
-            "title": "Welcome 3",
-            "description": "This is a prebuilt card composed from atomic UI pieces.",
-            "footerText": "Card footer text 3",
-            "descendants": [
-              {
-                "id": "card-button-3",
-                "type": "button",
-                "text": "Learn more 3",
-                "expand": false
-              }
-            ]
-          },
-          {
-            "id": "form-1",
-            "type": "form",
-            "method": "POST",
-            "action": "http://localhost:3000/api/save",
-            "descendants": [
-              {
-                "id": "name-input",
-                "type": "input",
-                "name": "name",
-                "placeholder": "Enter your name",
-                "required": true
-              },
-              {
-                "id": "query-input",
-                "type": "select",
-                "name": "status",
-                "placeholder": "Status of the user",
-                "required": true,
-                "options": [
-                  { "label": "Active", "value": "active" },
-                  { "label": "Inactive", "value": "inactive" }
-                ]
-              },
-              {
-                "id": "description-textarea",
-                "type": "textarea",
-                "name": "description",
-                "placeholder": "Enter the description",
-                "required": true
-              },
-              {
-                "id": "save-button",
-                "type": "button",
-                "text": "Save",
-                "expand": false
               }
             ]
           }
@@ -155,8 +167,18 @@
                 "description": "A single screen that exercises stacks, cards, buttons, inputs, selects, textareas, forms, required validation, and the submit confirmation dialog.",
                 "footerText": "Tip: try submitting each form to see the confirm dialog.",
                 "descendants": [
-                  { "id": "hero-btn-1", "type": "button", "text": "Primary action", "expand": false },
-                  { "id": "hero-btn-2", "type": "button", "text": "Secondary action", "expand": false }
+                  {
+                    "id": "hero-btn-1",
+                    "type": "button",
+                    "text": "Primary action",
+                    "expand": false
+                  },
+                  {
+                    "id": "hero-btn-2",
+                    "type": "button",
+                    "text": "Secondary action",
+                    "expand": false
+                  }
                 ]
               },
               {
@@ -183,7 +205,12 @@
                             "placeholder": "Quick search (required)",
                             "required": true
                           },
-                          { "id": "mini-submit", "type": "button", "text": "Go", "expand": false }
+                          {
+                            "id": "mini-submit",
+                            "type": "button",
+                            "text": "Go",
+                            "expand": false
+                          }
                         ]
                       }
                     ]
@@ -235,7 +262,12 @@
                         "placeholder": "Description (required)",
                         "required": true
                       },
-                      { "id": "post-submit", "type": "button", "text": "Submit POST", "expand": false }
+                      {
+                        "id": "post-submit",
+                        "type": "button",
+                        "text": "Submit POST",
+                        "expand": false
+                      }
                     ]
                   }
                 ]
@@ -271,7 +303,12 @@
                         "name": "filter",
                         "placeholder": "Optional filter (e.g. id=1)"
                       },
-                      { "id": "get-submit", "type": "button", "text": "Submit GET", "expand": false }
+                      {
+                        "id": "get-submit",
+                        "type": "button",
+                        "text": "Submit GET",
+                        "expand": false
+                      }
                     ]
                   }
                 ]
@@ -295,7 +332,12 @@
                     "name": "demo",
                     "placeholder": "An input living inside a card"
                   },
-                  { "id": "content-btn", "type": "button", "text": "Card button", "expand": false }
+                  {
+                    "id": "content-btn",
+                    "type": "button",
+                    "text": "Card button",
+                    "expand": false
+                  }
                 ]
               },
               {
@@ -313,16 +355,36 @@
                         "id": "deep-left",
                         "type": "v_stack",
                         "descendants": [
-                          { "id": "deep-btn-1", "type": "button", "text": "Left 1", "expand": false },
-                          { "id": "deep-btn-2", "type": "button", "text": "Left 2", "expand": false }
+                          {
+                            "id": "deep-btn-1",
+                            "type": "button",
+                            "text": "Left 1",
+                            "expand": false
+                          },
+                          {
+                            "id": "deep-btn-2",
+                            "type": "button",
+                            "text": "Left 2",
+                            "expand": false
+                          }
                         ]
                       },
                       {
                         "id": "deep-right",
                         "type": "v_stack",
                         "descendants": [
-                          { "id": "deep-btn-3", "type": "button", "text": "Right 1", "expand": false },
-                          { "id": "deep-btn-4", "type": "button", "text": "Right 2", "expand": false }
+                          {
+                            "id": "deep-btn-3",
+                            "type": "button",
+                            "text": "Right 1",
+                            "expand": false
+                          },
+                          {
+                            "id": "deep-btn-4",
+                            "type": "button",
+                            "text": "Right 2",
+                            "expand": false
+                          }
                         ]
                       }
                     ]
