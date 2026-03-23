@@ -12,21 +12,21 @@ export interface IButtonComponent extends IBaseComponent<"button"> {
 
 export interface IInputComponent extends IBaseComponent<"input"> {
   name?: string;
-  placeholder?: string;
+  label?: string;
   defaultValue?: string;
   required?: boolean;
 }
 
 export interface ITextareaComponent extends IBaseComponent<"textarea"> {
   name?: string;
-  placeholder?: string;
+  label?: string;
   defaultValue?: string;
   required?: boolean;
 }
 
 export interface IDatepickerComponent extends IBaseComponent<"datepicker"> {
   name?: string;
-  placeholder?: string;
+  label?: string;
   defaultValue?: string;
   required?: boolean;
 }
@@ -38,7 +38,7 @@ export interface ISelectOption {
 
 export interface ISelectComponent extends IBaseComponent<"select"> {
   name?: string;
-  placeholder?: string;
+  label?: string;
   options?: ISelectOption[];
   required?: boolean;
 }

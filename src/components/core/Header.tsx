@@ -10,7 +10,6 @@ export const Header: React.FC = () => {
       <h1 className="text-2xl font-bold">BDUI Renderer</h1>
       <nav className="flex justify-between items-center gap-4">
         <Link to="/">Home</Link>
-        <Link to="/user">User</Link>
         <Link to="/showcase">Showcase</Link>
         <BaseButton
           type="button"

@@ -20,21 +20,21 @@
                     "id": "name-input",
                     "type": "input",
                     "name": "name",
-                    "placeholder": "Enter your name",
+                    "label": "Enter your name",
                     "required": true
                   },
                   {
                     "id": "birthday-input",
                     "type": "datepicker",
                     "name": "birthday",
-                    "placeholder": "Enter your birthday",
+                    "label": "Enter your birthday",
                     "required": true
                   },
                   {
                     "id": "query-input",
                     "type": "select",
                     "name": "status",
-                    "placeholder": "Status of the user",
+                    "label": "Status of the user",
                     "required": true,
                     "options": [
                       { "label": "Active", "value": "active" },
@@ -45,7 +45,7 @@
                     "id": "description-textarea",
                     "type": "textarea",
                     "name": "description",
-                    "placeholder": "Enter the description",
+                    "label": "Enter the description",
                     "required": true
                   },
                   {
@@ -72,7 +72,7 @@
                     "id": "name-input-2",
                     "type": "input",
                     "name": "name-2",
-                    "placeholder": "Enter your name",
+                    "label": "Enter your name",
                     "defaultValue": "John",
                     "required": true
                   },
@@ -80,7 +80,7 @@
                     "id": "birthday-input-2",
                     "type": "datepicker",
                     "name": "birthday-2",
-                    "placeholder": "Enter your birthday",
+                    "label": "Enter your birthday",
                     "defaultValue": "2026-03-19T10:00:00Z",
                     "required": true
                   },
@@ -88,7 +88,7 @@
                     "id": "query-input-2",
                     "type": "select",
                     "name": "status-2",
-                    "placeholder": "Status of the user",
+                    "label": "Status of the user",
                     "required": true,
                     "options": [
                       { "label": "Active", "value": "active" },
@@ -100,7 +100,7 @@
                     "id": "description-textarea-2",
                     "type": "textarea",
                     "name": "description-2",
-                    "placeholder": "Enter the description",
+                    "label": "Enter the description",
                     "required": true,
                     "defaultValue": "This is a description"
                   },
@@ -118,43 +118,6 @@
                     "expand": true
                   }
                 ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "route": "/user",
-    "ui": [
-      {
-        "id": "user-stack",
-        "type": "v_stack",
-        "descendants": [
-          {
-            "id": "form-2",
-            "type": "form",
-            "method": "GET",
-            "action": "/api/search",
-            "descendants": [
-              {
-                "id": "query-input",
-                "type": "select",
-                "name": "q",
-                "placeholder": "Choose query",
-                "required": true,
-                "options": [
-                  { "label": "Users", "value": "users" },
-                  { "label": "Posts", "value": "posts" },
-                  { "label": "Comments", "value": "comments" }
-                ]
-              },
-              {
-                "id": "search-button",
-                "type": "button",
-                "text": "Search",
-                "expand": false
               }
             ]
           }
@@ -183,14 +146,12 @@
                   {
                     "id": "hero-btn-1",
                     "type": "button",
-                    "text": "Primary action",
-                    "expand": false
+                    "text": "Primary action"
                   },
                   {
                     "id": "hero-btn-2",
                     "type": "button",
-                    "text": "Secondary action",
-                    "expand": false
+                    "text": "Secondary action"
                   }
                 ]
               },
@@ -215,14 +176,13 @@
                             "id": "mini-query",
                             "type": "input",
                             "name": "q",
-                            "placeholder": "Quick search (required)",
+                            "label": "Quick search (required)",
                             "required": true
                           },
                           {
                             "id": "mini-submit",
                             "type": "button",
-                            "text": "Go",
-                            "expand": false
+                            "text": "Go"
                           }
                         ]
                       }
@@ -253,14 +213,14 @@
                         "id": "post-name",
                         "type": "input",
                         "name": "name",
-                        "placeholder": "Name (required)",
+                        "label": "Name (required)",
                         "required": true
                       },
                       {
                         "id": "post-status",
                         "type": "select",
                         "name": "status",
-                        "placeholder": "Status (required)",
+                        "label": "Status (required)",
                         "required": true,
                         "options": [
                           { "label": "Active", "value": "active" },
@@ -272,14 +232,13 @@
                         "id": "post-desc",
                         "type": "textarea",
                         "name": "description",
-                        "placeholder": "Description (required)",
+                        "label": "Description (required)",
                         "required": true
                       },
                       {
                         "id": "post-submit",
                         "type": "button",
-                        "text": "Submit POST",
-                        "expand": false
+                        "text": "Submit POST"
                       }
                     ]
                   }
@@ -302,7 +261,7 @@
                         "id": "get-resource",
                         "type": "select",
                         "name": "q",
-                        "placeholder": "Resource (required)",
+                        "label": "Resource (required)",
                         "required": true,
                         "options": [
                           { "label": "Users", "value": "users" },
@@ -314,13 +273,12 @@
                         "id": "get-filter",
                         "type": "input",
                         "name": "filter",
-                        "placeholder": "Optional filter (e.g. id=1)"
+                        "label": "Optional filter (e.g. id=1)"
                       },
                       {
                         "id": "get-submit",
                         "type": "button",
-                        "text": "Submit GET",
-                        "expand": false
+                        "text": "Submit GET"
                       }
                     ]
                   }
@@ -343,13 +301,12 @@
                     "id": "content-input",
                     "type": "input",
                     "name": "demo",
-                    "placeholder": "An input living inside a card"
+                    "label": "An input living inside a card"
                   },
                   {
                     "id": "content-btn",
                     "type": "button",
-                    "text": "Card button",
-                    "expand": false
+                    "text": "Card button"
                   }
                 ]
               },
@@ -377,8 +334,7 @@
                           {
                             "id": "deep-btn-2",
                             "type": "button",
-                            "text": "Left 2",
-                            "expand": false
+                            "text": "Left 2"
                           }
                         ]
                       },
@@ -389,14 +345,12 @@
                           {
                             "id": "deep-btn-3",
                             "type": "button",
-                            "text": "Right 1",
-                            "expand": false
+                            "text": "Right 1"
                           },
                           {
                             "id": "deep-btn-4",
                             "type": "button",
-                            "text": "Right 2",
-                            "expand": false
+                            "text": "Right 2"
                           }
                         ]
                       }

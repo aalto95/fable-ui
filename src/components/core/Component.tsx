@@ -4,9 +4,6 @@ import { useDebug } from "@/contexts/debug";
 
 import type {
   ICardComponent,
-  IFormComponent,
-  IHStackComponent,
-  IVStackComponent,
   TComponentsWithDescendants,
   TComponentUnion,
 } from "@/models/interfaces/component";
@@ -88,57 +85,37 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
     );
   };
 
+  const ComponentWithDescendants = () => {
+    const { descendants } = rest as ICardComponent;
+    const hasDescendants = Array.isArray(descendants) && descendants.length > 0;
+
+    return wrap(
+      <MyComponent {...rest}>
+        {hasDescendants &&
+          descendants.map((child) => <Component key={child.id} {...child} />)}
+      </MyComponent>,
+    );
+  };
+
+  const ComponentWithoutDescendants = () => {
+    return wrap(<MyComponent {...rest}></MyComponent>);
+  };
+
   switch (type) {
     case "h_stack": {
-      const { descendants } = rest as IHStackComponent;
-      const hasDescendants =
-        Array.isArray(descendants) && descendants.length > 0;
-
-      return wrap(
-        <MyComponent {...rest}>
-          {hasDescendants &&
-            descendants.map((child) => <Component key={child.id} {...child} />)}
-        </MyComponent>,
-      );
+      return ComponentWithDescendants();
     }
     case "v_stack": {
-      const { descendants } = rest as IVStackComponent;
-      const hasDescendants =
-        Array.isArray(descendants) && descendants.length > 0;
-
-      return wrap(
-        <MyComponent {...rest}>
-          {hasDescendants &&
-            descendants.map((child) => <Component key={child.id} {...child} />)}
-        </MyComponent>,
-      );
+      return ComponentWithDescendants();
     }
     case "form": {
-      const { descendants } = rest as IFormComponent;
-      const hasDescendants =
-        Array.isArray(descendants) && descendants.length > 0;
-
-      return wrap(
-        <MyComponent {...rest}>
-          {hasDescendants &&
-            descendants.map((child) => <Component key={child.id} {...child} />)}
-        </MyComponent>,
-      );
+      return ComponentWithDescendants();
     }
     case "card": {
-      const { descendants } = rest as ICardComponent;
-      const hasDescendants =
-        Array.isArray(descendants) && descendants.length > 0;
-
-      return wrap(
-        <MyComponent {...rest}>
-          {hasDescendants &&
-            descendants.map((child) => <Component key={child.id} {...child} />)}
-        </MyComponent>,
-      );
+      return ComponentWithDescendants();
     }
     default: {
-      return wrap(<MyComponent {...rest}>{children}</MyComponent>);
+      return ComponentWithoutDescendants();
     }
   }
 };

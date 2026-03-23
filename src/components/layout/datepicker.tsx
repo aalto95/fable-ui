@@ -5,7 +5,7 @@ import type { IDatepickerComponent } from "@/models/interfaces/component";
 
 type DatePickerProps = Pick<
   IDatepickerComponent,
-  "name" | "placeholder" | "defaultValue" | "required"
+  "name" | "label" | "defaultValue" | "required"
 >;
 
 function formatDate(date: string | undefined) {
@@ -17,13 +17,13 @@ function formatDate(date: string | undefined) {
 
 export const Datepicker: React.FC<DatePickerProps> = ({
   name,
-  placeholder,
+  label,
   defaultValue,
   required,
 }) => {
   return (
     <BaseField>
-      <BaseLabel>{placeholder ?? "Select date"}</BaseLabel>
+      {label ?? <BaseLabel>{label}</BaseLabel>}
       <BaseInput
         type="date"
         name={name}

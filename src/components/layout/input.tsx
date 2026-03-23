@@ -5,18 +5,18 @@ import type { IInputComponent } from "@/models/interfaces/component";
 
 type InputProps = Pick<
   IInputComponent,
-  "name" | "placeholder" | "required" | "defaultValue"
+  "name" | "label" | "required" | "defaultValue"
 >;
 
 export const Input: React.FC<InputProps> = ({
   name,
-  placeholder,
+  label,
   required,
   defaultValue,
 }) => {
   return (
     <BaseField>
-      {placeholder && <BaseLabel>{placeholder}</BaseLabel>}
+      {label && <BaseLabel>{label}</BaseLabel>}
       <BaseInput
         id={name}
         name={name}

@@ -6,23 +6,23 @@ import type { ISelectComponent } from "@/models/interfaces/component";
 
 type SelectFieldProps = Pick<
   ISelectComponent,
-  "name" | "placeholder" | "options" | "required"
+  "name" | "label" | "options" | "required"
 >;
 
 export const SelectField: React.FC<SelectFieldProps> = ({
   name,
-  placeholder,
+  label,
   options,
   required,
   ...rest
 }) => {
   return (
     <BaseField>
-      <BaseLabel>{placeholder}</BaseLabel>
+      <BaseLabel>{label}</BaseLabel>
       <BaseSelect
         name={name}
         required={required}
-        data-bdui-label={placeholder ?? name}
+        data-bdui-label={label ?? name}
         className={cn("w-full")}
         {...(rest as React.SelectHTMLAttributes<HTMLSelectElement> & {
           size?: "sm" | "default";
