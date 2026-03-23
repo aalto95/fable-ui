@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { DatePickerComponent } from "../../models/interfaces/component";
-import { Input } from "../ui/input";
-import { Field } from "../ui/field";
+import { BaseInput } from "../ui/input";
+import { BaseField } from "../ui/field";
 type DatePickerProps = Omit<DatePickerComponent, "type">;
 
 function formatDate(date: string | undefined) {
@@ -20,8 +20,8 @@ export const Datepicker: React.FC<DatePickerProps> = ({
   const [value, setValue] = React.useState(formatDate(defaultValue));
 
   return (
-    <Field>
-      <Input
+    <BaseField>
+      <BaseInput
         type="date"
         name={name}
         required={required}
@@ -31,6 +31,6 @@ export const Datepicker: React.FC<DatePickerProps> = ({
           setValue(e.target.value);
         }}
       />
-    </Field>
+    </BaseField>
   );
 };

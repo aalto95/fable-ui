@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Renderer } from "./components/core/Renderer";
 import type { Page } from "./models/interfaces/page";
-import { Header } from "./components/layout/header";
-import { Footer } from "./components/layout/footer";
-import { Toaster } from "./components/ui/sonner";
+import { Header } from "./components/core/Header";
+import { Footer } from "./components/core/Footer";
+import { Toaster } from "./components/singleton/sonner";
 import { DebugProvider } from "./contexts/debug";
 
 export const App: React.FC = () => {

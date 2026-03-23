@@ -2,7 +2,7 @@ import * as React from "react";
 import { AlertDialog } from "radix-ui";
 
 import { cn } from "../../lib/utils";
-import { Button } from "./button";
+import { BaseButton } from "./button";
 
 function BaseDialog({
   ...props
@@ -144,15 +144,15 @@ function BaseDialogAction({
   size = "default",
   ...props
 }: React.ComponentProps<typeof AlertDialog.Action> &
-  Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {
+  Pick<React.ComponentProps<typeof BaseButton>, "variant" | "size">) {
   return (
-    <Button variant={variant} size={size} asChild>
+    <BaseButton variant={variant} size={size} asChild>
       <AlertDialog.Action
         data-slot="alert-dialog-action"
         className={cn(className)}
         {...props}
       />
-    </Button>
+    </BaseButton>
   );
 }
 
@@ -162,15 +162,15 @@ function BaseDialogCancel({
   size = "default",
   ...props
 }: React.ComponentProps<typeof AlertDialog.Cancel> &
-  Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {
+  Pick<React.ComponentProps<typeof BaseButton>, "variant" | "size">) {
   return (
-    <Button variant={variant} size={size} asChild>
+    <BaseButton variant={variant} size={size} asChild>
       <AlertDialog.Cancel
         data-slot="alert-dialog-cancel"
         className={cn(className)}
         {...props}
       />
-    </Button>
+    </BaseButton>
   );
 }
 

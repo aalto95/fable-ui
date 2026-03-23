@@ -2,7 +2,7 @@ import type { SubmitEventHandler } from "react";
 import type React from "react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { Dialog } from "./dialog";
+import { Dialog } from "../singleton/dialog";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
   action?: string;

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useDebug } from "../../contexts/debug";
-import { Button } from "../ui/button";
+import { BaseButton } from "../ui/button";
 
 export const Header: React.FC = () => {
   const { enabled, setEnabled } = useDebug();
@@ -12,14 +12,14 @@ export const Header: React.FC = () => {
         <Link to="/">Home</Link>
         <Link to="/user">User</Link>
         <Link to="/showcase">Showcase</Link>
-        <Button
+        <BaseButton
           type="button"
           variant={enabled ? "default" : "outline"}
           size="sm"
           onClick={() => setEnabled(!enabled)}
         >
           Debug: {enabled ? "On" : "Off"}
-        </Button>
+        </BaseButton>
       </nav>
     </header>
   );

@@ -1,7 +1,7 @@
 import type { CheckboxComponent } from "../../models/interfaces/component";
 import { BaseCheckbox } from "../ui/checkbox";
-import { Field } from "../ui/field";
-import { Label } from "../ui/label";
+import { BaseField } from "../ui/field";
+import { BaseLabel } from "../ui/label";
 
 type CheckboxProps = Omit<CheckboxComponent, "type">;
 
@@ -11,9 +11,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   required,
 }) => {
   return (
-    <Field orientation="horizontal">
+    <BaseField orientation="horizontal">
       <BaseCheckbox id={name} name={name} required={required} />
-      <Label htmlFor={name}>{label}</Label>
-    </Field>
+      <BaseLabel htmlFor={name}>{label}</BaseLabel>
+    </BaseField>
   );
 };
