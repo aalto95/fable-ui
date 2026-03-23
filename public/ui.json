@@ -51,8 +51,16 @@
                   {
                     "id": "checkbox-input",
                     "type": "checkbox",
-                    "name": "superuser",
-                    "label": "Should user be an admin"
+                    "name": "isAdmin",
+                    "label": "Should user be an admin",
+                    "actions": ["adminRole/toggle"]
+                  },
+                  {
+                    "id": "admin-role-input",
+                    "type": "input",
+                    "name": "adminRole",
+                    "label": "What role of admin?",
+                    "hidden": true
                   },
                   {
                     "id": "save-button",
@@ -109,7 +117,14 @@
                     "type": "checkbox",
                     "name": "superuser-2",
                     "label": "Should user be an admin",
-                    "checked": true
+                    "checked": true,
+                    "actions": ["adminRole-2/toggle"]
+                  },
+                  {
+                    "id": "admin-role-input-2",
+                    "type": "input",
+                    "name": "adminRole-2",
+                    "label": "What role of admin?"
                   },
                   {
                     "id": "save-button-2",

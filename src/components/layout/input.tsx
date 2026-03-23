@@ -5,7 +5,7 @@ import type { IInputComponent } from "@/models/interfaces/component";
 
 type InputProps = Pick<
   IInputComponent,
-  "name" | "label" | "required" | "defaultValue"
+  "name" | "label" | "required" | "defaultValue" | "hidden"
 >;
 
 export const Input: React.FC<InputProps> = ({
@@ -13,12 +13,12 @@ export const Input: React.FC<InputProps> = ({
   label,
   required,
   defaultValue,
+  hidden,
 }) => {
   return (
-    <BaseField>
+    <BaseField id={name} hidden={hidden}>
       {label && <BaseLabel>{label}</BaseLabel>}
       <BaseInput
-        id={name}
         name={name}
         required={required}
         defaultValue={defaultValue}

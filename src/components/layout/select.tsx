@@ -6,7 +6,7 @@ import type { ISelectComponent } from "@/models/interfaces/component";
 
 type SelectFieldProps = Pick<
   ISelectComponent,
-  "name" | "label" | "options" | "required"
+  "name" | "label" | "options" | "required" | "hidden"
 >;
 
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -14,10 +14,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   label,
   options,
   required,
+  hidden,
   ...rest
 }) => {
   return (
-    <BaseField>
+    <BaseField id={name} hidden={hidden}>
       <BaseLabel>{label}</BaseLabel>
       <BaseSelect
         name={name}

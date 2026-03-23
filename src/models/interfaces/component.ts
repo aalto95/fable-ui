@@ -15,6 +15,7 @@ export interface IInputComponent extends IBaseComponent<"input"> {
   label?: string;
   defaultValue?: string;
   required?: boolean;
+  hidden?: boolean;
 }
 
 export interface ITextareaComponent extends IBaseComponent<"textarea"> {
@@ -22,6 +23,7 @@ export interface ITextareaComponent extends IBaseComponent<"textarea"> {
   label?: string;
   defaultValue?: string;
   required?: boolean;
+  hidden?: boolean;
 }
 
 export interface IDatepickerComponent extends IBaseComponent<"datepicker"> {
@@ -29,6 +31,7 @@ export interface IDatepickerComponent extends IBaseComponent<"datepicker"> {
   label?: string;
   defaultValue?: string;
   required?: boolean;
+  hidden?: boolean;
 }
 
 export interface ISelectOption {
@@ -41,6 +44,7 @@ export interface ISelectComponent extends IBaseComponent<"select"> {
   label?: string;
   options?: ISelectOption[];
   required?: boolean;
+  hidden?: boolean;
 }
 
 export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
@@ -48,6 +52,7 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
   label?: string;
   required?: boolean;
   checked?: boolean;
+  actions?: string[];
 }
 
 export interface IHStackComponent extends IBaseComponent<"h_stack"> {
