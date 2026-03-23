@@ -1,28 +1,24 @@
-import type React from "react";
+import type { PropsWithChildren } from "react";
 import {
   BaseCard,
+  BaseCardContent,
+  BaseCardDescription,
+  BaseCardFooter,
   BaseCardHeader,
   BaseCardTitle,
-  BaseCardDescription,
-  BaseCardContent,
-  BaseCardFooter,
 } from "@/components/ui/card";
+import type { ICardComponent } from "@/models/interfaces/component";
 
-type Card = React.ComponentProps<typeof BaseCard> & {
-  title?: string;
-  description?: string;
-  footerText?: string;
-};
+type CardProps = Pick<ICardComponent, "title" | "description" | "footerText">;
 
-export const Card: React.FC<Card> = ({
+export const Card: React.FC<PropsWithChildren<CardProps>> = ({
   title,
   description,
   footerText,
   children,
-  ...rest
 }) => {
   return (
-    <BaseCard {...rest} className="flex-1 h-fit">
+    <BaseCard className="flex-1 h-fit">
       {(title || description) && (
         <BaseCardHeader>
           {title && <BaseCardTitle>{title}</BaseCardTitle>}

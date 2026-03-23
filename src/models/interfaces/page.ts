@@ -1,6 +1,6 @@
-import type { IComponent } from "./component";
+import type { TComponentUnion } from "./component";
 
-export interface Page {
+export interface IPage {
   route: string;
-  ui: IComponent[];
+  ui: TComponentUnion[];
 }

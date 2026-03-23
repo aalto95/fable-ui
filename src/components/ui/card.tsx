@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 function BaseCard({
@@ -97,10 +95,10 @@ function BaseCardFooter({ className, ...props }: React.ComponentProps<"div">) {
 
 export {
   BaseCard,
-  BaseCardHeader,
-  BaseCardFooter,
-  BaseCardTitle,
   BaseCardAction,
-  BaseCardDescription,
   BaseCardContent,
+  BaseCardDescription,
+  BaseCardFooter,
+  BaseCardHeader,
+  BaseCardTitle,
 };

@@ -1,8 +1,8 @@
-import { useMemo } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { useMemo } from "react";
 import { BaseLabel } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 function BaseFieldSet({
   className,
@@ -232,13 +232,13 @@ function BaseFieldError({
 
 export {
   BaseField,
-  BaseFieldLabel,
+  BaseFieldContent,
   BaseFieldDescription,
   BaseFieldError,
   BaseFieldGroup,
+  BaseFieldLabel,
   BaseFieldLegend,
   BaseFieldSeparator,
   BaseFieldSet,
-  BaseFieldContent,
   BaseFieldTitle,
 };

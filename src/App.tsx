@@ -1,15 +1,14 @@
-import type React from "react";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import { Renderer } from "./components/core/Renderer";
-import type { Page } from "./models/interfaces/page";
-import { Header } from "./components/core/Header";
-import { Footer } from "./components/core/Footer";
-import { Toaster } from "./components/singleton/sonner";
-import { DebugProvider } from "./contexts/debug";
+import { Footer } from "@/components/core/Footer";
+import { Header } from "@/components/core/Header";
+import { Renderer } from "@/components/core/Renderer";
+import { Toaster } from "@/components/singleton/sonner";
+import { DebugProvider } from "@/contexts/debug";
+import type { IPage } from "@/models/interfaces/page";
 
 export const App: React.FC = () => {
-  const [pages, setPages] = useState<Page[]>();
+  const [pages, setPages] = useState<IPage[]>();
   const [debugEnabled, setDebugEnabled] = useState<boolean>(() => {
     const raw = localStorage.getItem("bdui.debug.enabled");
     return raw === "true";
@@ -18,7 +17,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     fetch("./ui.json")
       .then((resp) => resp.json())
-      .then((uiSchema: Page[]) => {
+      .then((uiSchema: IPage[]) => {
         setPages(uiSchema);
       })
       .catch((error) => {

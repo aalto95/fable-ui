@@ -1,8 +1,12 @@
-import * as React from "react";
-import type { DatePickerComponent } from "@/models/interfaces/component";
-import { BaseInput } from "@/components/ui/input";
 import { BaseField } from "@/components/ui/field";
-type DatePickerProps = Omit<DatePickerComponent, "type">;
+import { BaseInput } from "@/components/ui/input";
+import { BaseLabel } from "@/components/ui/label";
+import type { IDatepickerComponent } from "@/models/interfaces/component";
+
+type DatePickerProps = Pick<
+  IDatepickerComponent,
+  "name" | "placeholder" | "defaultValue" | "required"
+>;
 
 function formatDate(date: string | undefined) {
   if (!date) {
@@ -17,19 +21,14 @@ export const Datepicker: React.FC<DatePickerProps> = ({
   defaultValue,
   required,
 }) => {
-  const [value, setValue] = React.useState(formatDate(defaultValue));
-
   return (
     <BaseField>
+      <BaseLabel>{placeholder ?? "Select date"}</BaseLabel>
       <BaseInput
         type="date"
         name={name}
         required={required}
-        value={value}
-        placeholder={placeholder ?? "Select date"}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}
+        defaultValue={formatDate(defaultValue)}
       />
     </BaseField>
   );

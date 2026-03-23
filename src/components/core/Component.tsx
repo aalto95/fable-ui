@@ -1,21 +1,17 @@
-import type React from "react";
-import { memo } from "react";
+import { memo, type PropsWithChildren } from "react";
 import { COMPONENTS_MAP } from "@/consts/components-map";
 import { useDebug } from "@/contexts/debug";
-import { cn } from "@/lib/utils";
+
 import type {
-  CardComponent,
-  ButtonComponent,
-  ComponentsWithDescendants,
-  FormComponent,
-  HStackComponent,
-  IComponent,
-  VStackComponent,
+  ICardComponent,
+  IFormComponent,
+  IHStackComponent,
+  IVStackComponent,
+  TComponentsWithDescendants,
+  TComponentUnion,
 } from "@/models/interfaces/component";
 
-type ComponentProps = IComponent & {
-  children?: React.ReactNode;
-};
+type ComponentProps = PropsWithChildren<TComponentUnion>;
 
 const DEBUG_COLORS: Record<
   string,
@@ -94,74 +90,50 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
 
   switch (type) {
     case "h_stack": {
-      const { descendants } = rest as HStackComponent;
+      const { descendants } = rest as IHStackComponent;
       const hasDescendants =
         Array.isArray(descendants) && descendants.length > 0;
 
       return wrap(
         <MyComponent {...rest}>
           {hasDescendants &&
-            descendants!.map((child) => (
-              <Component key={child.id} {...child} />
-            ))}
+            descendants.map((child) => <Component key={child.id} {...child} />)}
         </MyComponent>,
       );
     }
     case "v_stack": {
-      const { descendants } = rest as VStackComponent;
+      const { descendants } = rest as IVStackComponent;
       const hasDescendants =
         Array.isArray(descendants) && descendants.length > 0;
 
       return wrap(
         <MyComponent {...rest}>
           {hasDescendants &&
-            descendants!.map((child) => (
-              <Component key={child.id} {...child} />
-            ))}
+            descendants.map((child) => <Component key={child.id} {...child} />)}
         </MyComponent>,
       );
     }
     case "form": {
-      const { descendants } = rest as FormComponent;
+      const { descendants } = rest as IFormComponent;
       const hasDescendants =
         Array.isArray(descendants) && descendants.length > 0;
 
       return wrap(
         <MyComponent {...rest}>
           {hasDescendants &&
-            descendants!.map((child) => (
-              <Component key={child.id} {...child} />
-            ))}
+            descendants.map((child) => <Component key={child.id} {...child} />)}
         </MyComponent>,
       );
     }
     case "card": {
-      const { descendants } = rest as CardComponent;
+      const { descendants } = rest as ICardComponent;
       const hasDescendants =
         Array.isArray(descendants) && descendants.length > 0;
 
       return wrap(
         <MyComponent {...rest}>
           {hasDescendants &&
-            descendants!.map((child) => (
-              <Component key={child.id} {...child} />
-            ))}
-        </MyComponent>,
-      );
-    }
-    case "button": {
-      const { text, expand, ...buttonRest } =
-        rest as unknown as ButtonComponent;
-
-      return wrap(
-        <MyComponent
-          {...buttonRest}
-          className={cn(
-            (buttonRest as any).className,
-            expand ? "w-full" : "w-fit",
-          )}
-        >
-          {children ?? text}
+            descendants.map((child) => <Component key={child.id} {...child} />)}
         </MyComponent>,
       );
     }
@@ -176,8 +148,8 @@ const arePropsEqual = (prev: ComponentProps, next: ComponentProps): boolean => {
     return false;
   }
 
-  const prevDesc = (prev as ComponentsWithDescendants).descendants ?? [];
-  const nextDesc = (next as ComponentsWithDescendants).descendants ?? [];
+  const prevDesc = (prev as TComponentsWithDescendants).descendants ?? [];
+  const nextDesc = (next as TComponentsWithDescendants).descendants ?? [];
 
   if (prevDesc === nextDesc) {
     return true;

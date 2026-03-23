@@ -1,11 +1,8 @@
-import type React from "react";
 import { memo } from "react";
-import type { IComponent } from "@/models/interfaces/component";
+import type { IPage } from "@/models/interfaces/page";
 import { Component } from "./Component";
 
-type RendererProps = {
-  ui?: IComponent[];
-};
+type RendererProps = Pick<IPage, "ui">;
 
 const RendererInner: React.FC<RendererProps> = ({ ui }) => {
   if (!ui || ui.length === 0) {

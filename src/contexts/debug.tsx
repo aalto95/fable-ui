@@ -1,4 +1,3 @@
-import type React from "react";
 import { createContext, useContext } from "react";
 
 export type DebugContextValue = {
@@ -25,4 +24,3 @@ export function useDebug(): DebugContextValue {
   }
   return ctx;
 }
-

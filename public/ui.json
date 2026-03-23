@@ -42,13 +42,6 @@
                     ]
                   },
                   {
-                    "id": "checkbox-input",
-                    "type": "checkbox",
-                    "name": "superuser",
-                    "label": "Введите что-то",
-                    "required": true
-                  },
-                  {
                     "id": "description-textarea",
                     "type": "textarea",
                     "name": "description",
@@ -56,10 +49,16 @@
                     "required": true
                   },
                   {
+                    "id": "checkbox-input",
+                    "type": "checkbox",
+                    "name": "superuser",
+                    "label": "Should user be an admin"
+                  },
+                  {
                     "id": "save-button",
                     "type": "button",
                     "text": "Save",
-                    "expand": false
+                    "expand": true
                   }
                 ]
               },
@@ -72,7 +71,7 @@
                   {
                     "id": "name-input-2",
                     "type": "input",
-                    "name": "name",
+                    "name": "name-2",
                     "placeholder": "Enter your name",
                     "defaultValue": "John",
                     "required": true
@@ -80,7 +79,7 @@
                   {
                     "id": "birthday-input-2",
                     "type": "datepicker",
-                    "name": "birthday",
+                    "name": "birthday-2",
                     "placeholder": "Enter your birthday",
                     "defaultValue": "2026-03-19T10:00:00Z",
                     "required": true
@@ -88,28 +87,35 @@
                   {
                     "id": "query-input-2",
                     "type": "select",
-                    "name": "status",
+                    "name": "status-2",
                     "placeholder": "Status of the user",
                     "required": true,
                     "options": [
                       { "label": "Active", "value": "active" },
                       { "label": "Inactive", "value": "inactive" }
                     ],
-                    "defaultValue": "active"
+                    "defaultValue": "inactive"
                   },
                   {
                     "id": "description-textarea-2",
                     "type": "textarea",
-                    "name": "description",
+                    "name": "description-2",
                     "placeholder": "Enter the description",
                     "required": true,
                     "defaultValue": "This is a description"
                   },
                   {
+                    "id": "checkbox-input-2",
+                    "type": "checkbox",
+                    "name": "superuser-2",
+                    "label": "Should user be an admin",
+                    "checked": true
+                  },
+                  {
                     "id": "save-button-2",
                     "type": "button",
                     "text": "Save",
-                    "expand": false
+                    "expand": true
                   }
                 ]
               }

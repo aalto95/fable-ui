@@ -1,13 +1,11 @@
 import type { SubmitEventHandler } from "react";
-import type React from "react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Dialog } from "@/components/singleton/dialog";
+import type { IFormComponent } from "@/models/interfaces/component";
 
-type FormProps = React.FormHTMLAttributes<HTMLFormElement> & {
-  action?: string;
-  method?: string;
-};
+type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
+  Pick<IFormComponent, "action" | "method">;
 
 export const Form: React.FC<FormProps> = ({
   action,

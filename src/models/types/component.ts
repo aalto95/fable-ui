@@ -1,11 +1,3 @@
-export type TComponent =
-  | "h_stack"
-  | "v_stack"
-  | "button"
-  | "input"
-  | "textarea"
-  | "form"
-  | "datepicker"
-  | "card"
-  | "select"
-  | "checkbox";
+import type { COMPONENTS_MAP } from "@/consts/components-map";
+
+export type TComponent = keyof typeof COMPONENTS_MAP;

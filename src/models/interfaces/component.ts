@@ -1,92 +1,90 @@
 import type { TComponent } from "@/models/types/component";
 
-export interface BaseComponent<T extends TComponent = TComponent> {
+export interface IBaseComponent<T extends TComponent = TComponent> {
   id: string;
   type: T;
 }
 
-export interface HStackComponent extends BaseComponent<"h_stack"> {
-  descendants?: ComponentUnion[];
-}
-
-export interface VStackComponent extends BaseComponent<"v_stack"> {
-  descendants?: ComponentUnion[];
-}
-
-export interface ButtonComponent extends BaseComponent<"button"> {
+export interface IButtonComponent extends IBaseComponent<"button"> {
   text?: string;
   expand?: boolean;
 }
 
-export interface InputComponent extends BaseComponent<"input"> {
+export interface IInputComponent extends IBaseComponent<"input"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
   required?: boolean;
 }
 
-export interface Textarea extends BaseComponent<"textarea"> {
+export interface ITextareaComponent extends IBaseComponent<"textarea"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
   required?: boolean;
 }
 
-export interface DatePickerComponent extends BaseComponent<"datepicker"> {
+export interface IDatepickerComponent extends IBaseComponent<"datepicker"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;
   required?: boolean;
 }
 
-export interface SelectOption {
+export interface ISelectOption {
   label: string;
   value: string;
 }
 
-export interface SelectComponent extends BaseComponent<"select"> {
+export interface ISelectComponent extends IBaseComponent<"select"> {
   name?: string;
   placeholder?: string;
-  options?: SelectOption[];
+  options?: ISelectOption[];
   required?: boolean;
 }
 
-export interface CheckboxComponent extends BaseComponent<"checkbox"> {
+export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
   name?: string;
   label?: string;
   required?: boolean;
+  checked?: boolean;
 }
 
-export interface FormComponent extends BaseComponent<"form"> {
+export interface IHStackComponent extends IBaseComponent<"h_stack"> {
+  descendants?: TComponentUnion[];
+}
+
+export interface IVStackComponent extends IBaseComponent<"v_stack"> {
+  descendants?: TComponentUnion[];
+}
+
+export interface IFormComponent extends IBaseComponent<"form"> {
   method?: string;
   action?: string;
-  descendants?: ComponentUnion[];
+  descendants?: TComponentUnion[];
 }
 
-export interface CardComponent extends BaseComponent<"card"> {
+export interface ICardComponent extends IBaseComponent<"card"> {
   title?: string;
   description?: string;
   footerText?: string;
-  descendants?: ComponentUnion[];
+  descendants?: TComponentUnion[];
 }
 
-export type ComponentsWithDescendants =
-  | HStackComponent
-  | VStackComponent
-  | FormComponent
-  | CardComponent;
+export type TComponentsWithDescendants =
+  | IHStackComponent
+  | IVStackComponent
+  | IFormComponent
+  | ICardComponent;
 
-export type ComponentsWithoutDescendants =
-  | ButtonComponent
-  | InputComponent
-  | Textarea
-  | SelectComponent
-  | DatePickerComponent
-  | CheckboxComponent;
+export type TComponentsWithoutDescendants =
+  | IButtonComponent
+  | IInputComponent
+  | ITextareaComponent
+  | ISelectComponent
+  | IDatepickerComponent
+  | ICheckboxComponent;
 
-export type ComponentUnion =
-  | ComponentsWithoutDescendants
-  | ComponentsWithDescendants;
-
-// Backwards-compatible alias used across the app code.
-export type IComponent = ComponentUnion;
+export type TComponentUnion =
+  | TComponentsWithoutDescendants
+  | TComponentsWithDescendants;
