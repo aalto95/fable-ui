@@ -64,6 +64,7 @@ export interface IVStackComponent extends IBaseComponent<"v_stack"> {
 }
 
 export interface IFormComponent extends IBaseComponent<"form"> {
+  title?: string;
   method?: string;
   action?: string;
   descendants?: TComponentUnion[];

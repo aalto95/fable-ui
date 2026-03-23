@@ -44,7 +44,7 @@ function getDebugLayoutClass(): string {
   return "w-full";
 }
 
-const ComponentInner: React.FC<ComponentProps> = (props) => {
+export const Component: React.FC<ComponentProps> = (props) => {
   const { enabled: debugEnabled } = useDebug();
   const { type, children, ...rest } = props;
   const MyComponent = COMPONENTS_MAP[type];
@@ -119,34 +119,3 @@ const ComponentInner: React.FC<ComponentProps> = (props) => {
     }
   }
 };
-
-const arePropsEqual = (prev: ComponentProps, next: ComponentProps): boolean => {
-  if (prev.id !== next.id || prev.type !== next.type) {
-    return false;
-  }
-
-  const prevDesc = (prev as TComponentsWithDescendants).descendants ?? [];
-  const nextDesc = (next as TComponentsWithDescendants).descendants ?? [];
-
-  if (prevDesc === nextDesc) {
-    return true;
-  }
-
-  if (prevDesc.length !== nextDesc.length) {
-    return false;
-  }
-
-  // Shallow compare descendants by id and type.
-  for (let i = 0; i < prevDesc.length; i++) {
-    const a = prevDesc[i];
-    const b = nextDesc[i];
-
-    if (a.id !== b.id || a.type !== b.type) {
-      return false;
-    }
-  }
-
-  return true;
-};
-
-export const Component = memo(ComponentInner, arePropsEqual);

@@ -13,6 +13,7 @@
               {
                 "id": "form",
                 "type": "form",
+                "title": "Empty form",
                 "method": "POST",
                 "action": "http://localhost:3000/api/save",
                 "descendants": [
@@ -73,6 +74,7 @@
               {
                 "id": "form-2",
                 "type": "form",
+                "title": "Prefilled form",
                 "method": "POST",
                 "action": "http://localhost:3000/api/save",
                 "descendants": [

@@ -5,13 +5,14 @@ import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Pick<IFormComponent, "action" | "method">;
+  Pick<IFormComponent, "action" | "method" | "title">;
 
 export const Form: React.FC<FormProps> = ({
   action,
   method = "GET",
   onSubmit,
   children,
+  title,
   ...rest
 }) => {
   const submitAfterConfirmRef = useRef<null | (() => Promise<void>)>(null);
@@ -137,6 +138,7 @@ export const Form: React.FC<FormProps> = ({
         {...rest}
         className="flex flex-col gap-2 flex-1"
       >
+        {title && <h2 className="font-bold">{title}</h2>}
         {children}
       </form>
 
