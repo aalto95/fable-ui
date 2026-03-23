@@ -5,9 +5,10 @@ import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Pick<IFormComponent, "action" | "method" | "title">;
+  Pick<IFormComponent, "id" | "action" | "method" | "title">;
 
 export const Form: React.FC<FormProps> = ({
+  id,
   action,
   method = "GET",
   onSubmit,
@@ -132,11 +133,12 @@ export const Form: React.FC<FormProps> = ({
   return (
     <>
       <form
+        id={id}
         action={action}
         method={method}
         onSubmit={handleSubmit}
-        {...rest}
         className="flex flex-col gap-2 flex-1"
+        {...rest}
       >
         {title && <h2 className="font-bold">{title}</h2>}
         {children}

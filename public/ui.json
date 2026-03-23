@@ -3,36 +3,36 @@
     "route": "/",
     "ui": [
       {
-        "id": "1",
+        "id": "550e8400-e29b-41d4-a716-446655440000",
         "type": "v_stack",
         "descendants": [
           {
-            "id": "2",
+            "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
             "type": "h_stack",
             "descendants": [
               {
-                "id": "form",
+                "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
                 "type": "form",
                 "title": "Empty form",
                 "method": "POST",
                 "action": "http://localhost:3000/api/save",
                 "descendants": [
                   {
-                    "id": "name-input",
+                    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
                     "type": "input",
                     "name": "name",
                     "label": "Enter your name",
                     "required": true
                   },
                   {
-                    "id": "birthday-input",
+                    "id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
                     "type": "datepicker",
                     "name": "birthday",
                     "label": "Enter your birthday",
                     "required": true
                   },
                   {
-                    "id": "query-input",
+                    "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3fb",
                     "type": "select",
                     "name": "status",
                     "label": "Status of the user",
@@ -43,28 +43,28 @@
                     ]
                   },
                   {
-                    "id": "description-textarea",
+                    "id": "9c5b94b1-35ad-49bb-b118-8e8fc24abf80",
                     "type": "textarea",
                     "name": "description",
                     "label": "Enter the description",
                     "required": true
                   },
                   {
-                    "id": "checkbox-input",
+                    "id": "d3b07384-d9a5-4e6b-8c8a-3d3e8f6a7b2c",
                     "type": "checkbox",
                     "name": "isAdmin",
                     "label": "Should user be an admin",
-                    "actions": ["adminRole/toggle"]
+                    "actions": ["e4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e/toggle"]
                   },
                   {
-                    "id": "admin-role-input",
+                    "id": "e4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
                     "type": "input",
                     "name": "adminRole",
                     "label": "What role of admin?",
                     "hidden": true
                   },
                   {
-                    "id": "save-button",
+                    "id": "5f4d3c2b-1a0e-4f9d-8c7b-6a5e4d3c2b1a",
                     "type": "button",
                     "text": "Save",
                     "expand": true
@@ -72,32 +72,32 @@
                 ]
               },
               {
-                "id": "form-2",
+                "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
                 "type": "form",
                 "title": "Prefilled form",
                 "method": "POST",
                 "action": "http://localhost:3000/api/save",
                 "descendants": [
                   {
-                    "id": "name-input-2",
+                    "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
                     "type": "input",
-                    "name": "name-2",
+                    "name": "name",
                     "label": "Enter your name",
                     "defaultValue": "John",
                     "required": true
                   },
                   {
-                    "id": "birthday-input-2",
+                    "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
                     "type": "datepicker",
-                    "name": "birthday-2",
+                    "name": "birthday",
                     "label": "Enter your birthday",
                     "defaultValue": "2026-03-19T10:00:00Z",
                     "required": true
                   },
                   {
-                    "id": "query-input-2",
+                    "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
                     "type": "select",
-                    "name": "status-2",
+                    "name": "status",
                     "label": "Status of the user",
                     "required": true,
                     "options": [
@@ -107,29 +107,29 @@
                     "defaultValue": "inactive"
                   },
                   {
-                    "id": "description-textarea-2",
+                    "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
                     "type": "textarea",
-                    "name": "description-2",
+                    "name": "description",
                     "label": "Enter the description",
                     "required": true,
                     "defaultValue": "This is a description"
                   },
                   {
-                    "id": "checkbox-input-2",
+                    "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
                     "type": "checkbox",
-                    "name": "superuser-2",
+                    "name": "superuser",
                     "label": "Should user be an admin",
                     "checked": true,
-                    "actions": ["adminRole-2/toggle"]
+                    "actions": ["adminRole/toggle"]
                   },
                   {
-                    "id": "admin-role-input-2",
+                    "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
                     "type": "input",
-                    "name": "adminRole-2",
+                    "name": "adminRole",
                     "label": "What role of admin?"
                   },
                   {
-                    "id": "save-button-2",
+                    "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
                     "type": "button",
                     "text": "Save",
                     "expand": true
@@ -146,58 +146,58 @@
     "route": "/showcase",
     "ui": [
       {
-        "id": "showcase-root",
+        "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
         "type": "v_stack",
         "descendants": [
           {
-            "id": "showcase-hero-row",
+            "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
             "type": "h_stack",
             "descendants": [
               {
-                "id": "hero-card",
+                "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
                 "type": "card",
                 "title": "BDUI Showcase",
                 "description": "A single screen that exercises stacks, cards, buttons, inputs, selects, textareas, forms, required validation, and the submit confirmation dialog.",
                 "footerText": "Tip: try submitting each form to see the confirm dialog.",
                 "descendants": [
                   {
-                    "id": "hero-btn-1",
+                    "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
                     "type": "button",
                     "text": "Primary action"
                   },
                   {
-                    "id": "hero-btn-2",
+                    "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
                     "type": "button",
                     "text": "Secondary action"
                   }
                 ]
               },
               {
-                "id": "hero-card-2",
+                "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
                 "type": "card",
                 "title": "Nested layout",
                 "description": "This card contains a nested vertical stack and a mini form.",
                 "footerText": "Everything below is rendered from ui.json",
                 "descendants": [
                   {
-                    "id": "nested-v",
+                    "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
                     "type": "v_stack",
                     "descendants": [
                       {
-                        "id": "mini-form",
+                        "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
                         "type": "form",
                         "method": "GET",
                         "action": "/api/search",
                         "descendants": [
                           {
-                            "id": "mini-query",
+                            "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
                             "type": "input",
                             "name": "q",
                             "label": "Quick search (required)",
                             "required": true
                           },
                           {
-                            "id": "mini-submit",
+                            "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
                             "type": "button",
                             "text": "Go"
                           }
@@ -210,31 +210,31 @@
             ]
           },
           {
-            "id": "showcase-forms-row",
+            "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
             "type": "h_stack",
             "descendants": [
               {
-                "id": "post-form-card",
+                "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
                 "type": "card",
                 "title": "POST form (JSON body)",
                 "description": "Required fields + native select + textarea. Submitting prompts for confirmation.",
                 "footerText": "Action points to the mock API save endpoint.",
                 "descendants": [
                   {
-                    "id": "post-form",
+                    "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
                     "type": "form",
                     "method": "POST",
                     "action": "http://localhost:3000/api/save",
                     "descendants": [
                       {
-                        "id": "post-name",
+                        "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
                         "type": "input",
                         "name": "name",
                         "label": "Name (required)",
                         "required": true
                       },
                       {
-                        "id": "post-status",
+                        "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
                         "type": "select",
                         "name": "status",
                         "label": "Status (required)",
@@ -246,14 +246,14 @@
                         ]
                       },
                       {
-                        "id": "post-desc",
+                        "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
                         "type": "textarea",
                         "name": "description",
                         "label": "Description (required)",
                         "required": true
                       },
                       {
-                        "id": "post-submit",
+                        "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
                         "type": "button",
                         "text": "Submit POST"
                       }
@@ -262,20 +262,20 @@
                 ]
               },
               {
-                "id": "get-form-card",
+                "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
                 "type": "card",
                 "title": "GET form (query params)",
                 "description": "Demonstrates URL building from form fields.",
                 "footerText": "Try selecting a resource then submitting.",
                 "descendants": [
                   {
-                    "id": "get-form",
+                    "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
                     "type": "form",
                     "method": "GET",
                     "action": "/api/search",
                     "descendants": [
                       {
-                        "id": "get-resource",
+                        "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2a",
                         "type": "select",
                         "name": "q",
                         "label": "Resource (required)",
@@ -287,13 +287,13 @@
                         ]
                       },
                       {
-                        "id": "get-filter",
+                        "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b",
                         "type": "input",
                         "name": "filter",
                         "label": "Optional filter (e.g. id=1)"
                       },
                       {
-                        "id": "get-submit",
+                        "id": "f0a1b2c3-d4e5-4f6a-7b8c-9d0e1f2a3b4c",
                         "type": "button",
                         "text": "Submit GET"
                       }
@@ -304,68 +304,68 @@
             ]
           },
           {
-            "id": "showcase-mixed-row",
+            "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
             "type": "h_stack",
             "descendants": [
               {
-                "id": "content-card-1",
+                "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
                 "type": "card",
                 "title": "Card composition",
                 "description": "Cards can include arbitrary descendants like buttons and inputs.",
                 "footerText": "This is purely presentational content.",
                 "descendants": [
                   {
-                    "id": "content-input",
+                    "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
                     "type": "input",
                     "name": "demo",
                     "label": "An input living inside a card"
                   },
                   {
-                    "id": "content-btn",
+                    "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
                     "type": "button",
                     "text": "Card button"
                   }
                 ]
               },
               {
-                "id": "content-card-2",
+                "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
                 "type": "card",
                 "title": "Deep nesting",
                 "description": "A stack inside a card inside a stack.",
                 "footerText": "Useful for complex pages.",
                 "descendants": [
                   {
-                    "id": "deep-h",
+                    "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
                     "type": "h_stack",
                     "descendants": [
                       {
-                        "id": "deep-left",
+                        "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
                         "type": "v_stack",
                         "descendants": [
                           {
-                            "id": "deep-btn-1",
+                            "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
                             "type": "button",
                             "text": "Left 1",
                             "expand": false
                           },
                           {
-                            "id": "deep-btn-2",
+                            "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
                             "type": "button",
                             "text": "Left 2"
                           }
                         ]
                       },
                       {
-                        "id": "deep-right",
+                        "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
                         "type": "v_stack",
                         "descendants": [
                           {
-                            "id": "deep-btn-3",
+                            "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
                             "type": "button",
                             "text": "Right 1"
                           },
                           {
-                            "id": "deep-btn-4",
+                            "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
                             "type": "button",
                             "text": "Right 2"
                           }
