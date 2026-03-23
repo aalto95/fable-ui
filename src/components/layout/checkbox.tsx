@@ -34,9 +34,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   return (
-    <BaseField orientation="horizontal" id={id}>
+    <BaseField id={id} orientation="horizontal">
       <BaseCheckbox
-        id={name}
         name={name}
         required={required}
         defaultChecked={checked}

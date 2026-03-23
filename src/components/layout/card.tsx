@@ -9,16 +9,20 @@ import {
 } from "@/components/ui/card";
 import type { ICardComponent } from "@/models/interfaces/component";
 
-type CardProps = Pick<ICardComponent, "title" | "description" | "footerText">;
+type CardProps = Pick<
+  ICardComponent,
+  "id" | "title" | "description" | "footerText"
+>;
 
 export const Card: React.FC<PropsWithChildren<CardProps>> = ({
+  id,
   title,
   description,
   footerText,
   children,
 }) => {
   return (
-    <BaseCard className="flex-1 h-fit">
+    <BaseCard id={id} className="flex-1 h-fit">
       {(title || description) && (
         <BaseCardHeader>
           {title && <BaseCardTitle>{title}</BaseCardTitle>}

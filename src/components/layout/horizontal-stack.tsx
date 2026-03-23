@@ -1,5 +1,14 @@
 import type { PropsWithChildren } from "react";
+import type { IHStackComponent } from "@/models/interfaces/component";
 
-export const HorizontalStack: React.FC<PropsWithChildren> = (props) => {
-  return <div className="flex flex-row gap-2 w-full">{props.children}</div>;
+type HorizontalStackProps = Pick<IHStackComponent, "id">;
+
+export const HorizontalStack: React.FC<
+  PropsWithChildren<HorizontalStackProps>
+> = ({ id, children }) => {
+  return (
+    <div id={id} className="flex flex-row gap-2 w-full">
+      {children}
+    </div>
+  );
 };
