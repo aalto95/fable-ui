@@ -1,7 +1,7 @@
 import type React from "react";
 import { cn } from "../../lib/utils";
 import type { SelectComponent } from "../../models/interfaces/component";
-import { NativeSelect, NativeSelectOption } from "../ui/native-select";
+import { BaseSelect, BaseSelectOption } from "../ui/select";
 
 type SelectFieldProps = Omit<SelectComponent, "type">;
 
@@ -13,7 +13,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   ...rest
 }) => {
   return (
-    <NativeSelect
+    <BaseSelect
       name={name}
       required={required}
       defaultValue=""
@@ -23,14 +23,14 @@ export const SelectField: React.FC<SelectFieldProps> = ({
         size?: "sm" | "default";
       })}
     >
-      <NativeSelectOption value="" disabled={required} hidden={required}>
+      <BaseSelectOption value="" disabled={required} hidden={required}>
         {placeholder ?? "Select..."}
-      </NativeSelectOption>
+      </BaseSelectOption>
       {options?.map((option) => (
-        <NativeSelectOption key={option.value} value={option.value}>
+        <BaseSelectOption key={option.value} value={option.value}>
           {option.label}
-        </NativeSelectOption>
+        </BaseSelectOption>
       ))}
-    </NativeSelect>
+    </BaseSelect>
   );
 };

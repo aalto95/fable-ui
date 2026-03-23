@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { DatePickerComponent } from "../../models/interfaces/component";
 import { Input } from "../ui/input";
+import { Field } from "../ui/field";
 type DatePickerProps = Omit<DatePickerComponent, "type">;
 
 function formatDate(date: string | undefined) {
@@ -10,7 +11,7 @@ function formatDate(date: string | undefined) {
   return date.substring(0, 10);
 }
 
-export const DatePicker: React.FC<DatePickerProps> = ({
+export const Datepicker: React.FC<DatePickerProps> = ({
   name,
   placeholder,
   defaultValue,
@@ -19,15 +20,17 @@ export const DatePicker: React.FC<DatePickerProps> = ({
   const [value, setValue] = React.useState(formatDate(defaultValue));
 
   return (
-    <Input
-      type="date"
-      name={name}
-      required={required}
-      value={value}
-      placeholder={placeholder ?? "Select date"}
-      onChange={(e) => {
-        setValue(e.target.value);
-      }}
-    />
+    <Field>
+      <Input
+        type="date"
+        name={name}
+        required={required}
+        value={value}
+        placeholder={placeholder ?? "Select date"}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+      />
+    </Field>
   );
 };

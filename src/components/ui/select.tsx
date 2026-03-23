@@ -3,15 +3,15 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 
-type NativeSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
+type BaseSelectProps = Omit<React.ComponentProps<"select">, "size"> & {
   size?: "sm" | "default";
 };
 
-function NativeSelect({
+function BaseSelect({
   className,
   size = "default",
   ...props
-}: NativeSelectProps) {
+}: BaseSelectProps) {
   return (
     <div
       className={cn(
@@ -36,11 +36,11 @@ function NativeSelect({
   );
 }
 
-function NativeSelectOption({ ...props }: React.ComponentProps<"option">) {
+function BaseSelectOption({ ...props }: React.ComponentProps<"option">) {
   return <option data-slot="native-select-option" {...props} />;
 }
 
-function NativeSelectOptGroup({
+function BaseSelectOptGroup({
   className,
   ...props
 }: React.ComponentProps<"optgroup">) {
@@ -53,4 +53,4 @@ function NativeSelectOptGroup({
   );
 }
 
-export { NativeSelect, NativeSelectOptGroup, NativeSelectOption };
+export { BaseSelect, BaseSelectOptGroup, BaseSelectOption };

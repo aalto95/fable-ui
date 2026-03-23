@@ -32,7 +32,7 @@ export interface Textarea extends BaseComponent<"textarea"> {
   required?: boolean;
 }
 
-export interface DatePickerComponent extends BaseComponent<"date_picker"> {
+export interface DatePickerComponent extends BaseComponent<"datepicker"> {
   name?: string;
   placeholder?: string;
   defaultValue?: string;

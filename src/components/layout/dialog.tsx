@@ -1,14 +1,14 @@
 import type React from "react";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "../ui/alert-dialog";
+  BaseDialog,
+  BaseDialogAction,
+  BaseDialogCancel,
+  BaseDialogContent,
+  BaseDialogDescription,
+  BaseDialogFooter,
+  BaseDialogHeader,
+  BaseDialogTitle,
+} from "../ui/dialog";
 
 type ConfirmSubmitDialogProps = {
   open: boolean;
@@ -30,20 +30,19 @@ export const Dialog: React.FC<ConfirmSubmitDialogProps> = ({
   cancelText = "No",
 }) => {
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel type="button">{cancelText}</AlertDialogCancel>
-          <AlertDialogAction type="button" autoFocus onClick={onConfirm}>
+    <BaseDialog open={open} onOpenChange={onOpenChange}>
+      <BaseDialogContent>
+        <BaseDialogHeader>
+          <BaseDialogTitle>{title}</BaseDialogTitle>
+          <BaseDialogDescription>{description}</BaseDialogDescription>
+        </BaseDialogHeader>
+        <BaseDialogFooter>
+          <BaseDialogCancel type="button">{cancelText}</BaseDialogCancel>
+          <BaseDialogAction type="button" autoFocus onClick={onConfirm}>
             {confirmText}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          </BaseDialogAction>
+        </BaseDialogFooter>
+      </BaseDialogContent>
+    </BaseDialog>
   );
 };
-
