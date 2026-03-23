@@ -7,6 +7,7 @@ import { SelectField } from "../components/layout/select-field";
 import { HorizontalStack } from "../components/layout/horizontal-stack";
 import { Textarea } from "../components/ui/textarea";
 import { DatePicker } from "../components/layout/date-picker";
+import { Checkbox } from "../components/layout/checkbox";
 
 export const COMPONENTS_MAP = {
   h_stack: HorizontalStack,
@@ -18,4 +19,5 @@ export const COMPONENTS_MAP = {
   form: Form,
   card: CardLayout,
   select: SelectField,
+  checkbox: Checkbox,
 };

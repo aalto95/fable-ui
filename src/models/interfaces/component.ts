@@ -51,6 +51,12 @@ export interface SelectComponent extends BaseComponent<"select"> {
   required?: boolean;
 }
 
+export interface CheckboxComponent extends BaseComponent<"checkbox"> {
+  name?: string;
+  label?: string;
+  required?: boolean;
+}
+
 export interface FormComponent extends BaseComponent<"form"> {
   method?: string;
   action?: string;
@@ -75,7 +81,8 @@ export type ComponentsWithoutDescendants =
   | InputComponent
   | Textarea
   | SelectComponent
-  | DatePickerComponent;
+  | DatePickerComponent
+  | CheckboxComponent;
 
 export type ComponentUnion =
   | ComponentsWithoutDescendants

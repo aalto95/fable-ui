@@ -42,6 +42,13 @@
                     ]
                   },
                   {
+                    "id": "checkbox-input",
+                    "type": "checkbox",
+                    "name": "superuser",
+                    "label": "Введите что-то",
+                    "required": true
+                  },
+                  {
                     "id": "description-textarea",
                     "type": "textarea",
                     "name": "description",
