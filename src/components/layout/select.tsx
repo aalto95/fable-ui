@@ -1,7 +1,7 @@
 import type React from "react";
-import { cn } from "../../lib/utils";
-import type { SelectComponent } from "../../models/interfaces/component";
-import { BaseSelect, BaseSelectOption } from "../ui/select";
+import { cn } from "@/lib/utils";
+import type { SelectComponent } from "@/models/interfaces/component";
+import { BaseSelect, BaseSelectOption } from "@/components/ui/select";
 
 type SelectFieldProps = Omit<SelectComponent, "type">;
 

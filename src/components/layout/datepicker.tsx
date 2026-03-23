@@ -1,7 +1,7 @@
 import * as React from "react";
-import type { DatePickerComponent } from "../../models/interfaces/component";
-import { BaseInput } from "../ui/input";
-import { BaseField } from "../ui/field";
+import type { DatePickerComponent } from "@/models/interfaces/component";
+import { BaseInput } from "@/components/ui/input";
+import { BaseField } from "@/components/ui/field";
 type DatePickerProps = Omit<DatePickerComponent, "type">;
 
 function formatDate(date: string | undefined) {

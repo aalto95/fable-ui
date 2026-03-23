@@ -1,7 +1,7 @@
-import type { CheckboxComponent } from "../../models/interfaces/component";
-import { BaseCheckbox } from "../ui/checkbox";
-import { BaseField } from "../ui/field";
-import { BaseLabel } from "../ui/label";
+import type { CheckboxComponent } from "@/models/interfaces/component";
+import { BaseCheckbox } from "@/components/ui/checkbox";
+import { BaseField } from "@/components/ui/field";
+import { BaseLabel } from "@/components/ui/label";
 
 type CheckboxProps = Omit<CheckboxComponent, "type">;
 

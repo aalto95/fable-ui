@@ -6,7 +6,7 @@ import {
   BaseCardDescription,
   BaseCardContent,
   BaseCardFooter,
-} from "../ui/card";
+} from "@/components/ui/card";
 
 type Card = React.ComponentProps<typeof BaseCard> & {
   title?: string;

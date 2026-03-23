@@ -8,7 +8,7 @@ import {
   BaseDialogFooter,
   BaseDialogHeader,
   BaseDialogTitle,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 
 type ConfirmSubmitDialogProps = {
   open: boolean;

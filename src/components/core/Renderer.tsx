@@ -1,6 +1,6 @@
 import type React from "react";
 import { memo } from "react";
-import type { IComponent } from "../../models/interfaces/component";
+import type { IComponent } from "@/models/interfaces/component";
 import { Component } from "./Component";
 
 type RendererProps = {

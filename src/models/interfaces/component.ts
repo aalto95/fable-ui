@@ -1,4 +1,4 @@
-import type { TComponent } from "../types/component";
+import type { TComponent } from "@/models/types/component";
 
 export interface BaseComponent<T extends TComponent = TComponent> {
   id: string;

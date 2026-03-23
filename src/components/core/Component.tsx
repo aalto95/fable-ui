@@ -1,8 +1,8 @@
 import type React from "react";
 import { memo } from "react";
-import { COMPONENTS_MAP } from "../../consts/components-map";
-import { useDebug } from "../../contexts/debug";
-import { cn } from "../../lib/utils";
+import { COMPONENTS_MAP } from "@/consts/components-map";
+import { useDebug } from "@/contexts/debug";
+import { cn } from "@/lib/utils";
 import type {
   CardComponent,
   ButtonComponent,
@@ -11,7 +11,7 @@ import type {
   HStackComponent,
   IComponent,
   VStackComponent,
-} from "../../models/interfaces/component";
+} from "@/models/interfaces/component";
 
 type ComponentProps = IComponent & {
   children?: React.ReactNode;

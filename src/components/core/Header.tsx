@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { useDebug } from "../../contexts/debug";
-import { BaseButton } from "../ui/button";
+import { useDebug } from "@/contexts/debug";
+import { BaseButton } from "@/components/ui/button";
 
 export const Header: React.FC = () => {
   const { enabled, setEnabled } = useDebug();
