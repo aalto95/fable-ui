@@ -1,3 +1,4 @@
+import { Accordion } from "@/components/layout/accordion";
 import { Button } from "@/components/layout/button";
 import { Card } from "@/components/layout/card";
 import { Checkbox } from "@/components/layout/checkbox";
@@ -22,4 +23,5 @@ export const COMPONENTS_MAP = {
   textarea: Textarea,
   v_stack: VerticalStack,
   table: Table,
+  accordion: Accordion,
 };

@@ -81,6 +81,14 @@ export interface ICardComponent extends IBaseComponent<"card"> {
   descendants?: TComponentUnion[];
 }
 
+export interface IAccordionComponent extends IBaseComponent<"accordion"> {
+  items?: {
+    name: string;
+    title: string;
+    text: string;
+  }[];
+}
+
 export type TComponentsWithDescendants =
   | IHStackComponent
   | IVStackComponent
@@ -94,7 +102,8 @@ export type TComponentsWithoutDescendants =
   | ISelectComponent
   | IDatepickerComponent
   | ICheckboxComponent
-  | ITableComponent;
+  | ITableComponent
+  | IAccordionComponent;
 
 export type TComponentUnion =
   | TComponentsWithoutDescendants

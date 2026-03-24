@@ -7,6 +7,27 @@
         "type": "v_stack",
         "descendants": [
           {
+            "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3dd",
+            "type": "accordion",
+            "items": [
+              {
+                "name": "shipping",
+                "title": "What are your shipping options?",
+                "text": "We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free shipping on international orders."
+              },
+              {
+                "name": "returns",
+                "title": "What is your return policy?",
+                "text": "Returns accepted within 30 days. Items must be unused and in original packaging. Refunds processed within 5-7 business days."
+              },
+              {
+                "name": "support",
+                "title": "How can I contact customer support?",
+                "text": "Reach us via email, live chat, or phone. We respond within 24 hours during business days."
+              }
+            ]
+          },
+          {
             "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3fd",
             "type": "card",
             "descendants": [

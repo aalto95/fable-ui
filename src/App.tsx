@@ -31,24 +31,22 @@ export const App: React.FC = () => {
 
   return (
     <DebugProvider enabled={debugEnabled} setEnabled={setDebugEnabled}>
-      <div className="flex flex-col h-screen">
-        <Header />
-        <main className="p-4 flex-1">
-          <Routes>
-            {pages?.map((page) => {
-              return (
-                <Route
-                  key={page.route}
-                  path={page.route}
-                  element={<Renderer ui={page.ui} />}
-                />
-              );
-            })}
-          </Routes>
-        </main>
-        <Footer />
-        <Toaster />
-      </div>
+      <Header />
+      <main className="p-4 flex-1 flex flex-col items-center">
+        <Routes>
+          {pages?.map((page) => {
+            return (
+              <Route
+                key={page.route}
+                path={page.route}
+                element={<Renderer ui={page.ui} />}
+              />
+            );
+          })}
+        </Routes>
+      </main>
+      <Footer />
+      <Toaster />
     </DebugProvider>
   );
 };

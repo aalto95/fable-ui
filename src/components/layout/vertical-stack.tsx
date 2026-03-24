@@ -8,7 +8,7 @@ export const VerticalStack: React.FC<PropsWithChildren<VerticalStackProps>> = ({
   children,
 }) => {
   return (
-    <div id={id} className="flex flex-col gap-2 w-full">
+    <div id={id} className="flex flex-col gap-2 w-full max-w-7xl">
       {children}
     </div>
   );
