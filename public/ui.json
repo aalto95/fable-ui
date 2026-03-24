@@ -7,6 +7,79 @@
         "type": "v_stack",
         "descendants": [
           {
+            "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3fd",
+            "type": "card",
+            "descendants": [
+              {
+                "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3fc",
+                "type": "table",
+                "fields": [
+                  {
+                    "name": "invoice",
+                    "label": "Invoice"
+                  },
+                  {
+                    "name": "paymentStatus",
+                    "label": "Payment Status"
+                  },
+                  {
+                    "name": "paymentMethod",
+                    "label": "Payment Method"
+                  },
+                  {
+                    "name": "totalAmount",
+                    "label": "Total Amount"
+                  }
+                ],
+                "data": [
+                  {
+                    "invoice": "INV001",
+                    "paymentStatus": "Paid",
+                    "totalAmount": "$250.00",
+                    "paymentMethod": "Credit Card"
+                  },
+                  {
+                    "invoice": "INV002",
+                    "paymentStatus": "Pending",
+                    "totalAmount": "$150.00",
+                    "paymentMethod": "PayPal"
+                  },
+                  {
+                    "invoice": "INV003",
+                    "paymentStatus": "Unpaid",
+                    "totalAmount": "$350.00",
+                    "paymentMethod": "Bank Transfer"
+                  },
+                  {
+                    "invoice": "INV004",
+                    "paymentStatus": "Paid",
+                    "totalAmount": "$450.00",
+                    "paymentMethod": "Credit Card"
+                  },
+                  {
+                    "invoice": "INV005",
+                    "paymentStatus": "Paid",
+                    "totalAmount": "$550.00",
+                    "paymentMethod": "PayPal"
+                  },
+                  {
+                    "invoice": "INV006",
+                    "paymentStatus": "Pending",
+                    "totalAmount": "$200.00",
+                    "paymentMethod": "Bank Transfer"
+                  },
+                  {
+                    "invoice": "INV007",
+                    "paymentStatus": "Unpaid",
+                    "totalAmount": "$300.00",
+                    "paymentMethod": "Credit Card"
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
             "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
             "type": "h_stack",
             "descendants": [

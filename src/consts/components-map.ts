@@ -6,6 +6,7 @@ import { Form } from "@/components/layout/form";
 import { HorizontalStack } from "@/components/layout/horizontal-stack";
 import { Input } from "@/components/layout/input";
 import { SelectField } from "@/components/layout/select";
+import { Table } from "@/components/layout/table";
 import { Textarea } from "@/components/layout/textarea";
 import { VerticalStack } from "@/components/layout/vertical-stack";
 
@@ -20,4 +21,5 @@ export const COMPONENTS_MAP = {
   select: SelectField,
   textarea: Textarea,
   v_stack: VerticalStack,
+  table: Table,
 };
