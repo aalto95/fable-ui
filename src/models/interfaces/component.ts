@@ -56,8 +56,8 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
 }
 
 export interface ITableComponent extends IBaseComponent<"table"> {
-  fields: { name: string; label: string }[];
-  data: any[];
+  fields?: { name: string; label: string }[];
+  data?: any[];
 }
 export interface IHStackComponent extends IBaseComponent<"h_stack"> {
   descendants?: TComponentUnion[];

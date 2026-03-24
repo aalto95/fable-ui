@@ -1,4 +1,4 @@
-import { memo, type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { COMPONENTS_MAP } from "@/consts/components-map";
 import { useDebug } from "@/contexts/debug";
 
@@ -86,7 +86,7 @@ export const Component: React.FC<ComponentProps> = (props) => {
   };
 
   const ComponentWithDescendants = () => {
-    const { descendants } = rest as ICardComponent;
+    const { descendants } = rest as TComponentsWithDescendants;
     const hasDescendants = Array.isArray(descendants) && descendants.length > 0;
 
     return wrap(
