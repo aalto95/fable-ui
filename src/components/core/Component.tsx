@@ -3,7 +3,6 @@ import { COMPONENTS_MAP } from "@/consts/components-map";
 import { useDebug } from "@/contexts/debug";
 
 import type {
-  ICardComponent,
   TComponentsWithDescendants,
   TComponentUnion,
 } from "@/models/interfaces/component";
