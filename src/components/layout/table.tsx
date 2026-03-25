@@ -2,10 +2,10 @@ import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+  BaseDropdownMenu,
+  BaseDropdownMenuContent,
+  BaseDropdownMenuItem,
+  BaseDropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
   BaseTable,
@@ -68,24 +68,24 @@ export const Table: React.FC<TableProps> = ({
             ))}
             <BaseTableCell className="text-right">
               {actions?.length && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                <BaseDropdownMenu>
+                  <BaseDropdownMenuTrigger asChild>
                     <BaseButton variant="ghost" size="icon" className="size-8">
                       <MoreHorizontalIcon />
                       <span className="sr-only">Open menu</span>
                     </BaseButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  </BaseDropdownMenuTrigger>
+                  <BaseDropdownMenuContent align="end">
                     {actions.map((action, i) => (
-                      <DropdownMenuItem
+                      <BaseDropdownMenuItem
                         key={i}
                         onClick={() => goTo(action.path, item.id)}
                       >
                         {action.label}
-                      </DropdownMenuItem>
+                      </BaseDropdownMenuItem>
                     ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                  </BaseDropdownMenuContent>
+                </BaseDropdownMenu>
               )}
             </BaseTableCell>
           </BaseTableRow>
