@@ -6,6 +6,7 @@ import { Datepicker } from "@/components/layout/datepicker";
 import { Form } from "@/components/layout/form";
 import { HorizontalStack } from "@/components/layout/horizontal-stack";
 import { Input } from "@/components/layout/input";
+import { Pagination } from "@/components/layout/pagination";
 import { SelectField } from "@/components/layout/select";
 import { Table } from "@/components/layout/table";
 import { Textarea } from "@/components/layout/textarea";
@@ -24,4 +25,5 @@ export const COMPONENTS_MAP = {
   v_stack: VerticalStack,
   table: Table,
   accordion: Accordion,
+  pagination: Pagination,
 };

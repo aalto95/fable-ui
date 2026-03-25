@@ -59,6 +59,19 @@ export interface ITableComponent extends IBaseComponent<"table"> {
   fields?: { name: string; label: string }[];
   data?: any[];
 }
+
+export interface IAccordionComponent extends IBaseComponent<"accordion"> {
+  items?: {
+    name: string;
+    title: string;
+    text: string;
+  }[];
+}
+
+export interface IPaginationComponent extends IBaseComponent<"accordion"> {
+  pages: number;
+}
+
 export interface IHStackComponent extends IBaseComponent<"h_stack"> {
   descendants?: TComponentUnion[];
 }
@@ -81,14 +94,6 @@ export interface ICardComponent extends IBaseComponent<"card"> {
   descendants?: TComponentUnion[];
 }
 
-export interface IAccordionComponent extends IBaseComponent<"accordion"> {
-  items?: {
-    name: string;
-    title: string;
-    text: string;
-  }[];
-}
-
 export type TComponentsWithDescendants =
   | IHStackComponent
   | IVStackComponent
@@ -103,7 +108,8 @@ export type TComponentsWithoutDescendants =
   | IDatepickerComponent
   | ICheckboxComponent
   | ITableComponent
-  | IAccordionComponent;
+  | IAccordionComponent
+  | IPaginationComponent;
 
 export type TComponentUnion =
   | TComponentsWithoutDescendants
