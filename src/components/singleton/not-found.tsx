@@ -1,4 +1,3 @@
-import { ArrowUpRightIcon } from "lucide-react";
 import { Link } from "react-router";
 import { BaseButton } from "@/components/ui/button";
 import {

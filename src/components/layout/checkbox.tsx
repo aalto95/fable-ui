@@ -5,7 +5,7 @@ import type { ICheckboxComponent } from "@/models/interfaces/component";
 
 type CheckboxProps = Pick<
   ICheckboxComponent,
-  "id" | "name" | "label" | "required" | "checked" | "actions"
+  "id" | "name" | "label" | "required" | "checked"
 >;
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -14,25 +14,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   required,
   checked,
-  actions,
 }) => {
-  const playActions = () => {
-    actions?.forEach((action) => {
-      const [id, event] = action.split("/");
-      const element = document.getElementById(id);
-
-      if (id) {
-        switch (event) {
-          case "toggle":
-            element?.toggleAttribute("hidden");
-            break;
-          default:
-            break;
-        }
-      }
-    });
-  };
-
   return (
     <BaseField id={id} orientation="horizontal">
       <BaseCheckbox
@@ -40,7 +22,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         name={name}
         required={required}
         defaultChecked={checked}
-        onClick={playActions}
       />
       <BaseLabel htmlFor={name}>{label}</BaseLabel>
     </BaseField>

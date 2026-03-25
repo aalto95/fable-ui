@@ -20,12 +20,12 @@ import { BaseButton } from "../ui/button";
 
 type TableProps = Pick<
   ITableComponent,
-  "id" | "fields" | "data" | "dataSource" | "actions"
+  "id" | "heads" | "data" | "dataSource" | "actions"
 >;
 
 export const Table: React.FC<TableProps> = ({
   id,
-  fields,
+  heads,
   data,
   dataSource,
   actions,
@@ -55,7 +55,7 @@ export const Table: React.FC<TableProps> = ({
     <BaseTable id={id}>
       <BaseTableHeader>
         <BaseTableRow>
-          {fields?.map((field, i) => (
+          {heads?.map((field, i) => (
             <BaseTableHead key={i}>{field.label}</BaseTableHead>
           ))}
         </BaseTableRow>
@@ -63,7 +63,7 @@ export const Table: React.FC<TableProps> = ({
       <BaseTableBody>
         {fieldData?.map((item, i) => (
           <BaseTableRow key={i}>
-            {fields?.map((field, i) => (
+            {heads?.map((field, i) => (
               <BaseTableCell key={i}>{item[field.name]}</BaseTableCell>
             ))}
             <BaseTableCell className="text-right">

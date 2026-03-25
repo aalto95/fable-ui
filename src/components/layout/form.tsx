@@ -1,5 +1,5 @@
 import type { SubmitEventHandler } from "react";
-import { act, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { Dialog } from "@/components/singleton/dialog";
@@ -142,7 +142,7 @@ export const Form: React.FC<FormProps> = ({
     setDialogOpen(true);
   };
 
-  function addDefaultValues(fields: any, data: any) {
+  function addDefaultValues(fields: any[], data: any) {
     return fields.map((field) => {
       // Check if the field has a 'name' property and if that name exists in the data object
       if (field.name && Object.hasOwn(data, field.name)) {
@@ -156,7 +156,7 @@ export const Form: React.FC<FormProps> = ({
   }
 
   useEffect(() => {
-    if (path && id) {
+    if (path && id && innerFields) {
       fetch(`${path}/${id}`)
         .then((res) => res.json())
         .then((res) => {

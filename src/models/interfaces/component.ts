@@ -58,11 +58,10 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
   label?: string;
   required?: boolean;
   checked?: boolean;
-  actions?: IAction[];
 }
 
 export interface ITableComponent extends IBaseComponent<"table"> {
-  fields?: { name: string; label: string }[];
+  heads?: { name: string; label: string }[];
   data?: any[];
   dataSource?: string;
   actions?: IAction[];
@@ -106,7 +105,6 @@ export interface ICardComponent extends IBaseComponent<"card"> {
 export type TComponentsWithDescendants =
   | IHStackComponent
   | IVStackComponent
-  | IFormComponent
   | ICardComponent;
 
 export type TComponentsWithoutDescendants =
@@ -118,7 +116,8 @@ export type TComponentsWithoutDescendants =
   | ICheckboxComponent
   | ITableComponent
   | IAccordionComponent
-  | IPaginationComponent;
+  | IPaginationComponent
+  | IFormComponent;
 
 export type TComponentUnion =
   | TComponentsWithoutDescendants
