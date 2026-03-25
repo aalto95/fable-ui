@@ -26,11 +26,12 @@ class TodoController {
 
   async addTodo(req, res, next) {
     try {
-      const { name, text } = req.body;
+      const { name, text, dueDate } = req.body;
 
       const result = await todoService.addTodo({
         name,
         text,
+        dueDate,
       });
 
       res.status(200).json({

@@ -61,7 +61,7 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
 }
 
 export interface ITableComponent extends IBaseComponent<"table"> {
-  heads?: { name: string; label: string }[];
+  heads?: { name: string; label: string; type: "string" | "date" }[];
   data?: any[];
   dataSource?: string;
   actions?: IAction[];

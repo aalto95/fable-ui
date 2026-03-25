@@ -2,15 +2,99 @@ import type { SubmitEventHandler } from "react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
+
+import { Component } from "@/components/core/Component";
 import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
-import { Component } from "../core/Component";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
   Pick<
     IFormComponent,
     "path" | "method" | "fields" | "title" | "submitActions"
   >;
+
+/* -------------------- utils -------------------- */
+
+function dateOnlyToISO(value: string) {
+  return value ? new Date(value + "T00:00:00").toISOString() : value;
+}
+
+function formDataToJson(formData: FormData, form: HTMLFormElement) {
+  const json: Record<string, any> = {};
+
+  formData.forEach((value, key) => {
+    const input = form.elements.namedItem(key) as HTMLInputElement | null;
+
+    if (input?.type === "date" && typeof value === "string") {
+      json[key] = dateOnlyToISO(value);
+    } else {
+      json[key] = value;
+    }
+  });
+
+  return json;
+}
+
+function buildGetUrl(base: string, data: Record<string, any>) {
+  const params = new URLSearchParams();
+
+  Object.entries(data).forEach(([key, value]) => {
+    if (value != null) params.append(key, String(value));
+  });
+
+  return params.toString()
+    ? base.includes("?")
+      ? `${base}&${params}`
+      : `${base}?${params}`
+    : base;
+}
+
+function validateRequired(form: HTMLFormElement, formData: FormData) {
+  const nodes = Array.from(
+    form.querySelectorAll<HTMLElement>(
+      "[data-bdui-required='true'], [required]",
+    ),
+  );
+
+  const missing = nodes
+    .map((node) => {
+      const name =
+        (node as HTMLInputElement).name ||
+        node.getAttribute("name") ||
+        node.getAttribute("data-name");
+
+      if (!name) return null;
+
+      const value = formData.get(name);
+      const isMissing =
+        value == null || (typeof value === "string" && value.trim() === "");
+
+      if (!isMissing) return null;
+
+      return {
+        node,
+        label:
+          node.getAttribute("data-bdui-label") ||
+          (node as HTMLInputElement).placeholder ||
+          node.getAttribute("aria-label") ||
+          name,
+      };
+    })
+    .filter(Boolean) as { node: HTMLElement; label: string }[];
+
+  return missing;
+}
+
+function hasNameField(field: unknown): field is { name: string } {
+  return (
+    typeof field === "object" &&
+    field !== null &&
+    "name" in field &&
+    typeof (field as any).name === "string"
+  );
+}
+
+/* -------------------- component -------------------- */
 
 export const Form: React.FC<FormProps> = ({
   path,
@@ -23,117 +107,61 @@ export const Form: React.FC<FormProps> = ({
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const submitAfterConfirmRef = useRef<null | (() => Promise<void>)>(null);
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [innerFields, setInnerFields] = useState(fields);
 
-  const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
+  const submitRef = useRef<null | (() => Promise<void>)>(null);
+
+  /* -------- submit handler -------- */
+
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    const formElement = event.currentTarget;
-    const formData = new FormData(formElement);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    const targetAction = path ?? formElement.action;
-    const targetMethod = (method ?? formElement.method ?? "GET").toUpperCase();
+    const missing = validateRequired(form, formData);
 
-    // Convert FormData to plain object
-    const jsonBody: Record<string, any> = {};
-    formData.forEach((value, key) => {
-      // If multiple fields have the same name, you could handle arrays here
-      jsonBody[key] = value;
-    });
-
-    const requiredNodes = Array.from(
-      formElement.querySelectorAll<HTMLElement>(
-        "[data-bdui-required='true'], [required]",
-      ),
-    );
-
-    const missingRequired = requiredNodes
-      .map((node) => {
-        const nameAttr =
-          (node as HTMLInputElement).name ??
-          node.getAttribute("name") ??
-          node.getAttribute("data-name") ??
-          undefined;
-
-        if (!nameAttr) return null;
-
-        const value = formData.get(nameAttr);
-        const isMissing =
-          value === null ||
-          (typeof value === "string" && value.trim().length === 0);
-
-        if (!isMissing) return null;
-
-        const label =
-          node.getAttribute("data-bdui-label") ??
-          (node as HTMLInputElement).placeholder ??
-          node.getAttribute("aria-label") ??
-          nameAttr;
-
-        return { name: nameAttr, label, node };
-      })
-      .filter((x): x is NonNullable<typeof x> => x !== null);
-
-    if (missingRequired.length > 0) {
-      toast(
-        `Please fill required fields: ${missingRequired
-          .map((x) => x.label)
-          .join(", ")}`,
-      );
-
-      const first = missingRequired[0]?.node as HTMLElement | undefined;
-      first?.focus?.();
+    if (missing.length) {
+      toast(`Fill required: ${missing.map((m) => m.label).join(", ")}`);
+      missing[0].node?.focus();
       return;
     }
 
-    submitAfterConfirmRef.current = async () => {
-      let requestUrl = targetAction;
-      const init: RequestInit = {
-        method: targetMethod,
-        headers: {},
-      };
+    const json = formDataToJson(formData, form);
+
+    const targetMethod = method.toUpperCase();
+    const baseUrl = path ?? form.action;
+
+    submitRef.current = async () => {
+      let url = baseUrl;
+      const init: RequestInit = { method: targetMethod };
 
       if (targetMethod === "GET") {
-        const params = new URLSearchParams(
-          jsonBody as Record<string, string>,
-        ).toString();
-        if (params) {
-          requestUrl = targetAction.includes("?")
-            ? `${targetAction}&${params}`
-            : `${targetAction}?${params}`;
-        }
+        url = buildGetUrl(baseUrl, json);
       } else {
         init.headers = { "Content-Type": "application/json" };
-        init.body = JSON.stringify(jsonBody);
+        init.body = JSON.stringify(json);
       }
 
       try {
-        const response = await fetch(
-          id ? `${requestUrl}/${id}` : requestUrl,
-          init,
-        );
+        const res = await fetch(id ? `${url}/${id}` : url, init);
 
-        if (!response.ok) {
-          let bodyText: string | undefined;
-          try {
-            bodyText = await response.text();
-          } catch {
-            bodyText = undefined;
-          }
-
-          toast(
-            bodyText?.trim()
-              ? bodyText
-              : `Form not submitted (status ${response.status})`,
-          );
-        } else {
-          toast("Form submitted successfully");
-          formElement.reset();
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          toast(text || `Error ${res.status}`);
+          return;
         }
-      } catch (error) {
-        toast(`Form submission failed: ${String(error)}`);
+
+        toast("Success");
+        form.reset();
+
+        submitActions?.forEach((a) => {
+          if (a.type === "GO_TO") navigate("/");
+        });
+      } catch (e) {
+        toast(`Failed: ${String(e)}`);
       }
 
       onSubmit?.(event);
@@ -142,28 +170,25 @@ export const Form: React.FC<FormProps> = ({
     setDialogOpen(true);
   };
 
-  function addDefaultValues(fields: any[], data: any) {
-    return fields.map((field) => {
-      // Check if the field has a 'name' property and if that name exists in the data object
-      if (field.name && Object.hasOwn(data, field.name)) {
-        return {
-          ...field,
-          defaultValue: data[field.name],
-        };
-      }
-      return field;
-    });
-  }
+  /* -------- load defaults -------- */
 
   useEffect(() => {
-    if (path && id && innerFields) {
-      fetch(`${path}/${id}`)
-        .then((res) => res.json())
-        .then((res) => {
-          setInnerFields(addDefaultValues(innerFields, res));
-        });
-    }
-  }, []);
+    if (!path || !id || !fields) return;
+
+    fetch(`${path}/${id}`)
+      .then((r) => r.json())
+      .then((data) => {
+        setInnerFields((prev) =>
+          prev?.map((f) =>
+            hasNameField(f) && data[f.name] !== undefined
+              ? { ...f, defaultValue: data[f.name] }
+              : f,
+          ),
+        );
+      });
+  }, [path, id]);
+
+  /* -------- render -------- */
 
   return (
     <>
@@ -176,27 +201,22 @@ export const Form: React.FC<FormProps> = ({
         {...rest}
       >
         {title && <h2 className="font-bold">{title}</h2>}
+
         {innerFields?.map((field) => (
-          <Component key={field.id} {...field}></Component>
+          <Component key={field.id} {...field} />
         ))}
       </form>
 
       <Dialog
         open={dialogOpen}
         onOpenChange={(open) => {
-          if (!open) submitAfterConfirmRef.current = null;
+          if (!open) submitRef.current = null;
           setDialogOpen(open);
         }}
         onConfirm={async () => {
           setDialogOpen(false);
-          const submit = submitAfterConfirmRef.current;
-          submitAfterConfirmRef.current = null;
-          await submit?.();
-          submitActions?.forEach((action) => {
-            if (action.type === "GO_TO") {
-              navigate("/");
-            }
-          });
+          await submitRef.current?.();
+          submitRef.current = null;
         }}
       />
     </>

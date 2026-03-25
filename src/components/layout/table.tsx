@@ -1,6 +1,7 @@
 import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { BaseButton } from "@/components/ui/button";
 import {
   BaseDropdownMenu,
   BaseDropdownMenuContent,
@@ -16,7 +17,6 @@ import {
   BaseTableRow,
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
-import { BaseButton } from "../ui/button";
 
 type TableProps = Pick<
   ITableComponent,
@@ -32,6 +32,19 @@ export const Table: React.FC<TableProps> = ({
 }) => {
   const navigate = useNavigate();
   const [fieldData, setFieldData] = useState(data ?? []);
+
+  function formatValue(value: any, type?: string) {
+    if (value == null) return "";
+
+    if (type === "date" && typeof value === "string") {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+
+      return date.toLocaleDateString(); // локаль пользователя
+    }
+
+    return value;
+  }
 
   const getData = () => {
     if (dataSource) {
@@ -55,16 +68,18 @@ export const Table: React.FC<TableProps> = ({
     <BaseTable id={id}>
       <BaseTableHeader>
         <BaseTableRow>
-          {heads?.map((field, i) => (
-            <BaseTableHead key={i}>{field.label}</BaseTableHead>
+          {heads?.map((head, i) => (
+            <BaseTableHead key={i}>{head.label}</BaseTableHead>
           ))}
         </BaseTableRow>
       </BaseTableHeader>
       <BaseTableBody>
         {fieldData?.map((item, i) => (
           <BaseTableRow key={i}>
-            {heads?.map((field, i) => (
-              <BaseTableCell key={i}>{item[field.name]}</BaseTableCell>
+            {heads?.map((head, i) => (
+              <BaseTableCell key={i}>
+                {formatValue(item[head.name], head.type)}
+              </BaseTableCell>
             ))}
             <BaseTableCell className="text-right">
               {actions?.length && (
