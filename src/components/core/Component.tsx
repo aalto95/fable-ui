@@ -40,7 +40,7 @@ const DEBUG_COLORS: Record<
 };
 
 function getDebugLayoutClass(): string {
-  return "w-full";
+  return "w-full max-w-7xl";
 }
 
 export const Component: React.FC<ComponentProps> = (props) => {
