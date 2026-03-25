@@ -1,7 +1,6 @@
 import type { TComponent } from "@/models/types/component";
 
 export interface IBaseComponent<T extends TComponent = TComponent> {
-  id: string;
   type: T;
 }
 

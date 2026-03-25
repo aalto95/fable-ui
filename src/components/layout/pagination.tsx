@@ -86,8 +86,8 @@ export const Pagination: React.FC<PaginationProps> = ({ pages }) => {
           />
         </BasePaginationItem>
 
-        {getVisiblePages.map((page, index) => (
-          <BasePaginationItem key={`${page}-${index}`}>
+        {getVisiblePages.map((page, i) => (
+          <BasePaginationItem key={i}>
             {page === "ellipsis" ? (
               <BasePaginationEllipsis />
             ) : (

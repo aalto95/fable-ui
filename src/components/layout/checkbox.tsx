@@ -5,18 +5,17 @@ import type { ICheckboxComponent } from "@/models/interfaces/component";
 
 type CheckboxProps = Pick<
   ICheckboxComponent,
-  "id" | "name" | "label" | "required" | "checked"
+  "name" | "label" | "required" | "checked"
 >;
 
 export const Checkbox: React.FC<CheckboxProps> = ({
-  id,
   name,
   label,
   required,
   checked,
 }) => {
   return (
-    <BaseField id={id} orientation="horizontal">
+    <BaseField orientation="horizontal">
       <BaseCheckbox
         id={name}
         name={name}

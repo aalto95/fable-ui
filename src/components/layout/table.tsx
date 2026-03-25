@@ -20,11 +20,10 @@ import type { ITableComponent } from "@/models/interfaces/component";
 
 type TableProps = Pick<
   ITableComponent,
-  "id" | "heads" | "data" | "dataSource" | "actions"
+  "heads" | "data" | "dataSource" | "actions"
 >;
 
 export const Table: React.FC<TableProps> = ({
-  id,
   heads,
   data,
   dataSource,
@@ -65,7 +64,7 @@ export const Table: React.FC<TableProps> = ({
   }, []);
 
   return (
-    <BaseTable id={id}>
+    <BaseTable>
       <BaseTableHeader>
         <BaseTableRow>
           {heads?.map((head, i) => (

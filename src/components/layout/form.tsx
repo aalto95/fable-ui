@@ -202,8 +202,8 @@ export const Form: React.FC<FormProps> = ({
       >
         {title && <h2 className="font-bold">{title}</h2>}
 
-        {innerFields?.map((field) => (
-          <Component key={field.id} {...field} />
+        {innerFields?.map((field, i) => (
+          <Component key={i} {...field} />
         ))}
       </form>
 

@@ -91,7 +91,7 @@ export const Component: React.FC<ComponentProps> = (props) => {
     return wrap(
       <MyComponent {...rest}>
         {hasDescendants &&
-          descendants.map((child) => <Component key={child.id} {...child} />)}
+          descendants.map((child, i) => <Component key={i} {...child} />)}
       </MyComponent>,
     );
   };

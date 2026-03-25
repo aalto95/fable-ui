@@ -11,8 +11,8 @@ const RendererInner: React.FC<RendererProps> = ({ ui }) => {
 
   return (
     <>
-      {ui.map((component) => (
-        <Component key={component.id} {...component} />
+      {ui.map((component, i) => (
+        <Component key={i} {...component} />
       ))}
     </>
   );

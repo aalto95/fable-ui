@@ -5,7 +5,7 @@ import type { IDatepickerComponent } from "@/models/interfaces/component";
 
 type DatePickerProps = Pick<
   IDatepickerComponent,
-  "id" | "name" | "label" | "defaultValue" | "required" | "hidden"
+  "name" | "label" | "defaultValue" | "required" | "hidden"
 >;
 
 function toLocalISODateOnly(value?: string | Date) {
@@ -27,7 +27,6 @@ function toLocalISODateOnly(value?: string | Date) {
 }
 
 export const Datepicker: React.FC<DatePickerProps> = ({
-  id,
   name,
   label,
   defaultValue,
@@ -35,7 +34,7 @@ export const Datepicker: React.FC<DatePickerProps> = ({
   hidden,
 }) => {
   return (
-    <BaseField id={id} hidden={hidden}>
+    <BaseField hidden={hidden}>
       {label && <BaseLabel>{label}</BaseLabel>}
       <BaseInput
         type="date"

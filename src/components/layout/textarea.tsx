@@ -5,11 +5,10 @@ import type { ITextareaComponent } from "@/models/interfaces/component";
 
 type TextareaProps = Pick<
   ITextareaComponent,
-  "id" | "name" | "label" | "defaultValue" | "required" | "hidden"
+  "name" | "label" | "defaultValue" | "required" | "hidden"
 >;
 
 export const Textarea: React.FC<TextareaProps> = ({
-  id,
   name,
   label,
   defaultValue,
@@ -17,7 +16,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   hidden,
 }) => {
   return (
-    <BaseField id={id} hidden={hidden}>
+    <BaseField hidden={hidden}>
       {label && <BaseLabel>{label}</BaseLabel>}
       <BaseTextarea
         name={name}

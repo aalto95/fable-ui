@@ -4,7 +4,6 @@
     "name": "Home",
     "ui": [
       {
-        "id": "1b4e28ba-2fa1-11d2-883f-b9a761bde3fc",
         "type": "table",
         "heads": [
           {
@@ -39,7 +38,6 @@
     "name": "Create Todo",
     "ui": [
       {
-        "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11",
         "type": "form",
         "title": "Task Form",
         "method": "POST",
@@ -52,27 +50,23 @@
         ],
         "fields": [
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
             "type": "input",
             "name": "name",
             "label": "Enter task name",
             "required": true
           },
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d478",
             "type": "input",
             "name": "text",
             "label": "Enter task text",
             "required": true
           },
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d477",
             "type": "datepicker",
             "name": "dueDate",
             "label": "Enter due date"
           },
           {
-            "id": "5f4d3c2b-1a0e-4f9d-8c7b-6a5e4d3c2b1a",
             "type": "button",
             "text": "Save",
             "expand": true
@@ -86,7 +80,6 @@
     "name": "Update Todo",
     "ui": [
       {
-        "id": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12",
         "type": "form",
         "title": "Task Form",
         "method": "PUT",
@@ -99,27 +92,23 @@
         ],
         "fields": [
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
             "type": "input",
             "name": "name",
             "label": "Enter task name",
             "required": true
           },
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d478",
             "type": "input",
             "name": "text",
             "label": "Enter task text",
             "required": true
           },
           {
-            "id": "f47ac10b-58cc-4372-a567-0e02b2c3d477",
             "type": "datepicker",
             "name": "dueDate",
             "label": "Enter due date"
           },
           {
-            "id": "5f4d3c2b-1a0e-4f9d-8c7b-6a5e4d3c2b1a",
             "type": "button",
             "text": "Save",
             "expand": true

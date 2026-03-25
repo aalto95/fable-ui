@@ -6,11 +6,10 @@ import type { ISelectComponent } from "@/models/interfaces/component";
 
 type SelectFieldProps = Pick<
   ISelectComponent,
-  "id" | "name" | "label" | "options" | "required" | "hidden"
+  "name" | "label" | "options" | "required" | "hidden"
 >;
 
 export const SelectField: React.FC<SelectFieldProps> = ({
-  id,
   name,
   label,
   options,
@@ -19,7 +18,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   ...rest
 }) => {
   return (
-    <BaseField id={id} hidden={hidden}>
+    <BaseField hidden={hidden}>
       <BaseLabel>{label}</BaseLabel>
       <BaseSelect
         name={name}
@@ -31,8 +30,8 @@ export const SelectField: React.FC<SelectFieldProps> = ({
         })}
       >
         <BaseSelectOption></BaseSelectOption>
-        {options?.map((option) => (
-          <BaseSelectOption key={option.value} value={option.value}>
+        {options?.map((option, i) => (
+          <BaseSelectOption key={i} value={option.value}>
             {option.label}
           </BaseSelectOption>
         ))}
