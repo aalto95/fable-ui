@@ -1,3 +1,12 @@
+import { MoreHorizontalIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   BaseTable,
   BaseTableBody,
@@ -7,12 +16,43 @@ import {
   BaseTableRow,
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
+import { BaseButton } from "../ui/button";
 
-type TableProps = Pick<ITableComponent, "id" | "fields" | "data">;
+type TableProps = Pick<
+  ITableComponent,
+  "id" | "fields" | "data" | "dataSource" | "actions"
+>;
 
-export const Table: React.FC<TableProps> = ({ fields, data }) => {
+export const Table: React.FC<TableProps> = ({
+  id,
+  fields,
+  data,
+  dataSource,
+  actions,
+}) => {
+  const navigate = useNavigate();
+  const [fieldData, setFieldData] = useState(data ?? []);
+
+  const getData = () => {
+    if (dataSource) {
+      fetch(dataSource)
+        .then((res) => res.json())
+        .then((res) => {
+          setFieldData(res.data);
+        });
+    }
+  };
+
+  const goTo = (path: string, id: string) => {
+    navigate(`${path}/${id}`);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <BaseTable>
+    <BaseTable id={id}>
       <BaseTableHeader>
         <BaseTableRow>
           {fields?.map((field, i) => (
@@ -21,11 +61,33 @@ export const Table: React.FC<TableProps> = ({ fields, data }) => {
         </BaseTableRow>
       </BaseTableHeader>
       <BaseTableBody>
-        {data?.map((item, i) => (
+        {fieldData?.map((item, i) => (
           <BaseTableRow key={i}>
             {fields?.map((field, i) => (
               <BaseTableCell key={i}>{item[field.name]}</BaseTableCell>
             ))}
+            <BaseTableCell className="text-right">
+              {actions?.length && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <BaseButton variant="ghost" size="icon" className="size-8">
+                      <MoreHorizontalIcon />
+                      <span className="sr-only">Open menu</span>
+                    </BaseButton>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {actions.map((action, i) => (
+                      <DropdownMenuItem
+                        key={i}
+                        onClick={() => goTo(action.path, item.id)}
+                      >
+                        {action.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </BaseTableCell>
           </BaseTableRow>
         ))}
       </BaseTableBody>

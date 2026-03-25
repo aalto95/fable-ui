@@ -16,7 +16,7 @@ export const App: React.FC = () => {
   });
 
   useEffect(() => {
-    fetch("./ui.json")
+    fetch("/ui.json")
       .then((resp) => resp.json())
       .then((uiSchema: IPage[]) => {
         setPages(uiSchema);
@@ -32,9 +32,9 @@ export const App: React.FC = () => {
 
   return (
     <DebugProvider enabled={debugEnabled} setEnabled={setDebugEnabled}>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col w-full items-center min-h-screen">
         <Header />
-        <main className="p-4 flex-1 flex flex-col items-center">
+        <main className="p-4 flex-1 flex flex-col items-center w-full max-w-7xl">
           {pages?.length && (
             <Routes>
               {pages?.map((page) => {

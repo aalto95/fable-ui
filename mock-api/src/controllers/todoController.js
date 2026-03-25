@@ -14,18 +14,42 @@ class TodoController {
     }
   }
 
-  async saveTodo(req, res, next) {
+  async getTodoById(req, res, next) {
+    try {
+      const result = await todoService.getTodoById(req.params.id);
+
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async addTodo(req, res, next) {
     try {
       const { name, text } = req.body;
 
-      const result = await todoService.saveTodo({
+      const result = await todoService.addTodo({
         name,
         text,
       });
 
       res.status(200).json({
         success: true,
-        message: "Item saved successfully",
+        message: "Item added successfully",
+        data: result.data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateTodo(req, res, next) {
+    try {
+      const result = await todoService.updateTodo(req.params.id, req.body);
+
+      res.status(200).json({
+        success: true,
+        message: "Item updated successfully",
         data: result.data,
       });
     } catch (error) {

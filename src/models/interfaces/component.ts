@@ -5,6 +5,12 @@ export interface IBaseComponent<T extends TComponent = TComponent> {
   type: T;
 }
 
+export interface IAction {
+  type: "HTTP_GET" | "GO_TO" | "HIDE";
+  label: string;
+  path: string;
+}
+
 export interface IButtonComponent extends IBaseComponent<"button"> {
   text?: string;
   expand?: boolean;
@@ -52,12 +58,14 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
   label?: string;
   required?: boolean;
   checked?: boolean;
-  actions?: string[];
+  actions?: IAction[];
 }
 
 export interface ITableComponent extends IBaseComponent<"table"> {
   fields?: { name: string; label: string }[];
   data?: any[];
+  dataSource?: string;
+  actions?: IAction[];
 }
 
 export interface IAccordionComponent extends IBaseComponent<"accordion"> {
@@ -83,8 +91,9 @@ export interface IVStackComponent extends IBaseComponent<"v_stack"> {
 export interface IFormComponent extends IBaseComponent<"form"> {
   title?: string;
   method?: string;
-  action?: string;
-  descendants?: TComponentUnion[];
+  path?: string;
+  fields?: TComponentUnion[];
+  submitActions?: IAction[];
 }
 
 export interface ICardComponent extends IBaseComponent<"card"> {

@@ -1,23 +1,31 @@
 import type { SubmitEventHandler } from "react";
-import { useRef, useState } from "react";
+import { act, useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
+import { Component } from "../core/Component";
 
 type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Pick<IFormComponent, "id" | "action" | "method" | "title">;
+  Pick<
+    IFormComponent,
+    "path" | "method" | "fields" | "title" | "submitActions"
+  >;
 
 export const Form: React.FC<FormProps> = ({
-  id,
-  action,
+  path,
   method = "GET",
   onSubmit,
-  children,
+  fields,
   title,
+  submitActions,
   ...rest
 }) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const submitAfterConfirmRef = useRef<null | (() => Promise<void>)>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [innerFields, setInnerFields] = useState(fields);
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -25,7 +33,7 @@ export const Form: React.FC<FormProps> = ({
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
 
-    const targetAction = action ?? formElement.action;
+    const targetAction = path ?? formElement.action;
     const targetMethod = (method ?? formElement.method ?? "GET").toUpperCase();
 
     // Convert FormData to plain object
@@ -102,7 +110,11 @@ export const Form: React.FC<FormProps> = ({
       }
 
       try {
-        const response = await fetch(requestUrl, init);
+        const response = await fetch(
+          id ? `${requestUrl}/${id}` : requestUrl,
+          init,
+        );
+
         if (!response.ok) {
           let bodyText: string | undefined;
           try {
@@ -130,18 +142,43 @@ export const Form: React.FC<FormProps> = ({
     setDialogOpen(true);
   };
 
+  function addDefaultValues(fields: any, data: any) {
+    return fields.map((field) => {
+      // Check if the field has a 'name' property and if that name exists in the data object
+      if (field.name && Object.hasOwn(data, field.name)) {
+        return {
+          ...field,
+          defaultValue: data[field.name],
+        };
+      }
+      return field;
+    });
+  }
+
+  useEffect(() => {
+    if (path && id) {
+      fetch(`${path}/${id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setInnerFields(addDefaultValues(innerFields, res));
+        });
+    }
+  }, []);
+
   return (
     <>
       <form
         id={id}
-        action={action}
+        action={path}
         method={method}
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 flex-1"
+        className="flex flex-col gap-2 flex-1 w-full"
         {...rest}
       >
         {title && <h2 className="font-bold">{title}</h2>}
-        {children}
+        {innerFields?.map((field) => (
+          <Component key={field.id} {...field}></Component>
+        ))}
       </form>
 
       <Dialog
@@ -155,6 +192,11 @@ export const Form: React.FC<FormProps> = ({
           const submit = submitAfterConfirmRef.current;
           submitAfterConfirmRef.current = null;
           await submit?.();
+          submitActions?.forEach((action) => {
+            if (action.type === "GO_TO") {
+              navigate("/");
+            }
+          });
         }}
       />
     </>

@@ -5,6 +5,8 @@ const validateTodo = require("../validators/todoValidator");
 const router = express.Router();
 
 router.get("/todo", todoController.getTodos);
-router.post("/todo", validateTodo, todoController.saveTodo);
+router.get("/todo/:id", todoController.getTodoById);
+router.post("/todo", validateTodo, todoController.addTodo);
+router.put("/todo/:id", todoController.updateTodo);
 
 module.exports = router;
