@@ -13,19 +13,28 @@ import {
   Textarea,
   VerticalStack,
 } from "@/components/layout";
+import type {
+  TLayoutComponent,
+  TLeafComponent,
+} from "@/models/types/component";
 
-export const COMPONENTS_MAP = {
-  button: Button,
+export const LAYOUT_COMPONENTS: Record<TLayoutComponent, React.ElementType> = {
   card: Card,
+  h_stack: HorizontalStack,
+  v_stack: VerticalStack,
+};
+
+export const LEAF_COMPONENTS: Record<TLeafComponent, React.ElementType> = {
+  accordion: Accordion,
+  button: Button,
   checkbox: Checkbox,
   datepicker: Datepicker,
   form: Form,
-  h_stack: HorizontalStack,
   input: Input,
-  select: Select,
-  textarea: Textarea,
-  v_stack: VerticalStack,
-  table: Table,
-  accordion: Accordion,
   pagination: Pagination,
+  select: Select,
+  table: Table,
+  textarea: Textarea,
 };
+
+export const COMPONENTS_MAP = { ...LAYOUT_COMPONENTS, ...LEAF_COMPONENTS };

@@ -1,3 +1,15 @@
-import type { COMPONENTS_MAP } from "@/consts/components-map";
+export type TLayoutComponent = "card" | "h_stack" | "v_stack";
 
-export type TComponent = keyof typeof COMPONENTS_MAP;
+export type TLeafComponent =
+  | "accordion"
+  | "button"
+  | "checkbox"
+  | "datepicker"
+  | "form"
+  | "input"
+  | "pagination"
+  | "select"
+  | "table"
+  | "textarea";
+
+export type TComponent = TLayoutComponent & TLeafComponent;
