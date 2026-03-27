@@ -67,6 +67,9 @@ export const Table: React.FC<TTableProps> = ({
           {heads?.map((head, i) => (
             <BaseTableHead key={i}>{head.label}</BaseTableHead>
           ))}
+          {actions?.length && (
+            <BaseTableHead className="text-right">Actions</BaseTableHead>
+          )}
         </BaseTableRow>
       </BaseTableHeader>
       <BaseTableBody>
