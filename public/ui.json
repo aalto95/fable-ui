@@ -22,7 +22,7 @@
             "type": "date"
           }
         ],
-        "dataSource": "http://localhost:3000/api/todo",
+        "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
         "actions": [
           {
             "type": "GO_TO",
@@ -41,7 +41,7 @@
         "type": "form",
         "title": "Task Form",
         "method": "POST",
-        "path": "http://localhost:3000/api/todo",
+        "path": "https://bdui-mock-api.onrender.com/api/todo",
         "submitActions": [
           {
             "type": "GO_TO",
@@ -83,7 +83,7 @@
         "type": "form",
         "title": "Task Form",
         "method": "PUT",
-        "path": "http://localhost:3000/api/todo",
+        "path": "https://bdui-mock-api.onrender.com/api/todo",
         "submitActions": [
           {
             "type": "GO_TO",
