@@ -7,11 +7,8 @@ import { Component } from "@/components/core/Component";
 import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
 
-type FormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Pick<
-    IFormComponent,
-    "path" | "method" | "fields" | "title" | "submitActions"
-  >;
+export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
+  Exclude<IFormComponent, "type">;
 
 /* -------------------- utils -------------------- */
 
@@ -96,7 +93,7 @@ function hasNameField(field: unknown): field is { name: string } {
 
 /* -------------------- component -------------------- */
 
-export const Form: React.FC<FormProps> = ({
+export const Form: React.FC<TFormProps> = ({
   path,
   method = "GET",
   onSubmit,

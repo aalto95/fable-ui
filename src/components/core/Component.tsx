@@ -1,13 +1,35 @@
-import type { PropsWithChildren } from "react";
-import { COMPONENTS_MAP } from "@/consts/components-map";
+import {
+  Accordion,
+  Button,
+  Card,
+  Checkbox,
+  Datepicker,
+  Form,
+  HorizontalStack,
+  Input,
+  Pagination,
+  Select,
+  type TAccordionProps,
+  Table,
+  type TButtonProps,
+  type TCardProps,
+  type TCheckboxProps,
+  type TDatepickerProps,
+  Textarea,
+  type TFormProps,
+  type THorizontalStackProps,
+  type TInputProps,
+  type TPaginationProps,
+  type TSelectProps,
+  type TTableProps,
+  type TTextareaProps,
+  type TVerticalStackProps,
+  VerticalStack,
+} from "@/components/layout";
 import { useDebug } from "@/contexts/debug";
+import type { TComponentUnion } from "@/models/interfaces/component";
 
-import type {
-  TComponentsWithDescendants,
-  TComponentUnion,
-} from "@/models/interfaces/component";
-
-type ComponentProps = PropsWithChildren<TComponentUnion>;
+type ComponentProps = TComponentUnion;
 
 const DEBUG_COLORS: Record<
   string,
@@ -45,13 +67,7 @@ function getDebugLayoutClass(): string {
 
 export const Component: React.FC<ComponentProps> = (props) => {
   const { enabled: debugEnabled } = useDebug();
-  const { type, children, ...rest } = props;
-  const MyComponent = COMPONENTS_MAP[type];
-
-  if (!MyComponent) {
-    console.warn(`Unsupported component type: "${type}"`);
-    return null;
-  }
+  const { type, ...rest } = props;
 
   const debug = DEBUG_COLORS[type] ?? {
     border: "border-pink-500",
@@ -84,37 +100,61 @@ export const Component: React.FC<ComponentProps> = (props) => {
     );
   };
 
-  const ComponentWithDescendants = () => {
-    const { descendants } = rest as TComponentsWithDescendants;
-    const hasDescendants = Array.isArray(descendants) && descendants.length > 0;
+  const DynamicComponent = () => {
+    const descendants = rest as TComponentUnion[];
 
-    return wrap(
-      <MyComponent {...rest}>
-        {hasDescendants &&
-          descendants.map((child, i) => <Component key={i} {...child} />)}
-      </MyComponent>,
-    );
+    if (descendants?.length) {
+      switch (type) {
+        case "card":
+          return wrap(
+            <Card {...(rest as TCardProps)}>
+              {descendants.map((child, i) => (
+                <Component key={i} {...child} />
+              ))}
+            </Card>,
+          );
+        case "h_stack":
+          return wrap(
+            <HorizontalStack {...(rest as THorizontalStackProps)}>
+              {descendants.map((child, i) => (
+                <Component key={i} {...child} />
+              ))}
+            </HorizontalStack>,
+          );
+        case "v_stack":
+          return wrap(
+            <VerticalStack {...(rest as TVerticalStackProps)}>
+              {descendants.map((child, i) => (
+                <Component key={i} {...child} />
+              ))}
+            </VerticalStack>,
+          );
+      }
+    } else {
+      switch (type) {
+        case "accordion":
+          return wrap(<Accordion {...(rest as TAccordionProps)} />);
+        case "button":
+          return wrap(<Button {...(rest as TButtonProps)} />);
+        case "checkbox":
+          return wrap(<Checkbox {...(rest as TCheckboxProps)} />);
+        case "datepicker":
+          return wrap(<Datepicker {...(rest as TDatepickerProps)} />);
+        case "form":
+          return wrap(<Form {...(rest as TFormProps)} />);
+        case "input":
+          return wrap(<Input {...(rest as TInputProps)} />);
+        case "pagination":
+          return wrap(<Pagination {...(rest as TPaginationProps)} />);
+        case "select":
+          return wrap(<Select {...(rest as TSelectProps)} />);
+        case "table":
+          return wrap(<Table {...(rest as TTableProps)} />);
+        case "textarea":
+          return wrap(<Textarea {...(rest as TTextareaProps)} />);
+      }
+    }
   };
 
-  const ComponentWithoutDescendants = () => {
-    return wrap(<MyComponent {...rest}></MyComponent>);
-  };
-
-  switch (type) {
-    case "h_stack": {
-      return ComponentWithDescendants();
-    }
-    case "v_stack": {
-      return ComponentWithDescendants();
-    }
-    case "form": {
-      return ComponentWithDescendants();
-    }
-    case "card": {
-      return ComponentWithDescendants();
-    }
-    default: {
-      return ComponentWithoutDescendants();
-    }
-  }
+  return DynamicComponent();
 };

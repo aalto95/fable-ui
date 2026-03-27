@@ -1,16 +1,18 @@
-import { Accordion } from "@/components/layout/accordion";
-import { Button } from "@/components/layout/button";
-import { Card } from "@/components/layout/card";
-import { Checkbox } from "@/components/layout/checkbox";
-import { Datepicker } from "@/components/layout/datepicker";
-import { Form } from "@/components/layout/form";
-import { HorizontalStack } from "@/components/layout/horizontal-stack";
-import { Input } from "@/components/layout/input";
-import { Pagination } from "@/components/layout/pagination";
-import { SelectField } from "@/components/layout/select";
-import { Table } from "@/components/layout/table";
-import { Textarea } from "@/components/layout/textarea";
-import { VerticalStack } from "@/components/layout/vertical-stack";
+import {
+  Accordion,
+  Button,
+  Card,
+  Checkbox,
+  Datepicker,
+  Form,
+  HorizontalStack,
+  Input,
+  Pagination,
+  Select,
+  Table,
+  Textarea,
+  VerticalStack,
+} from "@/components/layout";
 
 export const COMPONENTS_MAP = {
   button: Button,
@@ -20,7 +22,7 @@ export const COMPONENTS_MAP = {
   form: Form,
   h_stack: HorizontalStack,
   input: Input,
-  select: SelectField,
+  select: Select,
   textarea: Textarea,
   v_stack: VerticalStack,
   table: Table,

@@ -18,12 +18,9 @@ import {
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
 
-type TableProps = Pick<
-  ITableComponent,
-  "heads" | "data" | "dataSource" | "actions"
->;
+export type TTableProps = Exclude<ITableComponent, "type">;
 
-export const Table: React.FC<TableProps> = ({
+export const Table: React.FC<TTableProps> = ({
   heads,
   data,
   dataSource,

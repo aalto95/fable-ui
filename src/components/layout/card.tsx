@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/card";
 import type { ICardComponent } from "@/models/interfaces/component";
 
-type CardProps = Pick<ICardComponent, "title" | "description" | "footerText">;
+export type TCardProps = Exclude<ICardComponent, "type">;
 
-export const Card: React.FC<PropsWithChildren<CardProps>> = ({
+export const Card: React.FC<PropsWithChildren<TCardProps>> = ({
   title,
   description,
   footerText,

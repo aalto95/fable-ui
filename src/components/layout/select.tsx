@@ -4,12 +4,9 @@ import { BaseSelect, BaseSelectOption } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { ISelectComponent } from "@/models/interfaces/component";
 
-type SelectFieldProps = Pick<
-  ISelectComponent,
-  "name" | "label" | "options" | "required" | "hidden"
->;
+export type TSelectProps = Exclude<ISelectComponent, "type">;
 
-export const SelectField: React.FC<SelectFieldProps> = ({
+export const Select: React.FC<TSelectProps> = ({
   name,
   label,
   options,

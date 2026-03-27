@@ -3,12 +3,9 @@ import { BaseLabel } from "@/components/ui/label";
 import { BaseTextarea } from "@/components/ui/textarea";
 import type { ITextareaComponent } from "@/models/interfaces/component";
 
-type TextareaProps = Pick<
-  ITextareaComponent,
-  "name" | "label" | "defaultValue" | "required" | "hidden"
->;
+export type TTextareaProps = Exclude<ITextareaComponent, "type">;
 
-export const Textarea: React.FC<TextareaProps> = ({
+export const Textarea: React.FC<TTextareaProps> = ({
   name,
   label,
   defaultValue,

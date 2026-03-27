@@ -3,12 +3,9 @@ import { BaseInput } from "@/components/ui/input";
 import { BaseLabel } from "@/components/ui/label";
 import type { IInputComponent } from "@/models/interfaces/component";
 
-type InputProps = Pick<
-  IInputComponent,
-  "name" | "label" | "required" | "defaultValue" | "hidden"
->;
+export type TInputProps = Exclude<IInputComponent, "type">;
 
-export const Input: React.FC<InputProps> = ({
+export const Input: React.FC<TInputProps> = ({
   name,
   label,
   required,

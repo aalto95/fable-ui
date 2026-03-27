@@ -3,10 +3,7 @@ import { BaseInput } from "@/components/ui/input";
 import { BaseLabel } from "@/components/ui/label";
 import type { IDatepickerComponent } from "@/models/interfaces/component";
 
-type DatePickerProps = Pick<
-  IDatepickerComponent,
-  "name" | "label" | "defaultValue" | "required" | "hidden"
->;
+export type TDatepickerProps = Exclude<IDatepickerComponent, "type">;
 
 function toLocalISODateOnly(value?: string | Date) {
   if (!value) {
@@ -26,7 +23,7 @@ function toLocalISODateOnly(value?: string | Date) {
   return `${year}-${month}-${day}`;
 }
 
-export const Datepicker: React.FC<DatePickerProps> = ({
+export const Datepicker: React.FC<TDatepickerProps> = ({
   name,
   label,
   defaultValue,

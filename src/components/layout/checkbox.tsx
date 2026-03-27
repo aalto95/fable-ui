@@ -3,12 +3,9 @@ import { BaseField } from "@/components/ui/field";
 import { BaseLabel } from "@/components/ui/label";
 import type { ICheckboxComponent } from "@/models/interfaces/component";
 
-type CheckboxProps = Pick<
-  ICheckboxComponent,
-  "name" | "label" | "required" | "checked"
->;
+export type TCheckboxProps = Exclude<ICheckboxComponent, "type">;
 
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: React.FC<TCheckboxProps> = ({
   name,
   label,
   required,

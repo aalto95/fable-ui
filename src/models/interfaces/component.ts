@@ -74,7 +74,7 @@ export interface IAccordionComponent extends IBaseComponent<"accordion"> {
   }[];
 }
 
-export interface IPaginationComponent extends IBaseComponent<"accordion"> {
+export interface IPaginationComponent extends IBaseComponent<"pagination"> {
   pages: number;
 }
 

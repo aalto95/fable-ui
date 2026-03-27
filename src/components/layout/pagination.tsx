@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/pagination";
 import type { IPaginationComponent } from "@/models/interfaces/component";
 
-type PaginationProps = Pick<IPaginationComponent, "pages">;
+export type TPaginationProps = Exclude<IPaginationComponent, "type">;
 
-export const Pagination: React.FC<PaginationProps> = ({ pages }) => {
+export const Pagination: React.FC<TPaginationProps> = ({ pages }) => {
   const [active, setActive] = useState(1);
 
   const getVisiblePages = useMemo(() => {
