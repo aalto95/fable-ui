@@ -12,4 +12,4 @@ export type TLeafComponent =
   | "table"
   | "textarea";
 
-export type TComponent = TLayoutComponent & TLeafComponent;
+export type TComponent = TLayoutComponent | TLeafComponent;
