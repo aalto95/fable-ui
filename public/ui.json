@@ -7,12 +7,6 @@
         "type": "v_stack",
         "descendants": [
           {
-            "type": "card",
-            "title": "Tasks",
-            "description": "Open the full component showcase at route /showcase (use the address bar or your router history).",
-            "footerText": "SDUI renderer demo"
-          },
-          {
             "type": "table",
             "heads": [
               { "name": "name", "label": "Name", "type": "string" },
@@ -31,6 +25,17 @@
                 "label": "Delete",
                 "variant": "destructive",
                 "path": "https://bdui-mock-api.onrender.com/api/todo"
+              }
+            ]
+          },
+          {
+            "type": "button",
+            "text": "Create Todo",
+            "actions": [
+              {
+                "type": "GO_TO",
+                "label": "Create Todo",
+                "path": "/todo/create"
               }
             ]
           }
