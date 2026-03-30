@@ -13,16 +13,7 @@ import type { IPage } from "@/models/interfaces/page";
 
 export const App: React.FC = () => {
   const [pages, setPages] = useState<IPage[]>();
-  const [dialogConfig, setDialogConfig] = useState<DialogConfig>({
-    title: "This is a Server-Driven UI Renderer",
-    description:
-      "It serves as a showcase of modern SDUI systems where Frontend serves as a rendering engine while Server is sending JSON-schema which defines the structure of UI, actions, side effects, routing and whatever you want it to do.",
-    confirmText: "Confirm",
-    hideCancel: true,
-    onConfirm: () => {
-      setDialogConfig(null);
-    },
-  });
+  const [dialogConfig, setDialogConfig] = useState<DialogConfig>(null);
   const [debugEnabled, setDebugEnabled] = useState<boolean>(() => {
     const raw = localStorage.getItem("sdui.debug.enabled");
     return raw === "true";

@@ -76,6 +76,9 @@ export interface ITableComponent extends IBaseComponent<"table"> {
   heads?: { name: string; label: string; type: "string" | "date" }[];
   data?: any[];
   dataSource?: string;
+  pageParam?: string;
+  limitParam?: string;
+  defaultLimit?: number;
   actions?: IAction[];
 }
 
@@ -89,6 +92,9 @@ export interface IAccordionComponent extends IBaseComponent<"accordion"> {
 
 export interface IPaginationComponent extends IBaseComponent<"pagination"> {
   pages: number;
+  pageParam?: string;
+  limitParam?: string;
+  defaultLimit?: number;
 }
 
 export interface IHStackComponent extends IBaseComponent<"h_stack"> {

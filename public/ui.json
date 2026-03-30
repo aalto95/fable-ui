@@ -14,6 +14,9 @@
               { "name": "dueDate", "label": "Due Date", "type": "date" }
             ],
             "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+            "pageParam": "page",
+            "limitParam": "limit",
+            "defaultLimit": 5,
             "actions": [
               {
                 "type": "GO_TO",
@@ -178,7 +181,7 @@
           {
             "type": "card",
             "title": "Server-driven UI showcase",
-            "description": "This page exercises every registered component: card, horizontal and vertical stacks, accordion, table, pagination, form, and all leaf inputs.",
+            "description": "This page exercises every registered component: card, horizontal and vertical stacks, accordion, table (with optional pagination), form, and all leaf inputs.",
             "footerText": "Toggle debug mode in the header to see component boundaries."
           },
           {
@@ -192,7 +195,7 @@
               {
                 "name": "acc-data",
                 "title": "Data & navigation",
-                "text": "table loads remote rows via dataSource. pagination is client-side state. forms use dataSource only for GET prefill on edit; all HTTP writes use button actions (POST, PUT, DELETE, GO_TO)."
+                "text": "table loads remote rows via dataSource with route query params (page/limit). pagination appears when the list response includes totalPages (or total + limit). forms use dataSource only for GET prefill on edit; all HTTP writes use button actions (POST, PUT, DELETE, GO_TO)."
               },
               {
                 "name": "acc-leaf",
@@ -255,6 +258,9 @@
                   { "name": "dueDate", "label": "Due", "type": "date" }
                 ],
                 "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+                "pageParam": "showcasePage",
+                "limitParam": "showcaseLimit",
+                "defaultLimit": 4,
                 "actions": [
                   {
                     "type": "GO_TO",
@@ -262,17 +268,6 @@
                     "path": "/todo"
                   }
                 ]
-              }
-            ]
-          },
-          {
-            "type": "card",
-            "title": "Pagination",
-            "description": "Twelve pages — prev/next and page links are interactive.",
-            "descendants": [
-              {
-                "type": "pagination",
-                "pages": 12
               }
             ]
           },

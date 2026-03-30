@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 import {
   BasePagination,
   BasePaginationContent,
@@ -10,10 +11,20 @@ import {
 } from "@/components/ui/pagination";
 import type { IPaginationComponent } from "@/models/interfaces/component";
 
-export type TPaginationProps = Exclude<IPaginationComponent, "type">;
+/** Shared props for pagination UI (standalone leaf or embedded in `table`). */
+export type TPaginationProps = Omit<IPaginationComponent, "type">;
 
-export const Pagination: React.FC<TPaginationProps> = ({ pages }) => {
-  const [active, setActive] = useState(1);
+export const Pagination: React.FC<TPaginationProps> = ({
+  pages,
+  pageParam = "page",
+  limitParam = "limit",
+  defaultLimit,
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const parsedPage = Number(searchParams.get(pageParam));
+  const active = Number.isFinite(parsedPage)
+    ? Math.min(Math.max(parsedPage, 1), pages)
+    : 1;
 
   const getVisiblePages = useMemo(() => {
     const visiblePages: (number | "ellipsis")[] = [];
@@ -55,19 +66,23 @@ export const Pagination: React.FC<TPaginationProps> = ({ pages }) => {
   }, [pages, active]);
 
   const handlePageChange = (page: number) => {
-    setActive(page);
-    // You can add additional logic here for URL updates, etc.
+    const next = new URLSearchParams(searchParams);
+    next.set(pageParam, String(page));
+    if (defaultLimit != null && !next.get(limitParam)) {
+      next.set(limitParam, String(defaultLimit));
+    }
+    setSearchParams(next);
   };
 
   const handlePrevious = () => {
     if (active > 1) {
-      setActive(active - 1);
+      handlePageChange(active - 1);
     }
   };
 
   const handleNext = () => {
     if (active < pages) {
-      setActive(active + 1);
+      handlePageChange(active + 1);
     }
   };
 
