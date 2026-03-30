@@ -11,6 +11,11 @@ import { type DialogConfig, DialogProvider } from "@/contexts/dialog";
 import { http } from "@/lib/http-client";
 import type { IPage } from "@/models/interfaces/page";
 
+type Schema = {
+  $schema: string;
+  ui: IPage[];
+};
+
 export const App: React.FC = () => {
   const [pages, setPages] = useState<IPage[]>();
   const [dialogConfig, setDialogConfig] = useState<DialogConfig>(null);
@@ -22,9 +27,9 @@ export const App: React.FC = () => {
   useEffect(() => {
     const schemaPath = import.meta.env.UI_SCHEMA_PATH ?? "/ui.json";
     http
-      .get<IPage[]>(schemaPath)
+      .get<Schema>(schemaPath)
       .then((uiSchema) => {
-        setPages(uiSchema);
+        setPages(uiSchema.ui);
       })
       .catch((error) => {
         console.error("Failed to load UI schema:", error);
