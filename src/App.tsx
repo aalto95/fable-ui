@@ -29,8 +29,9 @@ export const App: React.FC = () => {
   });
 
   useEffect(() => {
+    const schemaPath = import.meta.env.UI_SCHEMA_PATH ?? "/ui.json";
     http
-      .get<IPage[]>("/ui.json")
+      .get<IPage[]>(schemaPath)
       .then((uiSchema) => {
         setPages(uiSchema);
       })
