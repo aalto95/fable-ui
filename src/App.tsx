@@ -8,6 +8,7 @@ import { NotFound } from "@/components/singleton/not-found";
 import { Toaster } from "@/components/singleton/sonner";
 import { DebugProvider } from "@/contexts/debug";
 import { type DialogConfig, DialogProvider } from "@/contexts/dialog";
+import { http } from "@/lib/http-client";
 import type { IPage } from "@/models/interfaces/page";
 
 export const App: React.FC = () => {
@@ -28,9 +29,9 @@ export const App: React.FC = () => {
   });
 
   useEffect(() => {
-    fetch("/ui.json")
-      .then((resp) => resp.json())
-      .then((uiSchema: IPage[]) => {
+    http
+      .get<IPage[]>("/ui.json")
+      .then((uiSchema) => {
         setPages(uiSchema);
       })
       .catch((error) => {

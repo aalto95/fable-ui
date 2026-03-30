@@ -1,4 +1,5 @@
 import { buildGetUrl, formDataToJson } from "@/lib/form-utils";
+import { http } from "@/lib/http-client";
 import type { IAction } from "@/models/interfaces/component";
 
 export type NavigateFn = (to: string) => void;
@@ -26,11 +27,7 @@ export async function executeAction(
       const formData = new FormData(form);
       const json = formDataToJson(formData, form);
       const url = buildGetUrl(action.path, json);
-      const res = await fetch(url);
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Error ${res.status}`);
-      }
+      await http.get(url);
       return;
     }
     case "HTTP_POST": {
@@ -38,15 +35,7 @@ export async function executeAction(
       const formData = new FormData(form);
       const json = formDataToJson(formData, form);
       const url = id ? `${action.path}/${id}` : action.path;
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(json),
-      });
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Error ${res.status}`);
-      }
+      await http.post(url, json);
       return;
     }
     case "HTTP_PUT": {
@@ -54,15 +43,7 @@ export async function executeAction(
       if (!id) throw new Error("Route id is required for HTTP_PUT");
       const formData = new FormData(form);
       const json = formDataToJson(formData, form);
-      const res = await fetch(`${action.path}/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(json),
-      });
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Error ${res.status}`);
-      }
+      await http.put(`${action.path}/${id}`, json);
       return;
     }
     case "HTTP_PATCH": {
@@ -70,28 +51,12 @@ export async function executeAction(
       if (!id) throw new Error("Route id is required for HTTP_PATCH");
       const formData = new FormData(form);
       const json = formDataToJson(formData, form);
-      const res = await fetch(`${action.path}/${id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(json),
-      });
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Error ${res.status}`);
-      }
+      await http.patch(`${action.path}/${id}`, json);
       return;
     }
     case "HTTP_DELETE": {
       if (!id) throw new Error("Route id is required for HTTP_DELETE");
-      const res = await fetch(`${action.path}/${id}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id }),
-      });
-      if (!res.ok) {
-        const text = await res.text().catch(() => "");
-        throw new Error(text || `Error ${res.status}`);
-      }
+      await http.delete(`${action.path}/${id}`, { id });
       return;
     }
     default: {

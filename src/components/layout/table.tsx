@@ -20,6 +20,7 @@ import {
 import type { ITableComponent } from "@/models/interfaces/component";
 import { toast } from "sonner";
 import { executeAction } from "@/lib/http-actions";
+import { http } from "@/lib/http-client";
 
 export type TTableProps = Exclude<ITableComponent, "type">;
 
@@ -48,10 +49,13 @@ export const Table: React.FC<TTableProps> = ({
 
   const getData = (url: string) => {
     setIsLoading(true);
-    fetch(url)
-      .then((res) => res.json())
+    http
+      .get<{ data: unknown[] }>(url)
       .then((res) => {
         setFieldData(res.data);
+      })
+      .catch((err: unknown) => {
+        toast.error(String(err));
       })
       .finally(() => {
         setIsLoading(false);
@@ -105,13 +109,13 @@ export const Table: React.FC<TTableProps> = ({
                             executeAction(action, {
                               form: null,
                               id: item.id,
-                              navigate: (to) => navigate(to + "/" + item.id),
+                              navigate: (to) => navigate(`${to}/${item.id}`),
                             });
                           } else if (action.type === "HTTP_DELETE") {
                             executeAction(action, {
                               form: null,
                               id: item.id,
-                              navigate: (to) => navigate(to + "/" + item.id),
+                              navigate: (to) => navigate(`${to}/${item.id}`),
                             }).then(() => {
                               toast.success("Item deleted");
                               if (dataSource) {

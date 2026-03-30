@@ -2,6 +2,7 @@ import type { RefObject } from "react";
 import { useEffect, useState } from "react";
 
 import { hasNameField, unwrapRecordPayload } from "@/lib/form-utils";
+import { http } from "@/lib/http-client";
 import type { TComponentUnion } from "@/models/interfaces/component";
 
 type UseFormPrefillArgs = {
@@ -37,9 +38,9 @@ export function useFormPrefill({
     const ac = new AbortController();
     setIsLoading(true);
 
-    fetch(`${baseUrl}/${id}`, { signal: ac.signal })
-      .then((r) => r.json())
-      .then((raw: unknown) => {
+    http
+      .get<unknown>(`${baseUrl}/${id}`, { signal: ac.signal })
+      .then((raw) => {
         const data = unwrapRecordPayload(raw);
         setInnerFields((prev) =>
           prev?.map((f) =>
