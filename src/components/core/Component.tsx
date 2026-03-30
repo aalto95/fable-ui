@@ -1,7 +1,7 @@
 import { memo } from "react";
-import { LAYOUT_COMPONENTS, LEAF_COMPONENTS } from "@/consts/components-map";
 import { DebugOutline } from "./DebugOutline";
 import { useDebug } from "@/contexts/debug";
+import { componentRegistry } from "@/registry/component-registry";
 import type { TComponentUnion } from "@/models/interfaces/component";
 import type {
   TLayoutComponent,
@@ -47,11 +47,11 @@ const DEFAULT_DEBUG = {
 };
 
 function isLayout(type: string): type is TLayoutComponent {
-  return type in LAYOUT_COMPONENTS;
+  return componentRegistry.hasLayout(type);
 }
 
 function isLeaf(type: string): type is TLeafComponent {
-  return type in LEAF_COMPONENTS;
+  return componentRegistry.hasLeaf(type);
 }
 
 export const Component: React.FC<Props> = memo((props) => {
@@ -61,7 +61,7 @@ export const Component: React.FC<Props> = memo((props) => {
   const debug = DEBUG_COLORS[type] ?? DEFAULT_DEBUG;
 
   if (isLayout(type)) {
-    const Comp = LAYOUT_COMPONENTS[type];
+    const Comp = componentRegistry.getLayout(type)!;
 
     const children =
       "descendants" in rest && Array.isArray(rest.descendants)
@@ -78,7 +78,7 @@ export const Component: React.FC<Props> = memo((props) => {
   }
 
   if (isLeaf(type)) {
-    const Comp = LEAF_COMPONENTS[type];
+    const Comp = componentRegistry.getLeaf(type)!;
     const node = <Comp {...rest} />;
 
     return (
