@@ -1,5 +1,12 @@
+type Todo = {
+  id: string;
+  name: string;
+  text: string;
+  dueDate?: string;
+};
+
 class ItemService {
-  todos = [
+  todos: Todo[] = [
     {
       id: "8e487950-ed12-4f6c-a230-1968cb84dd28",
       name: "First todo",
@@ -96,6 +103,66 @@ class ItemService {
       text: "Example",
       dueDate: "2026-03-27T15:00:00.000Z",
     },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd44",
+      name: "Seventeenth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd45",
+      name: "Eighteenth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd46",
+      name: "Nineteenth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd47",
+      name: "Twentieth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd48",
+      name: "Twenty-first todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd49",
+      name: "Twenty-second todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd50",
+      name: "Twenty-third todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd51",
+      name: "Twenty-fourth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd52",
+      name: "Twenty-fifth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    },
+    {
+      id: "8e487950-ed12-4f6c-a230-1968cb84dd53",
+      name: "Twenty-sixth todo",
+      text: "Example",
+      dueDate: "2026-03-27T15:00:00.000Z",
+    }
   ];
 
   async getTodos(query: { page?: number; limit?: number }) {
