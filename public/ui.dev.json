@@ -9,6 +9,17 @@
           "type": "v_stack",
           "descendants": [
             {
+              "type": "button",
+              "text": "Create Todo",
+              "actions": [
+                {
+                  "type": "GO_TO",
+                  "label": "Create Todo",
+                  "path": "/todo/create"
+                }
+              ]
+            },
+            {
               "type": "table",
               "heads": [
                 { "name": "name", "label": "Name", "type": "string" },
@@ -30,17 +41,6 @@
                   "label": "Delete",
                   "variant": "destructive",
                   "path": "http://localhost:3000/api/todo"
-                }
-              ]
-            },
-            {
-              "type": "button",
-              "text": "Create Todo",
-              "actions": [
-                {
-                  "type": "GO_TO",
-                  "label": "Create Todo",
-                  "path": "/todo/create"
                 }
               ]
             }
@@ -74,18 +74,35 @@
               "label": "Enter due date"
             },
             {
-              "type": "button",
-              "text": "Save",
-              "actions": [
+              "type": "h_stack",
+              "descendants": [
                 {
-                  "type": "HTTP_POST",
-                  "label": "Create",
-                  "path": "http://localhost:3000/api/todo"
+                  "type": "button",
+                  "variant": "outline",
+                  "text": "Cancel",
+                  "actions": [
+                    {
+                      "type": "GO_TO",
+                      "label": "Go back",
+                      "path": "/"
+                    }
+                  ]
                 },
                 {
-                  "type": "GO_TO",
-                  "label": "Home",
-                  "path": "/"
+                  "type": "button",
+                  "text": "Create",
+                  "actions": [
+                    {
+                      "type": "HTTP_POST",
+                      "label": "Create",
+                      "path": "http://localhost:3000/api/todo"
+                    },
+                    {
+                      "type": "GO_TO",
+                      "label": "Home",
+                      "path": "/"
+                    }
+                  ]
                 }
               ]
             }

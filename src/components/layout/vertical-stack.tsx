@@ -6,5 +6,5 @@ export type TVerticalStackProps = Exclude<IVStackComponent, "type">;
 export const VerticalStack: React.FC<
   PropsWithChildren<TVerticalStackProps>
 > = ({ children }) => {
-  return <div className="flex flex-col gap-2 w-full max-w-7xl">{children}</div>;
+  return <div className="flex flex-col gap-2 w-full">{children}</div>;
 };

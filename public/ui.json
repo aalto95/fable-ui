@@ -9,6 +9,17 @@
           "type": "v_stack",
           "descendants": [
             {
+              "type": "button",
+              "text": "Create Todo",
+              "actions": [
+                {
+                  "type": "GO_TO",
+                  "label": "Create Todo",
+                  "path": "/todo/create"
+                }
+              ]
+            },
+            {
               "type": "table",
               "heads": [
                 { "name": "name", "label": "Name", "type": "string" },
@@ -18,7 +29,7 @@
               "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
               "pageParam": "page",
               "limitParam": "limit",
-              "defaultLimit": 5,
+              "defaultLimit": 10,
               "actions": [
                 {
                   "type": "GO_TO",
@@ -30,17 +41,6 @@
                   "label": "Delete",
                   "variant": "destructive",
                   "path": "https://bdui-mock-api.onrender.com/api/todo"
-                }
-              ]
-            },
-            {
-              "type": "button",
-              "text": "Create Todo",
-              "actions": [
-                {
-                  "type": "GO_TO",
-                  "label": "Create Todo",
-                  "path": "/todo/create"
                 }
               ]
             }

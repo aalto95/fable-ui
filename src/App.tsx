@@ -45,21 +45,23 @@ export const App: React.FC = () => {
       <DialogProvider config={dialogConfig} setConfig={setDialogConfig}>
         <div className="flex flex-col w-full items-center min-h-screen">
           <Header />
-          <main className="p-4 flex-1 flex flex-col items-center w-full max-w-7xl">
-            {pages?.length && (
-              <Routes>
-                {pages?.map((page) => {
-                  return (
-                    <Route
-                      key={page.route}
-                      path={page.route}
-                      element={<Renderer ui={page.ui} />}
-                    />
-                  );
-                })}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            )}
+          <main className="p-4 flex-1 flex flex-col items-center w-full">
+            <div className="w-full max-w-7xl">
+              {pages?.length && (
+                <Routes>
+                  {pages?.map((page) => {
+                    return (
+                      <Route
+                        key={page.route}
+                        path={page.route}
+                        element={<Renderer ui={page.ui} />}
+                      />
+                    );
+                  })}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              )}
+            </div>
           </main>
           <Footer />
           <Toaster />

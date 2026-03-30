@@ -23,7 +23,7 @@ export function DebugOutline({
     <div
       className={cn(
         enabled
-          ? "relative rounded-md border-2 border-dashed p-2 w-full max-w-7xl"
+          ? "relative rounded-md border-2 border-dashed p-2 w-full"
           : "contents",
         enabled && palette.border,
       )}
