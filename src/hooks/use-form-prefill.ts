@@ -5,7 +5,6 @@ import { hasNameField, unwrapRecordPayload } from "@/lib/form-utils";
 import type { TComponentUnion } from "@/models/interfaces/component";
 
 type UseFormPrefillArgs = {
-  path?: string;
   dataSource?: string;
   id?: string;
   fields?: TComponentUnion[];
@@ -13,7 +12,6 @@ type UseFormPrefillArgs = {
 };
 
 export function useFormPrefill({
-  path,
   dataSource,
   id,
   fields,
@@ -22,7 +20,7 @@ export function useFormPrefill({
   const [innerFields, setInnerFields] = useState(fields);
   const [isLoading, setIsLoading] = useState(false);
 
-  const baseUrl = dataSource ?? path;
+  const baseUrl = dataSource;
 
   useEffect(() => {
     if (!baseUrl || !id || !fields) {

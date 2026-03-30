@@ -1,44 +1,40 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
+import type { SubmitEventHandler } from "react";
 import { useParams } from "react-router";
 
 import { Component } from "@/components/core/Component";
 import { FormActionsProvider } from "@/contexts/form-actions";
 import { Spinner } from "@/components/ui/spinner";
 import { useFormPrefill } from "@/hooks/use-form-prefill";
-import { useFormSubmit } from "@/hooks/use-form-submit";
 import type { IFormComponent } from "@/models/interfaces/component";
 
 export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
   Exclude<IFormComponent, "type">;
 
 export const Form: React.FC<TFormProps> = ({
-  path,
-  method,
   dataSource,
   onSubmit,
   fields,
   title,
-  submitActions,
   ...rest
 }) => {
   const { id } = useParams();
   const formRef = useRef<HTMLFormElement>(null);
 
   const { innerFields, isLoading } = useFormPrefill({
-    path,
     dataSource,
     id,
     fields,
     formRef,
   });
 
-  const handleSubmit = useFormSubmit({
-    method,
-    path,
-    onSubmit,
-    submitActions,
-    enabled: Boolean(path && method),
-  });
+  const handleSubmit = useCallback<SubmitEventHandler<HTMLFormElement>>(
+    (event) => {
+      event.preventDefault();
+      onSubmit?.(event);
+    },
+    [onSubmit],
+  );
 
   if (isLoading) return <Spinner />;
 
@@ -46,11 +42,9 @@ export const Form: React.FC<TFormProps> = ({
     <FormActionsProvider formRef={formRef}>
       <form
         id={id}
-        action={path}
-        method={method ?? "GET"}
-        onSubmit={handleSubmit}
         className="flex flex-col gap-2 flex-1 w-full"
         {...rest}
+        onSubmit={handleSubmit}
         ref={formRef}
       >
         {title && <h2 className="font-bold">{title}</h2>}

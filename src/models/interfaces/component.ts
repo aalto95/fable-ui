@@ -101,12 +101,9 @@ export interface IVStackComponent extends IBaseComponent<"v_stack"> {
 
 export interface IFormComponent extends IBaseComponent<"form"> {
   title?: string;
-  method?: string;
-  path?: string;
-  /** Base URL for GET prefill (`GET ${dataSource}/:id`). Falls back to `path` when omitted. */
+  /** Base URL for GET prefill (`GET ${dataSource}/:id`). HTTP submit is configured on button `actions`. */
   dataSource?: string;
   fields?: TComponentUnion[];
-  submitActions?: IAction[];
 }
 
 export interface ICardComponent extends IBaseComponent<"card"> {

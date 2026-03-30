@@ -45,15 +45,6 @@
       {
         "type": "form",
         "title": "Task Form",
-        "method": "POST",
-        "path": "https://bdui-mock-api.onrender.com/api/todo",
-        "submitActions": [
-          {
-            "type": "GO_TO",
-            "label": "Home",
-            "path": "/"
-          }
-        ],
         "fields": [
           {
             "type": "input",
@@ -75,7 +66,18 @@
           {
             "type": "button",
             "text": "Save",
-            "expand": true
+            "actions": [
+              {
+                "type": "HTTP_POST",
+                "label": "Create",
+                "path": "https://bdui-mock-api.onrender.com/api/todo"
+              },
+              {
+                "type": "GO_TO",
+                "label": "Home",
+                "path": "/"
+              }
+            ]
           }
         ]
       }
@@ -185,7 +187,7 @@
               {
                 "name": "acc-data",
                 "title": "Data & navigation",
-                "text": "table loads remote rows via dataSource. pagination is client-side state. create forms use path+method submit; edit forms use dataSource for prefill and PUT/DELETE from button actions."
+                "text": "table loads remote rows via dataSource. pagination is client-side state. forms use dataSource only for GET prefill on edit; all HTTP writes use button actions (POST, PUT, DELETE, GO_TO)."
               },
               {
                 "name": "acc-leaf",
@@ -272,20 +274,11 @@
           {
             "type": "card",
             "title": "Form with every field type",
-            "description": "POST creates a todo; confirm in the dialog before the request runs.",
+            "description": "POST creates a todo via the submit button actions; confirm in the dialog before the request runs.",
             "descendants": [
               {
                 "type": "form",
                 "title": "Create task (showcase)",
-                "method": "POST",
-                "path": "https://bdui-mock-api.onrender.com/api/todo",
-                "submitActions": [
-                  {
-                    "type": "GO_TO",
-                    "label": "Back to list",
-                    "path": "/"
-                  }
-                ],
                 "fields": [
                   {
                     "type": "input",
@@ -324,7 +317,19 @@
                   {
                     "type": "button",
                     "text": "Submit showcase form",
-                    "expand": true
+                    "expand": true,
+                    "actions": [
+                      {
+                        "type": "HTTP_POST",
+                        "label": "Create",
+                        "path": "https://bdui-mock-api.onrender.com/api/todo"
+                      },
+                      {
+                        "type": "GO_TO",
+                        "label": "Back to list",
+                        "path": "/"
+                      }
+                    ]
                   }
                 ]
               }
