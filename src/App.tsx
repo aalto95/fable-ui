@@ -11,7 +11,7 @@ import type { IPage } from "@/models/interfaces/page";
 export const App: React.FC = () => {
   const [pages, setPages] = useState<IPage[]>();
   const [debugEnabled, setDebugEnabled] = useState<boolean>(() => {
-    const raw = localStorage.getItem("bdui.debug.enabled");
+    const raw = localStorage.getItem("sdui.debug.enabled");
     return raw === "true";
   });
 
@@ -27,7 +27,7 @@ export const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("bdui.debug.enabled", String(debugEnabled));
+    localStorage.setItem("sdui.debug.enabled", String(debugEnabled));
   }, [debugEnabled]);
 
   return (

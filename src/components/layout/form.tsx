@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Component } from "@/components/core/Component";
 import { Dialog } from "@/components/singleton/dialog";
 import type { IFormComponent } from "@/models/interfaces/component";
+import { Spinner } from "@/components/ui/spinner";
 
 export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
   Exclude<IFormComponent, "type">;
@@ -49,7 +50,7 @@ function buildGetUrl(base: string, data: Record<string, any>) {
 function validateRequired(form: HTMLFormElement, formData: FormData) {
   const nodes = Array.from(
     form.querySelectorAll<HTMLElement>(
-      "[data-bdui-required='true'], [required]",
+      "[data-sdui-required='true'], [required]",
     ),
   );
 
@@ -71,7 +72,7 @@ function validateRequired(form: HTMLFormElement, formData: FormData) {
       return {
         node,
         label:
-          node.getAttribute("data-bdui-label") ||
+          node.getAttribute("data-sdui-label") ||
           (node as HTMLInputElement).placeholder ||
           node.getAttribute("aria-label") ||
           name,
@@ -107,6 +108,7 @@ export const Form: React.FC<TFormProps> = ({
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [innerFields, setInnerFields] = useState(fields);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitRef = useRef<null | (() => Promise<void>)>(null);
 
@@ -172,6 +174,7 @@ export const Form: React.FC<TFormProps> = ({
   useEffect(() => {
     if (!path || !id || !fields) return;
 
+    setIsLoading(true);
     fetch(`${path}/${id}`)
       .then((r) => r.json())
       .then((data) => {
@@ -182,10 +185,15 @@ export const Form: React.FC<TFormProps> = ({
               : f,
           ),
         );
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [path, id]);
 
   /* -------- render -------- */
+
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <>

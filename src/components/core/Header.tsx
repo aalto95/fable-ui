@@ -8,11 +8,10 @@ export const Header: React.FC = () => {
   return (
     <header className="flex items-center justify-center p-4 border-b border-gray-200 w-full">
       <div className="flex w-full max-w-7xl justify-between">
-        <h1 className="text-2xl font-bold">BDUI Renderer</h1>
+        <h1 className="text-2xl font-bold">SDUI Renderer</h1>
         <nav className="flex justify-between items-center gap-4">
           <Link to="/">Home</Link>
           <Link to="/todo/create">Create Todo</Link>
-          <Link to="/showcase">Showcase</Link>
           <BaseButton
             type="button"
             variant={enabled ? "default" : "outline"}

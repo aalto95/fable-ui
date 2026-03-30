@@ -4,7 +4,7 @@ export const Footer: React.FC = () => {
       <div className="flex w-full max-w-7xl justify-between">
         <p className="text-sm text-gray-500">Footer</p>
         <p className="text-sm text-gray-500">
-          <span className="font-bold">BDUI Renderer</span> by aalto95
+          <span className="font-bold">SDUI Renderer</span> by aalto95
         </p>
         <p className="text-sm text-gray-500">
           <span className="font-bold">Version</span> 1.0.0

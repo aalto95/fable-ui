@@ -17,6 +17,7 @@ import {
   BaseTableRow,
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
+import { Spinner } from "@/components/ui/spinner";
 
 export type TTableProps = Exclude<ITableComponent, "type">;
 
@@ -28,6 +29,7 @@ export const Table: React.FC<TTableProps> = ({
 }) => {
   const navigate = useNavigate();
   const [fieldData, setFieldData] = useState(data ?? []);
+  const [isLoading, setIsLoading] = useState(false);
 
   function formatValue(value: any, type?: string) {
     if (value == null) return "";
@@ -42,14 +44,16 @@ export const Table: React.FC<TTableProps> = ({
     return value;
   }
 
-  const getData = () => {
-    if (dataSource) {
-      fetch(dataSource)
-        .then((res) => res.json())
-        .then((res) => {
-          setFieldData(res.data);
-        });
-    }
+  const getData = (url: string) => {
+    setIsLoading(true);
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => {
+        setFieldData(res.data);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const goTo = (path: string, id: string) => {
@@ -57,8 +61,12 @@ export const Table: React.FC<TTableProps> = ({
   };
 
   useEffect(() => {
-    getData();
+    if (dataSource) {
+      getData(dataSource);
+    }
   }, []);
+
+  if (isLoading) return <Spinner></Spinner>;
 
   return (
     <BaseTable>
