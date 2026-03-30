@@ -65,6 +65,20 @@ export function validateRequired(form: HTMLFormElement, formData: FormData) {
   return missing;
 }
 
+/** Normalizes list/detail API payloads to a flat record for field prefill. */
+export function unwrapRecordPayload(raw: unknown): Record<string, unknown> {
+  if (raw && typeof raw === "object" && raw !== null && !Array.isArray(raw)) {
+    if ("data" in raw) {
+      const inner = (raw as { data: unknown }).data;
+      if (inner && typeof inner === "object" && !Array.isArray(inner)) {
+        return inner as Record<string, unknown>;
+      }
+    }
+    return raw as Record<string, unknown>;
+  }
+  return {};
+}
+
 export function hasNameField(field: unknown): field is { name: string } {
   return (
     typeof field === "object" &&

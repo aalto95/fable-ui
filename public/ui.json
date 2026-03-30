@@ -29,7 +29,131 @@
               {
                 "type": "HTTP_DELETE",
                 "label": "Delete",
+                "variant": "destructive",
                 "path": "https://bdui-mock-api.onrender.com/api/todo"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/todo/create",
+    "name": "Create Todo",
+    "ui": [
+      {
+        "type": "form",
+        "title": "Task Form",
+        "method": "POST",
+        "path": "https://bdui-mock-api.onrender.com/api/todo",
+        "submitActions": [
+          {
+            "type": "GO_TO",
+            "label": "Home",
+            "path": "/"
+          }
+        ],
+        "fields": [
+          {
+            "type": "input",
+            "name": "name",
+            "label": "Enter task name",
+            "required": true
+          },
+          {
+            "type": "input",
+            "name": "text",
+            "label": "Enter task text",
+            "required": true
+          },
+          {
+            "type": "datepicker",
+            "name": "dueDate",
+            "label": "Enter due date"
+          },
+          {
+            "type": "button",
+            "text": "Save",
+            "expand": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/todo/:id",
+    "name": "Update Todo",
+    "ui": [
+      {
+        "type": "form",
+        "title": "Task Form",
+        "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+        "fields": [
+          {
+            "type": "input",
+            "name": "name",
+            "label": "Enter task name",
+            "required": true
+          },
+          {
+            "type": "input",
+            "name": "text",
+            "label": "Enter task text",
+            "required": true
+          },
+          {
+            "type": "datepicker",
+            "name": "dueDate",
+            "label": "Enter due date"
+          },
+          {
+            "type": "h_stack",
+            "descendants": [
+              {
+                "type": "button",
+                "text": "Cancel",
+                "variant": "outline",
+                "actions": [
+                  {
+                    "type": "GO_TO",
+                    "label": "Home",
+                    "path": "/"
+                  }
+                ]
+              },
+              {
+                "type": "button",
+                "text": "Update",
+                "actions": [
+                  {
+                    "type": "HTTP_PUT",
+                    "label": "Update",
+                    "path": "https://bdui-mock-api.onrender.com/api/todo"
+                  },
+                  {
+                    "type": "GO_TO",
+                    "label": "Home",
+                    "path": "/"
+                  }
+                ]
+              },
+              {
+                "type": "button",
+                "text": "Delete",
+                "variant": "destructive",
+                "actions": [
+                  {
+                    "type": "HTTP_DELETE",
+                    "label": "Delete",
+                    "path": "https://bdui-mock-api.onrender.com/api/todo"
+                  },
+                  {
+                    "type": "GO_TO",
+                    "label": "Home",
+                    "path": "/"
+                  }
+                ]
               }
             ]
           }
@@ -61,7 +185,7 @@
               {
                 "name": "acc-data",
                 "title": "Data & navigation",
-                "text": "table loads remote rows via dataSource. pagination is client-side state. form submits through the dialog confirm flow."
+                "text": "table loads remote rows via dataSource. pagination is client-side state. create forms use path+method submit; edit forms use dataSource for prefill and PUT/DELETE from button actions."
               },
               {
                 "name": "acc-leaf",
@@ -205,92 +329,6 @@
                 ]
               }
             ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "route": "/todo/create",
-    "name": "Create Todo",
-    "ui": [
-      {
-        "type": "form",
-        "title": "Task Form",
-        "method": "POST",
-        "path": "https://bdui-mock-api.onrender.com/api/todo",
-        "submitActions": [
-          {
-            "type": "GO_TO",
-            "label": "Home",
-            "path": "/"
-          }
-        ],
-        "fields": [
-          {
-            "type": "input",
-            "name": "name",
-            "label": "Enter task name",
-            "required": true
-          },
-          {
-            "type": "input",
-            "name": "text",
-            "label": "Enter task text",
-            "required": true
-          },
-          {
-            "type": "datepicker",
-            "name": "dueDate",
-            "label": "Enter due date"
-          },
-          {
-            "type": "button",
-            "text": "Save",
-            "expand": true
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "route": "/todo/:id",
-    "name": "Update Todo",
-    "ui": [
-      {
-        "type": "form",
-        "title": "Task Form",
-        "method": "PUT",
-        "path": "https://bdui-mock-api.onrender.com/api/todo",
-        "submitActions": [
-          {
-            "type": "GO_TO",
-            "label": "Home",
-            "path": "/"
-          }
-        ],
-        "fields": [
-          {
-            "type": "input",
-            "name": "name",
-            "label": "Enter task name",
-            "required": true
-          },
-          {
-            "type": "input",
-            "name": "text",
-            "label": "Enter task text",
-            "required": true
-          },
-          {
-            "type": "datepicker",
-            "name": "dueDate",
-            "label": "Enter due date"
-          },
-          {
-            "type": "button",
-            "text": "Save",
-            "expand": true
           }
         ]
       }

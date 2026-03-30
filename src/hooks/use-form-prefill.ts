@@ -1,11 +1,12 @@
 import type { RefObject } from "react";
 import { useEffect, useState } from "react";
 
-import { hasNameField } from "@/lib/form-utils";
+import { hasNameField, unwrapRecordPayload } from "@/lib/form-utils";
 import type { TComponentUnion } from "@/models/interfaces/component";
 
 type UseFormPrefillArgs = {
   path?: string;
+  dataSource?: string;
   id?: string;
   fields?: TComponentUnion[];
   formRef: RefObject<HTMLFormElement | null>;
@@ -13,6 +14,7 @@ type UseFormPrefillArgs = {
 
 export function useFormPrefill({
   path,
+  dataSource,
   id,
   fields,
   formRef,
@@ -20,24 +22,27 @@ export function useFormPrefill({
   const [innerFields, setInnerFields] = useState(fields);
   const [isLoading, setIsLoading] = useState(false);
 
+  const baseUrl = dataSource ?? path;
+
   useEffect(() => {
-    if (!path || !id || !fields) {
+    if (!baseUrl || !id || !fields) {
       setInnerFields(fields);
       formRef.current?.reset();
     }
-  }, [path, id, fields]);
+  }, [baseUrl, id, fields]);
 
   useEffect(() => {
-    if (!path || !id || !fields) {
+    if (!baseUrl || !id || !fields) {
       return;
     }
 
     const ac = new AbortController();
     setIsLoading(true);
 
-    fetch(`${path}/${id}`, { signal: ac.signal })
+    fetch(`${baseUrl}/${id}`, { signal: ac.signal })
       .then((r) => r.json())
-      .then((data: Record<string, unknown>) => {
+      .then((raw: unknown) => {
+        const data = unwrapRecordPayload(raw);
         setInnerFields((prev) =>
           prev?.map((f) =>
             hasNameField(f) && data[f.name] !== undefined
@@ -57,7 +62,7 @@ export function useFormPrefill({
     return () => {
       ac.abort();
     };
-  }, [path, id]);
+  }, [baseUrl, id]);
 
   return { innerFields, isLoading };
 }

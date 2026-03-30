@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
 import { toast } from "sonner";
+import { executeAction } from "@/lib/http-actions";
 
 export type TTableProps = Exclude<ITableComponent, "type">;
 
@@ -39,7 +40,7 @@ export const Table: React.FC<TTableProps> = ({
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return value;
 
-      return date.toLocaleDateString(); // локаль пользователя
+      return date.toLocaleDateString();
     }
 
     return value;
@@ -55,33 +56,6 @@ export const Table: React.FC<TTableProps> = ({
       .finally(() => {
         setIsLoading(false);
       });
-  };
-
-  const goTo = (path: string, id: string) => {
-    navigate(`${path}/${id}`);
-  };
-
-  const deleteItem = async (url: string, id: string) => {
-    try {
-      const res = await fetch(`${url}/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(`Failed to delete item: ${res.statusText}`);
-      }
-
-      toast.success(data.message);
-      getData(url);
-    } catch (err) {
-      toast.error("Failed to delete item");
-    }
   };
 
   useEffect(() => {
@@ -125,11 +99,27 @@ export const Table: React.FC<TTableProps> = ({
                     {actions.map((action, i) => (
                       <BaseDropdownMenuItem
                         key={i}
+                        variant={action?.variant as "default" | "destructive"}
                         onClick={() => {
                           if (action.type === "GO_TO") {
-                            goTo(action.path, item.id);
+                            executeAction(action, {
+                              form: null,
+                              id: item.id,
+                              navigate: (to) => navigate(to + "/" + item.id),
+                            });
                           } else if (action.type === "HTTP_DELETE") {
-                            deleteItem(action.path, item.id);
+                            executeAction(action, {
+                              form: null,
+                              id: item.id,
+                              navigate: (to) => navigate(to + "/" + item.id),
+                            }).then(() => {
+                              toast.success("Item deleted");
+                              if (dataSource) {
+                                getData(dataSource);
+                              }
+                            }).catch((err) => {
+                              toast.error(err.message);
+                            });
                           }
                         }}
                       >

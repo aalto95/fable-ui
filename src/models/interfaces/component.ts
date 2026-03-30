@@ -4,15 +4,28 @@ export interface IBaseComponent<T extends TComponent> {
   type: T;
 }
 
+export type IActionType =
+  | "HTTP_GET"
+  | "HTTP_POST"
+  | "HTTP_PUT"
+  | "HTTP_PATCH"
+  | "HTTP_DELETE"
+  | "GO_TO"
+  | "HIDE";
+
 export interface IAction {
-  type: "HTTP_GET" | "GO_TO" | "HIDE" | "HTTP_DELETE";
+  type: IActionType;
   label: string;
   path: string;
+  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
 }
 
 export interface IButtonComponent extends IBaseComponent<"button"> {
   text?: string;
+  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
+  size?: "default" | "sm" | "lg" | "icon";
   expand?: boolean;
+  actions?: IAction[];
 }
 
 export interface IInputComponent extends IBaseComponent<"input"> {
@@ -90,6 +103,8 @@ export interface IFormComponent extends IBaseComponent<"form"> {
   title?: string;
   method?: string;
   path?: string;
+  /** Base URL for GET prefill (`GET ${dataSource}/:id`). Falls back to `path` when omitted. */
+  dataSource?: string;
   fields?: TComponentUnion[];
   submitActions?: IAction[];
 }

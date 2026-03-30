@@ -13,6 +13,7 @@ import {
 import type { IAction } from "@/models/interfaces/component";
 
 type UseFormSubmitArgs = {
+  enabled?: boolean;
   method?: string;
   path?: string;
   onSubmit?: SubmitEventHandler<HTMLFormElement>;
@@ -20,6 +21,7 @@ type UseFormSubmitArgs = {
 };
 
 export function useFormSubmit({
+  enabled = true,
   method = "GET",
   path,
   onSubmit,
@@ -32,6 +34,11 @@ export function useFormSubmit({
 
   const handleSubmit = useCallback<SubmitEventHandler<HTMLFormElement>>(
     (event) => {
+      if (!enabled) {
+        event.preventDefault();
+        return;
+      }
+
       event.preventDefault();
 
       const form = event.currentTarget;
@@ -74,7 +81,7 @@ export function useFormSubmit({
           form.reset();
 
           submitActions?.forEach((a) => {
-            if (a.type === "GO_TO") navigate("/");
+            if (a.type === "GO_TO") navigate(a.path);
           });
         } catch (e) {
           toast(`Failed: ${String(e)}`);
@@ -103,7 +110,7 @@ export function useFormSubmit({
         },
       });
     },
-    [method, path, onSubmit, submitActions, navigate, id, setConfig],
+    [enabled, method, path, onSubmit, submitActions, navigate, id, setConfig],
   );
 
   return handleSubmit;
