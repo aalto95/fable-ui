@@ -18,6 +18,7 @@ import {
   BaseTableRow,
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
+import { toast } from "sonner";
 
 export type TTableProps = Exclude<ITableComponent, "type">;
 
@@ -58,6 +59,29 @@ export const Table: React.FC<TTableProps> = ({
 
   const goTo = (path: string, id: string) => {
     navigate(`${path}/${id}`);
+  };
+
+  const deleteItem = async (url: string, id: string) => {
+    try {
+      const res = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(`Failed to delete item: ${res.statusText}`);
+      }
+
+      toast.success(data.message);
+      getData(url);
+    } catch (err) {
+      toast.error("Failed to delete item");
+    }
   };
 
   useEffect(() => {
@@ -101,7 +125,13 @@ export const Table: React.FC<TTableProps> = ({
                     {actions.map((action, i) => (
                       <BaseDropdownMenuItem
                         key={i}
-                        onClick={() => goTo(action.path, item.id)}
+                        onClick={() => {
+                          if (action.type === "GO_TO") {
+                            goTo(action.path, item.id);
+                          } else if (action.type === "HTTP_DELETE") {
+                            deleteItem(action.path, item.id);
+                          }
+                        }}
                       >
                         {action.label}
                       </BaseDropdownMenuItem>

@@ -5,7 +5,7 @@ export interface IBaseComponent<T extends TComponent> {
 }
 
 export interface IAction {
-  type: "HTTP_GET" | "GO_TO" | "HIDE";
+  type: "HTTP_GET" | "GO_TO" | "HIDE" | "HTTP_DELETE";
   label: string;
   path: string;
 }

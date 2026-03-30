@@ -25,6 +25,11 @@
                 "type": "GO_TO",
                 "label": "Edit",
                 "path": "/todo"
+              },
+              {
+                "type": "HTTP_DELETE",
+                "label": "Delete",
+                "path": "https://bdui-mock-api.onrender.com/api/todo"
               }
             ]
           }

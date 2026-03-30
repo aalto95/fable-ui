@@ -63,6 +63,18 @@ class ItemService {
       throw new Error(e);
     }
   }
+
+  async deleteTodo(id) {
+    try {
+      this.todos = this.todos.filter((todo) => todo.id !== id);
+
+      return {
+        success: true,
+      };
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 }
 
 module.exports = new ItemService();

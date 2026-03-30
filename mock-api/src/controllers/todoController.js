@@ -57,6 +57,20 @@ class TodoController {
       next(error);
     }
   }
+
+  async deleteTodo(req, res, next) {
+    try {
+      const result = await todoService.deleteTodo(req.params.id);
+
+      res.status(200).json({
+        success: true,
+        message: "Item deleted successfully",
+        data: result.data,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new TodoController();
