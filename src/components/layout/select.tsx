@@ -16,7 +16,7 @@ export const Select: React.FC<TSelectProps> = ({
 }) => {
   return (
     <BaseField hidden={hidden}>
-      <BaseLabel>{label}</BaseLabel>
+      {label && <BaseLabel>{label} {required && <span className="text-red-500">*</span>}</BaseLabel>}
       <BaseSelect
         name={name}
         required={required}

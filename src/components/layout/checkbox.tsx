@@ -19,7 +19,7 @@ export const Checkbox: React.FC<TCheckboxProps> = ({
         required={required}
         defaultChecked={checked}
       />
-      <BaseLabel htmlFor={name}>{label}</BaseLabel>
+      {label && <BaseLabel htmlFor={name}>{label} {required && <span className="text-red-500">*</span>}</BaseLabel>}
     </BaseField>
   );
 };

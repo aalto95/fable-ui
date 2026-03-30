@@ -32,7 +32,7 @@ export const Datepicker: React.FC<TDatepickerProps> = ({
 }) => {
   return (
     <BaseField hidden={hidden}>
-      {label && <BaseLabel>{label}</BaseLabel>}
+      {label && <BaseLabel>{label} {required && <span className="text-red-500">*</span>}</BaseLabel>}
       <BaseInput
         type="date"
         name={name}
