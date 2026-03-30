@@ -8,37 +8,39 @@ import {
   BaseDialogHeader,
   BaseDialogTitle,
 } from "@/components/ui/dialog";
+import { useDialog } from "@/contexts/dialog";
 
-type ConfirmSubmitDialogProps = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  onConfirm: () => void | Promise<void>;
-  title?: string;
-  description?: string;
-  confirmText?: string;
-  cancelText?: string;
-};
+export const Dialog: React.FC = () => {
+  const { config, setConfig } = useDialog();
 
-export const Dialog: React.FC<ConfirmSubmitDialogProps> = ({
-  open,
-  onOpenChange,
-  onConfirm,
-  title = "Submit form?",
-  description = "Are you sure you want to submit this form?",
-  confirmText = "Yes",
-  cancelText = "No",
-}) => {
+  if (!config) {
+    return null;
+  }
+
   return (
-    <BaseDialog open={open} onOpenChange={onOpenChange}>
+    <BaseDialog open={!!config}>
       <BaseDialogContent>
         <BaseDialogHeader>
-          <BaseDialogTitle>{title}</BaseDialogTitle>
-          <BaseDialogDescription>{description}</BaseDialogDescription>
+          <BaseDialogTitle>{config.title}</BaseDialogTitle>
+          <BaseDialogDescription>{config.description}</BaseDialogDescription>
         </BaseDialogHeader>
         <BaseDialogFooter>
-          <BaseDialogCancel type="button">{cancelText}</BaseDialogCancel>
-          <BaseDialogAction type="button" autoFocus onClick={onConfirm}>
-            {confirmText}
+          {!config.hideCancel && (
+            <BaseDialogCancel
+              type="button"
+              disabled={config.isPending}
+              onClick={() => setConfig(null)}
+            >
+              {config.cancelText ?? "Cancel"}
+            </BaseDialogCancel>
+          )}
+          <BaseDialogAction
+            type="button"
+            autoFocus
+            disabled={config.isPending}
+            onClick={config.onConfirm}
+          >
+            {config.confirmText ?? "Save"}
           </BaseDialogAction>
         </BaseDialogFooter>
       </BaseDialogContent>

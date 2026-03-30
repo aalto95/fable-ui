@@ -8,6 +8,7 @@ import {
   BaseDropdownMenuItem,
   BaseDropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Spinner } from "@/components/ui/spinner";
 import {
   BaseTable,
   BaseTableBody,
@@ -17,7 +18,6 @@ import {
   BaseTableRow,
 } from "@/components/ui/table";
 import type { ITableComponent } from "@/models/interfaces/component";
-import { Spinner } from "@/components/ui/spinner";
 
 export type TTableProps = Exclude<ITableComponent, "type">;
 
@@ -66,7 +66,7 @@ export const Table: React.FC<TTableProps> = ({
     }
   }, []);
 
-  if (isLoading) return <Spinner></Spinner>;
+  if (isLoading) return <Spinner />;
 
   return (
     <BaseTable>

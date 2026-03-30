@@ -1,5 +1,7 @@
+import { memo } from "react";
 import { LAYOUT_COMPONENTS, LEAF_COMPONENTS } from "@/consts/components-map";
 import { useDebug } from "@/contexts/debug";
+import { cn } from "@/lib/utils";
 import type { TComponentUnion } from "@/models/interfaces/component";
 import type {
   TLayoutComponent,
@@ -52,7 +54,7 @@ function isLeaf(type: string): type is TLeafComponent {
   return type in LEAF_COMPONENTS;
 }
 
-export const Component: React.FC<Props> = (props) => {
+export const Component: React.FC<Props> = memo((props) => {
   const { enabled } = useDebug();
   const { type, ...rest } = props;
 
@@ -72,17 +74,17 @@ export const Component: React.FC<Props> = (props) => {
 
     return (
       <div
-        className={[
+        className={cn(
           "relative rounded-md border-2 border-dashed p-2 w-full max-w-7xl",
           debug.border,
-        ].join(" ")}
+        )}
       >
         <div
-          className={[
+          className={cn(
             "pointer-events-none absolute left-0 top-0 -translate-y-1/2 translate-x-1 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold tracking-wide shadow",
             debug.bg,
             debug.text,
-          ].join(" ")}
+          )}
         >
           {type}
         </div>
@@ -99,17 +101,17 @@ export const Component: React.FC<Props> = (props) => {
 
     return (
       <div
-        className={[
+        className={cn(
           "relative rounded-md border-2 border-dashed p-2 w-full max-w-7xl",
           debug.border,
-        ].join(" ")}
+        )}
       >
         <div
-          className={[
+          className={cn(
             "pointer-events-none absolute left-0 top-0 -translate-y-1/2 translate-x-1 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold tracking-wide shadow",
             debug.bg,
             debug.text,
-          ].join(" ")}
+          )}
         >
           {type}
         </div>
@@ -119,4 +121,4 @@ export const Component: React.FC<Props> = (props) => {
   }
 
   return null;
-};
+});

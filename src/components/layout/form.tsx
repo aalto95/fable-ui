@@ -4,14 +4,12 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 
 import { Component } from "@/components/core/Component";
-import { Dialog } from "@/components/singleton/dialog";
-import type { IFormComponent } from "@/models/interfaces/component";
 import { Spinner } from "@/components/ui/spinner";
+import { type DialogConfig, useDialog } from "@/contexts/dialog";
+import type { IFormComponent } from "@/models/interfaces/component";
 
 export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
   Exclude<IFormComponent, "type">;
-
-/* -------------------- utils -------------------- */
 
 function dateOnlyToISO(value: string) {
   return value ? new Date(value + "T00:00:00").toISOString() : value;
@@ -48,26 +46,23 @@ function buildGetUrl(base: string, data: Record<string, any>) {
 }
 
 function validateRequired(form: HTMLFormElement, formData: FormData) {
-  const nodes = Array.from(
-    form.querySelectorAll<HTMLElement>(
-      "[data-sdui-required='true'], [required]",
-    ),
-  );
+  const nodes = Array.from(form.querySelectorAll<HTMLElement>("[required]"));
 
   const missing = nodes
     .map((node) => {
-      const name =
-        (node as HTMLInputElement).name ||
-        node.getAttribute("name") ||
-        node.getAttribute("data-name");
+      const name = (node as HTMLInputElement).name || node.getAttribute("name");
 
-      if (!name) return null;
+      if (!name) {
+        return null;
+      }
 
       const value = formData.get(name);
       const isMissing =
         value == null || (typeof value === "string" && value.trim() === "");
 
-      if (!isMissing) return null;
+      if (!isMissing) {
+        return null;
+      }
 
       return {
         node,
@@ -92,8 +87,6 @@ function hasNameField(field: unknown): field is { name: string } {
   );
 }
 
-/* -------------------- component -------------------- */
-
 export const Form: React.FC<TFormProps> = ({
   path,
   method = "GET",
@@ -106,13 +99,12 @@ export const Form: React.FC<TFormProps> = ({
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const { config, setConfig } = useDialog();
   const [innerFields, setInnerFields] = useState(fields);
   const [isLoading, setIsLoading] = useState(false);
 
+  const formRef = useRef<null | HTMLFormElement>(null);
   const submitRef = useRef<null | (() => Promise<void>)>(null);
-
-  /* -------- submit handler -------- */
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -166,13 +158,33 @@ export const Form: React.FC<TFormProps> = ({
       onSubmit?.(event);
     };
 
-    setDialogOpen(true);
+    const configTexts: Partial<DialogConfig> = {
+      title: "Save this form?",
+      description: "An HTTP query will be performed.",
+      cancelText: "No",
+      confirmText: "Yes",
+    };
+
+    setConfig({
+      ...configTexts,
+      onConfirm: async () => {
+        setConfig({
+          ...configTexts,
+          isPending: true,
+        });
+        await submitRef.current?.();
+        submitRef.current = null;
+        setConfig(null);
+      },
+    });
   };
 
-  /* -------- load defaults -------- */
-
   useEffect(() => {
-    if (!path || !id || !fields) return;
+    if (!path || !id || !fields) {
+      formRef.current?.reset();
+      console.log("reset");
+      return;
+    }
 
     setIsLoading(true);
     fetch(`${path}/${id}`)
@@ -191,39 +203,22 @@ export const Form: React.FC<TFormProps> = ({
       });
   }, [path, id]);
 
-  /* -------- render -------- */
-
-  if (isLoading) return <Spinner></Spinner>;
+  if (isLoading) return <Spinner />;
 
   return (
-    <>
-      <form
-        id={id}
-        action={path}
-        method={method}
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-2 flex-1 w-full"
-        {...rest}
-      >
-        {title && <h2 className="font-bold">{title}</h2>}
+    <form
+      id={id}
+      action={path}
+      method={method}
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-2 flex-1 w-full"
+      {...rest}
+    >
+      {title && <h2 className="font-bold">{title}</h2>}
 
-        {innerFields?.map((field, i) => (
-          <Component key={i} {...field} />
-        ))}
-      </form>
-
-      <Dialog
-        open={dialogOpen}
-        onOpenChange={(open) => {
-          if (!open) submitRef.current = null;
-          setDialogOpen(open);
-        }}
-        onConfirm={async () => {
-          setDialogOpen(false);
-          await submitRef.current?.();
-          submitRef.current = null;
-        }}
-      />
-    </>
+      {innerFields?.map((field, i) => (
+        <Component key={i} {...field} />
+      ))}
+    </form>
   );
 };
