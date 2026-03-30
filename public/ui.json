@@ -4,30 +4,202 @@
     "name": "Home",
     "ui": [
       {
-        "type": "table",
-        "heads": [
+        "type": "v_stack",
+        "descendants": [
           {
-            "name": "name",
-            "label": "Name",
-            "type": "string"
+            "type": "card",
+            "title": "Tasks",
+            "description": "Open the full component showcase at route /showcase (use the address bar or your router history).",
+            "footerText": "SDUI renderer demo"
           },
           {
-            "name": "text",
-            "label": "Text",
-            "type": "string"
-          },
-          {
-            "name": "dueDate",
-            "label": "Due Date",
-            "type": "date"
+            "type": "table",
+            "heads": [
+              { "name": "name", "label": "Name", "type": "string" },
+              { "name": "text", "label": "Text", "type": "string" },
+              { "name": "dueDate", "label": "Due Date", "type": "date" }
+            ],
+            "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+            "actions": [
+              {
+                "type": "GO_TO",
+                "label": "Edit",
+                "path": "/todo"
+              }
+            ]
           }
-        ],
-        "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
-        "actions": [
+        ]
+      }
+    ]
+  },
+  {
+    "route": "/showcase",
+    "name": "Advanced showcase",
+    "ui": [
+      {
+        "type": "v_stack",
+        "descendants": [
           {
-            "type": "GO_TO",
-            "label": "Edit",
-            "path": "/todo"
+            "type": "card",
+            "title": "Server-driven UI showcase",
+            "description": "This page exercises every registered component: card, horizontal and vertical stacks, accordion, table, pagination, form, and all leaf inputs.",
+            "footerText": "Toggle debug mode in the header to see component boundaries."
+          },
+          {
+            "type": "accordion",
+            "items": [
+              {
+                "name": "acc-layout",
+                "title": "Layout primitives",
+                "text": "v_stack and h_stack map to flex column and row. card groups title, description, footer, and nested descendants."
+              },
+              {
+                "name": "acc-data",
+                "title": "Data & navigation",
+                "text": "table loads remote rows via dataSource. pagination is client-side state. form submits through the dialog confirm flow."
+              },
+              {
+                "name": "acc-leaf",
+                "title": "Leaf components",
+                "text": "input, textarea, select, datepicker, checkbox, and button are composed inside forms or standalone for demos."
+              }
+            ]
+          },
+          {
+            "type": "h_stack",
+            "descendants": [
+              {
+                "type": "card",
+                "title": "Column A",
+                "description": "Horizontal stack places cards side by side (on wide viewports).",
+                "descendants": [
+                  {
+                    "type": "checkbox",
+                    "name": "demo-a",
+                    "label": "Standalone checkbox (not inside a form)"
+                  },
+                  {
+                    "type": "button",
+                    "text": "Primary-style button",
+                    "expand": true
+                  }
+                ]
+              },
+              {
+                "type": "card",
+                "title": "Column B",
+                "description": "Mix of controls without a form wrapper.",
+                "descendants": [
+                  {
+                    "type": "input",
+                    "name": "demo-input",
+                    "label": "Standalone text input",
+                    "defaultValue": "Editable default"
+                  },
+                  {
+                    "type": "textarea",
+                    "name": "demo-textarea",
+                    "label": "Standalone textarea",
+                    "defaultValue": "Multi-line text"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "title": "Remote table",
+            "description": "Same todo API as the home page.",
+            "descendants": [
+              {
+                "type": "table",
+                "heads": [
+                  { "name": "name", "label": "Name", "type": "string" },
+                  { "name": "text", "label": "Text", "type": "string" },
+                  { "name": "dueDate", "label": "Due", "type": "date" }
+                ],
+                "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+                "actions": [
+                  {
+                    "type": "GO_TO",
+                    "label": "Edit",
+                    "path": "/todo"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "title": "Pagination",
+            "description": "Twelve pages — prev/next and page links are interactive.",
+            "descendants": [
+              {
+                "type": "pagination",
+                "pages": 12
+              }
+            ]
+          },
+          {
+            "type": "card",
+            "title": "Form with every field type",
+            "description": "POST creates a todo; confirm in the dialog before the request runs.",
+            "descendants": [
+              {
+                "type": "form",
+                "title": "Create task (showcase)",
+                "method": "POST",
+                "path": "https://bdui-mock-api.onrender.com/api/todo",
+                "submitActions": [
+                  {
+                    "type": "GO_TO",
+                    "label": "Back to list",
+                    "path": "/"
+                  }
+                ],
+                "fields": [
+                  {
+                    "type": "input",
+                    "name": "name",
+                    "label": "Task name",
+                    "required": true
+                  },
+                  {
+                    "type": "textarea",
+                    "name": "text",
+                    "label": "Description",
+                    "required": true
+                  },
+                  {
+                    "type": "select",
+                    "name": "priority",
+                    "label": "Priority",
+                    "required": false,
+                    "options": [
+                      { "label": "Low", "value": "low" },
+                      { "label": "Medium", "value": "medium" },
+                      { "label": "High", "value": "high" }
+                    ]
+                  },
+                  {
+                    "type": "datepicker",
+                    "name": "dueDate",
+                    "label": "Due date"
+                  },
+                  {
+                    "type": "checkbox",
+                    "name": "notify",
+                    "label": "Send reminder",
+                    "checked": false
+                  },
+                  {
+                    "type": "button",
+                    "text": "Submit showcase form",
+                    "expand": true
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -45,6 +217,7 @@
         "submitActions": [
           {
             "type": "GO_TO",
+            "label": "Home",
             "path": "/"
           }
         ],
@@ -87,6 +260,7 @@
         "submitActions": [
           {
             "type": "GO_TO",
+            "label": "Home",
             "path": "/"
           }
         ],
