@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { LAYOUT_COMPONENTS, LEAF_COMPONENTS } from "@/consts/components-map";
+import { DebugOutline } from "./DebugOutline";
 import { useDebug } from "@/contexts/debug";
-import { cn } from "@/lib/utils";
 import type { TComponentUnion } from "@/models/interfaces/component";
 import type {
   TLayoutComponent,
@@ -70,26 +70,10 @@ export const Component: React.FC<Props> = memo((props) => {
 
     const node = <Comp {...rest}>{children}</Comp>;
 
-    if (!enabled) return node;
-
     return (
-      <div
-        className={cn(
-          "relative rounded-md border-2 border-dashed p-2 w-full max-w-7xl",
-          debug.border,
-        )}
-      >
-        <div
-          className={cn(
-            "pointer-events-none absolute left-0 top-0 -translate-y-1/2 translate-x-1 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold tracking-wide shadow",
-            debug.bg,
-            debug.text,
-          )}
-        >
-          {type}
-        </div>
+      <DebugOutline enabled={enabled} label={type} palette={debug}>
         {node}
-      </div>
+      </DebugOutline>
     );
   }
 
@@ -97,26 +81,10 @@ export const Component: React.FC<Props> = memo((props) => {
     const Comp = LEAF_COMPONENTS[type];
     const node = <Comp {...rest} />;
 
-    if (!enabled) return node;
-
     return (
-      <div
-        className={cn(
-          "relative rounded-md border-2 border-dashed p-2 w-full max-w-7xl",
-          debug.border,
-        )}
-      >
-        <div
-          className={cn(
-            "pointer-events-none absolute left-0 top-0 -translate-y-1/2 translate-x-1 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold tracking-wide shadow",
-            debug.bg,
-            debug.text,
-          )}
-        >
-          {type}
-        </div>
+      <DebugOutline enabled={enabled} label={type} palette={debug}>
         {node}
-      </div>
+      </DebugOutline>
     );
   }
 

@@ -4,7 +4,6 @@ export * from "./card";
 export * from "./checkbox";
 export * from "./datepicker";
 export * from "./form";
-export * from "./form";
 export * from "./horizontal-stack";
 export * from "./input";
 export * from "./pagination";
