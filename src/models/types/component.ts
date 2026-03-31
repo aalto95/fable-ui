@@ -9,7 +9,9 @@ export type TLeafComponent =
   | "input"
   | "pagination"
   | "select"
+  | "subtitle"
   | "table"
+  | "title"
   | "textarea";
 
 export type TComponent = TLayoutComponent | TLeafComponent;

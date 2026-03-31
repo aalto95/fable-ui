@@ -85,6 +85,16 @@ export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
   checked?: boolean;
 }
 
+export interface ITitleComponent extends IBaseComponent<"title"> {
+  text?: string;
+  hidden?: boolean;
+}
+
+export interface ISubtitleComponent extends IBaseComponent<"subtitle"> {
+  text?: string;
+  hidden?: boolean;
+}
+
 export interface ITableComponent extends IBaseComponent<"table"> {
   heads?: { name: string; label: string; type: "string" | "date" }[];
   data?: any[];
@@ -141,6 +151,8 @@ export type TComponentsWithoutDescendants =
   | IButtonComponent
   | IInputComponent
   | ITextareaComponent
+  | ITitleComponent
+  | ISubtitleComponent
   | ISelectComponent
   | IDatepickerComponent
   | ICheckboxComponent

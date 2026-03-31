@@ -178,6 +178,26 @@
         "checked": { "type": "boolean" }
       }
     },
+    "titleComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "title" },
+        "text": { "type": "string" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "subtitleComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "subtitle" },
+        "text": { "type": "string" },
+        "hidden": { "type": "boolean" }
+      }
+    },
     "tableComponent": {
       "type": "object",
       "additionalProperties": false,
@@ -286,6 +306,8 @@
         { "$ref": "#/$defs/selectComponent" },
         { "$ref": "#/$defs/datepickerComponent" },
         { "$ref": "#/$defs/checkboxComponent" },
+        { "$ref": "#/$defs/titleComponent" },
+        { "$ref": "#/$defs/subtitleComponent" },
         { "$ref": "#/$defs/tableComponent" },
         { "$ref": "#/$defs/accordionComponent" },
         { "$ref": "#/$defs/paginationComponent" },

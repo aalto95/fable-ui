@@ -8,8 +8,10 @@ import { HorizontalStack } from "@/components/layout/HorizontalStack";
 import { Input } from "@/components/layout/Input";
 import { Pagination } from "@/components/layout/Pagination";
 import { Select } from "@/components/layout/Select";
+import { Subtitle } from "@/components/layout/Subtitle";
 import { Table } from "@/components/layout/Table";
 import { Textarea } from "@/components/layout/Textarea";
+import { Title } from "@/components/layout/Title";
 import { VerticalStack } from "@/components/layout/VerticalStack";
 
 import { componentRegistry } from "./component-registry";
@@ -37,7 +39,9 @@ export function registerDefaultComponents(): void {
     .registerLeaf("input", Input)
     .registerLeaf("pagination", Pagination)
     .registerLeaf("select", Select)
+    .registerLeaf("subtitle", Subtitle)
     .registerLeaf("table", Table)
+    .registerLeaf("title", Title)
     .registerLeaf("textarea", Textarea);
 }
 

@@ -9,6 +9,14 @@
           "type": "v_stack",
           "descendants": [
             {
+              "type": "title",
+              "text": "Todo list"
+            },
+            {
+              "type": "subtitle",
+              "text": "Manage tasks, edit existing items, and create new todos."
+            },
+            {
               "type": "button",
               "text": "Create Todo",
               "actions": [

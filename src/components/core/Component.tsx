@@ -33,10 +33,20 @@ const DEBUG_COLORS: Record<
     text: "text-white",
   },
   select: { border: "border-lime-500", bg: "bg-lime-500", text: "text-black" },
+  subtitle: {
+    border: "border-zinc-500",
+    bg: "bg-zinc-500",
+    text: "text-white",
+  },
   button: {
     border: "border-orange-500",
     bg: "bg-orange-500",
     text: "text-black",
+  },
+  title: {
+    border: "border-violet-500",
+    bg: "bg-violet-500",
+    text: "text-white",
   },
 };
 
