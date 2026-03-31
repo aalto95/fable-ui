@@ -48,7 +48,13 @@
                   "type": "HTTP_DELETE",
                   "label": "Delete",
                   "variant": "destructive",
-                  "path": "https://todo-api-af91.onrender.com/api/todo"
+                  "path": "https://todo-api-af91.onrender.com/api/todo",
+                  "dialogConfig": {
+                    "title": "Delete Todo",
+                    "description": "Are you sure you want to delete this todo?",
+                    "cancelText": "Cancel",
+                    "confirmText": "Delete"
+                  }
                 }
               ]
             }

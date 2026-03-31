@@ -48,7 +48,13 @@
                   "type": "HTTP_DELETE",
                   "label": "Delete",
                   "variant": "destructive",
-                  "path": "http://localhost:3000/api/todo"
+                  "path": "http://localhost:3000/api/todo",
+                  "dialogConfig": {
+                    "title": "Delete Todo",
+                    "description": "Are you sure you want to delete this todo?",
+                    "cancelText": "Cancel",
+                    "confirmText": "Delete"
+                  }
                 }
               ]
             }

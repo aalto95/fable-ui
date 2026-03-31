@@ -18,6 +18,13 @@ export interface IAction {
   type: IActionType;
   label: string;
   path?: string;
+  dialogConfig?: {
+    title?: string;
+    description?: string;
+    cancelText?: string;
+    confirmText?: string;
+    hideCancel?: boolean;
+  };
   variant?:
     | "default"
     | "outline"

@@ -19,6 +19,7 @@ import {
   BaseTableHeader,
   BaseTableRow,
 } from "@/components/ui/table";
+import { type DialogConfig, useDialog } from "@/contexts/dialog";
 import { executeAction } from "@/lib/http-actions";
 import { http } from "@/lib/http-client";
 import type { ITableComponent } from "@/models/interfaces/component";
@@ -41,6 +42,7 @@ export const Table: React.FC<TTableProps> = ({
   actions,
 }) => {
   const navigate = useNavigate();
+  const { setConfig } = useDialog();
   const [searchParams] = useSearchParams();
   const search = searchParams.toString();
   const [fieldData, setFieldData] = useState(data ?? []);
@@ -155,28 +157,59 @@ export const Table: React.FC<TTableProps> = ({
                           key={i}
                           variant={action?.variant as "default" | "destructive"}
                           onClick={() => {
-                            executeAction(action, {
-                              form: null,
-                              id: item.id,
-                              navigate: (to) => {
-                                if (typeof to === "number") {
-                                  navigate(to);
-                                  return;
-                                }
-                                navigate(`${to}/${item.id}`);
-                              },
-                            })
-                              .then(() => {
-                                if (action.type === "HTTP_DELETE") {
-                                  toast.success("Item deleted");
-                                  if (dataSource) {
-                                    getData(dataSource);
+                            const runAction = async () => {
+                              await executeAction(action, {
+                                form: null,
+                                id: item.id,
+                                navigate: (to) => {
+                                  if (typeof to === "number") {
+                                    navigate(to);
+                                    return;
                                   }
+                                  navigate(`${to}/${item.id}`);
+                                },
+                              });
+                              if (action.type === "HTTP_DELETE") {
+                                toast.success("Item deleted");
+                                if (dataSource) {
+                                  getData(dataSource);
                                 }
-                              })
-                              .catch((err) => {
+                              }
+                            };
+
+                            if (!action.dialogConfig) {
+                              void runAction().catch((err) => {
                                 toast.error(err.message);
                               });
+                              return;
+                            }
+
+                            const dialogConfig: Partial<
+                              Exclude<DialogConfig, null>
+                            > = {
+                              title: "Confirm action",
+                              description: "This action will be executed.",
+                              cancelText: "Cancel",
+                              confirmText: "Confirm",
+                              ...action.dialogConfig,
+                            };
+
+                            setConfig({
+                              ...dialogConfig,
+                              onConfirm: async () => {
+                                setConfig({
+                                  ...dialogConfig,
+                                  isPending: true,
+                                });
+                                try {
+                                  await runAction();
+                                } catch (err) {
+                                  toast.error(String(err));
+                                } finally {
+                                  setConfig(null);
+                                }
+                              },
+                            });
                           }}
                         >
                           {action.label}

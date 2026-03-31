@@ -15,6 +15,14 @@ function isNavigationOnly(actions: IAction[]): boolean {
   );
 }
 
+function getActionDialogConfig(
+  actions: IAction[],
+): Partial<Exclude<DialogConfig, null>> | null {
+  const action = actions.find((a) => a.dialogConfig);
+  if (!action?.dialogConfig) return null;
+  return action.dialogConfig;
+}
+
 function requiresForm(actions: IAction[]): boolean {
   return actions.some(
     (a) =>
@@ -69,7 +77,10 @@ export function useFormButtonActions(actions?: IAction[]) {
         }
       };
 
-      if (isNavigationOnly(actions)) {
+      const dialogFromAction = getActionDialogConfig(actions);
+      const shouldConfirm = !isNavigationOnly(actions) || !!dialogFromAction;
+
+      if (!shouldConfirm) {
         void runActions().catch((e) => {
           toast.error(String(e));
         });
@@ -96,6 +107,7 @@ export function useFormButtonActions(actions?: IAction[]) {
         description: "An HTTP request will be performed.",
         cancelText: "No",
         confirmText: "Yes",
+        ...dialogFromAction,
       };
 
       setConfig({

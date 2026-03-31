@@ -37,13 +37,25 @@
         "HTTP_PATCH",
         "HTTP_DELETE",
         "GO_TO",
+        "GO_BACK",
         "HIDE"
       ]
+    },
+    "actionDialogConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "cancelText": { "type": "string" },
+        "confirmText": { "type": "string" },
+        "hideCancel": { "type": "boolean" }
+      }
     },
     "action": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "label", "path"],
+      "required": ["type", "label"],
       "properties": {
         "type": {
           "$ref": "#/$defs/actionType"
@@ -53,6 +65,9 @@
         },
         "path": {
           "type": "string"
+        },
+        "dialogConfig": {
+          "$ref": "#/$defs/actionDialogConfig"
         },
         "variant": {
           "$ref": "#/$defs/variant"
