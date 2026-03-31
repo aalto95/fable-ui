@@ -61,7 +61,11 @@ export const Component: React.FC<Props> = memo((props) => {
   const debug = DEBUG_COLORS[type] ?? DEFAULT_DEBUG;
 
   if (isLayout(type)) {
-    const Comp = componentRegistry.getLayout(type)!;
+    const Comp = componentRegistry.getLayout(type);
+
+    if (!Comp) {
+      throw new Error(`Layout component ${type} not found`);
+    }
 
     const children =
       "descendants" in rest && Array.isArray(rest.descendants)
@@ -78,7 +82,12 @@ export const Component: React.FC<Props> = memo((props) => {
   }
 
   if (isLeaf(type)) {
-    const Comp = componentRegistry.getLeaf(type)!;
+    const Comp = componentRegistry.getLeaf(type);
+
+    if (!Comp) {
+      throw new Error(`Leaf component ${type} not found`);
+    }
+
     const node = <Comp {...rest} />;
 
     return (
