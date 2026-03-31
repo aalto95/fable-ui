@@ -4,10 +4,10 @@ import { Header } from "@/components/app/Header";
 
 export const Shell: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex flex-col w-full items-center min-h-screen">
+    <div className="flex min-h-dvh w-full flex-col">
       <Header />
-      <main className="p-4 flex-1 flex flex-col items-center w-full">
-        <div className="w-full max-w-7xl">{children}</div>
+      <main className="w-full flex-1 p-4">
+        <div className="mx-auto w-full max-w-7xl">{children}</div>
       </main>
       <Footer />
     </div>
