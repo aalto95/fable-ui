@@ -1,12 +1,12 @@
 import { memo } from "react";
-import { DebugOutline } from "./DebugOutline";
 import { useDebug } from "@/contexts/debug";
-import { componentRegistry } from "@/registry/component-registry";
 import type { TComponentUnion } from "@/models/interfaces/component";
 import type {
   TLayoutComponent,
   TLeafComponent,
 } from "@/models/types/component";
+import { componentRegistry } from "@/registry/component-registry";
+import { DebugOutline } from "./DebugOutline";
 
 type Props = TComponentUnion;
 

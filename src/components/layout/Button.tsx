@@ -4,7 +4,13 @@ import type { IButtonComponent } from "@/models/interfaces/component";
 
 export type TButtonProps = Exclude<IButtonComponent, "type">;
 
-export const Button: React.FC<TButtonProps> = ({ text, variant, size, expand, actions }) => {
+export const Button: React.FC<TButtonProps> = ({
+  text,
+  variant,
+  size,
+  expand,
+  actions,
+}) => {
   const handleActions = useFormButtonActions(actions);
 
   return (

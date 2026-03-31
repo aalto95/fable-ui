@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import { Footer } from "@/components/core/Footer";
-import { Header } from "@/components/core/Header";
+import { Dialog } from "@/components/app/Dialog";
+import { NotFound } from "@/components/app/NotFound";
+import { Toaster } from "@/components/app/Sonner";
 import { Renderer } from "@/components/core/Renderer";
-import { Dialog } from "@/components/singleton/dialog";
-import { NotFound } from "@/components/singleton/not-found";
-import { Toaster } from "@/components/singleton/sonner";
+import { Shell } from "@/components/core/Shell";
 import { DebugProvider } from "@/contexts/debug";
 import { type DialogConfig, DialogProvider } from "@/contexts/dialog";
 import { http } from "@/lib/http-client";
@@ -43,30 +42,24 @@ export const App: React.FC = () => {
   return (
     <DebugProvider enabled={debugEnabled} setEnabled={setDebugEnabled}>
       <DialogProvider config={dialogConfig} setConfig={setDialogConfig}>
-        <div className="flex flex-col w-full items-center min-h-screen">
-          <Header />
-          <main className="p-4 flex-1 flex flex-col items-center w-full">
-            <div className="w-full max-w-7xl">
-              {pages?.length && (
-                <Routes>
-                  {pages?.map((page) => {
-                    return (
-                      <Route
-                        key={page.route}
-                        path={page.route}
-                        element={<Renderer ui={page.ui} />}
-                      />
-                    );
-                  })}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              )}
-            </div>
-          </main>
-          <Footer />
-          <Toaster />
-          <Dialog />
-        </div>
+        <Shell>
+          {pages?.length && (
+            <Routes>
+              {pages?.map((page) => {
+                return (
+                  <Route
+                    key={page.route}
+                    path={page.route}
+                    element={<Renderer ui={page.ui} />}
+                  />
+                );
+              })}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          )}
+        </Shell>
+        <Toaster />
+        <Dialog />
       </DialogProvider>
     </DebugProvider>
   );

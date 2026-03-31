@@ -69,7 +69,11 @@ export const http = {
     return request<T>(url, { ...init, method: "PATCH", jsonBody });
   },
 
-  delete<T>(url: string, jsonBody?: unknown, init?: HttpRequestInit): Promise<T> {
+  delete<T>(
+    url: string,
+    jsonBody?: unknown,
+    init?: HttpRequestInit,
+  ): Promise<T> {
     if (jsonBody === undefined) {
       return request<T>(url, { ...init, method: "DELETE" });
     }

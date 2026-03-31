@@ -1,6 +1,8 @@
 import { MoreHorizontalIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
+import { Pagination } from "@/components/layout/Pagination";
 import { BaseButton } from "@/components/ui/button";
 import {
   BaseDropdownMenu,
@@ -17,11 +19,9 @@ import {
   BaseTableHeader,
   BaseTableRow,
 } from "@/components/ui/table";
-import type { ITableComponent } from "@/models/interfaces/component";
-import { Pagination } from "@/components/layout/pagination";
-import { toast } from "sonner";
 import { executeAction } from "@/lib/http-actions";
 import { http } from "@/lib/http-client";
+import type { ITableComponent } from "@/models/interfaces/component";
 
 export type TTableProps = Omit<ITableComponent, "type">;
 
@@ -80,9 +80,7 @@ export const Table: React.FC<TTableProps> = ({
       .then((res) => {
         setFieldData(res.data ?? []);
         const limitNum =
-          Number(searchParams.get(limitParam)) ||
-          defaultLimit ||
-          10;
+          Number(searchParams.get(limitParam)) || defaultLimit || 10;
         const derived =
           res.totalPages ??
           (typeof res.total === "number" && limitNum > 0
@@ -142,7 +140,11 @@ export const Table: React.FC<TTableProps> = ({
                 {actions?.length && (
                   <BaseDropdownMenu>
                     <BaseDropdownMenuTrigger asChild>
-                      <BaseButton variant="ghost" size="icon" className="size-8">
+                      <BaseButton
+                        variant="ghost"
+                        size="icon"
+                        className="size-8"
+                      >
                         <MoreHorizontalIcon />
                         <span className="sr-only">Open menu</span>
                       </BaseButton>

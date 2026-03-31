@@ -14,7 +14,11 @@ export const Textarea: React.FC<TTextareaProps> = ({
 }) => {
   return (
     <BaseField hidden={hidden}>
-      {label && <BaseLabel>{label} {required && <span className="text-red-500">*</span>}</BaseLabel>}
+      {label && (
+        <BaseLabel>
+          {label} {required && <span className="text-red-500">*</span>}
+        </BaseLabel>
+      )}
       <BaseTextarea
         name={name}
         defaultValue={defaultValue}

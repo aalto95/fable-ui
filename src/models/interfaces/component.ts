@@ -17,12 +17,24 @@ export interface IAction {
   type: IActionType;
   label: string;
   path: string;
-  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
+  variant?:
+    | "default"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "destructive"
+    | "link";
 }
 
 export interface IButtonComponent extends IBaseComponent<"button"> {
   text?: string;
-  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
+  variant?:
+    | "default"
+    | "outline"
+    | "secondary"
+    | "ghost"
+    | "destructive"
+    | "link";
   size?: "default" | "sm" | "lg" | "icon";
   expand?: boolean;
   actions?: IAction[];

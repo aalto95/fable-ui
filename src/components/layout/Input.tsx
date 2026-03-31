@@ -14,7 +14,11 @@ export const Input: React.FC<TInputProps> = ({
 }) => {
   return (
     <BaseField hidden={hidden}>
-      {label && <BaseLabel>{label} {required && <span className="text-red-500">*</span>}</BaseLabel>}
+      {label && (
+        <BaseLabel>
+          {label} {required && <span className="text-red-500">*</span>}
+        </BaseLabel>
+      )}
       <BaseInput
         name={name}
         required={required}
