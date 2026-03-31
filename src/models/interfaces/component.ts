@@ -11,12 +11,13 @@ export type IActionType =
   | "HTTP_PATCH"
   | "HTTP_DELETE"
   | "GO_TO"
+  | "GO_BACK"
   | "HIDE";
 
 export interface IAction {
   type: IActionType;
   label: string;
-  path: string;
+  path?: string;
   variant?:
     | "default"
     | "outline"

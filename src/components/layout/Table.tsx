@@ -155,28 +155,28 @@ export const Table: React.FC<TTableProps> = ({
                           key={i}
                           variant={action?.variant as "default" | "destructive"}
                           onClick={() => {
-                            if (action.type === "GO_TO") {
-                              executeAction(action, {
-                                form: null,
-                                id: item.id,
-                                navigate: (to) => navigate(`${to}/${item.id}`),
-                              });
-                            } else if (action.type === "HTTP_DELETE") {
-                              executeAction(action, {
-                                form: null,
-                                id: item.id,
-                                navigate: (to) => navigate(`${to}/${item.id}`),
-                              })
-                                .then(() => {
+                            executeAction(action, {
+                              form: null,
+                              id: item.id,
+                              navigate: (to) => {
+                                if (typeof to === "number") {
+                                  navigate(to);
+                                  return;
+                                }
+                                navigate(`${to}/${item.id}`);
+                              },
+                            })
+                              .then(() => {
+                                if (action.type === "HTTP_DELETE") {
                                   toast.success("Item deleted");
                                   if (dataSource) {
                                     getData(dataSource);
                                   }
-                                })
-                                .catch((err) => {
-                                  toast.error(err.message);
-                                });
-                            }
+                                }
+                              })
+                              .catch((err) => {
+                                toast.error(err.message);
+                              });
                           }}
                         >
                           {action.label}

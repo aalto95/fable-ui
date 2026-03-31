@@ -10,7 +10,9 @@ import { executeAction } from "@/lib/http-actions";
 import type { IAction } from "@/models/interfaces/component";
 
 function isNavigationOnly(actions: IAction[]): boolean {
-  return actions.every((a) => a.type === "GO_TO" || a.type === "HIDE");
+  return actions.every(
+    (a) => a.type === "GO_TO" || a.type === "GO_BACK" || a.type === "HIDE",
+  );
 }
 
 function requiresForm(actions: IAction[]): boolean {
@@ -53,7 +55,13 @@ export function useFormButtonActions(actions?: IAction[]) {
           await executeAction(action, {
             form,
             id,
-            navigate: (to) => navigate(to),
+            navigate: (to) => {
+              if (typeof to === "number") {
+                navigate(to);
+                return;
+              }
+              navigate(to);
+            },
           });
         }
         if (!isNavigationOnly(actions)) {
