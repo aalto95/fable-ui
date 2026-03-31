@@ -26,7 +26,7 @@
                 { "name": "text", "label": "Text", "type": "string" },
                 { "name": "dueDate", "label": "Due Date", "type": "date" }
               ],
-              "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+              "dataSource": "https://todo-api-af91.onrender.com/api/todo",
               "pageParam": "page",
               "limitParam": "limit",
               "defaultLimit": 10,
@@ -40,7 +40,7 @@
                   "type": "HTTP_DELETE",
                   "label": "Delete",
                   "variant": "destructive",
-                  "path": "https://bdui-mock-api.onrender.com/api/todo"
+                  "path": "https://todo-api-af91.onrender.com/api/todo"
                 }
               ]
             }
@@ -80,7 +80,7 @@
                 {
                   "type": "HTTP_POST",
                   "label": "Create",
-                  "path": "https://bdui-mock-api.onrender.com/api/todo"
+                  "path": "https://todo-api-af91.onrender.com/api/todo"
                 },
                 {
                   "type": "GO_TO",
@@ -100,7 +100,7 @@
         {
           "type": "form",
           "title": "Task Form",
-          "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+          "dataSource": "https://todo-api-af91.onrender.com/api/todo",
           "fields": [
             {
               "type": "input",
@@ -141,7 +141,7 @@
                     {
                       "type": "HTTP_PUT",
                       "label": "Update",
-                      "path": "https://bdui-mock-api.onrender.com/api/todo"
+                      "path": "https://todo-api-af91.onrender.com/api/todo"
                     },
                     {
                       "type": "GO_TO",
@@ -158,7 +158,7 @@
                     {
                       "type": "HTTP_DELETE",
                       "label": "Delete",
-                      "path": "https://bdui-mock-api.onrender.com/api/todo"
+                      "path": "https://todo-api-af91.onrender.com/api/todo"
                     },
                     {
                       "type": "GO_TO",
@@ -259,7 +259,7 @@
                     { "name": "text", "label": "Text", "type": "string" },
                     { "name": "dueDate", "label": "Due", "type": "date" }
                   ],
-                  "dataSource": "https://bdui-mock-api.onrender.com/api/todo",
+                  "dataSource": "https://todo-api-af91.onrender.com/api/todo",
                   "pageParam": "showcasePage",
                   "limitParam": "showcaseLimit",
                   "defaultLimit": 4,
@@ -324,7 +324,7 @@
                         {
                           "type": "HTTP_POST",
                           "label": "Create",
-                          "path": "https://bdui-mock-api.onrender.com/api/todo"
+                          "path": "https://todo-api-af91.onrender.com/api/todo"
                         },
                         {
                           "type": "GO_TO",
