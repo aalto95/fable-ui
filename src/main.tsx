@@ -1,4 +1,5 @@
 import "@/registry/register-defaults";
+import { ThemeProvider } from "next-themes";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";
@@ -8,8 +9,15 @@ const root = document.getElementById("root");
 
 if (root) {
   createRoot(root).render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>,
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ThemeProvider>,
   );
 }
