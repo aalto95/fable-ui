@@ -1,7 +1,11 @@
 import type { RefObject } from "react";
 import { useEffect, useState } from "react";
 
-import { hasNameField, unwrapRecordPayload } from "@/lib/form-utils";
+import {
+  hasNameField,
+  mergePrefillToField,
+  unwrapRecordPayload,
+} from "@/lib/form-utils";
 import { http } from "@/lib/http-client";
 import type { TComponentUnion } from "@/models/interfaces/component";
 
@@ -45,7 +49,7 @@ export function useFormPrefill({
         setInnerFields((prev) =>
           prev?.map((f) =>
             hasNameField(f) && data[f.name] !== undefined
-              ? { ...f, defaultValue: data[f.name] as string }
+              ? mergePrefillToField(f, data[f.name])
               : f,
           ),
         );

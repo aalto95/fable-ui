@@ -1,3 +1,5 @@
+import type { TComponentUnion } from "@/models/interfaces/component";
+
 export function dateOnlyToISO(value: string) {
   return value ? new Date(`${value}T00:00:00`).toISOString() : value;
 }
@@ -86,4 +88,39 @@ export function hasNameField(field: unknown): field is { name: string } {
     "name" in field &&
     typeof (field as { name: unknown }).name === "string"
   );
+}
+
+/** Applies a detail payload value to a form field with the correct prop shape per component type. */
+export function mergePrefillToField(
+  field: TComponentUnion,
+  value: unknown,
+): TComponentUnion {
+  if (!hasNameField(field) || value === undefined) {
+    return field;
+  }
+
+  switch (field.type) {
+    case "slider": {
+      const n = typeof value === "number" ? value : Number(value);
+      return Number.isNaN(n) ? field : { ...field, defaultValue: n };
+    }
+    case "checkbox": {
+      const checked =
+        typeof value === "boolean"
+          ? value
+          : value === "true" || value === true || value === 1;
+      return { ...field, checked };
+    }
+    case "input":
+    case "textarea":
+    case "datepicker":
+      return { ...field, defaultValue: String(value) };
+    case "select":
+      return {
+        ...field,
+        defaultValue: String(value),
+      } as TComponentUnion;
+    default:
+      return field;
+  }
 }
