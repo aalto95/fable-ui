@@ -127,6 +127,17 @@ export interface IPaginationComponent extends IBaseComponent<"pagination"> {
   defaultLimit?: number;
 }
 
+export interface ISliderComponent extends IBaseComponent<"slider"> {
+  name?: string;
+  label?: string;
+  required?: boolean;
+  valueSuffix?: string;
+  defaultValue?: number;
+  min?: number;
+  max?: number;
+  step?: number;
+}
+
 export interface IHStackComponent extends IBaseComponent<"h_stack"> {
   descendants?: TComponentUnion[];
 }
@@ -166,6 +177,7 @@ export type TComponentsWithoutDescendants =
   | ITableComponent
   | IAccordionComponent
   | IPaginationComponent
+  | ISliderComponent
   | IFormComponent;
 
 export type TComponentUnion =

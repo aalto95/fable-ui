@@ -12,6 +12,7 @@ export type TLeafComponent =
   | "subtitle"
   | "table"
   | "title"
-  | "textarea";
+  | "textarea"
+  | "slider";
 
 export type TComponent = TLayoutComponent | TLeafComponent;

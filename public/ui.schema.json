@@ -260,6 +260,26 @@
         "defaultLimit": { "type": "number" }
       }
     },
+    "sliderComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "slider" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "required": { "type": "boolean" },
+        "valueSuffix": { "type": "string" },
+        "defaultValue": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "step": { "type": "number" },
+        "value": {
+          "type": "array",
+          "items": { "type": "number" }
+        }
+      }
+    },
     "hStackComponent": {
       "type": "object",
       "additionalProperties": false,
@@ -326,6 +346,7 @@
         { "$ref": "#/$defs/tableComponent" },
         { "$ref": "#/$defs/accordionComponent" },
         { "$ref": "#/$defs/paginationComponent" },
+        { "$ref": "#/$defs/sliderComponent" },
         { "$ref": "#/$defs/hStackComponent" },
         { "$ref": "#/$defs/vStackComponent" },
         { "$ref": "#/$defs/formComponent" },

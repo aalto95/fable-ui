@@ -348,6 +348,16 @@
                       "checked": false
                     },
                     {
+                      "type": "slider",
+                      "name": "effort",
+                      "label": "Effort (range)",
+                      "min": 0,
+                      "max": 100,
+                      "step": 1,
+                      "defaultValue": 50,
+                      "valueSuffix": "%"
+                    },
+                    {
                       "type": "button",
                       "text": "Submit showcase form",
                       "expand": true,
