@@ -24,7 +24,8 @@ export const App: React.FC = () => {
   });
 
   useEffect(() => {
-    const schemaPath = import.meta.env.UI_SCHEMA_PATH ?? "/ui.json";
+    const schemaPath =
+      import.meta.env.UI_SCHEMA_PATH ?? "http://localhost:3000/ui";
     http
       .get<Schema>(schemaPath)
       .then((uiSchema) => {
