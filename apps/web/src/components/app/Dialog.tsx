@@ -8,7 +8,7 @@ import {
   BaseDialogHeader,
   BaseDialogTitle,
   useDialog,
-} from "@sdui/renderer";
+} from "manifest-ui";
 
 export const Dialog: React.FC = () => {
   const { config, setConfig } = useDialog();

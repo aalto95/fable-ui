@@ -1,7 +1,7 @@
 @import "tailwindcss";
 /* Paths are relative to this file: apps/web/src/index.css → repo root is ../../../ */
 @source "./**/*.{ts,tsx}";
-@source "../../../packages/sdui-renderer/src/**/*.{ts,tsx}";
+@source "../../../packages/manifest-ui/src/**/*.{ts,tsx}";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";

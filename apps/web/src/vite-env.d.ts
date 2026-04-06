@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  /** Path or absolute URL to the SDUI schema JSON (from `.env.development` / `.env.production`). */
+  /** Path or absolute URL to the UI manifest schema JSON (from `.env.development` / `.env.production`). */
   readonly UI_SCHEMA_PATH?: string;
 }
 

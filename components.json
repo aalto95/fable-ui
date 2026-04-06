@@ -11,11 +11,11 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "packages/sdui-renderer/src/components",
-    "utils": "packages/sdui-renderer/src/lib/utils",
-    "ui": "packages/sdui-renderer/src/components/ui",
-    "lib": "packages/sdui-renderer/src/lib",
-    "hooks": "packages/sdui-renderer/src/hooks"
+    "components": "packages/manifest-ui/src/components",
+    "utils": "packages/manifest-ui/src/lib/utils",
+    "ui": "packages/manifest-ui/src/components/ui",
+    "lib": "packages/manifest-ui/src/lib",
+    "hooks": "packages/manifest-ui/src/hooks"
   },
   "iconLibrary": "lucide",
   "rtl": false,

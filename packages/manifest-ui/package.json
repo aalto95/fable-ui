@@ -1,7 +1,7 @@
 {
-  "name": "@sdui/renderer",
+  "name": "manifest-ui",
   "version": "1.0.0",
-  "description": "Server-driven UI renderer for React: schema-driven pages, forms, and pluggable components.",
+  "description": "Manifest-driven UI renderer for React: schema-driven pages, forms, and pluggable components.",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

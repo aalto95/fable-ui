@@ -14,7 +14,7 @@
       "!dist",
       "!build",
       "!apps/web/src/index.css",
-      "!packages/sdui-renderer/src/components/ui/**/*.tsx"
+      "!packages/manifest-ui/src/components/ui/**/*.tsx"
     ]
   },
   "formatter": {
@@ -50,7 +50,7 @@
   },
   "overrides": [
     {
-      "includes": ["packages/sdui-renderer/src/registry/builtin-lazy-loaders.ts"],
+      "includes": ["packages/manifest-ui/src/registry/builtin-lazy-loaders.ts"],
       "linter": {
         "rules": {
           "suspicious": {

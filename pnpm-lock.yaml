@@ -14,12 +14,12 @@ importers:
 
   apps/web:
     dependencies:
-      '@sdui/renderer':
-        specifier: workspace:*
-        version: link:../../packages/sdui-renderer
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.4)
+      manifest-ui:
+        specifier: workspace:*
+        version: link:../../packages/manifest-ui
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -70,7 +70,7 @@ importers:
         specifier: ^8.0.1
         version: 8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@25.5.2)(jiti@2.6.1)
 
-  packages/sdui-renderer:
+  packages/manifest-ui:
     dependencies:
       class-variance-authority:
         specifier: ^0.7.1

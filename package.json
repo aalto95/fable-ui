@@ -1,14 +1,14 @@
 {
-  "name": "sdui-renderer-monorepo",
+  "name": "manifest-ui-monorepo",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter @sdui/renderer build && pnpm --filter sdui-renderer-web build",
-    "publish:renderer": "pnpm --filter @sdui/renderer publish",
-    "dev": "pnpm --filter sdui-renderer-web dev",
+    "build": "pnpm --filter manifest-ui build && pnpm --filter manifest-ui-web build",
+    "publish:manifest-ui": "pnpm --filter manifest-ui publish",
+    "dev": "pnpm --filter manifest-ui-web dev",
     "format": "biome format --write",
     "lint": "biome check",
-    "preview": "pnpm --filter sdui-renderer-web preview"
+    "preview": "pnpm --filter manifest-ui-web preview"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.8"

@@ -7,7 +7,7 @@ import type { Plugin } from "vite";
 import { defineConfig } from "vite";
 
 const workspaceRoot = fileURLToPath(new URL("../..", import.meta.url));
-const libSrc = resolve(workspaceRoot, "packages/sdui-renderer/src");
+const libSrc = resolve(workspaceRoot, "packages/manifest-ui/src");
 
 function resolveLibFile(subPath: string): string | undefined {
   const base = resolve(libSrc, subPath);
@@ -20,16 +20,16 @@ function resolveLibFile(subPath: string): string | undefined {
   return undefined;
 }
 
-function sduiLibAtAlias(): Plugin {
+function manifestUiLibAtAlias(): Plugin {
   return {
-    name: "sdui-lib-at-alias",
+    name: "manifest-ui-lib-at-alias",
     enforce: "pre",
     resolveId(id, importer) {
       if (!id.startsWith("@/") || !importer) {
         return null;
       }
       const normalized = importer.replace(/\\/g, "/");
-      if (!normalized.includes("/packages/sdui-renderer/")) {
+      if (!normalized.includes("/packages/manifest-ui/")) {
         return null;
       }
       return resolveLibFile(id.slice(2)) ?? null;
@@ -39,20 +39,20 @@ function sduiLibAtAlias(): Plugin {
 
 export default defineConfig({
   envPrefix: ["VITE_", "UI_"],
-  plugins: [sduiLibAtAlias(), react(), tailwindcss()],
+  plugins: [manifestUiLibAtAlias(), react(), tailwindcss()],
   resolve: {
     alias: {
-      "@sdui/renderer/register-async": resolve(
+      "manifest-ui/register-async": resolve(
         workspaceRoot,
-        "packages/sdui-renderer/src/register-async.ts",
+        "packages/manifest-ui/src/register-async.ts",
       ),
-      "@sdui/renderer/register": resolve(
+      "manifest-ui/register": resolve(
         workspaceRoot,
-        "packages/sdui-renderer/src/register.ts",
+        "packages/manifest-ui/src/register.ts",
       ),
-      "@sdui/renderer": resolve(
+      "manifest-ui": resolve(
         workspaceRoot,
-        "packages/sdui-renderer/src/index.ts",
+        "packages/manifest-ui/src/index.ts",
       ),
     },
   },

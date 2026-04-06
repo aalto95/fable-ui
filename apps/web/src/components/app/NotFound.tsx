@@ -5,7 +5,7 @@ import {
   BaseEmptyDescription,
   BaseEmptyHeader,
   BaseEmptyTitle,
-} from "@sdui/renderer";
+} from "manifest-ui";
 import { Link } from "react-router";
 
 export const NotFound = () => {
