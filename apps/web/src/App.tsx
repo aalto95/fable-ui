@@ -1,14 +1,17 @@
+import {
+  DebugProvider,
+  type DialogConfig,
+  DialogProvider,
+  http,
+  type IPage,
+  Renderer,
+} from "@sdui/renderer";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
-import { Dialog } from "@/components/app/Dialog";
-import { NotFound } from "@/components/app/NotFound";
-import { Toaster } from "@/components/app/Sonner";
-import { Renderer } from "@/components/core/Renderer";
-import { Shell } from "@/components/core/Shell";
-import { DebugProvider } from "@/contexts/debug";
-import { type DialogConfig, DialogProvider } from "@/contexts/dialog";
-import { http } from "@/lib/http-client";
-import type { IPage } from "@/models/interfaces/page";
+import { Dialog } from "./components/app/Dialog.tsx";
+import { NotFound } from "./components/app/NotFound.tsx";
+import { Toaster } from "./components/app/Sonner.tsx";
+import { Shell } from "./components/core/Shell.tsx";
 
 type Schema = {
   $schema: string;

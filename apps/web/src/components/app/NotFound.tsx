@@ -1,12 +1,12 @@
-import { Link } from "react-router";
-import { BaseButton } from "@/components/ui/button";
 import {
+  BaseButton,
   BaseEmpty,
   BaseEmptyContent,
   BaseEmptyDescription,
   BaseEmptyHeader,
   BaseEmptyTitle,
-} from "@/components/ui/empty";
+} from "@sdui/renderer";
+import { Link } from "react-router";
 
 export const NotFound = () => {
   return (

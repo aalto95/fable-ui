@@ -7,8 +7,8 @@ import {
   BaseDialogFooter,
   BaseDialogHeader,
   BaseDialogTitle,
-} from "@/components/ui/dialog";
-import { useDialog } from "@/contexts/dialog";
+  useDialog,
+} from "@sdui/renderer";
 
 export const Dialog: React.FC = () => {
   const { config, setConfig } = useDialog();
@@ -28,6 +28,8 @@ export const Dialog: React.FC = () => {
           {!config.hideCancel && (
             <BaseDialogCancel
               type="button"
+              variant="outline"
+              size="default"
               disabled={config.isPending}
               onClick={() => setConfig(null)}
             >
@@ -36,6 +38,8 @@ export const Dialog: React.FC = () => {
           )}
           <BaseDialogAction
             type="button"
+            variant="default"
+            size="default"
             autoFocus
             disabled={config.isPending}
             onClick={config.onConfirm}

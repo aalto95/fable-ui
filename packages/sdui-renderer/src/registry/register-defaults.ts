@@ -45,5 +45,3 @@ export function registerDefaultComponents(): void {
     .registerLeaf("textarea", Textarea)
     .registerLeaf("slider", Slider);
 }
-
-registerDefaultComponents();

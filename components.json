@@ -5,17 +5,17 @@
   "tsx": true,
   "tailwind": {
     "config": "",
-    "css": "src/index.css",
+    "css": "apps/web/src/index.css",
     "baseColor": "neutral",
     "cssVariables": true,
     "prefix": ""
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
-    "lib": "@/lib",
-    "hooks": "@/hooks"
+    "components": "packages/sdui-renderer/src/components",
+    "utils": "packages/sdui-renderer/src/lib/utils",
+    "ui": "packages/sdui-renderer/src/components/ui",
+    "lib": "packages/sdui-renderer/src/lib",
+    "hooks": "packages/sdui-renderer/src/hooks"
   },
   "iconLibrary": "lucide",
   "rtl": false,

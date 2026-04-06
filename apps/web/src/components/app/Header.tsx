@@ -1,7 +1,6 @@
+import { BaseButton, useDebug } from "@sdui/renderer";
 import { useTheme } from "next-themes";
 import { Link } from "react-router";
-import { BaseButton } from "@/components/ui/button";
-import { useDebug } from "@/contexts/debug";
 
 export const Header: React.FC = () => {
   const { enabled, setEnabled } = useDebug();
