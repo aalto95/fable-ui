@@ -19,79 +19,102 @@ type Props = TComponentUnion;
 
 const DEBUG_COLORS: Record<
   string,
-  { border: string; bg: string; text: string }
+  { outline: string; bg: string; text: string }
 > = {
   h_stack: {
-    border: "border-fuchsia-500",
+    outline: "outline-fuchsia-500",
     bg: "bg-fuchsia-500",
     text: "text-white",
   },
-  v_stack: { border: "border-sky-500", bg: "bg-sky-500", text: "text-white" },
+  v_stack: {
+    outline: "outline-sky-500",
+    bg: "bg-sky-500",
+    text: "text-white",
+  },
   card: {
-    border: "border-emerald-500",
+    outline: "outline-emerald-500",
     bg: "bg-emerald-500",
     text: "text-white",
   },
-  form: { border: "border-amber-500", bg: "bg-amber-500", text: "text-black" },
-  input: { border: "border-rose-500", bg: "bg-rose-500", text: "text-white" },
+  form: {
+    outline: "outline-amber-500",
+    bg: "bg-amber-500",
+    text: "text-black",
+  },
+  input: {
+    outline: "outline-rose-500",
+    bg: "bg-rose-500",
+    text: "text-white",
+  },
   textarea: {
-    border: "border-indigo-500",
+    outline: "outline-indigo-500",
     bg: "bg-indigo-500",
     text: "text-white",
   },
-  select: { border: "border-lime-500", bg: "bg-lime-500", text: "text-black" },
+  select: {
+    outline: "outline-lime-500",
+    bg: "bg-lime-500",
+    text: "text-black",
+  },
   subtitle: {
-    border: "border-zinc-500",
+    outline: "outline-zinc-500",
     bg: "bg-zinc-500",
     text: "text-white",
   },
   button: {
-    border: "border-orange-500",
+    outline: "outline-orange-500",
     bg: "bg-orange-500",
     text: "text-black",
   },
   title: {
-    border: "border-violet-500",
+    outline: "outline-violet-500",
     bg: "bg-violet-500",
     text: "text-white",
   },
   table: {
-    border: "border-cyan-600",
+    outline: "outline-cyan-600",
     bg: "bg-cyan-600",
     text: "text-white",
   },
   accordion: {
-    border: "border-teal-500",
+    outline: "outline-teal-500",
     bg: "bg-teal-500",
     text: "text-white",
   },
   pagination: {
-    border: "border-stone-500",
+    outline: "outline-stone-500",
     bg: "bg-stone-500",
     text: "text-white",
   },
   checkbox: {
-    border: "border-red-400",
+    outline: "outline-red-400",
     bg: "bg-red-400",
     text: "text-white",
   },
   datepicker: {
-    border: "border-blue-400",
+    outline: "outline-blue-400",
     bg: "bg-blue-400",
     text: "text-white",
   },
   slider: {
-    border: "border-yellow-500",
+    outline: "outline-yellow-500",
     bg: "bg-yellow-500",
     text: "text-black",
   },
 };
 
 const DEFAULT_DEBUG = {
-  border: "border-pink-500",
+  outline: "outline-pink-500",
   bg: "bg-pink-500",
   text: "text-white",
 };
+
+/** Root uses `flex-1` and must stay the flex item that grows/shrinks in `h_stack` / `v_stack`. */
+const DEBUG_FLEX_PASSTHROUGH_TYPES = new Set(["card", "form"]);
+
+function flexPassthroughForType(type: string): boolean {
+  return DEBUG_FLEX_PASSTHROUGH_TYPES.has(type);
+}
 
 function LazyFallback() {
   return (
@@ -118,7 +141,12 @@ export const Component: React.FC<Props> = memo((props) => {
         : null;
     const node = <Comp {...rest}>{children}</Comp>;
     return (
-      <DebugOutline enabled={enabled} label={type} palette={debug}>
+      <DebugOutline
+        enabled={enabled}
+        flexPassthrough={flexPassthroughForType(type)}
+        label={type}
+        palette={debug}
+      >
         {node}
       </DebugOutline>
     );
@@ -136,7 +164,12 @@ export const Component: React.FC<Props> = memo((props) => {
       </Suspense>
     );
     return (
-      <DebugOutline enabled={enabled} label={type} palette={debug}>
+      <DebugOutline
+        enabled={enabled}
+        flexPassthrough={flexPassthroughForType(type)}
+        label={type}
+        palette={debug}
+      >
         {node}
       </DebugOutline>
     );
@@ -149,7 +182,12 @@ export const Component: React.FC<Props> = memo((props) => {
     }
     const node = <Comp {...rest} />;
     return (
-      <DebugOutline enabled={enabled} label={type} palette={debug}>
+      <DebugOutline
+        enabled={enabled}
+        flexPassthrough={flexPassthroughForType(type)}
+        label={type}
+        palette={debug}
+      >
         {node}
       </DebugOutline>
     );
@@ -163,7 +201,12 @@ export const Component: React.FC<Props> = memo((props) => {
       </Suspense>
     );
     return (
-      <DebugOutline enabled={enabled} label={type} palette={debug}>
+      <DebugOutline
+        enabled={enabled}
+        flexPassthrough={flexPassthroughForType(type)}
+        label={type}
+        palette={debug}
+      >
         {node}
       </DebugOutline>
     );

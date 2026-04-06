@@ -18,7 +18,7 @@ export const Card: React.FC<PropsWithChildren<TCardProps>> = ({
   children,
 }) => {
   return (
-    <BaseCard className="flex-1 h-fit">
+    <BaseCard className="flex-1">
       {(title || description) && (
         <BaseCardHeader>
           {title && <BaseCardTitle>{title}</BaseCardTitle>}

@@ -1,7 +1,8 @@
 import { cn } from "@/lib/utils";
 
 export type DebugPalette = {
-  border: string;
+  /** Tailwind outline color, e.g. `outline-fuchsia-500` (outline does not change layout). */
+  outline: string;
   bg: string;
   text: string;
 };
@@ -11,6 +12,12 @@ type DebugOutlineProps = {
   label: string;
   palette: DebugPalette;
   children: React.ReactNode;
+  /**
+   * When the child uses `flex-1` to share space in a row/column (e.g. Card, Form),
+   * the wrapper must participate in the same flex contract or the child stops
+   * growing on the parent main axis.
+   */
+  flexPassthrough?: boolean;
 };
 
 export function DebugOutline({
@@ -18,28 +25,37 @@ export function DebugOutline({
   label,
   palette,
   children,
+  flexPassthrough = false,
 }: DebugOutlineProps) {
+  if (!enabled) {
+    return children;
+  }
+
   return (
     <div
       className={cn(
-        enabled
-          ? "relative rounded-md border-2 border-dashed p-2 w-full"
-          : "contents",
-        enabled && palette.border,
+        "group/sdui-debug relative z-0 box-border flex min-h-0 max-w-full flex-col self-stretch rounded-md p-1.5 outline outline-2 -outline-offset-1 outline-dashed group-hover/sdui-debug:z-[100]",
+        flexPassthrough && "min-w-0 flex-1",
+        palette.outline,
       )}
     >
-      {enabled && (
-        <div
-          className={cn(
-            "pointer-events-none absolute left-0 top-0 -translate-y-1/2 translate-x-1 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold tracking-wide shadow",
-            palette.bg,
-            palette.text,
-          )}
-        >
-          {label}
-        </div>
-      )}
-      {children}
+      <div
+        className={cn(
+          "pointer-events-auto mb-1 shrink-0 cursor-default self-start rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold tracking-wide shadow",
+          palette.bg,
+          palette.text,
+        )}
+      >
+        {label}
+      </div>
+      <div
+        className={cn(
+          "flex min-h-0 w-full min-w-0 flex-col",
+          flexPassthrough && "flex-1",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }
