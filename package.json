@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm --filter @sdui/renderer build && pnpm --filter sdui-renderer-web build",
+    "publish:renderer": "pnpm --filter @sdui/renderer publish",
     "dev": "pnpm --filter sdui-renderer-web dev",
     "format": "biome format --write",
     "lint": "biome check",
