@@ -1,7 +1,19 @@
 {
   "name": "fable-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fable UI: schema-driven React renderer for pages, forms, and pluggable components.",
+  "keywords": [
+    "react",
+    "typescript",
+    "ui",
+    "schema",
+    "renderer",
+    "forms",
+    "component-registry",
+    "fable-ui",
+    "declarative-ui",
+    "layout"
+  ],
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -9,7 +21,8 @@
   "type": "module",
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",

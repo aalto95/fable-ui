@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# fable-ui
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Monorepo for **fable-ui**, a schema-driven React library that renders pages and forms from structured definitions, with a pluggable component registry and lazy-loaded built-ins.
 
-Currently, two official plugins are available:
+## Packages
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+| Package | Description |
+| --- | --- |
+| [`fable-ui`](packages/fable-ui) | Publishable library: `Renderer`, `Component`, registry, layout components, HTTP helpers, and types for pages and components. **Docs:** [packages/fable-ui/README.md](packages/fable-ui/README.md). |
+| [`fable-ui-web`](apps/web) | Example Vite + React app that consumes the workspace package. |
 
-## React Compiler
+## Requirements
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- [Node.js](https://nodejs.org/) (LTS recommended)
+- [pnpm](https://pnpm.io/)
 
-## Expanding the ESLint configuration
+## Scripts (repository root)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Command | Purpose |
+| --- | --- |
+| `pnpm dev` | Start the example app (`fable-ui-web`) in development mode. |
+| `pnpm build` | Build the library and the web app. |
+| `pnpm lint` | Run Biome checks. |
+| `pnpm format` | Format with Biome. |
+| `pnpm preview` | Preview the built web app. |
+| `pnpm publish:fable-ui` | Publish the `fable-ui` package to npm (after `build` and versioning as needed). |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Using the library
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Install from npm (when published) or depend on the workspace package as in `fable-ui-web`:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```json
+{
+  "dependencies": {
+    "fable-ui": "workspace:*"
+  }
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Peer dependencies: React 19, React DOM, React Router 7, and Sonner (see `packages/fable-ui/package.json`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## License
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+MIT (see package metadata in `packages/fable-ui`).
