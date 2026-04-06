@@ -1,5 +1,5 @@
 import { registerDefaultComponents } from "@sdui/renderer";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, type ThemeProviderProps } from "next-themes";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";
@@ -10,16 +10,18 @@ registerDefaultComponents();
 const root = document.getElementById("root");
 
 if (root) {
-  createRoot(root).render(
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+  // next-themes@0.4.6: PropsWithChildren + React 19 JSX types disagree (TS2322).
+  const themeProps = {
+    attribute: "class" as const,
+    defaultTheme: "system",
+    enableSystem: true,
+    disableTransitionOnChange: true,
+    children: (
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>,
-  );
+    ),
+  } as ThemeProviderProps;
+
+  createRoot(root).render(<ThemeProvider {...themeProps} />);
 }
