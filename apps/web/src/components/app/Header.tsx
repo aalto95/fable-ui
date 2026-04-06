@@ -1,4 +1,4 @@
-import { BaseButton, useDebug } from "manifest-ui";
+import { BaseButton, useDebug } from "fable-ui";
 import { useTheme } from "next-themes";
 import { Link } from "react-router";
 
@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
   return (
     <header className="w-full border-b border-border px-4 py-3 sm:py-4">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-xl font-bold sm:text-2xl">Manifest UI</h1>
+        <h1 className="text-xl font-bold sm:text-2xl">Fable UI</h1>
         <nav className="flex flex-wrap items-center gap-3 sm:gap-4">
           <Link to="/">Home</Link>
           <Link to="/showcase">Showcase</Link>

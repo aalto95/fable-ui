@@ -7,7 +7,7 @@ import type { Plugin } from "vite";
 import { defineConfig } from "vite";
 
 const workspaceRoot = fileURLToPath(new URL("../..", import.meta.url));
-const libSrc = resolve(workspaceRoot, "packages/manifest-ui/src");
+const libSrc = resolve(workspaceRoot, "packages/fable-ui/src");
 
 function resolveLibFile(subPath: string): string | undefined {
   const base = resolve(libSrc, subPath);
@@ -20,16 +20,16 @@ function resolveLibFile(subPath: string): string | undefined {
   return undefined;
 }
 
-function manifestUiLibAtAlias(): Plugin {
+function fableUiLibAtAlias(): Plugin {
   return {
-    name: "manifest-ui-lib-at-alias",
+    name: "fable-ui-lib-at-alias",
     enforce: "pre",
     resolveId(id, importer) {
       if (!id.startsWith("@/") || !importer) {
         return null;
       }
       const normalized = importer.replace(/\\/g, "/");
-      if (!normalized.includes("/packages/manifest-ui/")) {
+      if (!normalized.includes("/packages/fable-ui/")) {
         return null;
       }
       return resolveLibFile(id.slice(2)) ?? null;
@@ -39,20 +39,20 @@ function manifestUiLibAtAlias(): Plugin {
 
 export default defineConfig({
   envPrefix: ["VITE_", "UI_"],
-  plugins: [manifestUiLibAtAlias(), react(), tailwindcss()],
+  plugins: [fableUiLibAtAlias(), react(), tailwindcss()],
   resolve: {
     alias: {
-      "manifest-ui/register-async": resolve(
+      "fable-ui/register-async": resolve(
         workspaceRoot,
-        "packages/manifest-ui/src/register-async.ts",
+        "packages/fable-ui/src/register-async.ts",
       ),
-      "manifest-ui/register": resolve(
+      "fable-ui/register": resolve(
         workspaceRoot,
-        "packages/manifest-ui/src/register.ts",
+        "packages/fable-ui/src/register.ts",
       ),
-      "manifest-ui": resolve(
+      "fable-ui": resolve(
         workspaceRoot,
-        "packages/manifest-ui/src/index.ts",
+        "packages/fable-ui/src/index.ts",
       ),
     },
   },

@@ -1,14 +1,14 @@
 {
-  "name": "manifest-ui-monorepo",
+  "name": "fable-ui-monorepo",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter manifest-ui build && pnpm --filter manifest-ui-web build",
-    "publish:manifest-ui": "pnpm --filter manifest-ui publish",
-    "dev": "pnpm --filter manifest-ui-web dev",
+    "build": "pnpm --filter fable-ui build && pnpm --filter fable-ui-web build",
+    "publish:fable-ui": "pnpm --filter fable-ui publish",
+    "dev": "pnpm --filter fable-ui-web dev",
     "format": "biome format --write",
     "lint": "biome check",
-    "preview": "pnpm --filter manifest-ui-web preview"
+    "preview": "pnpm --filter fable-ui-web preview"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.8"

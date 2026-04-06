@@ -3,7 +3,7 @@ import type { ElementType } from "react";
 export type RegisteredComponent = ElementType;
 
 /**
- * Pluggable registry for manifest-driven UI component kinds. Layout components receive
+ * Pluggable registry for Fable UI component kinds. Layout components receive
  * recursive `descendants`; leaf components render props only.
  */
 export class ComponentRegistry {

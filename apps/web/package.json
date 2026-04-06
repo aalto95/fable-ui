@@ -1,5 +1,5 @@
 {
-  "name": "manifest-ui-web",
+  "name": "fable-ui-web",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "manifest-ui": "workspace:*",
+    "fable-ui": "workspace:*",
     "lucide-react": "^0.577.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.4",

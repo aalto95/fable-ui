@@ -34,7 +34,7 @@ export function DebugOutline({
   return (
     <div
       className={cn(
-        "group/manifest-ui-debug relative z-0 box-border flex min-h-0 max-w-full flex-col self-stretch rounded-md p-1.5 outline outline-2 -outline-offset-1 outline-dashed group-hover/manifest-ui-debug:z-[100]",
+        "group/fable-ui-debug relative z-0 box-border flex min-h-0 max-w-full flex-col self-stretch rounded-md p-1.5 outline outline-2 -outline-offset-1 outline-dashed group-hover/fable-ui-debug:z-[100]",
         flexPassthrough && "min-w-0 flex-1",
         palette.outline,
       )}

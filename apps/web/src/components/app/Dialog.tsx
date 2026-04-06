@@ -8,7 +8,7 @@ import {
   BaseDialogHeader,
   BaseDialogTitle,
   useDialog,
-} from "manifest-ui";
+} from "fable-ui";
 
 export const Dialog: React.FC = () => {
   const { config, setConfig } = useDialog();

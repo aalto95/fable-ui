@@ -5,7 +5,7 @@ import {
   http,
   type IPage,
   Renderer,
-} from "manifest-ui";
+} from "fable-ui";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Dialog } from "./components/app/Dialog.tsx";
@@ -22,7 +22,7 @@ export const App: React.FC = () => {
   const [pages, setPages] = useState<IPage[]>();
   const [dialogConfig, setDialogConfig] = useState<DialogConfig>(null);
   const [debugEnabled, setDebugEnabled] = useState<boolean>(() => {
-    const raw = localStorage.getItem("manifestUi.debug.enabled");
+    const raw = localStorage.getItem("fableUi.debug.enabled");
     return raw === "true";
   });
 
@@ -40,7 +40,7 @@ export const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("manifestUi.debug.enabled", String(debugEnabled));
+    localStorage.setItem("fableUi.debug.enabled", String(debugEnabled));
   }, [debugEnabled]);
 
   return (

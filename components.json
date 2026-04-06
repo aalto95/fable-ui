@@ -11,11 +11,11 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "packages/manifest-ui/src/components",
-    "utils": "packages/manifest-ui/src/lib/utils",
-    "ui": "packages/manifest-ui/src/components/ui",
-    "lib": "packages/manifest-ui/src/lib",
-    "hooks": "packages/manifest-ui/src/hooks"
+    "components": "packages/fable-ui/src/components",
+    "utils": "packages/fable-ui/src/lib/utils",
+    "ui": "packages/fable-ui/src/components/ui",
+    "lib": "packages/fable-ui/src/lib",
+    "hooks": "packages/fable-ui/src/hooks"
   },
   "iconLibrary": "lucide",
   "rtl": false,

@@ -1,7 +1,7 @@
 {
-  "name": "manifest-ui",
+  "name": "fable-ui",
   "version": "1.0.0",
-  "description": "Manifest-driven UI renderer for React: schema-driven pages, forms, and pluggable components.",
+  "description": "Fable UI: schema-driven React renderer for pages, forms, and pluggable components.",
   "license": "MIT",
   "publishConfig": {
     "access": "public"

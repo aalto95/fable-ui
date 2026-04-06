@@ -24,7 +24,7 @@ export const Select: React.FC<TSelectProps> = ({
       <BaseSelect
         name={name}
         required={required}
-        data-manifest-ui-label={label ?? name}
+        data-fable-ui-label={label ?? name}
         className={cn("w-full")}
         {...(rest as React.SelectHTMLAttributes<HTMLSelectElement> & {
           size?: "sm" | "default";

@@ -56,7 +56,7 @@ export function validateRequired(form: HTMLFormElement, formData: FormData) {
       return {
         node,
         label:
-          node.getAttribute("data-manifest-ui-label") ||
+          node.getAttribute("data-fable-ui-label") ||
           (node as HTMLInputElement).placeholder ||
           node.getAttribute("aria-label") ||
           name,

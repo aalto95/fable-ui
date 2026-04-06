@@ -5,7 +5,7 @@ import {
   BaseEmptyDescription,
   BaseEmptyHeader,
   BaseEmptyTitle,
-} from "manifest-ui";
+} from "fable-ui";
 import { Link } from "react-router";
 
 export const NotFound = () => {
