@@ -60,9 +60,13 @@ export type {
   TLayoutComponent,
   TLeafComponent,
 } from "./models/types/component";
-export type { RegisteredComponent } from "./registry";
+export {
+  isBuiltinLayoutType,
+  isBuiltinLeafType,
+  preloadBuiltinComponent,
+} from "./registry/builtin-lazy-loaders";
+export type { RegisteredComponent } from "./registry/component-registry";
 export {
   ComponentRegistry,
   componentRegistry,
-  registerDefaultComponents,
-} from "./registry";
+} from "./registry/component-registry";

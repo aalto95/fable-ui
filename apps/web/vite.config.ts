@@ -42,6 +42,14 @@ export default defineConfig({
   plugins: [sduiLibAtAlias(), react(), tailwindcss()],
   resolve: {
     alias: {
+      "@sdui/renderer/register-async": resolve(
+        workspaceRoot,
+        "packages/sdui-renderer/src/register-async.ts",
+      ),
+      "@sdui/renderer/register": resolve(
+        workspaceRoot,
+        "packages/sdui-renderer/src/register.ts",
+      ),
       "@sdui/renderer": resolve(
         workspaceRoot,
         "packages/sdui-renderer/src/index.ts",

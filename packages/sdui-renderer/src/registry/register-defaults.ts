@@ -19,7 +19,13 @@ import { componentRegistry } from "./component-registry";
 let registered = false;
 
 /**
- * Registers built-in layout and leaf components. Safe to call multiple times.
+ * Registers built-in layout and leaf components synchronously on the registry.
+ * Safe to call multiple times.
+ *
+ * By default, built-ins are **not** required: `Component` lazy-loads each
+ * built-in kind on first use. Use this when you want synchronous rendering
+ * (no `Suspense` fallback) or to replace a built-in via the registry before
+ * the lazy path runs.
  */
 export function registerDefaultComponents(): void {
   if (registered) return;

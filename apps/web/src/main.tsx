@@ -1,11 +1,8 @@
-import { registerDefaultComponents } from "@sdui/renderer";
 import { ThemeProvider, type ThemeProviderProps } from "next-themes";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";
 import { App } from "./App.tsx";
-
-registerDefaultComponents();
 
 const root = document.getElementById("root");
 
