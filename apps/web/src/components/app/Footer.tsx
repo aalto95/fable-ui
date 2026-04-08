@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
           <span className="font-bold">Fable UI</span> by aalto95
         </p>
         <p className="text-muted-foreground">
-          <span className="font-bold">Version</span> 1.0.0
+          <span className="font-bold">Version</span> 1.1.0
         </p>
         <p className="text-muted-foreground">
           <span className="font-bold">License</span> MIT
