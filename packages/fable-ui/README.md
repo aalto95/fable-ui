@@ -39,6 +39,8 @@ export function Page() {
 
 Load schema from your API or static JSON the same way: map each entry to a route and pass `page.ui` into `Renderer`.
 
+**Full built-in reference (props, actions, behavior):** [COMPONENTS.md](./COMPONENTS.md).
+
 ## Registering built-ins
 
 By default, built-in kinds are **lazy-loaded** on first use. To register all built-ins **synchronously** (e.g. to avoid Suspense fallbacks or to override a built-in before lazy resolution), call:
@@ -57,11 +59,15 @@ import { registerDefaultComponentsAsync } from "fable-ui/register-async";
 await registerDefaultComponentsAsync();
 ```
 
-### Built-in kinds
+### Built-in kinds (summary)
 
 | Layout | Leaf |
 | --- | --- |
-| `card`, `h_stack`, `v_stack` | `accordion`, `button`, `checkbox`, `datepicker`, `form`, `input`, `pagination`, `select`, `subtitle`, `table`, `title`, `textarea`, `slider` |
+| `card`, `h_stack`, `v_stack` | `accordion`, `button`, `checkbox`, `datepicker`, `form`, `input`, `markdown`, `pagination`, `select`, `subtitle`, `table`, `title`, `textarea`, `slider` |
+
+See **[COMPONENTS.md](./COMPONENTS.md)** for every field, action type, and behavioral note.
+
+The **`markdown`** leaf renders GitHub Flavored Markdown from the `content` string (`remark-gfm` + HTML sanitization). Use for docs or rich copy inside layouts.
 
 ## Custom components
 
@@ -75,7 +81,7 @@ componentRegistry.registerLeaf("my_widget", MyWidget);
 
 ## Exports
 
-- **Main** (`fable-ui`): `Renderer`, `Component`, primitives, `componentRegistry`, HTTP helpers (`http`, `executeAction`), dialog/debug providers, and TypeScript types (`IPage`, component unions, etc.).
+- **Main** (`fable-ui`): `Renderer`, `Component`, `Markdown`, primitives, `componentRegistry`, HTTP helpers (`http`, `executeAction`), dialog/debug providers, and TypeScript types (`IPage`, component unions, etc.).
 - **`fable-ui/register`**: `registerDefaultComponents`.
 - **`fable-ui/register-async`**: `registerDefaultComponentsAsync`.
 

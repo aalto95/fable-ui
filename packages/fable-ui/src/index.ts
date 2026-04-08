@@ -1,6 +1,8 @@
 export { Component } from "./components/core/Component";
 export { DebugOutline } from "./components/core/DebugOutline";
 export { Renderer } from "./components/core/Renderer";
+export type { TMarkdownProps } from "./components/layout/Markdown";
+export { Markdown } from "./components/layout/Markdown";
 export { BaseButton } from "./components/ui/button";
 export {
   BaseDialog,
@@ -44,6 +46,7 @@ export type {
   IFormComponent,
   IHStackComponent,
   IInputComponent,
+  IMarkdownComponent,
   IPaginationComponent,
   ISelectComponent,
   ISliderComponent,

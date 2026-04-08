@@ -7,6 +7,7 @@ export type TLeafComponent =
   | "datepicker"
   | "form"
   | "input"
+  | "markdown"
   | "pagination"
   | "select"
   | "subtitle"

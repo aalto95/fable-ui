@@ -21,6 +21,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     { Form },
     { HorizontalStack },
     { Input },
+    { Markdown },
     { Pagination },
     { Select },
     { Slider },
@@ -38,6 +39,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     import("../components/layout/Form"),
     import("../components/layout/HorizontalStack"),
     import("../components/layout/Input"),
+    import("../components/layout/Markdown"),
     import("../components/layout/Pagination"),
     import("../components/layout/Select"),
     import("../components/layout/Slider"),
@@ -60,6 +62,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     .registerLeaf("datepicker", Datepicker)
     .registerLeaf("form", Form)
     .registerLeaf("input", Input)
+    .registerLeaf("markdown", Markdown)
     .registerLeaf("pagination", Pagination)
     .registerLeaf("select", Select)
     .registerLeaf("subtitle", Subtitle)

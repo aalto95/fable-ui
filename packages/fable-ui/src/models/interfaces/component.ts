@@ -102,6 +102,14 @@ export interface ISubtitleComponent extends IBaseComponent<"subtitle"> {
   hidden?: boolean;
 }
 
+export interface IMarkdownComponent extends IBaseComponent<"markdown"> {
+  /** Markdown source (GitHub Flavored Markdown). Sanitized before render. */
+  content?: string;
+  hidden?: boolean;
+  /** Extra classes on the wrapper (Tailwind-friendly). */
+  className?: string;
+}
+
 export interface ITableComponent extends IBaseComponent<"table"> {
   heads?: { name: string; label: string; type: "string" | "date" }[];
   data?: any[];
@@ -171,6 +179,7 @@ export type TComponentsWithoutDescendants =
   | ITextareaComponent
   | ITitleComponent
   | ISubtitleComponent
+  | IMarkdownComponent
   | ISelectComponent
   | IDatepickerComponent
   | ICheckboxComponent

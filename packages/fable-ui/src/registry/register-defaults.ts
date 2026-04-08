@@ -6,6 +6,7 @@ import { Datepicker } from "@/components/layout/Datepicker";
 import { Form } from "@/components/layout/Form";
 import { HorizontalStack } from "@/components/layout/HorizontalStack";
 import { Input } from "@/components/layout/Input";
+import { Markdown } from "@/components/layout/Markdown";
 import { Pagination } from "@/components/layout/Pagination";
 import { Select } from "@/components/layout/Select";
 import { Slider } from "@/components/layout/Slider";
@@ -43,6 +44,7 @@ export function registerDefaultComponents(): void {
     .registerLeaf("datepicker", Datepicker)
     .registerLeaf("form", Form)
     .registerLeaf("input", Input)
+    .registerLeaf("markdown", Markdown)
     .registerLeaf("pagination", Pagination)
     .registerLeaf("select", Select)
     .registerLeaf("subtitle", Subtitle)

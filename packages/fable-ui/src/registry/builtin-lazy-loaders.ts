@@ -59,6 +59,10 @@ const BUILTIN_LEAF_LOADERS = {
     })),
   title: () =>
     import("@/components/layout/Title").then((m) => ({ default: m.Title })),
+  markdown: () =>
+    import("@/components/layout/Markdown").then((m) => ({
+      default: m.Markdown,
+    })),
 } as const satisfies Record<TLeafComponent, BuiltinLoader>;
 
 const layoutLazyCache = new Map<

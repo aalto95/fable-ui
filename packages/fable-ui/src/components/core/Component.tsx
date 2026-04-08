@@ -101,6 +101,11 @@ const DEBUG_COLORS: Record<
     bg: "bg-yellow-500",
     text: "text-black",
   },
+  markdown: {
+    outline: "outline-slate-500",
+    bg: "bg-slate-500",
+    text: "text-white",
+  },
 };
 
 const DEFAULT_DEBUG = {
