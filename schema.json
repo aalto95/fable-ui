@@ -1,0 +1,393 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SDUI Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["ui"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "origins": {
+      "type": "array",
+      "description": "Browser origins allowed to call this orchestrator (CORS), merged with server defaults. Example: https://my-app.example.com",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "ui": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/page"
+      }
+    }
+  },
+  "$defs": {
+    "variant": {
+      "type": "string",
+      "enum": [
+        "default",
+        "outline",
+        "secondary",
+        "ghost",
+        "destructive",
+        "link"
+      ]
+    },
+    "actionType": {
+      "type": "string",
+      "enum": [
+        "HTTP_GET",
+        "HTTP_POST",
+        "HTTP_PUT",
+        "HTTP_PATCH",
+        "HTTP_DELETE",
+        "GO_TO",
+        "GO_BACK",
+        "HIDE"
+      ]
+    },
+    "actionDialogConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "cancelText": { "type": "string" },
+        "confirmText": { "type": "string" },
+        "hideCancel": { "type": "boolean" }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "label"],
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/actionType"
+        },
+        "label": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "dialogConfig": {
+          "$ref": "#/$defs/actionDialogConfig"
+        },
+        "variant": {
+          "$ref": "#/$defs/variant"
+        }
+      }
+    },
+    "tableHeadType": {
+      "type": "string",
+      "enum": ["string", "date"]
+    },
+    "tableHead": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "label", "type"],
+      "properties": {
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "type": { "$ref": "#/$defs/tableHeadType" }
+      }
+    },
+    "selectOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "string" }
+      }
+    },
+    "accordionItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "title", "text"],
+      "properties": {
+        "name": { "type": "string" },
+        "title": { "type": "string" },
+        "text": { "type": "string" }
+      }
+    },
+    "buttonComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "button" },
+        "text": { "type": "string" },
+        "variant": { "$ref": "#/$defs/variant" },
+        "size": {
+          "type": "string",
+          "enum": ["default", "sm", "lg", "icon"]
+        },
+        "expand": { "type": "boolean" },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/action" }
+        }
+      }
+    },
+    "inputComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "input" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "required": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "textareaComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "textarea" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "required": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "datepickerComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "datepicker" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "defaultValue": { "type": "string" },
+        "required": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "selectComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "select" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "options": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/selectOption" }
+        },
+        "required": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "checkboxComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "checkbox" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "required": { "type": "boolean" },
+        "checked": { "type": "boolean" }
+      }
+    },
+    "titleComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "title" },
+        "text": { "type": "string" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "subtitleComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "subtitle" },
+        "text": { "type": "string" },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "markdownComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "markdown" },
+        "content": {
+          "type": "string",
+          "description": "GitHub Flavored Markdown source; rendered with sanitization (no raw HTML)."
+        },
+        "className": {
+          "type": "string",
+          "description": "Optional extra CSS classes on the wrapper element (e.g. Tailwind)."
+        },
+        "hidden": { "type": "boolean" }
+      }
+    },
+    "tableComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "table" },
+        "heads": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tableHead" }
+        },
+        "data": {
+          "type": "array"
+        },
+        "dataSource": { "type": "string" },
+        "pageParam": { "type": "string" },
+        "limitParam": { "type": "string" },
+        "defaultLimit": { "type": "number" },
+        "actions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/action" }
+        }
+      }
+    },
+    "accordionComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "accordion" },
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/accordionItem" }
+        }
+      }
+    },
+    "paginationComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "pages"],
+      "properties": {
+        "type": { "const": "pagination" },
+        "pages": { "type": "number" },
+        "pageParam": { "type": "string" },
+        "limitParam": { "type": "string" },
+        "defaultLimit": { "type": "number" }
+      }
+    },
+    "sliderComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "slider" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "required": { "type": "boolean" },
+        "valueSuffix": { "type": "string" },
+        "defaultValue": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "step": { "type": "number" }
+      }
+    },
+    "hStackComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "h_stack" },
+        "descendants": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/componentUnion" }
+        }
+      }
+    },
+    "vStackComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "v_stack" },
+        "descendants": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/componentUnion" }
+        }
+      }
+    },
+    "formComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "form" },
+        "title": { "type": "string" },
+        "dataSource": { "type": "string" },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/componentUnion" }
+        }
+      }
+    },
+    "cardComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "card" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "footerText": { "type": "string" },
+        "descendants": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/componentUnion" }
+        }
+      }
+    },
+    "componentUnion": {
+      "oneOf": [
+        { "$ref": "#/$defs/buttonComponent" },
+        { "$ref": "#/$defs/inputComponent" },
+        { "$ref": "#/$defs/textareaComponent" },
+        { "$ref": "#/$defs/selectComponent" },
+        { "$ref": "#/$defs/datepickerComponent" },
+        { "$ref": "#/$defs/checkboxComponent" },
+        { "$ref": "#/$defs/titleComponent" },
+        { "$ref": "#/$defs/subtitleComponent" },
+        { "$ref": "#/$defs/markdownComponent" },
+        { "$ref": "#/$defs/tableComponent" },
+        { "$ref": "#/$defs/accordionComponent" },
+        { "$ref": "#/$defs/paginationComponent" },
+        { "$ref": "#/$defs/sliderComponent" },
+        { "$ref": "#/$defs/hStackComponent" },
+        { "$ref": "#/$defs/vStackComponent" },
+        { "$ref": "#/$defs/formComponent" },
+        { "$ref": "#/$defs/cardComponent" }
+      ]
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "ui"],
+      "properties": {
+        "route": { "type": "string" },
+        "name": { "type": "string" },
+        "ui": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/componentUnion"
+          }
+        }
+      }
+    }
+  }
+}
