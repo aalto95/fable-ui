@@ -4,9 +4,10 @@ import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import type { Plugin } from "vite";
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 
 const workspaceRoot = fileURLToPath(new URL("../..", import.meta.url));
+const webAppRoot = fileURLToPath(new URL(".", import.meta.url));
 const libSrc = resolve(workspaceRoot, "packages/fable-ui/src");
 
 function resolveLibFile(subPath: string): string | undefined {
@@ -37,23 +38,36 @@ function fableUiLibAtAlias(): Plugin {
   };
 }
 
-export default defineConfig({
-  envPrefix: ["VITE_", "UI_"],
-  plugins: [fableUiLibAtAlias(), react(), tailwindcss()],
-  resolve: {
-    alias: {
-      "fable-ui/register-async": resolve(
-        workspaceRoot,
-        "packages/fable-ui/src/register-async.ts",
-      ),
-      "fable-ui/register": resolve(
-        workspaceRoot,
-        "packages/fable-ui/src/register.ts",
-      ),
-      "fable-ui": resolve(
-        workspaceRoot,
-        "packages/fable-ui/src/index.ts",
-      ),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, webAppRoot, "");
+  const siteUrl =
+    (env.VITE_SITE_URL ?? "").replace(/\/$/, "") || "http://localhost:5173";
+
+  return {
+    envPrefix: ["VITE_", "UI_"],
+    plugins: [
+      fableUiLibAtAlias(),
+      react(),
+      tailwindcss(),
+      {
+        name: "html-meta-site-url",
+        transformIndexHtml(html) {
+          return html.replaceAll("%SITE_URL%", siteUrl);
+        },
+      },
+    ],
+    resolve: {
+      alias: {
+        "fable-ui/register-async": resolve(
+          workspaceRoot,
+          "packages/fable-ui/src/register-async.ts",
+        ),
+        "fable-ui/register": resolve(
+          workspaceRoot,
+          "packages/fable-ui/src/register.ts",
+        ),
+        "fable-ui": resolve(workspaceRoot, "packages/fable-ui/src/index.ts"),
+      },
     },
-  },
+  };
 });
