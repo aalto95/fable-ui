@@ -41,6 +41,19 @@ Load schema from your API or static JSON the same way: map each entry to a route
 
 **Full built-in reference (props, actions, behavior):** [COMPONENTS.md](./COMPONENTS.md).
 
+## JSON Schema
+
+The npm package includes **[schema.json](./schema.json)** (draft 2020-12): it describes the top-level SDUI document (`ui`: array of pages with `route` and component trees) and every built-in `type`. Use it in editors for completion and validation, or in CI with a JSON Schema validator.
+
+```json
+{
+  "$schema": "./node_modules/fable-ui/schema.json",
+  "ui": []
+}
+```
+
+The package export **`fable-ui/schema.json`** resolves to the same file (for bundlers and `import`/`fs` resolution).
+
 ## Registering built-ins
 
 By default, built-in kinds are **lazy-loaded** on first use. To register all built-ins **synchronously** (e.g. to avoid Suspense fallbacks or to override a built-in before lazy resolution), call:

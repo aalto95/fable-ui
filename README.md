@@ -6,7 +6,7 @@ Monorepo for **fable-ui**, a schema-driven React library that renders pages and 
 
 | Package | Description |
 | --- | --- |
-| [`fable-ui`](packages/fable-ui) | Publishable library: `Renderer`, `Component`, registry, layout components, HTTP helpers, and types for pages and components. **Docs:** [README](packages/fable-ui/README.md) · **[Component reference](packages/fable-ui/COMPONENTS.md)** (built-in kinds, props, actions). |
+| [`fable-ui`](packages/fable-ui) | Publishable library: `Renderer`, `Component`, registry, layout components, HTTP helpers, and types for pages and components. **Docs:** [README](packages/fable-ui/README.md) · **[Component reference](packages/fable-ui/COMPONENTS.md)** · **[schema.json](packages/fable-ui/schema.json)** (JSON Schema for SDUI documents). |
 | [`fable-ui-web`](apps/web) | Example Vite + React app that consumes the workspace package. |
 
 ## Requirements

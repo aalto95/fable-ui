@@ -1,5 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://unpkg.com/fable-ui/schema.json",
   "title": "SDUI Schema",
   "type": "object",
   "additionalProperties": false,
