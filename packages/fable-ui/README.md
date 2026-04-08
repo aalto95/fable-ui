@@ -98,6 +98,10 @@ componentRegistry.registerLeaf("my_widget", MyWidget);
 - **`fable-ui/register`**: `registerDefaultComponents`.
 - **`fable-ui/register-async`**: `registerDefaultComponentsAsync`.
 
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md).
+
 ## License
 
 MIT

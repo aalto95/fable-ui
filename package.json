@@ -11,6 +11,6 @@
     "preview": "pnpm --filter fable-ui-web preview"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.8"
+    "@biomejs/biome": "^2.4.10"
   }
 }
