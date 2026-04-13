@@ -1,41 +1,37 @@
 import type { RefObject } from "react";
 import { useEffect, useState } from "react";
 
-import {
-  hasNameField,
-  mergePrefillToField,
-  unwrapRecordPayload,
-} from "@/lib/form-utils";
+import { mergePrefillIntoDescendants, unwrapRecordPayload } from "@/lib/form-utils";
 import { http } from "@/lib/http-client";
 import type { TComponentUnion } from "@/models/interfaces/component";
 
 type UseFormPrefillArgs = {
   dataSource?: string;
   id?: string;
-  fields?: TComponentUnion[];
+  descendants?: TComponentUnion[];
   formRef: RefObject<HTMLFormElement | null>;
 };
 
 export function useFormPrefill({
   dataSource,
   id,
-  fields,
+  descendants,
   formRef,
 }: UseFormPrefillArgs) {
-  const [innerFields, setInnerFields] = useState(fields);
+  const [innerDescendants, setInnerDescendants] = useState(descendants);
   const [isLoading, setIsLoading] = useState(false);
 
   const baseUrl = dataSource;
 
   useEffect(() => {
-    if (!baseUrl || !id || !fields) {
-      setInnerFields(fields);
+    if (!baseUrl || !id || !descendants) {
+      setInnerDescendants(descendants);
       formRef.current?.reset();
     }
-  }, [baseUrl, id, fields]);
+  }, [baseUrl, id, descendants]);
 
   useEffect(() => {
-    if (!baseUrl || !id || !fields) {
+    if (!baseUrl || !id || !descendants) {
       return;
     }
 
@@ -46,13 +42,10 @@ export function useFormPrefill({
       .get<unknown>(`${baseUrl}/${id}`, { signal: ac.signal })
       .then((raw) => {
         const data = unwrapRecordPayload(raw);
-        setInnerFields((prev) =>
-          prev?.map((f) =>
-            hasNameField(f) && data[f.name] !== undefined
-              ? mergePrefillToField(f, data[f.name])
-              : f,
-          ),
-        );
+        setInnerDescendants((prev) => {
+          const base = prev ?? descendants;
+          return mergePrefillIntoDescendants(base, data) ?? base;
+        });
       })
       .catch((err: unknown) => {
         if (err instanceof Error && err.name === "AbortError") return;
@@ -65,7 +58,7 @@ export function useFormPrefill({
     return () => {
       ac.abort();
     };
-  }, [baseUrl, id]);
+  }, [baseUrl, id, descendants]);
 
-  return { innerFields, isLoading };
+  return { innerDescendants, isLoading };
 }

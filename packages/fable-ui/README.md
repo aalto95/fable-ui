@@ -76,7 +76,7 @@ await registerDefaultComponentsAsync();
 
 | Layout | Leaf |
 | --- | --- |
-| `card`, `h_stack`, `v_stack` | `accordion`, `button`, `checkbox`, `datepicker`, `form`, `input`, `markdown`, `pagination`, `select`, `subtitle`, `table`, `title`, `textarea`, `slider` |
+| `card`, `form`, `h_stack`, `v_stack` | `accordion`, `button`, `checkbox`, `datepicker`, `input`, `markdown`, `pagination`, `select`, `subtitle`, `table`, `title`, `textarea`, `slider` |
 
 See **[COMPONENTS.md](./COMPONENTS.md)** for every field, action type, and behavioral note.
 

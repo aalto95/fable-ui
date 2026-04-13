@@ -141,7 +141,9 @@ export const Component: React.FC<Props> = memo((props) => {
       throw new Error(`Layout component ${type} not found`);
     }
     const children =
-      "descendants" in rest && Array.isArray(rest.descendants)
+      type !== "form" &&
+      "descendants" in rest &&
+      Array.isArray(rest.descendants)
         ? rest.descendants.map((child, i) => <Component key={i} {...child} />)
         : null;
     const node = <Comp {...rest}>{children}</Comp>;
@@ -160,7 +162,9 @@ export const Component: React.FC<Props> = memo((props) => {
   if (isBuiltinLayoutType(type)) {
     const LazyComp = getCachedLazyBuiltinLayout(type as TLayoutComponent);
     const children =
-      "descendants" in rest && Array.isArray(rest.descendants)
+      type !== "form" &&
+      "descendants" in rest &&
+      Array.isArray(rest.descendants)
         ? rest.descendants.map((child, i) => <Component key={i} {...child} />)
         : null;
     const node = (

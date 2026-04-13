@@ -13,17 +13,17 @@ export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
 export const Form: React.FC<TFormProps> = ({
   dataSource,
   onSubmit,
-  fields,
+  descendants,
   title,
   ...rest
 }) => {
   const { id } = useParams();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const { innerFields, isLoading } = useFormPrefill({
+  const { innerDescendants, isLoading } = useFormPrefill({
     dataSource,
     id,
-    fields,
+    descendants,
     formRef,
   });
 
@@ -48,8 +48,8 @@ export const Form: React.FC<TFormProps> = ({
       >
         {title && <h2 className="font-bold">{title}</h2>}
 
-        {innerFields?.map((field, i) => (
-          <Component key={i} {...field} />
+        {innerDescendants?.map((child, i) => (
+          <Component key={i} {...child} />
         ))}
       </form>
     </FormActionsProvider>

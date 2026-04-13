@@ -333,7 +333,7 @@
         "type": { "const": "form" },
         "title": { "type": "string" },
         "dataSource": { "type": "string" },
-        "fields": {
+        "descendants": {
           "type": "array",
           "items": { "$ref": "#/$defs/componentUnion" }
         }

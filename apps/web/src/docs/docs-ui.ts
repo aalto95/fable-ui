@@ -37,7 +37,7 @@ export const DOCS_UI: TComponentUnion[] = [
         type: "card",
         title: "Built-in kinds",
         description:
-          "Layouts: card, h_stack, v_stack. Leaves include markdown, form, input, button, table, accordion, title, subtitle, and more. Open Components in the sidebar: each showcase page documents fields and behavior, then a Demo section with a live example. The fable-ui package also ships COMPONENTS.md with the same reference.",
+          "Layouts: card, form, h_stack, v_stack. Leaves include markdown, input, button, table, accordion, title, subtitle, and more. Open Components in the sidebar: each showcase page documents props and behavior, then a Demo section with a live example. The fable-ui package also ships COMPONENTS.md with the same reference.",
       },
       {
         type: "accordion",

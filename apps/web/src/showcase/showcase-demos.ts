@@ -148,7 +148,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         {
           type: "form",
           title: "Sample form",
-          fields: [
+          descendants: [
             {
               type: "input",
               name: "email",

@@ -104,18 +104,18 @@ Optional \`dialogConfig\` on an action can show a confirmation dialog first.`,
 | \`required\` | \`boolean?\` | |
 | \`hidden\` | \`boolean?\` | Skip rendering when true. |`,
 
-  form: `### \`form\` (leaf)
+  form: `### \`form\` (layout)
 
-**Purpose:** \`<form>\` wrapper with optional **prefill** from an API and **fields** as nested component nodes.
+**Purpose:** \`<form>\` wrapper with optional **prefill** from an API and **descendants** as nested component nodes (you can nest \`v_stack\`, \`h_stack\`, \`card\`, etc.).
 
 | Field | Type | Description |
 | --- | --- | --- |
 | \`type\` | \`"form"\` | |
-| \`title\` | \`string?\` | Heading above fields. |
+| \`title\` | \`string?\` | Heading above the body. |
 | \`dataSource\` | \`string?\` | Base URL for \`GET\` prefill when route param \`id\` exists. |
-| \`fields\` | array? | Inputs, buttons, etc. as \`Component\` nodes. |
+| \`descendants\` | array? | Inputs, buttons, layouts — same as other layouts. |
 
-**Behavior:** **FormActionsProvider** wires buttons inside the form so HTTP actions can read the form DOM. Prefill shows loading while fetching; \`id\` comes from React Router \`useParams()\`.`,
+**Behavior:** **FormActionsProvider** wires buttons inside the form so HTTP actions can read the form DOM. Prefill merges API values into named fields **recursively** inside nested layouts. \`id\` comes from React Router \`useParams()\`.`,
 
   input: `### \`input\` (leaf)
 

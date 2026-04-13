@@ -10,6 +10,8 @@ type BuiltinLoader = () => Promise<{ default: ComponentType<any> }>;
 const BUILTIN_LAYOUT_LOADERS = {
   card: () =>
     import("@/components/layout/Card").then((m) => ({ default: m.Card })),
+  form: () =>
+    import("@/components/layout/Form").then((m) => ({ default: m.Form })),
   h_stack: () =>
     import("@/components/layout/HorizontalStack").then((m) => ({
       default: m.HorizontalStack,
@@ -35,8 +37,6 @@ const BUILTIN_LEAF_LOADERS = {
     import("@/components/layout/Datepicker").then((m) => ({
       default: m.Datepicker,
     })),
-  form: () =>
-    import("@/components/layout/Form").then((m) => ({ default: m.Form })),
   input: () =>
     import("@/components/layout/Input").then((m) => ({ default: m.Input })),
   pagination: () =>

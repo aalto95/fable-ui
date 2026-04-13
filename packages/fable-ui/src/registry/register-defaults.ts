@@ -34,6 +34,7 @@ export function registerDefaultComponents(): void {
 
   componentRegistry
     .registerLayout("card", Card)
+    .registerLayout("form", Form)
     .registerLayout("h_stack", HorizontalStack)
     .registerLayout("v_stack", VerticalStack);
 
@@ -42,7 +43,6 @@ export function registerDefaultComponents(): void {
     .registerLeaf("button", Button)
     .registerLeaf("checkbox", Checkbox)
     .registerLeaf("datepicker", Datepicker)
-    .registerLeaf("form", Form)
     .registerLeaf("input", Input)
     .registerLeaf("markdown", Markdown)
     .registerLeaf("pagination", Pagination)

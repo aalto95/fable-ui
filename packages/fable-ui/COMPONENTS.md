@@ -9,7 +9,7 @@ For setup (install, `Renderer`, registry), see [README.md](./README.md).
 ## How nodes work
 
 - Each UI node is a JSON object with a required **`type`** string (`TComponent`).
-- **Layouts** nest other nodes via **`descendants`**: `card`, `h_stack`, `v_stack`.
+- **Layouts** nest other nodes via **`descendants`**: `card`, `form`, `h_stack`, `v_stack`. (The **`form`** layout renders its tree internally so prefill can update nested field props.)
 - **Leaves** have no `descendants`; they render controls or content only.
 - The **`Component`** resolver loads a React implementation either from **`componentRegistry`** (your registrations) or from **lazy built-ins** (code-split chunks) when the kind matches a known built-in name.
 
@@ -80,6 +80,21 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 | `descendants` | `TComponentUnion[]?` | Children stacked vertically with gap. |
 
 **Behavior:** Default layout for page sections (titles, forms, paragraphs).
+
+---
+
+### `form`
+
+**Purpose:** `<form>` wrapper with optional **prefill** from an API and **`descendants`** rendered as nested **`Component`** nodes (you may nest **`v_stack`**, **`h_stack`**, **`card`**, etc., inside the form).
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `type` | `"form"` | |
+| `title` | `string?` | Heading above the body. |
+| `dataSource` | `string?` | Base URL for **`GET ${dataSource}/:id`** when route param **`id`** exists (prefill). |
+| `descendants` | `TComponentUnion[]?` | Form controls, buttons, and nested layouts. |
+
+**Behavior:** Uses **`FormActionsProvider`** so buttons inside can run HTTP actions with the form DOM. Prefill walks **`descendants` recursively** (named inputs inside stacks/cards get **`defaultValue`** / **`checked`** merged from the API payload). Shows a loading state while fetching. **`id`** comes from React Router **`useParams()`**.
 
 ---
 
@@ -235,21 +250,6 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 
 ---
 
-### `form`
-
-**Purpose:** `<form>` wrapper with optional **prefill** from an API and **fields** rendered as nested **`Component`** nodes.
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `type` | `"form"` | |
-| `title` | `string?` | Heading above the fields. |
-| `dataSource` | `string?` | Base URL for **`GET ${dataSource}/:id`** when route param **`id`** exists (prefill). |
-| `fields` | `TComponentUnion[]?` | Form controls and buttons (each is a component node). |
-
-**Behavior:** Uses **`FormActionsProvider`** so buttons inside can run HTTP actions with the form DOM. Prefill shows a loading state while fetching. **`id`** comes from React Router **`useParams()`**.
-
----
-
 ### `accordion`
 
 **Purpose:** Collapsible sections (one panel open at a time depending on implementation).
@@ -298,7 +298,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 
 ## Custom kinds
 
-Register your own React components with **`componentRegistry.registerLayout(name, Component)`** or **`registerLeaf(name, Component)`**. Layout components receive React **`children`** built from **`descendants`**; leaf components receive the rest of the props object (everything except **`type`**).
+Register your own React components with **`componentRegistry.registerLayout(name, Component)`** or **`registerLeaf(name, Component)`**. Layout components receive React **`children`** built from **`descendants`**, except the built-in **`form`** layout (it receives **`descendants`** as props and renders the tree itself for prefill). Leaf components receive the rest of the props object (everything except **`type`**).
 
 ---
 

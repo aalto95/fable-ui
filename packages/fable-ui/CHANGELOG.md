@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **`form`** is a **layout** built-in (with **`descendants`**) instead of a leaf with **`fields`**. API prefill now merges into named inputs nested inside **`v_stack`**, **`h_stack`**, **`card`**, etc.
+
 ## [1.1.0] - 2026-04-08
 
 ### Added

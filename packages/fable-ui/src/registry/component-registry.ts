@@ -4,7 +4,8 @@ export type RegisteredComponent = ElementType;
 
 /**
  * Pluggable registry for Fable UI component kinds. Layout components receive
- * recursive `descendants`; leaf components render props only.
+ * recursive `descendants` as `children` (except the built-in `form`, which
+ * renders `descendants` internally for prefill). Leaf components render props only.
  */
 export class ComponentRegistry {
   readonly layouts = new Map<string, RegisteredComponent>();

@@ -124,3 +124,30 @@ export function mergePrefillToField(
       return field;
   }
 }
+
+/** Deep-merge API prefill values into a component tree (named inputs at any depth). */
+export function mergePrefillIntoDescendants(
+  nodes: TComponentUnion[] | undefined,
+  data: Record<string, unknown>,
+): TComponentUnion[] | undefined {
+  if (!nodes) {
+    return nodes;
+  }
+  return nodes.map((node) => mergePrefillIntoNode(node, data));
+}
+
+function mergePrefillIntoNode(
+  node: TComponentUnion,
+  data: Record<string, unknown>,
+): TComponentUnion {
+  if (hasNameField(node) && data[node.name] !== undefined) {
+    return mergePrefillToField(node, data[node.name]);
+  }
+  if ("descendants" in node && Array.isArray(node.descendants)) {
+    return {
+      ...node,
+      descendants: mergePrefillIntoDescendants(node.descendants, data),
+    };
+  }
+  return node;
+}

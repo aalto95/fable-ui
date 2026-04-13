@@ -158,7 +158,8 @@ export interface IFormComponent extends IBaseComponent<"form"> {
   title?: string;
   /** Base URL for GET prefill (`GET ${dataSource}/:id`). HTTP submit is configured on button `actions`. */
   dataSource?: string;
-  fields?: TComponentUnion[];
+  /** Nested component tree (inputs, buttons, layouts, etc.). Rendered inside the `<form>`; prefill walks the tree recursively. */
+  descendants?: TComponentUnion[];
 }
 
 export interface ICardComponent extends IBaseComponent<"card"> {
@@ -171,7 +172,8 @@ export interface ICardComponent extends IBaseComponent<"card"> {
 export type TComponentsWithDescendants =
   | IHStackComponent
   | IVStackComponent
-  | ICardComponent;
+  | ICardComponent
+  | IFormComponent;
 
 export type TComponentsWithoutDescendants =
   | IButtonComponent
@@ -186,8 +188,7 @@ export type TComponentsWithoutDescendants =
   | ITableComponent
   | IAccordionComponent
   | IPaginationComponent
-  | ISliderComponent
-  | IFormComponent;
+  | ISliderComponent;
 
 export type TComponentUnion =
   | TComponentsWithoutDescendants
