@@ -14,7 +14,8 @@
       "!dist",
       "!build",
       "!apps/web/src/index.css",
-      "!packages/fable-ui/src/components/ui/**/*.tsx"
+      "!packages/fable-ui/src/components/ui/**/*.tsx",
+      "!packages/fable-ui/src/styles/fable-ui.css"
     ]
   },
   "formatter": {

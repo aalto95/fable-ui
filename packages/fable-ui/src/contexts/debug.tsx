@@ -20,7 +20,7 @@ export const DebugProvider: React.FC<
 export function useDebug(): DebugContextValue {
   const ctx = useContext(DebugContext);
   if (!ctx) {
-    throw new Error("useDebug must be used within DebugProvider");
+    throw new Error("useDebug must be used within SduiProvider or DebugProvider");
   }
   return ctx;
 }

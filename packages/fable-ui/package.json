@@ -1,6 +1,6 @@
 {
   "name": "fable-ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Fable UI: schema-driven React renderer for pages, forms, and pluggable components.",
   "keywords": [
     "react",
@@ -19,9 +19,12 @@
     "access": "public"
   },
   "type": "module",
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "files": [
     "dist",
+    "src",
     "README.md",
     "COMPONENTS.md",
     "CHANGELOG.md",
@@ -44,23 +47,28 @@
       "import": "./dist/register-async.js"
     },
     "./schema.json": "./schema.json",
+    "./styles.css": "./src/styles/fable-ui.css",
     "./dist/*": "./dist/*"
   },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.0.0",
-    "sonner": "^2.0.0"
+    "tailwindcss": "^4.0.0"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "^5.2.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.7.0",
+    "next-themes": "^0.4.6",
     "radix-ui": "^1.4.3",
     "react-markdown": "^10.1.0",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
-    "tailwind-merge": "^3.5.0"
+    "sonner": "^2.0.0",
+    "tailwind-merge": "^3.5.0",
+    "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",

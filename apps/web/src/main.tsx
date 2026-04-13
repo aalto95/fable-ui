@@ -1,4 +1,4 @@
-import { ThemeProvider, type ThemeProviderProps } from "next-themes";
+import { ThemeProvider, type ThemeProviderProps } from "fable-ui";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter } from "react-router";

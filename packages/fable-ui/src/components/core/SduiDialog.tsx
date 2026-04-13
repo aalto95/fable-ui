@@ -7,10 +7,10 @@ import {
   BaseDialogFooter,
   BaseDialogHeader,
   BaseDialogTitle,
-  useDialog,
-} from "fable-ui";
+} from "@/components/ui/dialog";
+import { useDialog } from "@/contexts/dialog";
 
-export const Dialog: React.FC = () => {
+export const SduiDialog: React.FC = () => {
   const { config, setConfig } = useDialog();
 
   if (!config) {
@@ -18,7 +18,12 @@ export const Dialog: React.FC = () => {
   }
 
   return (
-    <BaseDialog open={!!config}>
+    <BaseDialog
+      open={!!config}
+      onOpenChange={(open) => {
+        if (!open) setConfig(null);
+      }}
+    >
       <BaseDialogContent>
         <BaseDialogHeader>
           <BaseDialogTitle>{config.title}</BaseDialogTitle>

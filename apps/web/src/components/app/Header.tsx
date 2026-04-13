@@ -1,6 +1,5 @@
-import { BaseButton, useDebug } from "fable-ui";
+import { BaseButton, useDebug, useTheme } from "fable-ui";
 import { Menu } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Link } from "react-router";
 
 export type HeaderProps = {

@@ -1,6 +1,19 @@
+export {
+  type Attribute,
+  ThemeProvider,
+  type ThemeProviderProps,
+  type UseThemeProps,
+  useTheme,
+} from "next-themes";
 export { Component } from "./components/core/Component";
 export { DebugOutline } from "./components/core/DebugOutline";
 export { Renderer } from "./components/core/Renderer";
+export { SduiDialog } from "./components/core/SduiDialog";
+export {
+  SduiProvider,
+  type SduiProviderProps,
+} from "./components/core/SduiProvider";
+export { SduiToaster } from "./components/core/SduiToaster";
 export type { TMarkdownProps } from "./components/layout/Markdown";
 export { Markdown } from "./components/layout/Markdown";
 export { BaseButton } from "./components/ui/button";

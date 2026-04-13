@@ -58,6 +58,10 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
+        "fable-ui/styles.css": resolve(
+          workspaceRoot,
+          "packages/fable-ui/src/styles/fable-ui.css",
+        ),
         "fable-ui/register-async": resolve(
           workspaceRoot,
           "packages/fable-ui/src/register-async.ts",
