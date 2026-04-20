@@ -1,5 +1,27 @@
-import { getAt, getParentAndIndex, type Path } from "../paths";
+import { getAt, getParentAndIndex, type Path, pathKey } from "../paths";
 import { isRecord } from "../uiDocumentGuards";
+
+/** Every path that has children in the structure tree (for “expand all”). */
+export function collectExpandablePathKeys(doc: unknown): string[] {
+  const out = new Set<string>();
+  function visit(path: Path) {
+    const node = path.length === 0 ? doc : getAt(doc, path);
+    const kids = childPaths(path, node);
+    if (kids.length === 0) return;
+    out.add(pathKey(path));
+    for (const { subPath } of kids) {
+      visit(subPath);
+    }
+  }
+  visit([]);
+  return [...out];
+}
+
+export function countStructurePages(doc: unknown): number {
+  if (!isRecord(doc)) return 0;
+  const ui = doc.ui;
+  return Array.isArray(ui) ? ui.length : 0;
+}
 
 export function nodeLabel(path: Path, node: unknown): string {
   if (path.length === 0) return "Document";
@@ -21,7 +43,8 @@ export function nodeLabel(path: Path, node: unknown): string {
   }
   const t = node.type;
   if (typeof t === "string") {
-    if (t === "button") return `button: ${typeof node.text === "string" ? node.text : "…"}`;
+    if (t === "button")
+      return `button: ${typeof node.text === "string" ? node.text : "…"}`;
     if (t === "markdown") {
       const c = typeof node.content === "string" ? node.content : "";
       const line = c.split("\n")[0]?.trim() ?? "";
@@ -31,21 +54,29 @@ export function nodeLabel(path: Path, node: unknown): string {
     }
     if (t === "title" || t === "subtitle")
       return `${t}: ${typeof node.text === "string" ? node.text : "…"}`;
-    if ("name" in node && typeof node.name === "string") return `${t}: ${node.name}`;
+    if ("name" in node && typeof node.name === "string")
+      return `${t}: ${node.name}`;
     return t;
   }
   if ("label" in node && "type" in node) {
     const a = node as { type?: unknown; label?: unknown };
     return `action: ${typeof a.label === "string" ? a.label : "…"}`;
   }
-  if ("name" in node && "label" in node && !("type" in node && node.type === "button")) {
+  if (
+    "name" in node &&
+    "label" in node &&
+    !("type" in node && node.type === "button")
+  ) {
     const h = node as { name?: unknown; label?: unknown };
     return `head: ${typeof h.label === "string" ? h.label : "…"}`;
   }
   return "node";
 }
 
-export function childPaths(path: Path, node: unknown): { subPath: Path; label: string }[] {
+export function childPaths(
+  path: Path,
+  node: unknown,
+): { subPath: Path; label: string }[] {
   if (path.length === 1 && path[0] === "origins" && Array.isArray(node)) {
     return node.map((_, i) => ({
       subPath: ["origins", i],
@@ -122,12 +153,17 @@ export function childPaths(path: Path, node: unknown): { subPath: Path; label: s
   return out;
 }
 
-export function getParentListPath(path: Path | null): { parentPath: Path; index: number } | null {
+export function getParentListPath(
+  path: Path | null,
+): { parentPath: Path; index: number } | null {
   if (path === null) return null;
   return getParentAndIndex(path);
 }
 
-export function insertionTargetFor(path: Path | null, doc: unknown): { parentPath: Path } | null {
+export function insertionTargetFor(
+  path: Path | null,
+  doc: unknown,
+): { parentPath: Path } | null {
   if (path === null) return null;
   const node = getAt(doc, path);
   if (path.length === 0) {

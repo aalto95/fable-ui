@@ -1,10 +1,10 @@
 import { ChevronDown, ChevronRight, GripVertical } from "lucide-react";
 import { type DragEvent, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { isRecord } from "@/lib/uiDocumentGuards";
-import { cn } from "@/lib/utils";
 import { childPaths, nodeLabel } from "../../lib/interactiveEditor/treeModel";
 import { getAt, type Path, pathKey } from "../../lib/paths";
+import { isRecord } from "../../lib/uiDocumentGuards";
+import { cn } from "../../lib/utils";
 
 function nodeIsHidden(node: unknown): boolean {
   return isRecord(node) && node.hidden === true;
@@ -58,7 +58,8 @@ function TreeRow({
   const selected = selectedPath !== null && pathKey(selectedPath) === pk;
   const label = nodeLabel(path, node);
   const draggable = !disabled && canDragPath(path);
-  const isDragSource = dragSourcePath !== null && pathKey(dragSourcePath) === pk;
+  const isDragSource =
+    dragSourcePath !== null && pathKey(dragSourcePath) === pk;
   const hl =
     dropHighlight?.pathKey === pk
       ? dropHighlight.place === "before"
@@ -94,13 +95,15 @@ function TreeRow({
       <div
         ref={rowRef}
         className={cn(
-          "flex min-h-7 items-center gap-1",
-          selected && "rounded-md bg-primary/10",
+          "flex min-h-8 items-center gap-1 rounded-md border border-transparent transition-colors",
+          selected &&
+            "border-primary/20 bg-primary/[0.09] shadow-[inset_3px_0_0_0_var(--primary)]",
+          !selected && "hover:border-border/80 hover:bg-muted/45",
           hl,
           hidden && "text-muted-foreground",
           isDragSource ? "opacity-65" : hidden ? "opacity-[0.48]" : undefined,
         )}
-        style={{ paddingLeft: 8 + depth * 14 }}
+        style={{ paddingLeft: 6 + depth * 12 }}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
@@ -152,8 +155,9 @@ function TreeRow({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-auto min-h-0 flex-1 justify-start rounded px-1.5 py-1 text-left font-normal text-[13px] hover:bg-muted/80"
+          className="h-auto min-h-0 flex-1 justify-start rounded px-1.5 py-1 text-left font-normal text-[13px] hover:bg-transparent"
           disabled={disabled}
+          aria-current={selected ? "true" : undefined}
           onClick={() => onSelect(path)}
         >
           {label}
@@ -222,10 +226,14 @@ export function TreeRoot({
     <div className="text-sm">
       <div
         className={cn(
-          "flex min-h-7 items-center gap-1",
-          selectedPath !== null && pathKey(selectedPath) === pk && "rounded-md bg-primary/10",
+          "flex min-h-8 items-center gap-1 rounded-md border border-transparent transition-colors",
+          selectedPath !== null &&
+            pathKey(selectedPath) === pk &&
+            "border-primary/20 bg-primary/[0.09] shadow-[inset_3px_0_0_0_var(--primary)]",
+          (selectedPath === null || pathKey(selectedPath) !== pk) &&
+            "hover:border-border/80 hover:bg-muted/45",
         )}
-        style={{ paddingLeft: 8 }}
+        style={{ paddingLeft: 6 }}
       >
         <Button
           type="button"
@@ -247,8 +255,13 @@ export function TreeRoot({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-auto min-h-0 flex-1 justify-start rounded px-1.5 py-1 text-left font-normal text-[13px] hover:bg-muted/80"
+          className="h-auto min-h-0 flex-1 justify-start rounded px-1.5 py-1 text-left font-medium text-[13px] text-foreground/90 hover:bg-transparent"
           disabled={disabled}
+          aria-current={
+            selectedPath !== null && pathKey(selectedPath) === pk
+              ? "true"
+              : undefined
+          }
           onClick={() => onSelect([])}
         >
           Document

@@ -1,4 +1,11 @@
-import { GripVertical, Plus } from "lucide-react";
+import {
+  ChevronsDownUp,
+  ChevronsUpDown,
+  GripVertical,
+  ListTree,
+  Plus,
+  SlidersHorizontal,
+} from "lucide-react";
 import { type DragEvent, useCallback, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,7 +16,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type ComponentType, defaultComponent, defaultPage } from "../../lib/componentDefaults";
-import { getParentListPath, insertionTargetFor } from "../../lib/interactiveEditor/treeModel";
+import {
+  collectExpandablePathKeys,
+  countStructurePages,
+  getParentListPath,
+  insertionTargetFor,
+} from "../../lib/interactiveEditor/treeModel";
 import {
   deleteAt,
   getAt,
@@ -256,6 +268,15 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
     [applyDoc, doc, selectedPath, valid],
   );
 
+  const expandAll = useCallback(() => {
+    if (!doc || !isUiDoc(doc)) return;
+    setExpanded(new Set(collectExpandablePathKeys(doc)));
+  }, [doc]);
+
+  const collapseStructure = useCallback(() => {
+    setExpanded(new Set([pathKey([])]));
+  }, []);
+
   if (!parsed.ok) {
     return (
       <div className="rounded-lg border border-destructive/45 bg-destructive/5 p-4 text-foreground">
@@ -285,100 +306,172 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
   const canReorder = getParentListPath(selectedPath);
   const parentList = canReorder ? (getAt(doc, canReorder.parentPath) as unknown[]) : null;
 
-  return (
-    <div className="rounded-lg border border-border bg-muted/35 p-4 shadow-sm">
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <Button
-          type="button"
-          variant="outline"
-          disabled={disabled}
-          className="gap-1.5"
-          onClick={handleAddPage}
-        >
-          <Plus className="size-3.5" strokeWidth={2} aria-hidden />
-          Page
-        </Button>
-        {addable && insertableTypes.length > 0 && (
-          <span className="inline-flex items-center gap-2">
-            <AddComponentTypeSelect
-              key={pathKey(selectedPath ?? [])}
-              disabled={disabled}
-              options={insertableTypes}
-              onAdd={(t) => handleAdd(t)}
-            />
-          </span>
-        )}
-        {addable && insertableTypes.length === 0 && structuredAddLabel !== null && (
-          <Button type="button" variant="outline" disabled={disabled} onClick={() => handleAdd()}>
-            {structuredAddLabel}
-          </Button>
-        )}
-        {selectedIsTable && (
-          <Button type="button" variant="outline" disabled={disabled} onClick={handleAddTableColumn}>
-            Add column
-          </Button>
-        )}
-        <Button
-          type="button"
-          variant="destructive"
-          disabled={disabled || selectedPath === null || selectedPath.length === 0}
-          onClick={handleDelete}
-        >
-          Delete node
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={disabled || !canReorder || !parentList || canReorder.index <= 0}
-          onClick={() => handleMove(-1)}
-        >
-          Move up
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          disabled={
-            disabled || !canReorder || !parentList || canReorder.index >= parentList.length - 1
-          }
-          onClick={() => handleMove(1)}
-        >
-          Move down
-        </Button>
-        <span
-          className="ml-1 inline-flex items-center gap-1 text-muted-foreground text-xs"
-          title="Same parent only"
-        >
-          <GripVertical className="size-3 shrink-0 opacity-80" strokeWidth={2} aria-hidden />
-          Drag the grip on a row to reorder siblings.
-        </span>
-      </div>
+  const pageCount = countStructurePages(doc);
 
-      <div className="grid grid-cols-1 gap-3 min-[900px]:grid-cols-2">
-        <div className="max-h-[420px] min-h-[220px] overflow-auto rounded-md border border-border bg-background p-2.5">
-          <div className="mb-2 font-semibold text-[11px] text-muted-foreground uppercase tracking-wide">
-            Structure
-          </div>
-          <TreeRoot
-            doc={doc}
-            selectedPath={selectedPath}
-            onSelect={setSelectedPath}
-            expanded={expanded}
-            onToggle={toggle}
+  return (
+    <div className="rounded-xl border border-border/80 bg-gradient-to-b from-muted/40 to-muted/25 p-4 shadow-sm">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="me-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+            Insert
+          </span>
+          <Button
+            type="button"
+            variant="outline"
             disabled={disabled}
-            dragSourcePath={dragSourcePath}
-            dropHighlight={dropHighlight}
-            onDragStartPath={handleDragStartPath}
-            onDragEnd={handleDragEnd}
-            onDragOverRow={handleDragOverRow}
-            onDropOnRow={handleDropOnRow}
-          />
+            className="gap-1.5"
+            onClick={handleAddPage}
+          >
+            <Plus className="size-3.5" strokeWidth={2} aria-hidden />
+            Page
+          </Button>
+          {addable && insertableTypes.length > 0 && (
+            <span className="inline-flex items-center gap-2">
+              <AddComponentTypeSelect
+                key={pathKey(selectedPath ?? [])}
+                disabled={disabled}
+                options={insertableTypes}
+                onAdd={(t) => handleAdd(t)}
+              />
+            </span>
+          )}
+          {addable && insertableTypes.length === 0 && structuredAddLabel !== null && (
+            <Button type="button" variant="outline" disabled={disabled} onClick={() => handleAdd()}>
+              {structuredAddLabel}
+            </Button>
+          )}
+          {selectedIsTable && (
+            <Button type="button" variant="outline" disabled={disabled} onClick={handleAddTableColumn}>
+              Add column
+            </Button>
+          )}
         </div>
-        <div className="max-h-[420px] min-h-[220px] overflow-auto rounded-md border border-border bg-background p-2.5">
-          <div className="mb-2 font-semibold text-[11px] text-muted-foreground uppercase tracking-wide">
-            Properties
+        <div className="flex flex-wrap items-center gap-2 border-border/60 sm:border-s sm:ps-3">
+          <span className="me-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+            Selection
+          </span>
+          <Button
+            type="button"
+            variant="destructive"
+            disabled={disabled || selectedPath === null || selectedPath.length === 0}
+            onClick={handleDelete}
+          >
+            Delete node
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={disabled || !canReorder || !parentList || canReorder.index <= 0}
+            onClick={() => handleMove(-1)}
+          >
+            Move up
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={
+              disabled || !canReorder || !parentList || canReorder.index >= parentList.length - 1
+            }
+            onClick={() => handleMove(1)}
+          >
+            Move down
+          </Button>
+        </div>
+      </div>
+      <p className="mb-4 flex items-start gap-2 rounded-lg border border-border/50 bg-background/60 px-3 py-2 text-muted-foreground text-xs leading-snug">
+        <GripVertical className="mt-0.5 size-3.5 shrink-0 opacity-70" strokeWidth={2} aria-hidden />
+        <span>
+          <span className="font-medium text-foreground/90">Reorder:</span> drag the grip beside a row
+          to move it among <em className="not-italic text-foreground/80">siblings</em> only. Drop
+          lines show where it will land.
+        </span>
+      </p>
+
+      <div className="grid grid-cols-1 gap-4 min-[900px]:grid-cols-2">
+        <section
+          className="flex max-h-[min(520px,70vh)] min-h-[240px] flex-col overflow-hidden rounded-lg border border-border/70 bg-background shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+          aria-label="Document structure"
+        >
+          <header className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-border/60 border-b bg-muted/35 px-3 py-2.5">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                <ListTree className="size-4" strokeWidth={2} aria-hidden />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-semibold text-foreground text-sm leading-tight">Structure</h3>
+                <p className="truncate text-[11px] text-muted-foreground leading-snug">
+                  {pageCount === 0
+                    ? "No pages yet — add a page above"
+                    : `${pageCount} page${pageCount === 1 ? "" : "s"} · click to inspect · expand to navigate`}
+                </p>
+              </div>
+            </div>
+            <div className="flex shrink-0 items-center gap-1">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 gap-1 px-2 text-muted-foreground text-xs"
+                disabled={disabled}
+                onClick={expandAll}
+                title="Expand every branch"
+              >
+                <ChevronsUpDown className="size-3.5" aria-hidden />
+                Expand all
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 gap-1 px-2 text-muted-foreground text-xs"
+                disabled={disabled}
+                onClick={collapseStructure}
+                title="Collapse to document only"
+              >
+                <ChevronsDownUp className="size-3.5" aria-hidden />
+                Collapse
+              </Button>
+            </div>
+          </header>
+          <div className="min-h-0 flex-1 overflow-auto p-2.5">
+            <TreeRoot
+              doc={doc}
+              selectedPath={selectedPath}
+              onSelect={setSelectedPath}
+              expanded={expanded}
+              onToggle={toggle}
+              disabled={disabled}
+              dragSourcePath={dragSourcePath}
+              dropHighlight={dropHighlight}
+              onDragStartPath={handleDragStartPath}
+              onDragEnd={handleDragEnd}
+              onDragOverRow={handleDragOverRow}
+              onDropOnRow={handleDropOnRow}
+            />
           </div>
-          <PropertyPanel doc={doc} path={selectedPath} onChange={applyDoc} disabled={disabled} />
-        </div>
+        </section>
+
+        <section
+          className="flex max-h-[min(520px,70vh)] min-h-[240px] flex-col overflow-hidden rounded-lg border border-border/70 bg-background shadow-[0_1px_2px_rgba(0,0,0,0.04)]"
+          aria-label="Node properties"
+        >
+          <header className="shrink-0 border-border/60 border-b bg-muted/35 px-3 py-2.5">
+            <div className="flex items-center gap-2.5">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground">
+                <SlidersHorizontal className="size-4" strokeWidth={2} aria-hidden />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-semibold text-foreground text-sm leading-tight">Properties</h3>
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  Edit the selected node — synced with JSON
+                </p>
+              </div>
+            </div>
+          </header>
+          <div className="min-h-0 flex-1 overflow-auto p-2.5">
+            <PropertyPanel doc={doc} path={selectedPath} onChange={applyDoc} disabled={disabled} />
+          </div>
+        </section>
       </div>
     </div>
   );
