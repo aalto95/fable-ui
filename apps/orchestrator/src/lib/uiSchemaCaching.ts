@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { readFile } from "node:fs/promises";
 import { getSchemaOverride } from "@/lib/uiSchemaStore";
 
 /** Strong ETag (quoted opaque token) from exact UTF-8 body bytes. */
@@ -18,7 +19,7 @@ export async function loadUiSchemaJsonText(bundledSchemaPath: string): Promise<s
   if (override !== null) {
     return JSON.stringify(override);
   }
-  return await Bun.file(bundledSchemaPath).text();
+  return await readFile(bundledSchemaPath, "utf8");
 }
 
 /**

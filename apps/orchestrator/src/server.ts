@@ -1,3 +1,5 @@
+import "./env";
+import { serve } from "@hono/node-server";
 import { createApp } from "@/app";
 import { runMigrations } from "@/db/migrate";
 import { closePostgres, isPostgresConfigured, pingPostgres } from "@/db/postgres";
@@ -23,22 +25,27 @@ async function main() {
 
   const app = createApp();
 
-  const server = Bun.serve({
-    port: PORT,
-    fetch: app.fetch,
-  });
+  const server = serve(
+    {
+      fetch: app.fetch,
+      port: PORT,
+    },
+    (info) => {
+      console.log(`Server running on http://localhost:${info.port} (SDUI; docs at /docs)`);
+    },
+  );
 
   startBduiMockPing();
 
   const shutdown = async () => {
     await closePostgres();
-    server.stop();
-    process.exit(0);
+    server.close((err) => {
+      if (err) console.error(err);
+      process.exit(err ? 1 : 0);
+    });
   };
   process.on("SIGINT", () => void shutdown());
   process.on("SIGTERM", () => void shutdown());
-
-  console.log(`Server running on http://localhost:${server.port} (SDUI; docs at /docs)`);
 }
 
 main().catch((e) => {

@@ -1,32 +1,44 @@
 # SDUI Orchestrator
 
-HTTP API for **server-driven UI** documents, a **JSON Schema** for UI payloads, and a **todo** CRUD API. Built with [Bun](https://bun.sh), [Hono](https://hono.dev), and [OpenAPIHono](https://hono.dev/examples/zod-openapi) (`@hono/zod-openapi`). UI specs and schema overrides are stored in **PostgreSQL**.
+HTTP API for **server-driven UI** documents, a **JSON Schema** for UI payloads, and related admin routes. Built with [Node.js](https://nodejs.org/), [Hono](https://hono.dev), and [OpenAPIHono](https://hono.dev/examples/zod-openapi) (`@hono/zod-openapi`). UI specs and schema overrides are stored in **PostgreSQL**.
 
 ## Requirements
 
-- [Bun](https://bun.sh) `>= 1.1.0`
+- [Node.js](https://nodejs.org/) `>= 20.10` (LTS recommended)
 - PostgreSQL and a `DATABASE_URL` connection string
 
 ## Quick start
 
-```bash
-cp .env.example .env
-# Set DATABASE_URL in .env
+From the **monorepo root** (recommended):
 
-bun install
-bun run dev
+```bash
+cp apps/orchestrator/.env.example apps/orchestrator/.env
+# Set DATABASE_URL in apps/orchestrator/.env
+
+# Or use apps/orchestrator/.env.development (loaded automatically when NODE_ENV is not production)
+
+pnpm install
+pnpm orchestrator:dev
+```
+
+Env files are loaded from `apps/orchestrator/` in order: `.env`, then `.env.local`, then (non-production only) `.env.development`. Shell-exported variables still win unless overridden by a later file with `override`.
+
+Or from `apps/orchestrator` after a root `pnpm install`:
+
+```bash
+pnpm dev
 ```
 
 The server listens on `PORT` (default **3000**). On startup it pings Postgres and runs SQL migrations.
 
 ## Scripts
 
-| Command        | Description                          |
-| -------------- | ------------------------------------ |
-| `bun run dev`  | Watch mode (`bun --watch src/server.ts`) |
-| `bun run start`| Production-style run                 |
-| `bun run lint` | Biome check                          |
-| `bun run format` | Biome format (write)             |
+| Command | Description |
+| ------- | ----------- |
+| `pnpm dev` | Watch mode (`tsx watch src/server.ts`) |
+| `pnpm start` | Production-style run (`tsx src/server.ts`) |
+| `pnpm lint` | Biome check |
+| `pnpm format` | Biome format (write) |
 
 ## Environment
 
@@ -34,7 +46,7 @@ See `.env.example` for the full list. Highlights:
 
 | Variable | Required | Purpose |
 | -------- | -------- | ------- |
-| `DATABASE_URL` | Yes | PostgreSQL URL (todos, UI specs, schema override) |
+| `DATABASE_URL` | Yes | PostgreSQL URL (UI specs, schema override) |
 | `PORT` | No | Listen port (default `3000`) |
 | `PG_POOL_MAX` | No | Pool size (default `10`) |
 | `PG_IDLE_TIMEOUT_SEC` | No | Idle timeout seconds (default `20`) |
@@ -48,7 +60,6 @@ See `.env.example` for the full list. Highlights:
 | Area | Paths |
 | ---- | ----- |
 | Health | `GET /health` |
-| Todos | `GET` / `POST /api/todo`, `GET` / `PUT` / `DELETE /api/todo/:id` |
 | SDUI | `GET /ui`, `GET /ui/specs`, `GET` / `PUT` / `DELETE /ui/schema`, `GET` / `PUT` / `DELETE /ui/:id` |
 | Docs | `GET /openapi.json` (generated spec), `GET /docs` (Swagger UI) |
 
@@ -59,27 +70,25 @@ OpenAPI is generated from Zod route definitions (`createRoute` + `OpenAPIHono`).
 ```
 src/
   app.ts           # OpenAPIHono, middleware (CORS, logger), doc + Swagger
-  server.ts        # Postgres check, migrations, Bun.serve
+  server.ts        # Postgres check, migrations, @hono/node-server
   config/          # CORS, origins, env-based UI spec ids
   db/              # Postgres client, migrations, repos
-  handlers/        # Route handlers (todo, ui)
+  handlers/        # Route handlers
   lib/             # UI build/serve, schema cache, validation, etc.
   openapi/         # Shared Zod schemas for OpenAPI
-  routes/          # createRoute + mount (todo, ui)
+  routes/          # createRoute + mount (ui)
 ```
 
-Path alias: `@/*` → `src/*` (see `tsconfig.json`).
+Path alias: `@/*` → `src/*` (see `tsconfig.json`). Runtime uses [tsx](https://github.com/privatenumber/tsx) so paths resolve without a separate build step.
 
 ## Docker
 
-A `Dockerfile` is included. Build and run with your own `DATABASE_URL` (e.g. via `-e` or orchestrator secrets):
+Build from the **repository root** so the workspace lockfile and `packages/fable-ui` resolve:
 
 ```bash
-docker build -t sdui-orchestrator .
+docker build -f apps/orchestrator/Dockerfile -t sdui-orchestrator .
 docker run --rm -p 3000:3000 -e DATABASE_URL=postgresql://... sdui-orchestrator
 ```
-
-Ensure production installs include runtime dependencies your image expects (match `package.json` `dependencies` / lockfile with how you run `bun install` in the image).
 
 ## License
 
