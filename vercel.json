@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "pnpm i",
-  "buildCommand": "pnpm web:build",
+  "buildCommand": "pnpm fable-ui:build && pnpm web:build",
   "outputDirectory": "apps/web/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
