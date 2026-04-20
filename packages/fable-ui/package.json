@@ -50,6 +50,10 @@
     "./styles.css": "./src/styles/fable-ui.css",
     "./dist/*": "./dist/*"
   },
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -80,9 +84,5 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "^4.5.4"
-  },
-  "scripts": {
-    "build": "vite build",
-    "prepublishOnly": "npm run build"
   }
 }
