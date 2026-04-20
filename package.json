@@ -3,14 +3,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "pnpm --filter fable-ui build && pnpm --filter fable-ui-web build",
-    "publish:fable-ui": "pnpm --filter fable-ui publish",
-    "dev": "pnpm --filter fable-ui-web dev",
-    "format": "biome format --write",
-    "lint": "biome check",
-    "preview": "pnpm --filter fable-ui-web preview"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.10"
+    "fable-ui:build": "pnpm --filter fable-ui build",
+    "fable-ui:publish": "pnpm --filter fable-ui publish",
+    "web:build": "pnpm --filter fable-ui-web build",
+    "web:dev": "pnpm --filter fable-ui-web dev",
+    "web:preview": "pnpm --filter fable-ui-web preview",
+    "admin:build": "pnpm --filter fable-ui-admin build",
+    "admin:dev": "pnpm --filter fable-ui-admin dev",
+    "admin:format": "pnpm --filter fable-ui-admin format",
+    "admin:lint": "pnpm --filter fable-ui-admin lint",
+    "admin:preview": "pnpm --filter fable-ui-admin preview",
+    "orchestrator:start": "pnpm --filter fable-ui-orchestrator start",
+    "orchestrator:dev": "pnpm --filter fable-ui-orchestrator dev",
+    "orchestrator:format": "pnpm --filter fable-ui-orchestrator format",
+    "orchestrator:lint": "pnpm --filter fable-ui-orchestrator lint"
   }
 }
