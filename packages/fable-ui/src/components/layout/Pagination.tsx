@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-import { useSearchParams } from "react-router";
 import {
   BasePagination,
   BasePaginationContent,
@@ -8,7 +6,9 @@ import {
   BasePaginationLink,
   BasePaginationNext,
   BasePaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@fable-ui/shared";
+import { useMemo } from "react";
+import { useSearchParams } from "react-router";
 import type { IPaginationComponent } from "@/models/interfaces/component";
 
 /** Shared props for pagination UI (standalone leaf or embedded in `table`). */

@@ -1,7 +1,7 @@
+import { cn } from "@fable-ui/shared";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
-import { cn } from "@/lib/utils";
 import type { IMarkdownComponent } from "@/models/interfaces/component";
 
 export type TMarkdownProps = Exclude<IMarkdownComponent, "type">;

@@ -1,5 +1,5 @@
+import { Spinner } from "@fable-ui/shared";
 import { memo, Suspense } from "react";
-import { Spinner } from "@/components/ui/spinner";
 import { useDebug } from "@/contexts/debug";
 import type { TComponentUnion } from "@/models/interfaces/component";
 import type { TLayoutComponent, TLeafComponent } from "@/models/types/component";

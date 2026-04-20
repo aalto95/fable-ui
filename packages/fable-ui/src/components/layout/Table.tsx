@@ -1,24 +1,22 @@
-import { MoreHorizontalIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router";
-import { toast } from "sonner";
-import { Pagination } from "@/components/layout/Pagination";
-import { BaseButton } from "@/components/ui/button";
 import {
+  BaseButton,
   BaseDropdownMenu,
   BaseDropdownMenuContent,
   BaseDropdownMenuItem,
   BaseDropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Spinner } from "@/components/ui/spinner";
-import {
   BaseTable,
   BaseTableBody,
   BaseTableCell,
   BaseTableHead,
   BaseTableHeader,
   BaseTableRow,
-} from "@/components/ui/table";
+  Spinner,
+} from "@fable-ui/shared";
+import { MoreHorizontalIcon } from "lucide-react";
+import { useEffect, useState, type ReactNode } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import { toast } from "sonner";
+import { Pagination } from "@/components/layout/Pagination";
 import { type DialogConfig, useDialog } from "@/contexts/dialog";
 import { executeAction } from "@/lib/http-actions";
 import { http } from "@/lib/http-client";
@@ -31,6 +29,9 @@ type PaginatedListResponse = {
   total?: number;
   totalPages?: number;
 };
+
+/** Row objects from schema or API; keys are column names (see `heads`). */
+type TableRow = Record<string, unknown>;
 
 export const Table: React.FC<TTableProps> = ({
   heads,
@@ -45,11 +46,13 @@ export const Table: React.FC<TTableProps> = ({
   const { setConfig } = useDialog();
   const [searchParams] = useSearchParams();
   const search = searchParams.toString();
-  const [fieldData, setFieldData] = useState(data ?? []);
+  const [fieldData, setFieldData] = useState<TableRow[]>(
+    () => (Array.isArray(data) ? (data as TableRow[]) : []),
+  );
   const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
-  function formatValue(value: unknown, type?: string) {
+  function formatValue(value: unknown, type?: string): ReactNode {
     if (value == null) return "";
 
     if (type === "date" && typeof value === "string") {
@@ -59,7 +62,11 @@ export const Table: React.FC<TTableProps> = ({
       return date.toLocaleDateString();
     }
 
-    return value;
+    if (typeof value === "string" || typeof value === "number") {
+      return value;
+    }
+
+    return String(value);
   }
 
   const getData = (url: string) => {
@@ -80,7 +87,7 @@ export const Table: React.FC<TTableProps> = ({
     http
       .get<PaginatedListResponse>(endpoint.toString())
       .then((res) => {
-        setFieldData(res.data ?? []);
+        setFieldData((res.data ?? []) as TableRow[]);
         const limitNum = Number(searchParams.get(limitParam)) || defaultLimit || 10;
         const derived =
           res.totalPages ??
@@ -143,16 +150,18 @@ export const Table: React.FC<TTableProps> = ({
                           key={i}
                           variant={action?.variant as "default" | "destructive"}
                           onClick={() => {
+                            const rowId =
+                              item.id == null ? undefined : String(item.id);
                             const runAction = async () => {
                               await executeAction(action, {
                                 form: null,
-                                id: item.id,
+                                id: rowId,
                                 navigate: (to) => {
                                   if (typeof to === "number") {
                                     navigate(to);
                                     return;
                                   }
-                                  navigate(`${to}/${item.id}`);
+                                  navigate(`${to}/${rowId ?? ""}`);
                                 },
                               });
                               if (action.type === "HTTP_DELETE") {

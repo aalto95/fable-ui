@@ -1,4 +1,26 @@
 export {
+  BaseButton,
+  BaseDialog,
+  BaseDialogAction,
+  BaseDialogCancel,
+  BaseDialogContent,
+  BaseDialogDescription,
+  BaseDialogFooter,
+  BaseDialogHeader,
+  BaseDialogMedia,
+  BaseDialogOverlay,
+  BaseDialogPortal,
+  BaseDialogTitle,
+  BaseDialogTrigger,
+  BaseEmpty,
+  BaseEmptyContent,
+  BaseEmptyDescription,
+  BaseEmptyHeader,
+  BaseEmptyMedia,
+  BaseEmptyTitle,
+  cn,
+} from "@fable-ui/shared";
+export {
   type Attribute,
   ThemeProvider,
   type ThemeProviderProps,
@@ -16,29 +38,6 @@ export {
 export { SduiToaster } from "./components/core/SduiToaster";
 export type { TMarkdownProps } from "./components/layout/Markdown";
 export { Markdown } from "./components/layout/Markdown";
-export { BaseButton } from "./components/ui/button";
-export {
-  BaseDialog,
-  BaseDialogAction,
-  BaseDialogCancel,
-  BaseDialogContent,
-  BaseDialogDescription,
-  BaseDialogFooter,
-  BaseDialogHeader,
-  BaseDialogMedia,
-  BaseDialogOverlay,
-  BaseDialogPortal,
-  BaseDialogTitle,
-  BaseDialogTrigger,
-} from "./components/ui/dialog";
-export {
-  BaseEmpty,
-  BaseEmptyContent,
-  BaseEmptyDescription,
-  BaseEmptyHeader,
-  BaseEmptyMedia,
-  BaseEmptyTitle,
-} from "./components/ui/empty";
 export { DebugProvider, useDebug } from "./contexts/debug";
 export {
   type DialogConfig,
@@ -48,7 +47,6 @@ export {
 export { executeAction } from "./lib/http-actions";
 export type { HttpRequestInit } from "./lib/http-client";
 export { HttpError, http } from "./lib/http-client";
-export { cn } from "./lib/utils";
 export type {
   IAccordionComponent,
   IAction,

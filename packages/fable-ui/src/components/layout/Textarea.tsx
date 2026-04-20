@@ -1,6 +1,4 @@
-import { BaseField } from "@/components/ui/field";
-import { BaseLabel } from "@/components/ui/label";
-import { BaseTextarea } from "@/components/ui/textarea";
+import { BaseField, BaseLabel, BaseTextarea } from "@fable-ui/shared";
 import type { ITextareaComponent } from "@/models/interfaces/component";
 
 export type TTextareaProps = Exclude<ITextareaComponent, "type">;

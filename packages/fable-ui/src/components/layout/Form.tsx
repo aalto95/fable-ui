@@ -1,8 +1,8 @@
+import { Spinner } from "@fable-ui/shared";
 import type { SubmitEventHandler } from "react";
 import { useCallback, useRef } from "react";
 import { useParams } from "react-router";
 import { Component } from "@/components/core/Component";
-import { Spinner } from "@/components/ui/spinner";
 import { FormActionsProvider } from "@/contexts/form-actions";
 import { useFormPrefill } from "@/hooks/use-form-prefill";
 import type { IFormComponent } from "@/models/interfaces/component";

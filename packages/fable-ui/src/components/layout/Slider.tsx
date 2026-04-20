@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ISliderComponent } from "@/models/interfaces/component";
-import { BaseField } from "../ui/field";
-import { BaseLabel } from "../ui/label";
-import { BaseSlider } from "../ui/slider";
+import { BaseField, BaseLabel, BaseSlider } from "@fable-ui/shared";
 
 export type TSliderProps = Exclude<ISliderComponent, "type">;
 

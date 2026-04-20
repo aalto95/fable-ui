@@ -1,6 +1,4 @@
-import { BaseCheckbox } from "@/components/ui/checkbox";
-import { BaseField } from "@/components/ui/field";
-import { BaseLabel } from "@/components/ui/label";
+import { BaseCheckbox, BaseField, BaseLabel } from "@fable-ui/shared";
 import type { ICheckboxComponent } from "@/models/interfaces/component";
 
 export type TCheckboxProps = Exclude<ICheckboxComponent, "type">;

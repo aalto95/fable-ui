@@ -1,22 +1,16 @@
 import { AlertDialog } from "radix-ui";
-import { BaseButton } from "@/components/ui/button";
+import { BaseButton } from "@/components/button";
 import { cn } from "@/lib/utils";
 
-function BaseDialog({
-  ...props
-}: React.ComponentProps<typeof AlertDialog.Root>) {
+function BaseDialog({ ...props }: React.ComponentProps<typeof AlertDialog.Root>) {
   return <AlertDialog.Root data-slot="alert-dialog" {...props} />;
 }
 
-function BaseDialogTrigger({
-  ...props
-}: React.ComponentProps<typeof AlertDialog.Trigger>) {
+function BaseDialogTrigger({ ...props }: React.ComponentProps<typeof AlertDialog.Trigger>) {
   return <AlertDialog.Trigger data-slot="alert-dialog-trigger" {...props} />;
 }
 
-function BaseDialogPortal({
-  ...props
-}: React.ComponentProps<typeof AlertDialog.Portal>) {
+function BaseDialogPortal({ ...props }: React.ComponentProps<typeof AlertDialog.Portal>) {
   return <AlertDialog.Portal data-slot="alert-dialog-portal" {...props} />;
 }
 
@@ -28,7 +22,7 @@ function BaseDialogOverlay({
     <AlertDialog.Overlay
       data-slot="alert-dialog-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "data-open:fade-in-0 data-closed:fade-out-0 fixed inset-0 z-50 bg-black/10 duration-100 data-closed:animate-out data-open:animate-in supports-backdrop-filter:backdrop-blur-xs",
         className,
       )}
       {...props}
@@ -50,7 +44,7 @@ function BaseDialogContent({
         data-slot="alert-dialog-content"
         data-size={size}
         className={cn(
-          "group/alert-dialog-content fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-background p-4 ring-1 ring-foreground/10 duration-100 outline-none data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-[size=default]:sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+          "group/alert-dialog-content data-open:fade-in-0 data-open:zoom-in-95 data-closed:fade-out-0 data-closed:zoom-out-95 fixed top-1/2 left-1/2 z-50 grid w-full -translate-x-1/2 -translate-y-1/2 gap-4 rounded-xl bg-background p-4 outline-none ring-1 ring-foreground/10 duration-100 data-[size=default]:max-w-xs data-[size=sm]:max-w-xs data-closed:animate-out data-open:animate-in data-[size=default]:sm:max-w-sm",
           className,
         )}
         {...props}
@@ -59,10 +53,7 @@ function BaseDialogContent({
   );
 }
 
-function BaseDialogHeader({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+function BaseDialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-dialog-header"
@@ -75,10 +66,7 @@ function BaseDialogHeader({
   );
 }
 
-function BaseDialogFooter({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+function BaseDialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-dialog-footer"
@@ -104,15 +92,12 @@ function BaseDialogMedia({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function BaseDialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialog.Title>) {
+function BaseDialogTitle({ className, ...props }: React.ComponentProps<typeof AlertDialog.Title>) {
   return (
     <AlertDialog.Title
       data-slot="alert-dialog-title"
       className={cn(
-        "text-base font-medium sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
+        "font-medium text-base sm:group-data-[size=default]/alert-dialog-content:group-has-data-[slot=alert-dialog-media]/alert-dialog-content:col-start-2",
         className,
       )}
       {...props}
@@ -128,7 +113,7 @@ function BaseDialogDescription({
     <AlertDialog.Description
       data-slot="alert-dialog-description"
       className={cn(
-        "text-sm text-balance text-muted-foreground md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
+        "text-balance text-muted-foreground text-sm md:text-pretty *:[a]:underline *:[a]:underline-offset-3 *:[a]:hover:text-foreground",
         className,
       )}
       {...props}
@@ -145,11 +130,7 @@ function BaseDialogAction({
   Pick<React.ComponentProps<typeof BaseButton>, "variant" | "size">) {
   return (
     <BaseButton variant={variant} size={size} asChild>
-      <AlertDialog.Action
-        data-slot="alert-dialog-action"
-        className={cn(className)}
-        {...props}
-      />
+      <AlertDialog.Action data-slot="alert-dialog-action" className={cn(className)} {...props} />
     </BaseButton>
   );
 }
@@ -163,11 +144,7 @@ function BaseDialogCancel({
   Pick<React.ComponentProps<typeof BaseButton>, "variant" | "size">) {
   return (
     <BaseButton variant={variant} size={size} asChild>
-      <AlertDialog.Cancel
-        data-slot="alert-dialog-cancel"
-        className={cn(className)}
-        {...props}
-      />
+      <AlertDialog.Cancel data-slot="alert-dialog-cancel" className={cn(className)} {...props} />
     </BaseButton>
   );
 }

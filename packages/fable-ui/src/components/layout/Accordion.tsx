@@ -1,10 +1,10 @@
-import type React from "react";
 import {
   BaseAccordion,
   BaseAccordionContent,
   BaseAccordionItem,
   BaseAccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@fable-ui/shared";
+import type React from "react";
 import type { IAccordionComponent } from "@/models/interfaces/component";
 
 export type TAccordionProps = Exclude<IAccordionComponent, "type">;

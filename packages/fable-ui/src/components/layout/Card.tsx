@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from "react";
 import {
   BaseCard,
   BaseCardContent,
@@ -6,7 +5,8 @@ import {
   BaseCardFooter,
   BaseCardHeader,
   BaseCardTitle,
-} from "@/components/ui/card";
+} from "@fable-ui/shared";
+import type { PropsWithChildren } from "react";
 import type { ICardComponent } from "@/models/interfaces/component";
 
 export type TCardProps = Exclude<ICardComponent, "type">;

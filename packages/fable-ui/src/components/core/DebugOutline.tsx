@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@fable-ui/shared";
 
 export type DebugPalette = {
   /** Tailwind outline color, e.g. `outline-fuchsia-500` (outline does not change layout). */

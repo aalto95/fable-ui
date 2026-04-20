@@ -6,11 +6,13 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/shared/package.json ./packages/shared/
 COPY packages/fable-ui/package.json ./packages/fable-ui/
 COPY apps/orchestrator/package.json ./apps/orchestrator/
 
 RUN pnpm install --frozen-lockfile --filter fable-ui-orchestrator...
 
+COPY packages/shared ./packages/shared
 COPY packages/fable-ui ./packages/fable-ui
 COPY apps/orchestrator ./apps/orchestrator
 
