@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fable-ui/shared": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
@@ -23,13 +24,9 @@
     "@types/react-dom": "catalog:",
     "@uiw/react-codemirror": "^4.25.9",
     "@vitejs/plugin-react": "catalog:",
-    "class-variance-authority": "catalog:",
-    "clsx": "catalog:",
     "fable-ui": "workspace:*",
     "lucide-react": "catalog:",
     "radix-ui": "catalog:",
-    "shadcn": "^4.3.0",
-    "tailwind-merge": "catalog:",
     "tailwindcss": "catalog:",
     "tw-animate-css": "catalog:",
     "typescript": "catalog:",

@@ -2,8 +2,10 @@
  * Default design tokens, Geist font, tw-animate, and Tailwind @theme for fable-ui (shadcn-style).
  * Import after Tailwind in your app, then add @source lines for your app source (see README).
  */
-@import "@fontsource-variable/geist/wght.css";
+@import "tailwindcss";
 @import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
 
 /* Scan built-in components for class names (path is relative to this file). */
 @source "../**/*.ts";

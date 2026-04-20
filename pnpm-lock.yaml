@@ -80,6 +80,9 @@ importers:
 
   apps/admin:
     dependencies:
+      '@fable-ui/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       react:
         specifier: 'catalog:'
         version: 19.2.5
@@ -114,12 +117,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
-      class-variance-authority:
-        specifier: 'catalog:'
-        version: 0.7.1
-      clsx:
-        specifier: 'catalog:'
-        version: 2.1.1
       fable-ui:
         specifier: workspace:*
         version: link:../../packages/fable-ui
@@ -129,12 +126,6 @@ importers:
       radix-ui:
         specifier: 'catalog:'
         version: 1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
-      shadcn:
-        specifier: ^4.3.0
-        version: 4.3.0(@types/node@25.6.0)(typescript@6.0.3)
-      tailwind-merge:
-        specifier: 'catalog:'
-        version: 3.5.0
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.2
@@ -254,6 +245,9 @@ importers:
       remark-gfm:
         specifier: ^4.0.1
         version: 4.0.1
+      shadcn:
+        specifier: ^4.3.0
+        version: 4.3.0(@types/node@25.6.0)(typescript@6.0.3)
       sonner:
         specifier: ^2.0.0
         version: 2.0.7(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
