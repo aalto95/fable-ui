@@ -2,25 +2,34 @@
   "name": "fable-ui-monorepo",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=20.10.0"
+  },
   "scripts": {
-    "fable-ui:build": "pnpm --filter fable-ui build",
+    "build": "turbo run build",
+    "fable-ui:build": "turbo run build --filter=fable-ui",
     "fable-ui:publish": "pnpm --filter fable-ui publish",
-    "web:build": "pnpm --filter fable-ui-web build",
-    "web:dev": "pnpm --filter fable-ui-web dev",
-    "web:preview": "pnpm --filter fable-ui-web preview",
-    "admin:build": "pnpm --filter fable-ui-admin build",
-    "admin:dev": "pnpm --filter fable-ui-admin dev",
-    "admin:format": "pnpm --filter fable-ui-admin format",
-    "admin:lint": "pnpm --filter fable-ui-admin lint",
-    "admin:preview": "pnpm --filter fable-ui-admin preview",
-    "orchestrator:start": "pnpm --filter fable-ui-orchestrator start",
-    "orchestrator:dev": "pnpm --filter fable-ui-orchestrator dev",
-    "orchestrator:format": "pnpm --filter fable-ui-orchestrator format",
-    "orchestrator:lint": "pnpm --filter fable-ui-orchestrator lint",
+    "web:build": "turbo run build --filter=fable-ui-web",
+    "web:dev": "turbo run dev --filter=fable-ui-web",
+    "web:preview": "turbo run preview --filter=fable-ui-web",
+    "admin:build": "turbo run build --filter=fable-ui-admin",
+    "admin:dev": "turbo run dev --filter=fable-ui-admin",
+    "admin:format": "turbo run format --filter=fable-ui-admin",
+    "admin:lint": "turbo run lint --filter=fable-ui-admin",
+    "admin:preview": "turbo run preview --filter=fable-ui-admin",
+    "orchestrator:start": "turbo run start --filter=fable-ui-orchestrator",
+    "orchestrator:dev": "turbo run dev --filter=fable-ui-orchestrator",
+    "orchestrator:format": "turbo run format --filter=fable-ui-orchestrator",
+    "orchestrator:lint": "turbo run lint --filter=fable-ui-orchestrator",
+    "vercel:web": "turbo run build --filter=fable-ui-web",
+    "vercel:admin": "turbo run build --filter=fable-ui-admin",
     "lint": "biome check .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "lint:turbo": "turbo run lint"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:"
+    "@biomejs/biome": "catalog:",
+    "turbo": "catalog:"
   }
 }

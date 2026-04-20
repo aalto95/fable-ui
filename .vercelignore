@@ -1,0 +1,6 @@
+# Keep upload/cache smaller; Vercel still runs install from lockfile on the server.
+.turbo
+**/.turbo
+**/.DS_Store
+**/coverage
+**/*.log

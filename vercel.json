@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "pnpm i",
-  "buildCommand": "pnpm fable-ui:build && pnpm web:build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm vercel:web",
   "outputDirectory": "apps/web/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
