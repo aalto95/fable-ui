@@ -34,26 +34,21 @@ export function DebugOutline({
   return (
     <div
       className={cn(
-        "group/fable-ui-debug relative z-0 box-border flex min-h-0 max-w-full flex-col self-stretch rounded-md p-1.5 outline outline-2 -outline-offset-1 outline-dashed group-hover/fable-ui-debug:z-[100]",
+        "group/fable-ui-debug relative z-0 box-border flex min-h-0 max-w-full flex-col self-stretch rounded-md p-1.5 outline outline-dashed outline-2 -outline-offset-1 group-hover/fable-ui-debug:z-[100]",
         flexPassthrough && "min-w-0 flex-1",
         palette.outline,
       )}
     >
       <div
         className={cn(
-          "pointer-events-auto mb-1 shrink-0 cursor-default self-start rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold tracking-wide shadow",
+          "pointer-events-auto mb-1 shrink-0 cursor-default self-start rounded px-1.5 py-0.5 font-mono font-semibold text-[10px] tracking-wide shadow",
           palette.bg,
           palette.text,
         )}
       >
         {label}
       </div>
-      <div
-        className={cn(
-          "flex min-h-0 w-full min-w-0 flex-col",
-          flexPassthrough && "flex-1",
-        )}
-      >
+      <div className={cn("flex min-h-0 w-full min-w-0 flex-col", flexPassthrough && "flex-1")}>
         {children}
       </div>
     </div>

@@ -27,21 +27,14 @@ const markdownProse = cn(
   "[&_pre>code]:bg-transparent [&_pre>code]:p-0 [&_pre>code]:text-[0.8125rem]",
 );
 
-export const Markdown: React.FC<TMarkdownProps> = ({
-  content,
-  hidden,
-  className,
-}) => {
+export const Markdown: React.FC<TMarkdownProps> = ({ content, hidden, className }) => {
   if (hidden || content == null || content === "") {
     return null;
   }
 
   return (
     <div className={cn(markdownProse, className)}>
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSanitize]}
-      >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}>
         {content}
       </ReactMarkdown>
     </div>

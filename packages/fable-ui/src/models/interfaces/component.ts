@@ -25,24 +25,12 @@ export interface IAction {
     confirmText?: string;
     hideCancel?: boolean;
   };
-  variant?:
-    | "default"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "destructive"
-    | "link";
+  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
 }
 
 export interface IButtonComponent extends IBaseComponent<"button"> {
   text?: string;
-  variant?:
-    | "default"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "destructive"
-    | "link";
+  variant?: "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
   size?: "default" | "sm" | "lg" | "icon";
   expand?: boolean;
   actions?: IAction[];
@@ -112,7 +100,7 @@ export interface IMarkdownComponent extends IBaseComponent<"markdown"> {
 
 export interface ITableComponent extends IBaseComponent<"table"> {
   heads?: { name: string; label: string; type: "string" | "date" }[];
-  data?: any[];
+  data?: unknown[];
   dataSource?: string;
   pageParam?: string;
   limitParam?: string;
@@ -190,6 +178,4 @@ export type TComponentsWithoutDescendants =
   | IPaginationComponent
   | ISliderComponent;
 
-export type TComponentUnion =
-  | TComponentsWithoutDescendants
-  | TComponentsWithDescendants;
+export type TComponentUnion = TComponentsWithoutDescendants | TComponentsWithDescendants;

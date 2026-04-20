@@ -16,6 +16,11 @@
     "orchestrator:start": "pnpm --filter fable-ui-orchestrator start",
     "orchestrator:dev": "pnpm --filter fable-ui-orchestrator dev",
     "orchestrator:format": "pnpm --filter fable-ui-orchestrator format",
-    "orchestrator:lint": "pnpm --filter fable-ui-orchestrator lint"
+    "orchestrator:lint": "pnpm --filter fable-ui-orchestrator lint",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.12"
   }
 }

@@ -312,7 +312,7 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
     <div className="rounded-xl border border-border/80 bg-gradient-to-b from-muted/40 to-muted/25 p-4 shadow-sm">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="me-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+          <span className="me-1 font-semibold text-[10px] text-muted-foreground uppercase tracking-wider">
             Insert
           </span>
           <Button
@@ -341,13 +341,18 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
             </Button>
           )}
           {selectedIsTable && (
-            <Button type="button" variant="outline" disabled={disabled} onClick={handleAddTableColumn}>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={disabled}
+              onClick={handleAddTableColumn}
+            >
               Add column
             </Button>
           )}
         </div>
         <div className="flex flex-wrap items-center gap-2 border-border/60 sm:border-s sm:ps-3">
-          <span className="me-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-wider">
+          <span className="me-1 font-semibold text-[10px] text-muted-foreground uppercase tracking-wider">
             Selection
           </span>
           <Button
@@ -381,9 +386,9 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
       <p className="mb-4 flex items-start gap-2 rounded-lg border border-border/50 bg-background/60 px-3 py-2 text-muted-foreground text-xs leading-snug">
         <GripVertical className="mt-0.5 size-3.5 shrink-0 opacity-70" strokeWidth={2} aria-hidden />
         <span>
-          <span className="font-medium text-foreground/90">Reorder:</span> drag the grip beside a row
-          to move it among <em className="not-italic text-foreground/80">siblings</em> only. Drop
-          lines show where it will land.
+          <span className="font-medium text-foreground/90">Reorder:</span> drag the grip beside a
+          row to move it among <em className="text-foreground/80 not-italic">siblings</em> only.
+          Drop lines show where it will land.
         </span>
       </p>
 

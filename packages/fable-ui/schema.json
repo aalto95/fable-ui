@@ -27,14 +27,7 @@
   "$defs": {
     "variant": {
       "type": "string",
-      "enum": [
-        "default",
-        "outline",
-        "secondary",
-        "ghost",
-        "destructive",
-        "link"
-      ]
+      "enum": ["default", "outline", "secondary", "ghost", "destructive", "link"]
     },
     "actionType": {
       "type": "string",

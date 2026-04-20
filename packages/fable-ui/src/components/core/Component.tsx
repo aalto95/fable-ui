@@ -2,10 +2,7 @@ import { memo, Suspense } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { useDebug } from "@/contexts/debug";
 import type { TComponentUnion } from "@/models/interfaces/component";
-import type {
-  TLayoutComponent,
-  TLeafComponent,
-} from "@/models/types/component";
+import type { TLayoutComponent, TLeafComponent } from "@/models/types/component";
 import {
   getCachedLazyBuiltinLayout,
   getCachedLazyBuiltinLeaf,
@@ -17,10 +14,7 @@ import { DebugOutline } from "./DebugOutline";
 
 type Props = TComponentUnion;
 
-const DEBUG_COLORS: Record<
-  string,
-  { outline: string; bg: string; text: string }
-> = {
+const DEBUG_COLORS: Record<string, { outline: string; bg: string; text: string }> = {
   h_stack: {
     outline: "outline-fuchsia-500",
     bg: "bg-fuchsia-500",
@@ -141,9 +135,7 @@ export const Component: React.FC<Props> = memo((props) => {
       throw new Error(`Layout component ${type} not found`);
     }
     const children =
-      type !== "form" &&
-      "descendants" in rest &&
-      Array.isArray(rest.descendants)
+      type !== "form" && "descendants" in rest && Array.isArray(rest.descendants)
         ? rest.descendants.map((child, i) => <Component key={i} {...child} />)
         : null;
     const node = <Comp {...rest}>{children}</Comp>;
@@ -162,9 +154,7 @@ export const Component: React.FC<Props> = memo((props) => {
   if (isBuiltinLayoutType(type)) {
     const LazyComp = getCachedLazyBuiltinLayout(type as TLayoutComponent);
     const children =
-      type !== "form" &&
-      "descendants" in rest &&
-      Array.isArray(rest.descendants)
+      type !== "form" && "descendants" in rest && Array.isArray(rest.descendants)
         ? rest.descendants.map((child, i) => <Component key={i} {...child} />)
         : null;
     const node = (

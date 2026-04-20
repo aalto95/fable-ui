@@ -41,7 +41,7 @@ export const Form: React.FC<TFormProps> = ({
     <FormActionsProvider formRef={formRef}>
       <form
         id={id}
-        className="flex flex-col gap-2 flex-1 w-full"
+        className="flex w-full flex-1 flex-col gap-2"
         {...rest}
         onSubmit={handleSubmit}
         ref={formRef}

@@ -22,9 +22,7 @@ export const Pagination: React.FC<TPaginationProps> = ({
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const parsedPage = Number(searchParams.get(pageParam));
-  const active = Number.isFinite(parsedPage)
-    ? Math.min(Math.max(parsedPage, 1), pages)
-    : 1;
+  const active = Number.isFinite(parsedPage) ? Math.min(Math.max(parsedPage, 1), pages) : 1;
 
   const getVisiblePages = useMemo(() => {
     const visiblePages: (number | "ellipsis")[] = [];

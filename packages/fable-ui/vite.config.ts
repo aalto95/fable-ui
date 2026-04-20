@@ -31,9 +31,7 @@ function isExternal(id: string): boolean {
   if (id.startsWith("react/")) {
     return true;
   }
-  const pkgName = id.startsWith("@")
-    ? id.split("/").slice(0, 2).join("/")
-    : id.split("/")[0];
+  const pkgName = id.startsWith("@") ? id.split("/").slice(0, 2).join("/") : id.split("/")[0];
   return external.has(pkgName ?? "");
 }
 

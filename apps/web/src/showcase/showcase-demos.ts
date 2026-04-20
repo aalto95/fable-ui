@@ -36,9 +36,7 @@ function shell(
       type: "v_stack",
       descendants: [
         { type: "title", text: heading },
-        ...(description
-          ? [{ type: "subtitle", text: description } as const]
-          : []),
+        ...(description ? [{ type: "subtitle", text: description } as const] : []),
         {
           type: "markdown",
           content: showcaseDocFor(slug),
@@ -60,21 +58,14 @@ export function showcaseSlugLabel(slug: string): string {
 export function getShowcaseUi(kind: string): TComponentUnion[] | null {
   switch (kind) {
     case "card":
-      return shell(
-        "Layout: card",
-        "Container with optional header and footer.",
-        "card",
-        [
-          {
-            type: "card",
-            title: "Example card",
-            description: "Card description text.",
-            descendants: [
-              { type: "subtitle", text: "Content inside the card layout." },
-            ],
-          },
-        ],
-      );
+      return shell("Layout: card", "Container with optional header and footer.", "card", [
+        {
+          type: "card",
+          title: "Example card",
+          description: "Card description text.",
+          descendants: [{ type: "subtitle", text: "Content inside the card layout." }],
+        },
+      ]);
     case "h-stack":
       return shell("Layout: h_stack", "Horizontal children row.", "h-stack", [
         {
@@ -140,11 +131,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         },
       ]);
     case "form":
-      return shell(
-        "Form",
-        "Fields and submit wired to form actions.",
-        "form",
-        [
+      return shell("Form", "Fields and submit wired to form actions.", "form", [
         {
           type: "form",
           title: "Sample form",
@@ -164,9 +151,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         },
       ]);
     case "input":
-      return shell("Input", undefined, "input", [
-        { type: "input", name: "name", label: "Name" },
-      ]);
+      return shell("Input", undefined, "input", [{ type: "input", name: "name", label: "Name" }]);
     case "markdown":
       return shell("Markdown", "GFM + sanitization.", "markdown", [
         {
@@ -176,11 +161,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         },
       ]);
     case "pagination":
-      return shell(
-        "Pagination",
-        "Synced with URL search params.",
-        "pagination",
-        [
+      return shell("Pagination", "Synced with URL search params.", "pagination", [
         { type: "pagination", pages: 5, pageParam: "page" },
       ]);
     case "select":
@@ -214,9 +195,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         },
       ]);
     case "title":
-      return shell("Title", undefined, "title", [
-        { type: "title", text: "Page title component" },
-      ]);
+      return shell("Title", undefined, "title", [{ type: "title", text: "Page title component" }]);
     case "textarea":
       return shell("Textarea", undefined, "textarea", [
         {

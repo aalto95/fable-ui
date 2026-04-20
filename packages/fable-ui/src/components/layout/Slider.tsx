@@ -15,9 +15,7 @@ export const Slider: React.FC<TSliderProps> = ({
   defaultValue,
   valueSuffix = "",
 }) => {
-  const [value, setValue] = useState<number[]>(
-    defaultValue ? [defaultValue] : [min],
-  );
+  const [value, setValue] = useState<number[]>(defaultValue ? [defaultValue] : [min]);
 
   useEffect(() => {
     setValue(defaultValue ? [defaultValue] : [min]);
@@ -25,7 +23,7 @@ export const Slider: React.FC<TSliderProps> = ({
 
   return (
     <BaseField>
-      <span className="flex w-full text-sm gap-2">
+      <span className="flex w-full gap-2 text-sm">
         {label && <BaseLabel htmlFor={name}>{label}</BaseLabel>}
         {value.map((v) => v + valueSuffix)}
       </span>
@@ -40,7 +38,7 @@ export const Slider: React.FC<TSliderProps> = ({
           setValue(value);
         }}
       />
-      <span className="flex w-full text-sm justify-between">
+      <span className="flex w-full justify-between text-sm">
         <div>
           {min}
           {valueSuffix}

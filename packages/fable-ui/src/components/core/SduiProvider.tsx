@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import type { ToasterProps } from "sonner";
 import { DebugProvider } from "@/contexts/debug";
-import {
-  type DialogConfig,
-  DialogProvider,
-} from "@/contexts/dialog";
+import { type DialogConfig, DialogProvider } from "@/contexts/dialog";
 import { SduiDialog } from "./SduiDialog";
 import { SduiToaster } from "./SduiToaster";
 

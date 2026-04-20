@@ -7,5 +7,5 @@ export const Subtitle: React.FC<TSubtitleProps> = ({ text, hidden }) => {
     return null;
   }
 
-  return <p className="text-sm text-muted-foreground">{text}</p>;
+  return <p className="text-muted-foreground text-sm">{text}</p>;
 };

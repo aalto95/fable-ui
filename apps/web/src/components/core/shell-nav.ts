@@ -1,9 +1,6 @@
 import type { IPage } from "fable-ui";
 
-import {
-  SHOWCASE_SLUGS,
-  showcaseSlugLabel,
-} from "../../showcase/showcase-demos";
+import { SHOWCASE_SLUGS, showcaseSlugLabel } from "../../showcase/showcase-demos";
 
 export type ShellNavItem = {
   to: string;

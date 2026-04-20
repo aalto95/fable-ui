@@ -29,10 +29,7 @@ async function parseJsonBody<T>(res: Response): Promise<T> {
   return JSON.parse(text) as T;
 }
 
-async function request<T>(
-  url: string,
-  init: HttpRequestInit & { jsonBody?: unknown },
-): Promise<T> {
+async function request<T>(url: string, init: HttpRequestInit & { jsonBody?: unknown }): Promise<T> {
   const { jsonBody, headers: initHeaders, ...rest } = init;
   const headers = new Headers(initHeaders);
 
@@ -69,11 +66,7 @@ export const http = {
     return request<T>(url, { ...init, method: "PATCH", jsonBody });
   },
 
-  delete<T>(
-    url: string,
-    jsonBody?: unknown,
-    init?: HttpRequestInit,
-  ): Promise<T> {
+  delete<T>(url: string, jsonBody?: unknown, init?: HttpRequestInit): Promise<T> {
     if (jsonBody === undefined) {
       return request<T>(url, { ...init, method: "DELETE" });
     }

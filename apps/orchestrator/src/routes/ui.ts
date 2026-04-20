@@ -4,8 +4,8 @@ import {
   ErrorResponse,
   JsonObject,
   SchemaOverrideSuccess,
-  UiOriginUpsertRequest,
   UiOriginsResponse,
+  UiOriginUpsertRequest,
   UiOverrideSuccess,
   UiSpecsResponse,
 } from "@/openapi/schemas";
@@ -36,7 +36,8 @@ const getUiOriginsRoute = createRoute({
   path: "/origins",
   tags: ["Admin", "SDUI"],
   summary: "List origin bindings",
-  description: "Returns separately managed origins and the spec id each origin resolves to (if linked).",
+  description:
+    "Returns separately managed origins and the spec id each origin resolves to (if linked).",
   operationId: "getUiOrigins",
   responses: {
     200: {

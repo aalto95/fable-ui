@@ -7,14 +7,12 @@ export type DebugContextValue = {
 
 const DebugContext = createContext<DebugContextValue | null>(null);
 
-export const DebugProvider: React.FC<
-  React.PropsWithChildren<DebugContextValue>
-> = ({ enabled, setEnabled, children }) => {
-  return (
-    <DebugContext.Provider value={{ enabled, setEnabled }}>
-      {children}
-    </DebugContext.Provider>
-  );
+export const DebugProvider: React.FC<React.PropsWithChildren<DebugContextValue>> = ({
+  enabled,
+  setEnabled,
+  children,
+}) => {
+  return <DebugContext.Provider value={{ enabled, setEnabled }}>{children}</DebugContext.Provider>;
 };
 
 export function useDebug(): DebugContextValue {

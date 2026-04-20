@@ -46,8 +46,7 @@ function fableUiLibAtAlias(): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, webAppRoot, "");
-  const siteUrl =
-    (env.VITE_SITE_URL ?? "").replace(/\/$/, "") || "http://localhost:5173";
+  const siteUrl = (env.VITE_SITE_URL ?? "").replace(/\/$/, "") || "http://localhost:5173";
 
   return {
     envPrefix: ["VITE_", "UI_"],
@@ -67,18 +66,12 @@ export default defineConfig(({ mode }) => {
       alias: {
         react: reactRoot,
         "react-dom": reactDomRoot,
-        "fable-ui/styles.css": resolve(
-          workspaceRoot,
-          "packages/fable-ui/src/styles/fable-ui.css",
-        ),
+        "fable-ui/styles.css": resolve(workspaceRoot, "packages/fable-ui/src/styles/fable-ui.css"),
         "fable-ui/register-async": resolve(
           workspaceRoot,
           "packages/fable-ui/src/register-async.ts",
         ),
-        "fable-ui/register": resolve(
-          workspaceRoot,
-          "packages/fable-ui/src/register.ts",
-        ),
+        "fable-ui/register": resolve(workspaceRoot, "packages/fable-ui/src/register.ts"),
         "fable-ui": resolve(workspaceRoot, "packages/fable-ui/src/index.ts"),
       },
     },

@@ -49,7 +49,7 @@ export const Table: React.FC<TTableProps> = ({
   const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
-  function formatValue(value: any, type?: string) {
+  function formatValue(value: unknown, type?: string) {
     if (value == null) return "";
 
     if (type === "date" && typeof value === "string") {
@@ -81,17 +81,14 @@ export const Table: React.FC<TTableProps> = ({
       .get<PaginatedListResponse>(endpoint.toString())
       .then((res) => {
         setFieldData(res.data ?? []);
-        const limitNum =
-          Number(searchParams.get(limitParam)) || defaultLimit || 10;
+        const limitNum = Number(searchParams.get(limitParam)) || defaultLimit || 10;
         const derived =
           res.totalPages ??
           (typeof res.total === "number" && limitNum > 0
             ? Math.ceil(res.total / limitNum)
             : undefined);
         setTotalPages(
-          typeof derived === "number" && Number.isFinite(derived)
-            ? derived
-            : undefined,
+          typeof derived === "number" && Number.isFinite(derived) ? derived : undefined,
         );
       })
       .catch((err: unknown) => {
@@ -112,10 +109,7 @@ export const Table: React.FC<TTableProps> = ({
   if (isLoading) return <Spinner />;
 
   const showPagination =
-    dataSource != null &&
-    totalPages != null &&
-    totalPages > 1 &&
-    Number.isFinite(totalPages);
+    dataSource != null && totalPages != null && totalPages > 1 && Number.isFinite(totalPages);
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -125,28 +119,20 @@ export const Table: React.FC<TTableProps> = ({
             {heads?.map((head, i) => (
               <BaseTableHead key={i}>{head.label}</BaseTableHead>
             ))}
-            {actions?.length && (
-              <BaseTableHead className="text-right">Actions</BaseTableHead>
-            )}
+            {actions?.length && <BaseTableHead className="text-right">Actions</BaseTableHead>}
           </BaseTableRow>
         </BaseTableHeader>
         <BaseTableBody>
           {fieldData?.map((item, i) => (
             <BaseTableRow key={i}>
               {heads?.map((head, i) => (
-                <BaseTableCell key={i}>
-                  {formatValue(item[head.name], head.type)}
-                </BaseTableCell>
+                <BaseTableCell key={i}>{formatValue(item[head.name], head.type)}</BaseTableCell>
               ))}
               <BaseTableCell className="text-right">
                 {actions?.length && (
                   <BaseDropdownMenu>
                     <BaseDropdownMenuTrigger asChild>
-                      <BaseButton
-                        variant="ghost"
-                        size="icon"
-                        className="size-8"
-                      >
+                      <BaseButton variant="ghost" size="icon" className="size-8">
                         <MoreHorizontalIcon />
                         <span className="sr-only">Open menu</span>
                       </BaseButton>
@@ -184,9 +170,7 @@ export const Table: React.FC<TTableProps> = ({
                               return;
                             }
 
-                            const dialogConfig: Partial<
-                              Exclude<DialogConfig, null>
-                            > = {
+                            const dialogConfig: Partial<Exclude<DialogConfig, null>> = {
                               title: "Confirm action",
                               description: "This action will be executed.",
                               cancelText: "Cancel",

@@ -58,8 +58,7 @@ function TreeRow({
   const selected = selectedPath !== null && pathKey(selectedPath) === pk;
   const label = nodeLabel(path, node);
   const draggable = !disabled && canDragPath(path);
-  const isDragSource =
-    dragSourcePath !== null && pathKey(dragSourcePath) === pk;
+  const isDragSource = dragSourcePath !== null && pathKey(dragSourcePath) === pk;
   const hl =
     dropHighlight?.pathKey === pk
       ? dropHighlight.place === "before"
@@ -96,8 +95,7 @@ function TreeRow({
         ref={rowRef}
         className={cn(
           "flex min-h-8 items-center gap-1 rounded-md border border-transparent transition-colors",
-          selected &&
-            "border-primary/20 bg-primary/[0.09] shadow-[inset_3px_0_0_0_var(--primary)]",
+          selected && "border-primary/20 bg-primary/[0.09] shadow-[inset_3px_0_0_0_var(--primary)]",
           !selected && "hover:border-border/80 hover:bg-muted/45",
           hl,
           hidden && "text-muted-foreground",
@@ -257,11 +255,7 @@ export function TreeRoot({
           size="sm"
           className="h-auto min-h-0 flex-1 justify-start rounded px-1.5 py-1 text-left font-medium text-[13px] text-foreground/90 hover:bg-transparent"
           disabled={disabled}
-          aria-current={
-            selectedPath !== null && pathKey(selectedPath) === pk
-              ? "true"
-              : undefined
-          }
+          aria-current={selectedPath !== null && pathKey(selectedPath) === pk ? "true" : undefined}
           onClick={() => onSelect([])}
         >
           Document

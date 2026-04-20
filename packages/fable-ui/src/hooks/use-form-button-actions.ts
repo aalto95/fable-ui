@@ -10,14 +10,10 @@ import { executeAction } from "@/lib/http-actions";
 import type { IAction } from "@/models/interfaces/component";
 
 function isNavigationOnly(actions: IAction[]): boolean {
-  return actions.every(
-    (a) => a.type === "GO_TO" || a.type === "GO_BACK" || a.type === "HIDE",
-  );
+  return actions.every((a) => a.type === "GO_TO" || a.type === "GO_BACK" || a.type === "HIDE");
 }
 
-function getActionDialogConfig(
-  actions: IAction[],
-): Partial<Exclude<DialogConfig, null>> | null {
+function getActionDialogConfig(actions: IAction[]): Partial<Exclude<DialogConfig, null>> | null {
   const action = actions.find((a) => a.dialogConfig);
   if (!action?.dialogConfig) return null;
   return action.dialogConfig;

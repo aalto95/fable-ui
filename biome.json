@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.10/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.12/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -14,6 +14,7 @@
       "!dist",
       "!build",
       "!apps/web/src/index.css",
+      "!apps/admin/src/index.css",
       "!packages/fable-ui/src/components/ui/**/*.tsx",
       "!packages/fable-ui/src/styles/fable-ui.css"
     ]
@@ -21,7 +22,8 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "lineWidth": 100
   },
   "linter": {
     "enabled": true,
@@ -31,7 +33,11 @@
         "noImgElement": "off"
       },
       "suspicious": {
-        "noArrayIndexKey": "off"
+        "noArrayIndexKey": "off",
+        "noExplicitAny": "error"
+      },
+      "nursery": {
+        "useSortedClasses": "error"
       },
       "correctness": {
         "useExhaustiveDependencies": "off"
@@ -50,6 +56,16 @@
     }
   },
   "overrides": [
+    {
+      "includes": ["apps/orchestrator/**"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useSortedClasses": "off"
+          }
+        }
+      }
+    },
     {
       "includes": ["packages/fable-ui/src/registry/builtin-lazy-loaders.ts"],
       "linter": {

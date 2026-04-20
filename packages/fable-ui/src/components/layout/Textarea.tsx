@@ -19,11 +19,7 @@ export const Textarea: React.FC<TTextareaProps> = ({
           {label} {required && <span className="text-red-500">*</span>}
         </BaseLabel>
       )}
-      <BaseTextarea
-        name={name}
-        defaultValue={defaultValue}
-        required={required}
-      />
+      <BaseTextarea name={name} defaultValue={defaultValue} required={required} />
     </BaseField>
   );
 };

@@ -17,14 +17,12 @@ export type DialogContextValue = {
 
 const DialogContext = createContext<DialogContextValue | null>(null);
 
-export const DialogProvider: React.FC<
-  React.PropsWithChildren<DialogContextValue>
-> = ({ children, config, setConfig }) => {
-  return (
-    <DialogContext.Provider value={{ config, setConfig }}>
-      {children}
-    </DialogContext.Provider>
-  );
+export const DialogProvider: React.FC<React.PropsWithChildren<DialogContextValue>> = ({
+  children,
+  config,
+  setConfig,
+}) => {
+  return <DialogContext.Provider value={{ config, setConfig }}>{children}</DialogContext.Provider>;
 };
 
 export function useDialog(): DialogContextValue {

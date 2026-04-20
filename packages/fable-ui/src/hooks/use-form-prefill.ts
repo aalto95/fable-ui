@@ -12,12 +12,7 @@ type UseFormPrefillArgs = {
   formRef: RefObject<HTMLFormElement | null>;
 };
 
-export function useFormPrefill({
-  dataSource,
-  id,
-  descendants,
-  formRef,
-}: UseFormPrefillArgs) {
+export function useFormPrefill({ dataSource, id, descendants, formRef }: UseFormPrefillArgs) {
   const [innerDescendants, setInnerDescendants] = useState(descendants);
   const [isLoading, setIsLoading] = useState(false);
 

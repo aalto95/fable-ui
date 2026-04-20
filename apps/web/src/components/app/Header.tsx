@@ -9,16 +9,13 @@ export type HeaderProps = {
   menuOpen?: boolean;
 };
 
-export const Header: React.FC<HeaderProps> = ({
-  onMenuOpen,
-  menuOpen = false,
-}) => {
+export const Header: React.FC<HeaderProps> = ({ onMenuOpen, menuOpen = false }) => {
   const { enabled, setEnabled } = useDebug();
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
   return (
-    <header className="w-full shrink-0 border-b border-border px-4 py-3 sm:py-4">
+    <header className="w-full shrink-0 border-border border-b px-4 py-3 sm:py-4">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
           {onMenuOpen ? (
@@ -36,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
             </BaseButton>
           ) : null}
           <Link to="/" className="min-w-0 truncate hover:opacity-90">
-            <h1 className="text-xl font-bold sm:text-2xl">Fable UI</h1>
+            <h1 className="font-bold text-xl sm:text-2xl">Fable UI</h1>
           </Link>
         </div>
         <div className="flex flex-wrap items-center gap-3 sm:gap-4">

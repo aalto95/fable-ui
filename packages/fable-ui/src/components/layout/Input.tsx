@@ -5,13 +5,7 @@ import type { IInputComponent } from "@/models/interfaces/component";
 
 export type TInputProps = Exclude<IInputComponent, "type">;
 
-export const Input: React.FC<TInputProps> = ({
-  name,
-  label,
-  required,
-  defaultValue,
-  hidden,
-}) => {
+export const Input: React.FC<TInputProps> = ({ name, label, required, defaultValue, hidden }) => {
   return (
     <BaseField hidden={hidden}>
       {label && (
@@ -19,11 +13,7 @@ export const Input: React.FC<TInputProps> = ({
           {label} {required && <span className="text-red-500">*</span>}
         </BaseLabel>
       )}
-      <BaseInput
-        name={name}
-        required={required}
-        defaultValue={defaultValue}
-      ></BaseInput>
+      <BaseInput name={name} required={required} defaultValue={defaultValue}></BaseInput>
     </BaseField>
   );
 };

@@ -27,7 +27,7 @@ function NavList({
         }
         return (
           <div key={group} className="mb-3 last:mb-0">
-            <p className="mb-1.5 px-2 text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">
+            <p className="mb-1.5 px-2 font-semibold text-[0.65rem] text-muted-foreground uppercase tracking-wide">
               {group}
             </p>
             <ul className="flex flex-col gap-0.5">
@@ -102,13 +102,13 @@ function MobileNavDrawer({
       />
       <aside
         id="mobile-nav-panel"
-        className="absolute inset-y-0 left-0 flex w-[min(20rem,88vw)] flex-col border-r border-border bg-background shadow-xl"
+        className="absolute inset-y-0 left-0 flex w-[min(20rem,88vw)] flex-col border-border border-r bg-background shadow-xl"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
       >
-        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-border px-3 py-3">
-          <p id={titleId} className="text-sm font-semibold text-foreground">
+        <div className="flex shrink-0 items-center justify-between gap-2 border-border border-b px-3 py-3">
+          <p id={titleId} className="font-semibold text-foreground text-sm">
             Menu
           </p>
           <BaseButton
@@ -132,9 +132,10 @@ function MobileNavDrawer({
   );
 }
 
-export const Shell: React.FC<
-  PropsWithChildren<{ navItems: ShellNavItem[] }>
-> = ({ navItems, children }) => {
+export const Shell: React.FC<PropsWithChildren<{ navItems: ShellNavItem[] }>> = ({
+  navItems,
+  children,
+}) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const location = useLocation();
   const titleId = useId();
@@ -145,17 +146,14 @@ export const Shell: React.FC<
 
   return (
     <div className="flex min-h-dvh w-full flex-col md:flex-row md:items-stretch">
-      <aside className="hidden w-56 shrink-0 overflow-y-auto border-r border-border bg-muted/20 md:flex md:min-h-dvh md:flex-col">
+      <aside className="hidden w-56 shrink-0 overflow-y-auto border-border border-r bg-muted/20 md:flex md:min-h-dvh md:flex-col">
         <div className="p-3">
           <NavList items={navItems} />
         </div>
       </aside>
 
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <Header
-          menuOpen={mobileNavOpen}
-          onMenuOpen={() => setMobileNavOpen(true)}
-        />
+        <Header menuOpen={mobileNavOpen} onMenuOpen={() => setMobileNavOpen(true)} />
         <main className="min-h-0 flex-1 overflow-auto p-4">
           <div className="mx-auto h-full w-full max-w-7xl">{children}</div>
         </main>

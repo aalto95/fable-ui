@@ -1,9 +1,4 @@
-import {
-  type IPage,
-  Renderer,
-  SduiProvider,
-  useTheme,
-} from "fable-ui";
+import { type IPage, Renderer, SduiProvider, useTheme } from "fable-ui";
 import { useMemo } from "react";
 import { Route, Routes } from "react-router";
 import { NotFound } from "./components/app/NotFound.tsx";
@@ -23,11 +18,7 @@ export const App: React.FC = () => {
   const pages: IPage[] = UI_SCHEMA_PAGES;
   const { resolvedTheme } = useTheme();
   const toasterTheme =
-    resolvedTheme === "dark"
-      ? "dark"
-      : resolvedTheme === "light"
-        ? "light"
-        : "system";
+    resolvedTheme === "dark" ? "dark" : resolvedTheme === "light" ? "light" : "system";
   const navItems = useMemo(() => buildShellNavItems(pages), [pages]);
 
   return (
@@ -40,11 +31,7 @@ export const App: React.FC = () => {
           {pages
             .filter((page) => !isRootSchemaPage(page.route))
             .map((page) => (
-              <Route
-                key={page.route}
-                path={page.route}
-                element={<Renderer ui={page.ui} />}
-              />
+              <Route key={page.route} path={page.route} element={<Renderer ui={page.ui} />} />
             ))}
           <Route path="*" element={<NotFound />} />
         </Routes>

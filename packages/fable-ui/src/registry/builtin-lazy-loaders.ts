@@ -1,17 +1,12 @@
 import type { ComponentType } from "react";
 import { type LazyExoticComponent, lazy } from "react";
-import type {
-  TLayoutComponent,
-  TLeafComponent,
-} from "@/models/types/component";
+import type { TLayoutComponent, TLeafComponent } from "@/models/types/component";
 
 type BuiltinLoader = () => Promise<{ default: ComponentType<any> }>;
 
 const BUILTIN_LAYOUT_LOADERS = {
-  card: () =>
-    import("@/components/layout/Card").then((m) => ({ default: m.Card })),
-  form: () =>
-    import("@/components/layout/Form").then((m) => ({ default: m.Form })),
+  card: () => import("@/components/layout/Card").then((m) => ({ default: m.Card })),
+  form: () => import("@/components/layout/Form").then((m) => ({ default: m.Form })),
   h_stack: () =>
     import("@/components/layout/HorizontalStack").then((m) => ({
       default: m.HorizontalStack,
@@ -27,8 +22,7 @@ const BUILTIN_LEAF_LOADERS = {
     import("@/components/layout/Accordion").then((m) => ({
       default: m.Accordion,
     })),
-  button: () =>
-    import("@/components/layout/Button").then((m) => ({ default: m.Button })),
+  button: () => import("@/components/layout/Button").then((m) => ({ default: m.Button })),
   checkbox: () =>
     import("@/components/layout/Checkbox").then((m) => ({
       default: m.Checkbox,
@@ -37,42 +31,31 @@ const BUILTIN_LEAF_LOADERS = {
     import("@/components/layout/Datepicker").then((m) => ({
       default: m.Datepicker,
     })),
-  input: () =>
-    import("@/components/layout/Input").then((m) => ({ default: m.Input })),
+  input: () => import("@/components/layout/Input").then((m) => ({ default: m.Input })),
   pagination: () =>
     import("@/components/layout/Pagination").then((m) => ({
       default: m.Pagination,
     })),
-  select: () =>
-    import("@/components/layout/Select").then((m) => ({ default: m.Select })),
-  slider: () =>
-    import("@/components/layout/Slider").then((m) => ({ default: m.Slider })),
+  select: () => import("@/components/layout/Select").then((m) => ({ default: m.Select })),
+  slider: () => import("@/components/layout/Slider").then((m) => ({ default: m.Slider })),
   subtitle: () =>
     import("@/components/layout/Subtitle").then((m) => ({
       default: m.Subtitle,
     })),
-  table: () =>
-    import("@/components/layout/Table").then((m) => ({ default: m.Table })),
+  table: () => import("@/components/layout/Table").then((m) => ({ default: m.Table })),
   textarea: () =>
     import("@/components/layout/Textarea").then((m) => ({
       default: m.Textarea,
     })),
-  title: () =>
-    import("@/components/layout/Title").then((m) => ({ default: m.Title })),
+  title: () => import("@/components/layout/Title").then((m) => ({ default: m.Title })),
   markdown: () =>
     import("@/components/layout/Markdown").then((m) => ({
       default: m.Markdown,
     })),
 } as const satisfies Record<TLeafComponent, BuiltinLoader>;
 
-const layoutLazyCache = new Map<
-  TLayoutComponent,
-  LazyExoticComponent<ComponentType<any>>
->();
-const leafLazyCache = new Map<
-  TLeafComponent,
-  LazyExoticComponent<ComponentType<any>>
->();
+const layoutLazyCache = new Map<TLayoutComponent, LazyExoticComponent<ComponentType<any>>>();
+const leafLazyCache = new Map<TLeafComponent, LazyExoticComponent<ComponentType<any>>>();
 
 export function isBuiltinLayoutType(type: string): type is TLayoutComponent {
   return type in BUILTIN_LAYOUT_LOADERS;

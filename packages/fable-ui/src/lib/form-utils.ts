@@ -46,8 +46,7 @@ export function validateRequired(form: HTMLFormElement, formData: FormData) {
       }
 
       const value = formData.get(name);
-      const isMissing =
-        value == null || (typeof value === "string" && value.trim() === "");
+      const isMissing = value == null || (typeof value === "string" && value.trim() === "");
 
       if (!isMissing) {
         return null;
@@ -91,10 +90,7 @@ export function hasNameField(field: unknown): field is { name: string } {
 }
 
 /** Applies a detail payload value to a form field with the correct prop shape per component type. */
-export function mergePrefillToField(
-  field: TComponentUnion,
-  value: unknown,
-): TComponentUnion {
+export function mergePrefillToField(field: TComponentUnion, value: unknown): TComponentUnion {
   if (!hasNameField(field) || value === undefined) {
     return field;
   }
@@ -106,9 +102,7 @@ export function mergePrefillToField(
     }
     case "checkbox": {
       const checked =
-        typeof value === "boolean"
-          ? value
-          : value === "true" || value === true || value === 1;
+        typeof value === "boolean" ? value : value === "true" || value === true || value === 1;
       return { ...field, checked };
     }
     case "input":
