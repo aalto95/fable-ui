@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -9,6 +10,11 @@ import { defineConfig, loadEnv } from "vite";
 const workspaceRoot = fileURLToPath(new URL("../..", import.meta.url));
 const webAppRoot = fileURLToPath(new URL(".", import.meta.url));
 const libSrc = resolve(workspaceRoot, "packages/fable-ui/src");
+
+/** Single React instance — required when `fable-ui` is linked from source (avoid invalid hook calls). */
+const requireFromWeb = createRequire(import.meta.url);
+const reactRoot = dirname(requireFromWeb.resolve("react/package.json"));
+const reactDomRoot = dirname(requireFromWeb.resolve("react-dom/package.json"));
 
 function resolveLibFile(subPath: string): string | undefined {
   const base = resolve(libSrc, subPath);
@@ -57,7 +63,10 @@ export default defineConfig(({ mode }) => {
       },
     ],
     resolve: {
+      dedupe: ["react", "react-dom", "react-router"],
       alias: {
+        react: reactRoot,
+        "react-dom": reactDomRoot,
         "fable-ui/styles.css": resolve(
           workspaceRoot,
           "packages/fable-ui/src/styles/fable-ui.css",
