@@ -9,7 +9,9 @@ const PORT = Number(process.env.PORT) || 3000;
 
 async function main() {
   if (!isPostgresConfigured()) {
-    console.error("DATABASE_URL is required (PostgreSQL).");
+    console.error(
+      "PostgreSQL URL required: set DATABASE_URL or Supabase POSTGRES_URL / POSTGRES_URL_NON_POOLING.",
+    );
     process.exit(1);
   }
 

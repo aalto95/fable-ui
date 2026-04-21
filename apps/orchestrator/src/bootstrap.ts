@@ -6,7 +6,9 @@ let readyPromise: Promise<void> | null = null;
 /** Connect and apply migrations (Node server startup). */
 export async function ensureOrchestratorReady(): Promise<void> {
   if (!isPostgresConfigured()) {
-    throw new Error("DATABASE_URL is required (PostgreSQL).");
+    throw new Error(
+      "PostgreSQL URL required: DATABASE_URL or POSTGRES_URL / POSTGRES_URL_NON_POOLING",
+    );
   }
   await pingPostgres();
   await runMigrations();
