@@ -7,9 +7,12 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
-/* Scan built-in components for class names (path is relative to this file). */
+/* Scan built-in components for class names (paths relative to this file). */
 @source "../**/*.ts";
 @source "../**/*.tsx";
+/* @fable-ui/shared primitives (Button, cn, …) live here — must be scanned or utilities are missing. */
+@source "../../../shared/src/**/*.ts";
+@source "../../../shared/src/**/*.tsx";
 
 @custom-variant dark (&:is(.dark *));
 

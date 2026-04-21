@@ -1,4 +1,8 @@
-@import "tailwindcss";
+/**
+ * fable-ui: tokens, Tailwind, and @source for `packages/fable-ui` + `packages/shared`.
+ * Scan this app so classes in `apps/web/src` are generated.
+ */
 @import "fable-ui/styles.css";
-@source "./**/*.ts";
-@source "./**/*.tsx";
+
+@source "../**/*.ts";
+@source "../**/*.tsx";
