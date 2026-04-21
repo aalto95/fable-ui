@@ -124,3 +124,82 @@ export function pathAfterSiblingMove(
   if (from < to) to--;
   return [...fromPI.parentPath, to];
 }
+
+/** True if `a` is a prefix of `b` (same segments for `a.length`). */
+export function pathPrefix(a: Path, b: Path): boolean {
+  if (a.length > b.length) return false;
+  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
+  return true;
+}
+
+/**
+ * After removing `deletedPath`, adjust a path to an array that may have shifted indices.
+ * Returns `null` if `parent` pointed inside the deleted subtree.
+ */
+export function mapPathAfterDelete(parent: Path, deletedPath: Path): Path | null {
+  const delPI = getParentAndIndex(deletedPath);
+  if (!delPI) return parent;
+  if (pathPrefix(deletedPath, parent) && parent.length > deletedPath.length) return null;
+  const out = [...parent];
+  const pp = delPI.parentPath;
+  if (out.length <= pp.length) return out;
+  let same = true;
+  for (let i = 0; i < pp.length; i++) {
+    if (out[i] !== pp[i]) {
+      same = false;
+      break;
+    }
+  }
+  if (!same) return out;
+  const idx = pp.length;
+  if (typeof out[idx] === "number" && typeof delPI.index === "number" && out[idx] > delPI.index) {
+    out[idx] = out[idx] - 1;
+  }
+  return out;
+}
+
+/**
+ * Move a node into another container’s child list (reparent). `containerPath` is the row
+ * you drop onto (e.g. a `v_stack`); the item is appended unless `insertIndex` is set.
+ */
+export function moveInto(
+  doc: unknown,
+  fromPath: Path,
+  parentInsert: Path,
+  insertIndex?: number,
+): { doc: unknown; nextPath: Path } | null {
+  const fromPI = getParentAndIndex(fromPath);
+  if (!fromPI) return null;
+  const item = getAt(doc, fromPath);
+  if (item === undefined) return null;
+
+  if (pathPrefix(fromPath, parentInsert) && parentInsert.length > fromPath.length) return null;
+
+  if (pathKey(fromPI.parentPath) === pathKey(parentInsert)) {
+    const arr = getAt(doc, parentInsert);
+    if (!Array.isArray(arr)) return null;
+    const from = fromPI.index;
+    let to = insertIndex ?? arr.length;
+    if (to > arr.length) to = arr.length;
+    if (to < 0) to = 0;
+    const next = [...arr];
+    const [el] = next.splice(from, 1);
+    let adjustedTo = to;
+    if (from < to) adjustedTo--;
+    if (adjustedTo < 0) adjustedTo = 0;
+    if (adjustedTo > next.length) adjustedTo = next.length;
+    next.splice(adjustedTo, 0, el);
+    return { doc: setAt(doc, parentInsert, next), nextPath: [...parentInsert, adjustedTo] };
+  }
+
+  const doc2 = deleteAt(doc, fromPath);
+  const adjustedParent = mapPathAfterDelete(parentInsert, fromPath);
+  if (adjustedParent === null) return null;
+  const arr2 = getAt(doc2, adjustedParent);
+  const len = Array.isArray(arr2) ? arr2.length : 0;
+  let idx = insertIndex ?? len;
+  if (idx < 0) idx = 0;
+  if (idx > len) idx = len;
+  const nextDoc = insertAt(doc2, adjustedParent, idx, item);
+  return { doc: nextDoc, nextPath: [...adjustedParent, idx] };
+}

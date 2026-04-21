@@ -1,5 +1,6 @@
-import { getAt, getParentAndIndex, type Path, pathKey } from "../paths";
+import { getAt, getParentAndIndex, moveInto, type Path, pathKey, pathPrefix } from "../paths";
 import { isRecord } from "../uiDocumentGuards";
+import { insertableComponentTypesFor } from "../uiSchema";
 
 /** Every path that has children in the structure tree (for “expand all”). */
 export function collectExpandablePathKeys(doc: unknown): string[] {
@@ -210,4 +211,36 @@ export function insertionTargetFor(path: Path | null, doc: unknown): { parentPat
     return { parentPath: pl.parentPath };
   }
   return null;
+}
+
+/** Whether dropping `fromPath` onto `targetPath` can reparent into that node’s child list. */
+export function canDropInto(fromPath: Path, targetPath: Path, doc: unknown): boolean {
+  if (getParentAndIndex(fromPath) === null) return false;
+  const insertTarget = insertionTargetFor(targetPath, doc);
+  if (!insertTarget) return false;
+  const parentInsert = insertTarget.parentPath;
+  if (insertableComponentTypesFor(parentInsert).length === 0) return false;
+  if (pathKey(fromPath) === pathKey(targetPath)) return false;
+  if (pathPrefix(fromPath, targetPath) && targetPath.length > fromPath.length) return false;
+  if (pathPrefix(fromPath, parentInsert) && parentInsert.length > fromPath.length) return false;
+  return true;
+}
+
+/**
+ * Reparent the node at `fromPath` into the child list of `containerPath` (append, or `insertIndex`).
+ */
+export function moveIntoContainer(
+  doc: unknown,
+  fromPath: Path,
+  containerPath: Path,
+  insertIndex?: number,
+): { doc: unknown; nextPath: Path } | null {
+  const insertTarget = insertionTargetFor(containerPath, doc);
+  if (!insertTarget) return null;
+  const parentInsert = insertTarget.parentPath;
+  if (insertableComponentTypesFor(parentInsert).length === 0) return null;
+  if (pathKey(fromPath) === pathKey(containerPath)) return null;
+  if (pathPrefix(fromPath, containerPath) && containerPath.length > fromPath.length) return null;
+  if (pathPrefix(fromPath, parentInsert) && parentInsert.length > fromPath.length) return null;
+  return moveInto(doc, fromPath, parentInsert, insertIndex);
 }

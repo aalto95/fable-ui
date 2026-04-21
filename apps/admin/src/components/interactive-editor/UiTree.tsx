@@ -1,7 +1,7 @@
 import { ChevronDown, ChevronRight, GripVertical } from "lucide-react";
 import { type DragEvent, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { childPaths, nodeLabel } from "../../lib/interactiveEditor/treeModel";
+import { canDropInto, childPaths, nodeLabel } from "../../lib/interactiveEditor/treeModel";
 import { getAt, type Path, pathKey } from "../../lib/paths";
 import { isRecord } from "../../lib/uiDocumentGuards";
 import { cn } from "../../lib/utils";
@@ -14,6 +14,7 @@ const PATH_MIME = "application/x-sdui-path";
 
 const dropBeforeClass = "shadow-[inset_0_2px_0_0_var(--primary)]";
 const dropAfterClass = "shadow-[inset_0_-2px_0_0_var(--primary)]";
+const dropIntoClass = "ring-2 ring-primary/45 ring-inset bg-primary/[0.07]";
 
 function canDragPath(path: Path): boolean {
   if (path.length < 2) return false;
@@ -24,12 +25,14 @@ function TreeRow({
   path,
   node,
   depth,
+  doc,
   selectedPath,
   onSelect,
   expanded,
   onToggle,
   disabled,
   dragSourcePath,
+  resolveDragSource,
   dropHighlight,
   onDragStartPath,
   onDragEnd,
@@ -39,17 +42,20 @@ function TreeRow({
   path: Path;
   node: unknown;
   depth: number;
+  doc: unknown;
   selectedPath: Path | null;
   onSelect: (p: Path) => void;
   expanded: Set<string>;
   onToggle: (p: Path) => void;
   disabled: boolean;
   dragSourcePath: Path | null;
-  dropHighlight: { pathKey: string; place: "before" | "after" } | null;
+  /** Prefer over `dragSourcePath` for hit-testing — ref updates before React re-renders. */
+  resolveDragSource: () => Path | null;
+  dropHighlight: { pathKey: string; place: "before" | "after" | "into" } | null;
   onDragStartPath: (path: Path) => void;
   onDragEnd: () => void;
-  onDragOverRow: (path: Path, place: "before" | "after") => void;
-  onDropOnRow: (path: Path, place: "before" | "after", e: DragEvent) => void;
+  onDragOverRow: (path: Path, place: "before" | "after" | "into") => void;
+  onDropOnRow: (path: Path, place: "before" | "after" | "into", e: DragEvent) => void;
 }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const pk = pathKey(path);
@@ -63,7 +69,9 @@ function TreeRow({
     dropHighlight?.pathKey === pk
       ? dropHighlight.place === "before"
         ? dropBeforeClass
-        : dropAfterClass
+        : dropHighlight.place === "into"
+          ? dropIntoClass
+          : dropAfterClass
       : "";
   const hidden = nodeIsHidden(node);
 
@@ -74,7 +82,18 @@ function TreeRow({
     const el = rowRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const place = e.clientY < rect.top + rect.height / 2 ? "before" : "after";
+    const y = e.clientY - rect.top;
+    const h = rect.height;
+    let place: "before" | "after" | "into";
+    const from = resolveDragSource();
+    if (from !== null && canDropInto(from, path, doc)) {
+      const t = y / h;
+      if (t < 1 / 3) place = "before";
+      else if (t < 2 / 3) place = "into";
+      else place = "after";
+    } else {
+      place = y < h / 2 ? "before" : "after";
+    }
     onDragOverRow(path, place);
   };
 
@@ -84,7 +103,18 @@ function TreeRow({
     const el = rowRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    const place = e.clientY < rect.top + rect.height / 2 ? "before" : "after";
+    const y = e.clientY - rect.top;
+    const h = rect.height;
+    let place: "before" | "after" | "into";
+    const from = resolveDragSource();
+    if (from !== null && canDropInto(from, path, doc)) {
+      const t = y / h;
+      if (t < 1 / 3) place = "before";
+      else if (t < 2 / 3) place = "into";
+      else place = "after";
+    } else {
+      place = y < h / 2 ? "before" : "after";
+    }
     onDropOnRow(path, place, e);
   };
 
@@ -131,8 +161,8 @@ function TreeRow({
             size="icon-xs"
             className="w-5 shrink-0 cursor-grab p-0.5 text-center text-muted-foreground text-xs active:cursor-grabbing"
             draggable
-            title="Drag to reorder among siblings"
-            aria-label="Drag to reorder"
+            title="Drag: top/bottom third reorders siblings; middle third on a layout drops inside"
+            aria-label="Drag to reorder or move into a container"
             onDragStart={(e) => {
               e.stopPropagation();
               onDragStartPath(path);
@@ -171,12 +201,14 @@ function TreeRow({
               path={fullPath}
               node={child}
               depth={depth + 1}
+              doc={doc}
               selectedPath={selectedPath}
               onSelect={onSelect}
               expanded={expanded}
               onToggle={onToggle}
               disabled={disabled}
               dragSourcePath={dragSourcePath}
+              resolveDragSource={resolveDragSource}
               dropHighlight={dropHighlight}
               onDragStartPath={onDragStartPath}
               onDragEnd={onDragEnd}
@@ -197,6 +229,7 @@ export function TreeRoot({
   onToggle,
   disabled,
   dragSourcePath,
+  resolveDragSource,
   dropHighlight,
   onDragStartPath,
   onDragEnd,
@@ -210,11 +243,12 @@ export function TreeRoot({
   onToggle: (p: Path) => void;
   disabled: boolean;
   dragSourcePath: Path | null;
-  dropHighlight: { pathKey: string; place: "before" | "after" } | null;
+  resolveDragSource: () => Path | null;
+  dropHighlight: { pathKey: string; place: "before" | "after" | "into" } | null;
   onDragStartPath: (path: Path) => void;
   onDragEnd: () => void;
-  onDragOverRow: (path: Path, place: "before" | "after") => void;
-  onDropOnRow: (path: Path, place: "before" | "after", e: DragEvent) => void;
+  onDragOverRow: (path: Path, place: "before" | "after" | "into") => void;
+  onDropOnRow: (path: Path, place: "before" | "after" | "into", e: DragEvent) => void;
 }) {
   const pk = pathKey([]);
   const kids = childPaths([], doc);
@@ -270,12 +304,14 @@ export function TreeRoot({
               path={subPath}
               node={child}
               depth={1}
+              doc={doc}
               selectedPath={selectedPath}
               onSelect={onSelect}
               expanded={expanded}
               onToggle={onToggle}
               disabled={disabled}
               dragSourcePath={dragSourcePath}
+              resolveDragSource={resolveDragSource}
               dropHighlight={dropHighlight}
               onDragStartPath={onDragStartPath}
               onDragEnd={onDragEnd}

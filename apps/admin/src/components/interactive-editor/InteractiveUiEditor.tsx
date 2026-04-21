@@ -21,6 +21,7 @@ import {
   countStructurePages,
   getParentListPath,
   insertionTargetFor,
+  moveIntoContainer,
 } from "../../lib/interactiveEditor/treeModel";
 import {
   deleteAt,
@@ -106,7 +107,7 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
   const [dragSourcePath, setDragSourcePath] = useState<Path | null>(null);
   const [dropHighlight, setDropHighlight] = useState<{
     pathKey: string;
-    place: "before" | "after";
+    place: "before" | "after" | "into";
   } | null>(null);
   const toggle = useCallback((path: Path) => {
     const k = pathKey(path);
@@ -196,6 +197,8 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
     setSelectedPath(null);
   }, [applyDoc, doc, selectedPath, valid]);
 
+  const resolveDragSource = useCallback((): Path | null => dragPathRef.current, []);
+
   const handleDragStartPath = useCallback((path: Path) => {
     dragPathRef.current = path;
     setDragSourcePath(path);
@@ -207,12 +210,12 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
     setDropHighlight(null);
   }, []);
 
-  const handleDragOverRow = useCallback((path: Path, place: "before" | "after") => {
+  const handleDragOverRow = useCallback((path: Path, place: "before" | "after" | "into") => {
     setDropHighlight({ pathKey: pathKey(path), place });
   }, []);
 
   const handleDropOnRow = useCallback(
-    (targetPath: Path, place: "before" | "after", e: DragEvent) => {
+    (targetPath: Path, place: "before" | "after" | "into", e: DragEvent) => {
       e.preventDefault();
       if (!doc || !valid) return;
       let fromPath = dragPathRef.current;
@@ -230,6 +233,19 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
         }
       }
       if (pathKey(fromPath) === pathKey(targetPath)) {
+        handleDragEnd();
+        return;
+      }
+      if (place === "into") {
+        const res = moveIntoContainer(doc, fromPath, targetPath, undefined);
+        if (!res) {
+          handleDragEnd();
+          return;
+        }
+        applyDoc(res.doc);
+        if (selectedPath !== null && pathKey(selectedPath) === pathKey(fromPath)) {
+          setSelectedPath(res.nextPath);
+        }
         handleDragEnd();
         return;
       }
@@ -386,9 +402,11 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
       <p className="mb-4 flex items-start gap-2 rounded-lg border border-border/50 bg-background/60 px-3 py-2 text-muted-foreground text-xs leading-snug">
         <GripVertical className="mt-0.5 size-3.5 shrink-0 opacity-70" strokeWidth={2} aria-hidden />
         <span>
-          <span className="font-medium text-foreground/90">Reorder:</span> drag the grip beside a
-          row to move it among <em className="text-foreground/80 not-italic">siblings</em> only.
-          Drop lines show where it will land.
+          <span className="font-medium text-foreground/90">Structure:</span> drag the grip — top or
+          bottom third of a row reorders <em className="text-foreground/80 not-italic">siblings</em>
+          ; middle third on a layout (e.g. <code className="text-foreground/85">v_stack</code>,{" "}
+          <code className="text-foreground/85">card</code>, page){" "}
+          <em className="not-italic">moves the node inside</em> that container (highlighted ring).
         </span>
       </p>
 
@@ -447,6 +465,7 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
               onToggle={toggle}
               disabled={disabled}
               dragSourcePath={dragSourcePath}
+              resolveDragSource={resolveDragSource}
               dropHighlight={dropHighlight}
               onDragStartPath={handleDragStartPath}
               onDragEnd={handleDragEnd}
