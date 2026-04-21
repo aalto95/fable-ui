@@ -1,6 +1,6 @@
 {
   "name": "fable-ui",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Fable UI: schema-driven React renderer for pages, forms, and pluggable components.",
   "keywords": [
     "react",
