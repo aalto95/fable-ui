@@ -1,3 +1,5 @@
+import pkg from "../../../package.json" with { type: "json" };
+
 export const Footer: React.FC = () => {
   return (
     <footer className="mt-auto w-full shrink-0 border-border border-t px-4 py-3 sm:py-4">
@@ -7,7 +9,7 @@ export const Footer: React.FC = () => {
           <span className="font-bold">Fable UI</span> by aalto95
         </p>
         <p className="text-muted-foreground">
-          <span className="font-bold">Version</span> 1.1.0
+          <span className="font-bold">Version</span> {pkg.version}
         </p>
         <p className="text-muted-foreground">
           <span className="font-bold">License</span> MIT

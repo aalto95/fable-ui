@@ -73,11 +73,25 @@ export function useFormButtonActions(actions?: IAction[]) {
         }
       };
 
+      const needsHttpBlocking = !isNavigationOnly(actions);
+      const runActionsWithBlocking = async () => {
+        if (needsHttpBlocking) {
+          ctx?.beginHttpAction();
+        }
+        try {
+          await runActions();
+        } finally {
+          if (needsHttpBlocking) {
+            ctx?.endHttpAction();
+          }
+        }
+      };
+
       const dialogFromAction = getActionDialogConfig(actions);
       const shouldConfirm = !isNavigationOnly(actions) || !!dialogFromAction;
 
       if (!shouldConfirm) {
-        void runActions().catch((e) => {
+        void runActionsWithBlocking().catch((e) => {
           toast.error(String(e));
         });
         return;
@@ -114,7 +128,7 @@ export function useFormButtonActions(actions?: IAction[]) {
             isPending: true,
           });
           try {
-            await runActions();
+            await runActionsWithBlocking();
           } catch (e) {
             toast.error(String(e));
           } finally {
