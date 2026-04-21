@@ -1,8 +1,8 @@
 import "./env";
 import { serve } from "@hono/node-server";
 import { createApp } from "@/app";
-import { runMigrations } from "@/db/migrate";
-import { closePostgres, isPostgresConfigured, pingPostgres } from "@/db/postgres";
+import { ensureOrchestratorReady } from "@/bootstrap";
+import { closePostgres, isPostgresConfigured } from "@/db/postgres";
 import { startBduiMockPing } from "@/lib/bduiMockPing";
 
 const PORT = Number(process.env.PORT) || 3000;
@@ -14,9 +14,8 @@ async function main() {
   }
 
   try {
-    await pingPostgres();
+    await ensureOrchestratorReady();
     console.log("Postgres: connection ok");
-    await runMigrations();
     console.log("Postgres: migrations applied");
   } catch (e) {
     console.error("Postgres: startup failed", e);
