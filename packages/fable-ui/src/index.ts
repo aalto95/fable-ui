@@ -56,6 +56,7 @@ export type {
   IDatepickerComponent,
   IFormComponent,
   IHStackComponent,
+  IImageComponent,
   IInputComponent,
   IMarkdownComponent,
   IPaginationComponent,

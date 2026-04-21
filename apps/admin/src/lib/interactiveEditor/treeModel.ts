@@ -52,6 +52,12 @@ export function nodeLabel(path: Path, node: unknown): string {
       const preview = line.length > max ? `${line.slice(0, max)}…` : line;
       return preview ? `markdown: ${preview}` : "markdown";
     }
+    if (t === "image") {
+      const s = typeof node.src === "string" ? node.src.trim() : "";
+      const max = 40;
+      const preview = s.length > max ? `${s.slice(0, max)}…` : s;
+      return preview ? `image: ${preview}` : "image";
+    }
     if (t === "title" || t === "subtitle")
       return `${t}: ${typeof node.text === "string" ? node.text : "…"}`;
     if ("name" in node && typeof node.name === "string") return `${t}: ${node.name}`;

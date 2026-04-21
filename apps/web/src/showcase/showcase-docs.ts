@@ -130,6 +130,23 @@ Optional \`dialogConfig\` on an action can show a confirmation dialog first.`,
 | \`required\` | \`boolean?\` | |
 | \`hidden\` | \`boolean?\` | |`,
 
+  image: `### \`image\` (leaf)
+
+**Purpose:** Display an image from a URL.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| \`type\` | \`"image"\` | |
+| \`src\` | \`string?\` | Image URL; blank skips render. |
+| \`alt\` | \`string?\` | Accessible label; \`""\` for decorative. |
+| \`className\` | \`string?\` | Wrapper classes (e.g. max width). |
+| \`imgClassName\` | \`string?\` | Classes on \`<img>\`. |
+| \`loading\` | \`"lazy"\` or \`"eager"\` | Native loading (default \`lazy\`). |
+| \`width\` / \`height\` | \`number?\` | Optional pixel attributes. |
+| \`hidden\` | \`boolean?\` | |
+
+**Behavior:** Responsive \`<img>\` in a bordered wrapper. The demo uses a placeholder URL; production apps should use trusted sources.`,
+
   markdown: `### \`markdown\` (leaf)
 
 **Purpose:** Render **GitHub Flavored Markdown** (tables, lists, fenced code, task lists, etc.).

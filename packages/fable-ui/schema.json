@@ -231,6 +231,38 @@
         "hidden": { "type": "boolean" }
       }
     },
+    "imageComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "image" },
+        "src": {
+          "type": "string",
+          "description": "Image URL. If missing or empty, nothing is rendered."
+        },
+        "alt": {
+          "type": "string",
+          "description": "Accessible description; use empty string for decorative images when appropriate."
+        },
+        "className": {
+          "type": "string",
+          "description": "Extra classes on the wrapper (layout, max width)."
+        },
+        "imgClassName": {
+          "type": "string",
+          "description": "Extra classes on the img element."
+        },
+        "loading": {
+          "type": "string",
+          "enum": ["eager", "lazy"],
+          "description": "Native loading attribute (default lazy)."
+        },
+        "width": { "type": "number", "description": "Mapped to img width (pixels)." },
+        "height": { "type": "number", "description": "Mapped to img height (pixels)." },
+        "hidden": { "type": "boolean" }
+      }
+    },
     "tableComponent": {
       "type": "object",
       "additionalProperties": false,
@@ -358,6 +390,7 @@
         { "$ref": "#/$defs/titleComponent" },
         { "$ref": "#/$defs/subtitleComponent" },
         { "$ref": "#/$defs/markdownComponent" },
+        { "$ref": "#/$defs/imageComponent" },
         { "$ref": "#/$defs/tableComponent" },
         { "$ref": "#/$defs/accordionComponent" },
         { "$ref": "#/$defs/paginationComponent" },

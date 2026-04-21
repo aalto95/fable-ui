@@ -98,6 +98,24 @@ export interface IMarkdownComponent extends IBaseComponent<"markdown"> {
   className?: string;
 }
 
+export interface IImageComponent extends IBaseComponent<"image"> {
+  /** Image URL. If missing or blank, nothing is rendered. */
+  src?: string;
+  /** Accessible description; use empty string for decorative images when appropriate. */
+  alt?: string;
+  hidden?: boolean;
+  /** Extra classes on the wrapper (layout, max width). */
+  className?: string;
+  /** Extra classes on the `<img>` element. */
+  imgClassName?: string;
+  /** Native lazy loading (default `lazy`). */
+  loading?: "eager" | "lazy";
+  /** Mapped to the `<img>` `width` attribute (pixels). */
+  width?: number;
+  /** Mapped to the `<img>` `height` attribute (pixels). */
+  height?: number;
+}
+
 export interface ITableComponent extends IBaseComponent<"table"> {
   heads?: { name: string; label: string; type: "string" | "date" }[];
   data?: unknown[];
@@ -170,6 +188,7 @@ export type TComponentsWithoutDescendants =
   | ITitleComponent
   | ISubtitleComponent
   | IMarkdownComponent
+  | IImageComponent
   | ISelectComponent
   | IDatepickerComponent
   | ICheckboxComponent

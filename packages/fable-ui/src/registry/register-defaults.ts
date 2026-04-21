@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/layout/Checkbox";
 import { Datepicker } from "@/components/layout/Datepicker";
 import { Form } from "@/components/layout/Form";
 import { HorizontalStack } from "@/components/layout/HorizontalStack";
+import { Image } from "@/components/layout/Image";
 import { Input } from "@/components/layout/Input";
 import { Markdown } from "@/components/layout/Markdown";
 import { Pagination } from "@/components/layout/Pagination";
@@ -43,6 +44,7 @@ export function registerDefaultComponents(): void {
     .registerLeaf("button", Button)
     .registerLeaf("checkbox", Checkbox)
     .registerLeaf("datepicker", Datepicker)
+    .registerLeaf("image", Image)
     .registerLeaf("input", Input)
     .registerLeaf("markdown", Markdown)
     .registerLeaf("pagination", Pagination)

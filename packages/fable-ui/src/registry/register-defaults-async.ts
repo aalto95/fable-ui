@@ -20,6 +20,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     { Datepicker },
     { Form },
     { HorizontalStack },
+    { Image },
     { Input },
     { Markdown },
     { Pagination },
@@ -38,6 +39,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     import("../components/layout/Datepicker"),
     import("../components/layout/Form"),
     import("../components/layout/HorizontalStack"),
+    import("../components/layout/Image"),
     import("../components/layout/Input"),
     import("../components/layout/Markdown"),
     import("../components/layout/Pagination"),
@@ -61,6 +63,7 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     .registerLeaf("button", Button)
     .registerLeaf("checkbox", Checkbox)
     .registerLeaf("datepicker", Datepicker)
+    .registerLeaf("image", Image)
     .registerLeaf("input", Input)
     .registerLeaf("markdown", Markdown)
     .registerLeaf("pagination", Pagination)

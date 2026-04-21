@@ -5,6 +5,7 @@ export type TLeafComponent =
   | "button"
   | "checkbox"
   | "datepicker"
+  | "image"
   | "input"
   | "markdown"
   | "pagination"

@@ -385,6 +385,90 @@ export function PropertyPanel({
           </p>
         </div>
       );
+    case "image":
+      return (
+        <div className={formStackClass}>
+          <Field label="src (URL)">
+            <input
+              className={inputClass}
+              type="text"
+              disabled={disabled}
+              value={str(node.src)}
+              onChange={(e) => patch({ src: e.target.value })}
+            />
+          </Field>
+          <Field label="alt">
+            <input
+              className={inputClass}
+              type="text"
+              disabled={disabled}
+              value={str(node.alt)}
+              onChange={(e) => patch({ alt: e.target.value })}
+            />
+          </Field>
+          <Field label="className (wrapper)">
+            <input
+              className={inputClass}
+              type="text"
+              disabled={disabled}
+              value={str(node.className)}
+              onChange={(e) => patch({ className: e.target.value })}
+            />
+          </Field>
+          <Field label="imgClassName">
+            <input
+              className={inputClass}
+              type="text"
+              disabled={disabled}
+              value={str(node.imgClassName)}
+              onChange={(e) => patch({ imgClassName: e.target.value })}
+            />
+          </Field>
+          <Field label="loading">
+            <PropSelect
+              disabled={disabled}
+              value={str(node.loading) || "lazy"}
+              onValueChange={(v) => patch({ loading: v })}
+              options={[
+                { value: "lazy", label: "lazy" },
+                { value: "eager", label: "eager" },
+              ]}
+            />
+          </Field>
+          <Field label="width (px)">
+            <input
+              className={inputClass}
+              type="number"
+              disabled={disabled}
+              value={typeof node.width === "number" ? String(node.width) : ""}
+              onChange={(e) => {
+                const v = e.target.value;
+                patch({ width: v === "" ? undefined : Number(v) });
+              }}
+            />
+          </Field>
+          <Field label="height (px)">
+            <input
+              className={inputClass}
+              type="number"
+              disabled={disabled}
+              value={typeof node.height === "number" ? String(node.height) : ""}
+              onChange={(e) => {
+                const v = e.target.value;
+                patch({ height: v === "" ? undefined : Number(v) });
+              }}
+            />
+          </Field>
+          <PropCheckboxRow
+            path={path}
+            idSuffix="hidden-img"
+            disabled={disabled}
+            checked={bool(node.hidden)}
+            onCheckedChange={(next) => patch({ hidden: next })}
+            label="hidden"
+          />
+        </div>
+      );
     case "button":
       return (
         <div className={formStackClass}>

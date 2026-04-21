@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **`image` (leaf)** — Built-in **`image`** node: responsive **`<img>`** from **`src`**, optional **`alt`**, wrapper / **`imgClassName`**, **`loading`**, **`width`** / **`height`**, **`hidden`**. Documented in **`COMPONENTS.md`** and **`schema.json`**.
 - **`button` (schema)** — While an HTTP-backed action runs inside **`Form`**, **`button`** nodes with **`actions`** are disabled and exposed as busy (**`aria-busy`**) via **`FormActionsProvider`** pending state, so users cannot trigger duplicate requests.
 
 ## [1.2.0] - 2026-04-13

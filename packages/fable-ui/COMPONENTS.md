@@ -139,6 +139,25 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 
 ---
 
+### `image`
+
+**Purpose:** Display an image from a URL (hero, illustration, avatar, etc.).
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `type` | `"image"` | |
+| `src` | `string?` | Image URL. If missing or blank, nothing is rendered. |
+| `alt` | `string?` | Accessible text; use `""` for decorative images when appropriate. |
+| `className` | `string?` | Extra classes on the wrapper (layout, max width). |
+| `imgClassName` | `string?` | Extra classes on the `<img>`. |
+| `loading` | `"lazy"` \| `"eager"` | Native lazy loading (default **`lazy`**). |
+| `width` / `height` | `number?` | Optional intrinsic size (pixel attributes on `<img>`). |
+| `hidden` | `boolean?` | |
+
+**Behavior:** Renders a bordered, rounded wrapper and a responsive `<img>` (`max-w-full`, `object-contain`). Does not fetch or optimize URLs; the app is responsible for trusted `src` values (CDN, same-origin, etc.).
+
+---
+
 ### `button`
 
 **Purpose:** Clickable button; can submit a parent form or run **`actions`**.

@@ -100,6 +100,11 @@ const DEBUG_COLORS: Record<string, { outline: string; bg: string; text: string }
     bg: "bg-slate-500",
     text: "text-white",
   },
+  image: {
+    outline: "outline-pink-400",
+    bg: "bg-pink-400",
+    text: "text-white",
+  },
 };
 
 const DEFAULT_DEBUG = {

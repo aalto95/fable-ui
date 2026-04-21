@@ -12,6 +12,7 @@ export const SHOWCASE_SLUGS = [
   "checkbox",
   "datepicker",
   "form",
+  "image",
   "input",
   "markdown",
   "pagination",
@@ -152,6 +153,20 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
       ]);
     case "input":
       return shell("Input", undefined, "input", [{ type: "input", name: "name", label: "Name" }]);
+    case "image":
+      return shell(
+        "Image",
+        "Responsive figure from a URL; lazy-loaded by default.",
+        "image",
+        [
+          {
+            type: "image",
+            src: "https://picsum.photos/seed/fable-ui/640/360",
+            alt: "Random sample photo from picsum.photos",
+            className: "max-w-md",
+          },
+        ],
+      );
     case "markdown":
       return shell("Markdown", "GFM + sanitization.", "markdown", [
         {

@@ -31,6 +31,7 @@ const BUILTIN_LEAF_LOADERS = {
     import("@/components/layout/Datepicker").then((m) => ({
       default: m.Datepicker,
     })),
+  image: () => import("@/components/layout/Image").then((m) => ({ default: m.Image })),
   input: () => import("@/components/layout/Input").then((m) => ({ default: m.Input })),
   pagination: () =>
     import("@/components/layout/Pagination").then((m) => ({
