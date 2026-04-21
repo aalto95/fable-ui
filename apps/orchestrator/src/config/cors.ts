@@ -3,7 +3,7 @@ import * as uiOriginsRepo from "@/db/uiOriginsRepo";
 import * as uiSpecsRepo from "@/db/uiSpecsRepo";
 
 const DEFAULT_ALLOWED_ORIGINS = new Set([
-  "https://sdui-admin-tau.vercel.app",
+  "https://fable-ui-admin.vercel.app",
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://localhost:5174",
