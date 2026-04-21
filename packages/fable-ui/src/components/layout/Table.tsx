@@ -13,7 +13,7 @@ import {
   Spinner,
 } from "@fable-ui/shared";
 import { MoreHorizontalIcon } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import { Pagination } from "@/components/layout/Pagination";
@@ -46,8 +46,8 @@ export const Table: React.FC<TTableProps> = ({
   const { setConfig } = useDialog();
   const [searchParams] = useSearchParams();
   const search = searchParams.toString();
-  const [fieldData, setFieldData] = useState<TableRow[]>(
-    () => (Array.isArray(data) ? (data as TableRow[]) : []),
+  const [fieldData, setFieldData] = useState<TableRow[]>(() =>
+    Array.isArray(data) ? (data as TableRow[]) : [],
   );
   const [totalPages, setTotalPages] = useState<number | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(false);
@@ -150,8 +150,7 @@ export const Table: React.FC<TTableProps> = ({
                           key={i}
                           variant={action?.variant as "default" | "destructive"}
                           onClick={() => {
-                            const rowId =
-                              item.id == null ? undefined : String(item.id);
+                            const rowId = item.id == null ? undefined : String(item.id);
                             const runAction = async () => {
                               await executeAction(action, {
                                 form: null,

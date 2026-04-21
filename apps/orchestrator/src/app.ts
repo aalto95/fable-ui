@@ -83,6 +83,9 @@ export function createApp() {
     ),
   );
 
+  // Vercel and browsers often hit `/` first; without this the root returns 404.
+  app.get("/", (c) => c.redirect("/docs"));
+
   app.route("/ui", uiRoutes);
 
   app.get("/docs", async (c) => {
