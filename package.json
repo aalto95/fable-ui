@@ -22,8 +22,9 @@
     "orchestrator:dev": "turbo run dev --filter=fable-ui-orchestrator",
     "orchestrator:format": "turbo run format --filter=fable-ui-orchestrator",
     "orchestrator:lint": "turbo run lint --filter=fable-ui-orchestrator",
-    "vercel:web": "turbo run build --filter=fable-ui-web",
-    "vercel:admin": "turbo run build --filter=fable-ui-admin",
+    "vercel:web": "turbo run build --filter=...fable-ui-web",
+    "vercel:admin": "turbo run build --filter=...fable-ui-admin",
+    "vercel:orchestrator": "turbo run build --filter=...fable-ui-orchestrator",
     "lint": "biome check .",
     "format": "biome format --write .",
     "lint:turbo": "turbo run lint"
