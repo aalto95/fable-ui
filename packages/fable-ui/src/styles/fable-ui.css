@@ -10,9 +10,12 @@
 /* Scan built-in components for class names (paths relative to this file). */
 @source "../**/*.ts";
 @source "../**/*.tsx";
-/* fable-shared primitives (Button, cn, …) live here — must be scanned or utilities are missing. */
+/* fable-shared primitives (Button, cn, ...) live here - must be scanned or utilities are missing. */
 @source "../../../shared/src/**/*.ts";
 @source "../../../shared/src/**/*.tsx";
+/* When fable-ui is consumed from node_modules, shared lives under node_modules/fable-shared. */
+@source "../../../fable-shared/src/**/*.ts";
+@source "../../../fable-shared/src/**/*.tsx";
 
 @custom-variant dark (&:is(.dark *));
 

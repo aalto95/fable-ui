@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.6] - 2026-04-21
+
+### Fixed
+
+- **`fable-ui/styles.css`** — Added `@source` paths for both monorepo and installed `node_modules/fable-shared` layouts so Tailwind includes shared primitive utility classes in production builds.
+
 ## [1.3.5] - 2026-04-21
 
 ### Changed
