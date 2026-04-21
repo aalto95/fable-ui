@@ -1,1 +1,1 @@
-export { cn } from "@fable-ui/shared";
+export { cn } from "fable-shared";

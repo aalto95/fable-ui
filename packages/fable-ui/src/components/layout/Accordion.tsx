@@ -3,7 +3,7 @@ import {
   BaseAccordionContent,
   BaseAccordionItem,
   BaseAccordionTrigger,
-} from "@fable-ui/shared";
+} from "fable-shared";
 import type React from "react";
 import type { IAccordionComponent } from "@/models/interfaces/component";
 

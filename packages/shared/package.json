@@ -1,5 +1,5 @@
 {
-  "name": "@fable-ui/shared",
+  "name": "fable-shared",
   "version": "1.2.0",
   "publishConfig": {
     "access": "public"

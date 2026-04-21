@@ -1,4 +1,4 @@
-import { BaseButton } from "@fable-ui/shared";
+import { BaseButton } from "fable-shared";
 import { useFormActionsContext } from "@/contexts/form-actions";
 import { useFormButtonActions } from "@/hooks/use-form-button-actions";
 import type { IButtonComponent } from "@/models/interfaces/component";

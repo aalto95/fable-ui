@@ -1,4 +1,4 @@
-import { Spinner } from "@fable-ui/shared";
+import { Spinner } from "fable-shared";
 import type { SubmitEventHandler } from "react";
 import { useCallback, useRef } from "react";
 import { useParams } from "react-router";

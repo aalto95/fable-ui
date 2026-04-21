@@ -11,7 +11,7 @@ import {
   BaseTableHeader,
   BaseTableRow,
   Spinner,
-} from "@fable-ui/shared";
+} from "fable-shared";
 import { MoreHorizontalIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";

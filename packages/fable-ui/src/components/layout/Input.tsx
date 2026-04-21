@@ -1,4 +1,4 @@
-import { BaseField, BaseInput, BaseLabel } from "@fable-ui/shared";
+import { BaseField, BaseInput, BaseLabel } from "fable-shared";
 import type { IInputComponent } from "@/models/interfaces/component";
 
 export type TInputProps = Exclude<IInputComponent, "type">;

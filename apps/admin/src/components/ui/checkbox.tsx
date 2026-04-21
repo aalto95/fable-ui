@@ -1,1 +1,1 @@
-export { BaseCheckbox as Checkbox } from "@fable-ui/shared";
+export { BaseCheckbox as Checkbox } from "fable-shared";

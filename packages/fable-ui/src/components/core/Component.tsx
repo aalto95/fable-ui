@@ -1,4 +1,4 @@
-import { Spinner } from "@fable-ui/shared";
+import { Spinner } from "fable-shared";
 import { memo, Suspense } from "react";
 import { useDebug } from "@/contexts/debug";
 import type { TComponentUnion } from "@/models/interfaces/component";

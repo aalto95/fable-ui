@@ -1,4 +1,4 @@
-import { BaseField, BaseLabel, BaseSelect, BaseSelectOption, cn } from "@fable-ui/shared";
+import { BaseField, BaseLabel, BaseSelect, BaseSelectOption, cn } from "fable-shared";
 import type { ISelectComponent } from "@/models/interfaces/component";
 
 export type TSelectProps = Exclude<ISelectComponent, "type">;

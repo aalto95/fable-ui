@@ -1,4 +1,4 @@
-import { BaseField, BaseLabel, BaseTextarea } from "@fable-ui/shared";
+import { BaseField, BaseLabel, BaseTextarea } from "fable-shared";
 import type { ITextareaComponent } from "@/models/interfaces/component";
 
 export type TTextareaProps = Exclude<ITextareaComponent, "type">;

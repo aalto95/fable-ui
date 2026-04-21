@@ -6,7 +6,7 @@ import {
   BasePaginationLink,
   BasePaginationNext,
   BasePaginationPrevious,
-} from "@fable-ui/shared";
+} from "fable-shared";
 import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import type { IPaginationComponent } from "@/models/interfaces/component";

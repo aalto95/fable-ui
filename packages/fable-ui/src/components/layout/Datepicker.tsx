@@ -1,4 +1,4 @@
-import { BaseField, BaseInput, BaseLabel } from "@fable-ui/shared";
+import { BaseField, BaseInput, BaseLabel } from "fable-shared";
 import type { IDatepickerComponent } from "@/models/interfaces/component";
 
 export type TDatepickerProps = Exclude<IDatepickerComponent, "type">;

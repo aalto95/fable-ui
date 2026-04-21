@@ -1,4 +1,4 @@
-import { cn } from "@fable-ui/shared";
+import { cn } from "fable-shared";
 import ReactMarkdown from "react-markdown";
 import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";

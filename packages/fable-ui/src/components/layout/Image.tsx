@@ -1,4 +1,4 @@
-import { cn } from "@fable-ui/shared";
+import { cn } from "fable-shared";
 
 import type { IImageComponent } from "@/models/interfaces/component";
 

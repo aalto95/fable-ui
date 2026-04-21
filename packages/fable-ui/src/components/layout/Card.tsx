@@ -5,7 +5,7 @@ import {
   BaseCardFooter,
   BaseCardHeader,
   BaseCardTitle,
-} from "@fable-ui/shared";
+} from "fable-shared";
 import type { PropsWithChildren } from "react";
 import type { ICardComponent } from "@/models/interfaces/component";
 

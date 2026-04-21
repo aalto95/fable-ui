@@ -7,7 +7,7 @@ import {
   BaseDialogFooter,
   BaseDialogHeader,
   BaseDialogTitle,
-} from "@fable-ui/shared";
+} from "fable-shared";
 import { useDialog } from "@/contexts/dialog";
 
 export const SduiDialog: React.FC = () => {

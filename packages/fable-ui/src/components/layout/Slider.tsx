@@ -1,4 +1,4 @@
-import { BaseField, BaseLabel, BaseSlider } from "@fable-ui/shared";
+import { BaseField, BaseLabel, BaseSlider } from "fable-shared";
 import { useEffect, useState } from "react";
 import type { ISliderComponent } from "@/models/interfaces/component";
 

@@ -19,7 +19,7 @@ export {
   BaseEmptyMedia,
   BaseEmptyTitle,
   cn,
-} from "@fable-ui/shared";
+} from "fable-shared";
 export {
   type Attribute,
   ThemeProvider,

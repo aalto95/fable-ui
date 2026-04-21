@@ -62,7 +62,7 @@
     "tailwindcss": "^4.0.0"
   },
   "dependencies": {
-    "@fable-ui/shared": "workspace:*",
+    "fable-shared": "workspace:*",
     "@fontsource-variable/geist": "catalog:",
     "lucide-react": "catalog:",
     "tw-animate-css": "catalog:",
