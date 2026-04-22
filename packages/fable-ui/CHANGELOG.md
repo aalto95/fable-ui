@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **`Renderer`** — The `ui` prop now accepts either a single component object or an array of components, so callers can render one node without wrapping it in an array.
+
 ## [1.3.6] - 2026-04-21
 
 ### Fixed
