@@ -65,7 +65,7 @@ See `.env.example` for the full list. Highlights:
 
 OpenAPI is generated from Zod route definitions (`createRoute` + `OpenAPIHono`).
 
-## Project layout
+## Project branch
 
 ```
 src/

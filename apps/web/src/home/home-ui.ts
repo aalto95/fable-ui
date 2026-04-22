@@ -11,13 +11,13 @@ export const HOME_UI: TComponentUnion[] = [
       },
       {
         type: "subtitle",
-        text: "Schema-driven layouts, built-in components, and Markdown — explore from the sidebar.",
+        text: "Schema-driven branches, built-in components, and Markdown — explore from the sidebar.",
       },
       {
         type: "card",
         title: "Get started",
         description:
-          "Browse Docs for an overview, or open Components to see each built-in leaf and layout in isolation.",
+          "Browse Docs for an overview, or open Components to see each built-in leaf and branch in isolation.",
         descendants: [
           {
             type: "h_stack",

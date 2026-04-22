@@ -404,7 +404,7 @@ export default function InteractiveUiEditor({ uiJson, onUiJsonChange, disabled =
         <span>
           <span className="font-medium text-foreground/90">Structure:</span> drag the grip — top or
           bottom third of a row reorders <em className="text-foreground/80 not-italic">siblings</em>
-          ; middle third on a layout (e.g. <code className="text-foreground/85">v_stack</code>,{" "}
+          ; middle third on a branch (e.g. <code className="text-foreground/85">v_stack</code>,{" "}
           <code className="text-foreground/85">card</code>, page){" "}
           <em className="not-italic">moves the node inside</em> that container (highlighted ring).
         </span>

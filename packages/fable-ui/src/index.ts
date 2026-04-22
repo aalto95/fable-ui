@@ -36,8 +36,8 @@ export {
   type SduiProviderProps,
 } from "./components/core/SduiProvider";
 export { SduiToaster } from "./components/core/SduiToaster";
-export type { TMarkdownProps } from "./components/layout/Markdown";
-export { Markdown } from "./components/layout/Markdown";
+export type { TMarkdownProps } from "./components/leaf/Markdown";
+export { Markdown } from "./components/leaf/Markdown";
 export { DebugProvider, useDebug } from "./contexts/debug";
 export {
   type DialogConfig,
@@ -71,12 +71,12 @@ export type {
 } from "./models/interfaces/component";
 export type { IPage } from "./models/interfaces/page";
 export type {
+  TBranchComponent,
   TComponent,
-  TLayoutComponent,
   TLeafComponent,
 } from "./models/types/component";
 export {
-  isBuiltinLayoutType,
+  isBuiltinBranchType,
   isBuiltinLeafType,
   preloadBuiltinComponent,
 } from "./registry/builtin-lazy-loaders";

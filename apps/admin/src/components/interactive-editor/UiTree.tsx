@@ -161,7 +161,7 @@ function TreeRow({
             size="icon-xs"
             className="w-5 shrink-0 cursor-grab p-0.5 text-center text-muted-foreground text-xs active:cursor-grabbing"
             draggable
-            title="Drag: top/bottom third reorders siblings; middle third on a layout drops inside"
+            title="Drag: top/bottom third reorders siblings; middle third on a branch drops inside"
             aria-label="Drag to reorder or move into a container"
             onDragStart={(e) => {
               e.stopPropagation();

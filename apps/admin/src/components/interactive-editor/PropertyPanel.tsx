@@ -876,7 +876,7 @@ export function PropertyPanel({
     case "v_stack":
       return (
         <p className={cn(emptyStateClass, "text-xs")}>
-          Layout container — add children via toolbar.
+          Branch container — add children via toolbar.
         </p>
       );
     case "form":

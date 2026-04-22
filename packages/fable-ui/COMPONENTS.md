@@ -9,7 +9,7 @@ For setup (install, `Renderer`, registry), see [README.md](./README.md).
 ## How nodes work
 
 - Each UI node is a JSON object with a required **`type`** string (`TComponent`).
-- **Layouts** nest other nodes via **`descendants`**: `card`, `form`, `h_stack`, `v_stack`. (The **`form`** layout renders its tree internally so prefill can update nested field props.)
+- **Branches** nest other nodes via **`descendants`**: `card`, `form`, `h_stack`, `v_stack`. (The **`form`** branch renders its tree internally so prefill can update nested field props.)
 - **Leaves** have no `descendants`; they render controls or content only.
 - The **`Component`** resolver loads a React implementation either from **`componentRegistry`** (your registrations) or from **lazy built-ins** (code-split chunks) when the kind matches a known built-in name.
 
@@ -39,7 +39,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 
 ---
 
-## Layouts
+## Branches
 
 ### `card`
 
@@ -79,7 +79,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 | `type` | `"v_stack"` | |
 | `descendants` | `TComponentUnion[]?` | Children stacked vertically with gap. |
 
-**Behavior:** Default layout for page sections (titles, forms, paragraphs).
+**Behavior:** Default branch for page sections (titles, forms, paragraphs).
 
 ---
 
@@ -92,7 +92,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 | `type` | `"form"` | |
 | `title` | `string?` | Heading above the body. |
 | `dataSource` | `string?` | Base URL for **`GET ${dataSource}/:id`** when route param **`id`** exists (prefill). |
-| `descendants` | `TComponentUnion[]?` | Form controls, buttons, and nested layouts. |
+| `descendants` | `TComponentUnion[]?` | Form controls, buttons, and nested branches. |
 
 **Behavior:** Uses **`FormActionsProvider`** so buttons inside can run HTTP actions with the form DOM. Prefill walks **`descendants` recursively** (named inputs inside stacks/cards get **`defaultValue`** / **`checked`** merged from the API payload). Shows a loading state while fetching. **`id`** comes from React Router **`useParams()`**.
 
@@ -148,7 +148,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 | `type` | `"image"` | |
 | `src` | `string?` | Image URL. If missing or blank, nothing is rendered. |
 | `alt` | `string?` | Accessible text; use `""` for decorative images when appropriate. |
-| `className` | `string?` | Extra classes on the wrapper (layout, max width). |
+| `className` | `string?` | Extra classes on the wrapper (branch, max width). |
 | `imgClassName` | `string?` | Extra classes on the `<img>`. |
 | `loading` | `"lazy"` \| `"eager"` | Native lazy loading (default **`lazy`**). |
 | `width` / `height` | `number?` | Optional intrinsic size (pixel attributes on `<img>`). |
@@ -171,7 +171,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 | `expand` | `boolean?` | Full width when true. |
 | `actions` | `IAction[]?` | On click, runs these (navigation, HTTP, etc.). |
 
-**Behavior:** If **`actions`** are present, the button is `type="button"` and handlers run from the action pipeline (with React Router **`navigate`** and optional **`useDialog`**). If there are no actions and the button is inside a **form**, it may act as submit depending on layout code paths.
+**Behavior:** If **`actions`** are present, the button is `type="button"` and handlers run from the action pipeline (with React Router **`navigate`** and optional **`useDialog`**). If there are no actions and the button is inside a **form**, it may act as submit depending on branch code paths.
 
 ---
 
@@ -317,7 +317,7 @@ Buttons with **`actions`** use client-side handlers (navigation, HTTP, etc.); su
 
 ## Custom kinds
 
-Register your own React components with **`componentRegistry.registerLayout(name, Component)`** or **`registerLeaf(name, Component)`**. Layout components receive React **`children`** built from **`descendants`**, except the built-in **`form`** layout (it receives **`descendants`** as props and renders the tree itself for prefill). Leaf components receive the rest of the props object (everything except **`type`**).
+Register your own React components with **`componentRegistry.registerBranch(name, Component)`** or **`registerLeaf(name, Component)`**. Branch components receive React **`children`** built from **`descendants`**, except the built-in **`form`** branch (it receives **`descendants`** as props and renders the tree itself for prefill). Leaf components receive the rest of the props object (everything except **`type`**).
 
 ---
 

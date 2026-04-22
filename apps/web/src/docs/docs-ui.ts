@@ -15,7 +15,7 @@ export const DOCS_UI: TComponentUnion[] = [
       },
       {
         type: "subtitle",
-        text: "Schema-driven React: load pages from JSON, render forms and layouts from a pluggable component registry.",
+        text: "Schema-driven React: load pages from JSON, render forms and branches from a pluggable component registry.",
       },
       {
         type: "markdown",
@@ -37,7 +37,7 @@ export const DOCS_UI: TComponentUnion[] = [
         type: "card",
         title: "Built-in kinds",
         description:
-          "Layouts: card, form, h_stack, v_stack. Leaves include markdown, image, input, button, table, accordion, title, subtitle, and more. Open Components in the sidebar: each showcase page documents props and behavior, then a Demo section with a live example. The fable-ui package also ships COMPONENTS.md with the same reference.",
+          "Branches: card, form, h_stack, v_stack. Leaves include markdown, image, input, button, table, accordion, title, subtitle, and more. Open Components in the sidebar: each showcase page documents props and behavior, then a Demo section with a live example. The fable-ui package also ships COMPONENTS.md with the same reference.",
       },
       {
         type: "accordion",
@@ -50,7 +50,7 @@ export const DOCS_UI: TComponentUnion[] = [
           {
             name: "registry",
             title: "Registry",
-            text: "Register custom layout and leaf components with componentRegistry.registerLayout / registerLeaf.",
+            text: "Register custom branch and leaf components with componentRegistry.registerBranch / registerLeaf.",
           },
           {
             name: "register",

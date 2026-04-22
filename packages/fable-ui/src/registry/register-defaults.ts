@@ -1,27 +1,27 @@
-import { Accordion } from "@/components/layout/Accordion";
-import { Button } from "@/components/layout/Button";
-import { Card } from "@/components/layout/Card";
-import { Checkbox } from "@/components/layout/Checkbox";
-import { Datepicker } from "@/components/layout/Datepicker";
-import { Form } from "@/components/layout/Form";
-import { HorizontalStack } from "@/components/layout/HorizontalStack";
-import { Image } from "@/components/layout/Image";
-import { Input } from "@/components/layout/Input";
-import { Markdown } from "@/components/layout/Markdown";
-import { Pagination } from "@/components/layout/Pagination";
-import { Select } from "@/components/layout/Select";
-import { Slider } from "@/components/layout/Slider";
-import { Subtitle } from "@/components/layout/Subtitle";
-import { Table } from "@/components/layout/Table";
-import { Textarea } from "@/components/layout/Textarea";
-import { Title } from "@/components/layout/Title";
-import { VerticalStack } from "@/components/layout/VerticalStack";
+import { Card } from "@/components/branch/Card";
+import { Form } from "@/components/branch/Form";
+import { HorizontalStack } from "@/components/branch/HorizontalStack";
+import { VerticalStack } from "@/components/branch/VerticalStack";
+import { Accordion } from "@/components/leaf/Accordion";
+import { Button } from "@/components/leaf/Button";
+import { Checkbox } from "@/components/leaf/Checkbox";
+import { Datepicker } from "@/components/leaf/Datepicker";
+import { Image } from "@/components/leaf/Image";
+import { Input } from "@/components/leaf/Input";
+import { Markdown } from "@/components/leaf/Markdown";
+import { Pagination } from "@/components/leaf/Pagination";
+import { Select } from "@/components/leaf/Select";
+import { Slider } from "@/components/leaf/Slider";
+import { Subtitle } from "@/components/leaf/Subtitle";
+import { Table } from "@/components/leaf/Table";
+import { Textarea } from "@/components/leaf/Textarea";
+import { Title } from "@/components/leaf/Title";
 import { componentRegistry } from "./component-registry";
 
 let registered = false;
 
 /**
- * Registers built-in layout and leaf components synchronously on the registry.
+ * Registers built-in branch and leaf components synchronously on the registry.
  * Safe to call multiple times.
  *
  * By default, built-ins are **not** required: `Component` lazy-loads each
@@ -34,10 +34,10 @@ export function registerDefaultComponents(): void {
   registered = true;
 
   componentRegistry
-    .registerLayout("card", Card)
-    .registerLayout("form", Form)
-    .registerLayout("h_stack", HorizontalStack)
-    .registerLayout("v_stack", VerticalStack);
+    .registerBranch("card", Card)
+    .registerBranch("form", Form)
+    .registerBranch("h_stack", HorizontalStack)
+    .registerBranch("v_stack", VerticalStack);
 
   componentRegistry
     .registerLeaf("accordion", Accordion)

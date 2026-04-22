@@ -8,7 +8,7 @@ const DOC_FOOTER = `
 
 /** Long-form docs shown on each `/showcase/:kind` page (GFM markdown). */
 export const SHOWCASE_MARKDOWN: Record<ShowcaseSlug, string> = {
-  card: `### \`card\` (layout)
+  card: `### \`card\` (branch)
 
 **Purpose:** Card container with optional header (title, description), body (nested components), and optional footer text.
 
@@ -22,7 +22,7 @@ export const SHOWCASE_MARKDOWN: Record<ShowcaseSlug, string> = {
 
 **Behavior:** Uses the design-system card shell (border, radius, padding). Body children are stacked vertically.`,
 
-  "h-stack": `### \`h_stack\` (layout)
+  "h-stack": `### \`h_stack\` (branch)
 
 **Purpose:** Horizontal flex row of child components.
 
@@ -33,7 +33,7 @@ export const SHOWCASE_MARKDOWN: Record<ShowcaseSlug, string> = {
 
 **Behavior:** Flex row—use for button groups, side-by-side controls, or toolbars.`,
 
-  "v-stack": `### \`v_stack\` (layout)
+  "v-stack": `### \`v_stack\` (branch)
 
 **Purpose:** Vertical flex column of child components.
 
@@ -104,7 +104,7 @@ Optional \`dialogConfig\` on an action can show a confirmation dialog first.`,
 | \`required\` | \`boolean?\` | |
 | \`hidden\` | \`boolean?\` | Skip rendering when true. |`,
 
-  form: `### \`form\` (layout)
+  form: `### \`form\` (branch)
 
 **Purpose:** \`<form>\` wrapper with optional **prefill** from an API and **descendants** as nested component nodes (you can nest \`v_stack\`, \`h_stack\`, \`card\`, etc.).
 
@@ -113,9 +113,9 @@ Optional \`dialogConfig\` on an action can show a confirmation dialog first.`,
 | \`type\` | \`"form"\` | |
 | \`title\` | \`string?\` | Heading above the body. |
 | \`dataSource\` | \`string?\` | Base URL for \`GET\` prefill when route param \`id\` exists. |
-| \`descendants\` | array? | Inputs, buttons, layouts — same as other layouts. |
+| \`descendants\` | array? | Inputs, buttons, branches — same as other branches. |
 
-**Behavior:** **FormActionsProvider** wires buttons inside the form so HTTP actions can read the form DOM. Prefill merges API values into named fields **recursively** inside nested layouts. \`id\` comes from React Router \`useParams()\`.`,
+**Behavior:** **FormActionsProvider** wires buttons inside the form so HTTP actions can read the form DOM. Prefill merges API values into named fields **recursively** inside nested branches. \`id\` comes from React Router \`useParams()\`.`,
 
   input: `### \`input\` (leaf)
 

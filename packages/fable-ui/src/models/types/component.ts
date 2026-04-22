@@ -1,4 +1,4 @@
-export type TLayoutComponent = "card" | "form" | "h_stack" | "v_stack";
+export type TBranchComponent = "card" | "form" | "h_stack" | "v_stack";
 
 export type TLeafComponent =
   | "accordion"
@@ -16,4 +16,4 @@ export type TLeafComponent =
   | "textarea"
   | "slider";
 
-export type TComponent = TLayoutComponent | TLeafComponent;
+export type TComponent = TBranchComponent | TLeafComponent;

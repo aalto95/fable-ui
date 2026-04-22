@@ -247,7 +247,7 @@
         },
         "className": {
           "type": "string",
-          "description": "Extra classes on the wrapper (layout, max width)."
+          "description": "Extra classes on the wrapper (branch, max width)."
         },
         "imgClassName": {
           "type": "string",

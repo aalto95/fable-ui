@@ -3,16 +3,16 @@ import type { ElementType } from "react";
 export type RegisteredComponent = ElementType;
 
 /**
- * Pluggable registry for Fable UI component kinds. Layout components receive
- * recursive `descendants` as `children` (except the built-in `form`, which
+ * Pluggable registry for Fable UI component kinds. Branch components receive
+ * recursive `descendants` as `children` (except the built-in `form` branch, which
  * renders `descendants` internally for prefill). Leaf components render props only.
  */
 export class ComponentRegistry {
-  readonly layouts = new Map<string, RegisteredComponent>();
+  readonly branches = new Map<string, RegisteredComponent>();
   readonly leaves = new Map<string, RegisteredComponent>();
 
-  registerLayout(name: string, component: RegisteredComponent): this {
-    this.layouts.set(name, component);
+  registerBranch(name: string, component: RegisteredComponent): this {
+    this.branches.set(name, component);
     return this;
   }
 
@@ -21,16 +21,16 @@ export class ComponentRegistry {
     return this;
   }
 
-  getLayout(name: string): RegisteredComponent | undefined {
-    return this.layouts.get(name);
+  getBranch(name: string): RegisteredComponent | undefined {
+    return this.branches.get(name);
   }
 
   getLeaf(name: string): RegisteredComponent | undefined {
     return this.leaves.get(name);
   }
 
-  hasLayout(name: string): boolean {
-    return this.layouts.has(name);
+  hasBranch(name: string): boolean {
+    return this.branches.has(name);
   }
 
   hasLeaf(name: string): boolean {

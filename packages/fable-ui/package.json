@@ -12,7 +12,7 @@
     "component-registry",
     "fable-ui",
     "declarative-ui",
-    "layout"
+    "branch"
   ],
   "license": "MIT",
   "publishConfig": {

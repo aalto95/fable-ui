@@ -2,11 +2,11 @@ import { Spinner } from "fable-shared";
 import { memo, Suspense } from "react";
 import { useDebug } from "@/contexts/debug";
 import type { TComponentUnion } from "@/models/interfaces/component";
-import type { TLayoutComponent, TLeafComponent } from "@/models/types/component";
+import type { TBranchComponent, TLeafComponent } from "@/models/types/component";
 import {
-  getCachedLazyBuiltinLayout,
+  getCachedLazyBuiltinBranch,
   getCachedLazyBuiltinLeaf,
-  isBuiltinLayoutType,
+  isBuiltinBranchType,
   isBuiltinLeafType,
 } from "@/registry/builtin-lazy-loaders";
 import { componentRegistry } from "@/registry/component-registry";
@@ -134,10 +134,10 @@ export const Component: React.FC<Props> = memo((props) => {
 
   const debug = DEBUG_COLORS[type] ?? DEFAULT_DEBUG;
 
-  if (componentRegistry.hasLayout(type)) {
-    const Comp = componentRegistry.getLayout(type);
+  if (componentRegistry.hasBranch(type)) {
+    const Comp = componentRegistry.getBranch(type);
     if (!Comp) {
-      throw new Error(`Layout component ${type} not found`);
+      throw new Error(`Branch component ${type} not found`);
     }
     const children =
       type !== "form" && "descendants" in rest && Array.isArray(rest.descendants)
@@ -156,8 +156,8 @@ export const Component: React.FC<Props> = memo((props) => {
     );
   }
 
-  if (isBuiltinLayoutType(type)) {
-    const LazyComp = getCachedLazyBuiltinLayout(type as TLayoutComponent);
+  if (isBuiltinBranchType(type)) {
+    const LazyComp = getCachedLazyBuiltinBranch(type as TBranchComponent);
     const children =
       type !== "form" && "descendants" in rest && Array.isArray(rest.descendants)
         ? rest.descendants.map((child, i) => <Component key={i} {...child} />)

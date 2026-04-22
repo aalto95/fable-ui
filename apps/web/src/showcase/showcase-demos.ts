@@ -2,7 +2,7 @@ import type { TComponentUnion } from "fable-ui";
 
 import { showcaseDocFor } from "./showcase-docs";
 
-/** URL slugs for `/showcase/:kind` (match built-in layout + leaf kinds). */
+/** URL slugs for `/showcase/:kind` (match built-in branch + leaf kinds). */
 export const SHOWCASE_SLUGS = [
   "card",
   "h-stack",
@@ -59,16 +59,16 @@ export function showcaseSlugLabel(slug: string): string {
 export function getShowcaseUi(kind: string): TComponentUnion[] | null {
   switch (kind) {
     case "card":
-      return shell("Layout: card", "Container with optional header and footer.", "card", [
+      return shell("Branch: card", "Container with optional header and footer.", "card", [
         {
           type: "card",
           title: "Example card",
           description: "Card description text.",
-          descendants: [{ type: "subtitle", text: "Content inside the card layout." }],
+          descendants: [{ type: "subtitle", text: "Content inside the card branch." }],
         },
       ]);
     case "h-stack":
-      return shell("Layout: h_stack", "Horizontal children row.", "h-stack", [
+      return shell("Branch: h_stack", "Horizontal children row.", "h-stack", [
         {
           type: "h_stack",
           descendants: [
@@ -78,7 +78,7 @@ export function getShowcaseUi(kind: string): TComponentUnion[] | null {
         },
       ]);
     case "v-stack":
-      return shell("Layout: v_stack", "Vertical stack of children.", "v-stack", [
+      return shell("Branch: v_stack", "Vertical stack of children.", "v-stack", [
         {
           type: "v_stack",
           descendants: [

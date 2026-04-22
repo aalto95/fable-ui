@@ -30,7 +30,7 @@ export type SduiProviderProps = {
 
 /**
  * Wraps schema-driven UI with dialog context, debug outlines, a default confirm dialog shell, and Sonner toasts.
- * Use with `Renderer`; layout actions that call `toast()` or `useDialog()` work without extra wiring.
+ * Use with `Renderer`; branch actions that call `toast()` or `useDialog()` work without extra wiring.
  */
 export const SduiProvider: React.FC<SduiProviderProps> = ({
   children,

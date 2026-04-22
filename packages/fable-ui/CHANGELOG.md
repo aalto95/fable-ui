@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **`fable-ui/styles.css`** — Added `@source` paths for both monorepo and installed `node_modules/fable-shared` layouts so Tailwind includes shared primitive utility classes in production builds.
+- **`fable-ui/styles.css`** — Added `@source` paths for both monorepo and installed `node_modules/fable-shared` branches so Tailwind includes shared primitive utility classes in production builds.
 
 ## [1.3.5] - 2026-04-21
 
@@ -30,14 +30,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **`SduiProvider`** — Single wrapper for schema-driven UI: owns dialog state, **`SduiDialog`** (default confirm UI on **`useDialog()`**), **`SduiToaster`** (Sonner + Lucide icons, theme-friendly defaults), and **`DebugProvider`** (layout outlines via **`useDebug()`**). Optional **`toasterProps`**, optional controlled **`debug`**, default debug persistence under **`fableUi.debug.enabled`** in `localStorage`.
+- **`SduiProvider`** — Single wrapper for schema-driven UI: owns dialog state, **`SduiDialog`** (default confirm UI on **`useDialog()`**), **`SduiToaster`** (Sonner + Lucide icons, theme-friendly defaults), and **`DebugProvider`** (branch outlines via **`useDebug()`**). Optional **`toasterProps`**, optional controlled **`debug`**, default debug persistence under **`fableUi.debug.enabled`** in `localStorage`.
 - **`fable-ui/styles.css`** — Default styling entry: **Geist Variable** (`@fontsource-variable/geist`), **tw-animate-css**, shadcn-style **`:root` / `.dark`** tokens, **`@theme inline`**, base layer, and **`@source`** for built-in components. Import after **`@import "tailwindcss"`** in the app.
 - **Re-exports** — **`ThemeProvider`**, **`useTheme`**, and related types from **`next-themes`** (bundled dependency).
 - **Dependencies (bundled, no longer app peers):** **`sonner`**, **`next-themes`**, **`@fontsource-variable/geist`**, **`tw-animate-css`**.
 
 ### Changed
 
-- **`form`** is a **layout** built-in (with **`descendants`**) instead of a leaf with **`fields`**. API prefill merges into named inputs nested inside **`v_stack`**, **`h_stack`**, **`card`**, etc.
+- **`form`** is a **branch** built-in (with **`descendants`**) instead of a leaf with **`fields`**. API prefill merges into named inputs nested inside **`v_stack`**, **`h_stack`**, **`card`**, etc.
 - **Peer dependencies:** **`tailwindcss` ^4** is required when using **`fable-ui/styles.css`** (or any CSS using **`@theme`**, **`@apply`**, **`@source`**). **`sonner`** is no longer a peer (provided transitively).
 - **Package contents** — **`src/`** is published so Tailwind can scan component sources; **`sideEffects`** includes **`**/*.css`** for correct bundling of styles.
 - **`DebugProvider`** is still exported for advanced use; **`useDebug`** works when nested under **`SduiProvider`**.

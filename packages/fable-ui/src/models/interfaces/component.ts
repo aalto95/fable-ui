@@ -104,7 +104,7 @@ export interface IImageComponent extends IBaseComponent<"image"> {
   /** Accessible description; use empty string for decorative images when appropriate. */
   alt?: string;
   hidden?: boolean;
-  /** Extra classes on the wrapper (layout, max width). */
+  /** Extra classes on the wrapper (branch, max width). */
   className?: string;
   /** Extra classes on the `<img>` element. */
   imgClassName?: string;
@@ -164,7 +164,7 @@ export interface IFormComponent extends IBaseComponent<"form"> {
   title?: string;
   /** Base URL for GET prefill (`GET ${dataSource}/:id`). HTTP submit is configured on button `actions`. */
   dataSource?: string;
-  /** Nested component tree (inputs, buttons, layouts, etc.). Rendered inside the `<form>`; prefill walks the tree recursively. */
+  /** Nested component tree (inputs, buttons, branches, etc.). Rendered inside the `<form>`; prefill walks the tree recursively. */
   descendants?: TComponentUnion[];
 }
 

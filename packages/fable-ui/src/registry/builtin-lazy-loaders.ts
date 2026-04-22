@@ -1,78 +1,78 @@
 import type { ComponentType } from "react";
 import { type LazyExoticComponent, lazy } from "react";
-import type { TLayoutComponent, TLeafComponent } from "@/models/types/component";
+import type { TBranchComponent, TLeafComponent } from "@/models/types/component";
 
 type BuiltinLoader = () => Promise<{ default: ComponentType<any> }>;
 
-const BUILTIN_LAYOUT_LOADERS = {
-  card: () => import("@/components/layout/Card").then((m) => ({ default: m.Card })),
-  form: () => import("@/components/layout/Form").then((m) => ({ default: m.Form })),
+const BUILTIN_BRANCH_LOADERS = {
+  card: () => import("@/components/branch/Card").then((m) => ({ default: m.Card })),
+  form: () => import("@/components/branch/Form").then((m) => ({ default: m.Form })),
   h_stack: () =>
-    import("@/components/layout/HorizontalStack").then((m) => ({
+    import("@/components/branch/HorizontalStack").then((m) => ({
       default: m.HorizontalStack,
     })),
   v_stack: () =>
-    import("@/components/layout/VerticalStack").then((m) => ({
+    import("@/components/branch/VerticalStack").then((m) => ({
       default: m.VerticalStack,
     })),
-} as const satisfies Record<TLayoutComponent, BuiltinLoader>;
+} as const satisfies Record<TBranchComponent, BuiltinLoader>;
 
 const BUILTIN_LEAF_LOADERS = {
   accordion: () =>
-    import("@/components/layout/Accordion").then((m) => ({
+    import("@/components/leaf/Accordion").then((m) => ({
       default: m.Accordion,
     })),
-  button: () => import("@/components/layout/Button").then((m) => ({ default: m.Button })),
+  button: () => import("@/components/leaf/Button").then((m) => ({ default: m.Button })),
   checkbox: () =>
-    import("@/components/layout/Checkbox").then((m) => ({
+    import("@/components/leaf/Checkbox").then((m) => ({
       default: m.Checkbox,
     })),
   datepicker: () =>
-    import("@/components/layout/Datepicker").then((m) => ({
+    import("@/components/leaf/Datepicker").then((m) => ({
       default: m.Datepicker,
     })),
-  image: () => import("@/components/layout/Image").then((m) => ({ default: m.Image })),
-  input: () => import("@/components/layout/Input").then((m) => ({ default: m.Input })),
+  image: () => import("@/components/leaf/Image").then((m) => ({ default: m.Image })),
+  input: () => import("@/components/leaf/Input").then((m) => ({ default: m.Input })),
   pagination: () =>
-    import("@/components/layout/Pagination").then((m) => ({
+    import("@/components/leaf/Pagination").then((m) => ({
       default: m.Pagination,
     })),
-  select: () => import("@/components/layout/Select").then((m) => ({ default: m.Select })),
-  slider: () => import("@/components/layout/Slider").then((m) => ({ default: m.Slider })),
+  select: () => import("@/components/leaf/Select").then((m) => ({ default: m.Select })),
+  slider: () => import("@/components/leaf/Slider").then((m) => ({ default: m.Slider })),
   subtitle: () =>
-    import("@/components/layout/Subtitle").then((m) => ({
+    import("@/components/leaf/Subtitle").then((m) => ({
       default: m.Subtitle,
     })),
-  table: () => import("@/components/layout/Table").then((m) => ({ default: m.Table })),
+  table: () => import("@/components/leaf/Table").then((m) => ({ default: m.Table })),
   textarea: () =>
-    import("@/components/layout/Textarea").then((m) => ({
+    import("@/components/leaf/Textarea").then((m) => ({
       default: m.Textarea,
     })),
-  title: () => import("@/components/layout/Title").then((m) => ({ default: m.Title })),
+  title: () => import("@/components/leaf/Title").then((m) => ({ default: m.Title })),
   markdown: () =>
-    import("@/components/layout/Markdown").then((m) => ({
+    import("@/components/leaf/Markdown").then((m) => ({
       default: m.Markdown,
     })),
 } as const satisfies Record<TLeafComponent, BuiltinLoader>;
 
-const layoutLazyCache = new Map<TLayoutComponent, LazyExoticComponent<ComponentType<any>>>();
+const branchLazyCache = new Map<TBranchComponent, LazyExoticComponent<ComponentType<any>>>();
 const leafLazyCache = new Map<TLeafComponent, LazyExoticComponent<ComponentType<any>>>();
 
-export function isBuiltinLayoutType(type: string): type is TLayoutComponent {
-  return type in BUILTIN_LAYOUT_LOADERS;
+export function isBuiltinBranchType(type: string): type is TBranchComponent {
+  return type in BUILTIN_BRANCH_LOADERS;
 }
 
 export function isBuiltinLeafType(type: string): type is TLeafComponent {
   return type in BUILTIN_LEAF_LOADERS;
 }
 
-export function getCachedLazyBuiltinLayout(
-  type: TLayoutComponent,
+export function getCachedLazyBuiltinBranch(
+  type: TBranchComponent,
 ): LazyExoticComponent<ComponentType<any>> {
-  let cached = layoutLazyCache.get(type);
+  let cached = branchLazyCache.get(type);
   if (!cached) {
-    cached = lazy(BUILTIN_LAYOUT_LOADERS[type]);
-    layoutLazyCache.set(type, cached);
+    cached = lazy(BUILTIN_BRANCH_LOADERS[type]);
+    branchLazyCache.set(type, cached);
   }
   return cached;
 }
@@ -90,8 +90,8 @@ export function getCachedLazyBuiltinLeaf(
 
 /** Fire-and-forget fetch of a built-in chunk (e.g. on route hover or schema peek). */
 export function preloadBuiltinComponent(type: string): void {
-  if (isBuiltinLayoutType(type)) {
-    void BUILTIN_LAYOUT_LOADERS[type]();
+  if (isBuiltinBranchType(type)) {
+    void BUILTIN_BRANCH_LOADERS[type]();
     return;
   }
   if (isBuiltinLeafType(type)) {

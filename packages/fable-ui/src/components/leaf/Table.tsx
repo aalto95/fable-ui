@@ -16,7 +16,7 @@ import { MoreHorizontalIcon } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
-import { Pagination } from "@/components/layout/Pagination";
+import { Pagination } from "@/components/leaf/Pagination";
 import { type DialogConfig, useDialog } from "@/contexts/dialog";
 import { executeAction } from "@/lib/http-actions";
 import { http } from "@/lib/http-client";

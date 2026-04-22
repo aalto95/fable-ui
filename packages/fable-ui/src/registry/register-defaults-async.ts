@@ -3,7 +3,7 @@ import { componentRegistry } from "./component-registry";
 let registered = false;
 
 /**
- * Registers built-in layout and leaf components using dynamic `import()`.
+ * Registers built-in branch and leaf components using dynamic `import()`.
  * Each component becomes a separate chunk in the app bundle, loaded when this
  * function runs (typically once at startup). Smaller than the sync variant for
  * initial parse when you defer calling this until after first paint.
@@ -32,31 +32,31 @@ export async function registerDefaultComponentsAsync(): Promise<void> {
     { Title },
     { VerticalStack },
   ] = await Promise.all([
-    import("../components/layout/Accordion"),
-    import("../components/layout/Button"),
-    import("../components/layout/Card"),
-    import("../components/layout/Checkbox"),
-    import("../components/layout/Datepicker"),
-    import("../components/layout/Form"),
-    import("../components/layout/HorizontalStack"),
-    import("../components/layout/Image"),
-    import("../components/layout/Input"),
-    import("../components/layout/Markdown"),
-    import("../components/layout/Pagination"),
-    import("../components/layout/Select"),
-    import("../components/layout/Slider"),
-    import("../components/layout/Subtitle"),
-    import("../components/layout/Table"),
-    import("../components/layout/Textarea"),
-    import("../components/layout/Title"),
-    import("../components/layout/VerticalStack"),
+    import("../components/leaf/Accordion"),
+    import("../components/leaf/Button"),
+    import("../components/branch/Card"),
+    import("../components/leaf/Checkbox"),
+    import("../components/leaf/Datepicker"),
+    import("../components/branch/Form"),
+    import("../components/branch/HorizontalStack"),
+    import("../components/leaf/Image"),
+    import("../components/leaf/Input"),
+    import("../components/leaf/Markdown"),
+    import("../components/leaf/Pagination"),
+    import("../components/leaf/Select"),
+    import("../components/leaf/Slider"),
+    import("../components/leaf/Subtitle"),
+    import("../components/leaf/Table"),
+    import("../components/leaf/Textarea"),
+    import("../components/leaf/Title"),
+    import("../components/branch/VerticalStack"),
   ]);
 
   componentRegistry
-    .registerLayout("card", Card)
-    .registerLayout("form", Form)
-    .registerLayout("h_stack", HorizontalStack)
-    .registerLayout("v_stack", VerticalStack);
+    .registerBranch("card", Card)
+    .registerBranch("form", Form)
+    .registerBranch("h_stack", HorizontalStack)
+    .registerBranch("v_stack", VerticalStack);
 
   componentRegistry
     .registerLeaf("accordion", Accordion)

@@ -16,7 +16,7 @@ Install these in your app (versions should satisfy the ranges in `package.json`)
 - `react-router`
 - **Tailwind CSS v4** — build pipeline must process CSS (e.g. `@tailwindcss/vite` or PostCSS).
 
-**Toasts** use [Sonner](https://github.com/emilkowalski/sonner), bundled with `fable-ui` — wrap your app in `SduiProvider` so layout `toast()` calls and the default `<Toaster />` work without installing Sonner separately. **`SduiProvider`** also includes **`DebugProvider`**: `useDebug()` toggles layout outlines; by default the flag is stored as `fableUi.debug.enabled` in `localStorage` (override with the `debug` prop if you need controlled state).
+**Toasts** use [Sonner](https://github.com/emilkowalski/sonner), bundled with `fable-ui` — wrap your app in `SduiProvider` so branch `toast()` calls and the default `<Toaster />` work without installing Sonner separately. **`SduiProvider`** also includes **`DebugProvider`**: `useDebug()` toggles branch outlines; by default the flag is stored as `fableUi.debug.enabled` in `localStorage` (override with the `debug` prop if you need controlled state).
 
 **Theming** re-exports [`next-themes`](https://github.com/pacocoursey/next-themes) (`ThemeProvider`, `useTheme`, etc.) so you can drive light/dark (e.g. `.dark` on `html`) without a separate dependency.
 
@@ -95,17 +95,17 @@ await registerDefaultComponentsAsync();
 
 ### Built-in kinds (summary)
 
-| Layout | Leaf |
+| Branch | Leaf |
 | --- | --- |
 | `card`, `form`, `h_stack`, `v_stack` | `accordion`, `button`, `checkbox`, `datepicker`, `input`, `markdown`, `pagination`, `select`, `subtitle`, `table`, `title`, `textarea`, `slider` |
 
 See **[COMPONENTS.md](./COMPONENTS.md)** for every field, action type, and behavioral note.
 
-The **`markdown`** leaf renders GitHub Flavored Markdown from the `content` string (`remark-gfm` + HTML sanitization). Use for docs or rich copy inside layouts.
+The **`markdown`** leaf renders GitHub Flavored Markdown from the `content` string (`remark-gfm` + HTML sanitization). Use for docs or rich copy inside branches.
 
 ## Custom components
 
-Use `componentRegistry` to register your own layout or leaf kinds (layout components receive recursive `descendants`; leaves render props only):
+Use `componentRegistry` to register your own branch or leaf kinds (branch components receive recursive `descendants`; leaves render props only):
 
 ```tsx
 import { componentRegistry } from "fable-ui";
