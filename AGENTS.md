@@ -1,0 +1,60 @@
+# AGENTS.md — fable-ui monorepo
+
+## Project overview
+
+Schema-driven React UI rendering system. A published npm package (`fable-ui`) that renders pages/forms from JSON documents via a pluggable component registry, plus a shared primitive library (`fable-shared`), a Node.js orchestrator API (Hono + Postgres), an admin editor, a demo website, and a mock API.
+
+## Tech stack
+
+- **Runtime:** Node >=20.10, pnpm 10
+- **Monorepo:** Turborepo + pnpm workspaces with `catalog:` protocol for shared versions
+- **Framework:** React 19, TypeScript 6, Vite 8
+- **Styling:** Tailwind CSS 4 (`@tailwindcss/vite`), `tw-animate-css`, `tailwind-merge`/`clsx`/CVA, Radix UI, `next-themes`
+- **Linting/formatting:** Biome 2 (organize imports on save, 2-space indent, 100 width)
+- **No testing framework** — no test files exist; do not add tests without explicit instruction
+- **Auth/AuthZ:** Not yet present
+
+## Code conventions
+
+- **Imports:** Use `import type` for type-only imports. Use path aliases (`@/` in packages/apps where configured).
+- **React:** Functional components with explicit `interface` props (e.g., `interface FooProps { ... }`). Avoid default exports.
+- **CSS:** Tailwind utility classes with `cn()` from `fable-shared` (wraps `tailwind-merge` + `clsx`). Use `useSortedClasses` Biome rule.
+- **Types:** Define component schemas in `packages/fable-ui/src/models/interfaces/component.ts`. Union types in `models/types/`. Zod for API validation in orchestrator. No `any` (Biome error) except in `builtin-lazy-loaders.ts`.
+- **Monorepo management:** `pnpm add <pkg> --filter <workspace>` to add deps. Use `catalog:` versions from `pnpm-workspace.yaml` for shared deps.
+- **Use `catalog:` in dependencies** for any package listed in `pnpm-workspace.yaml`'s `catalog:` section (React, Radix, Tailwind, Vite, TypeScript, etc.).
+- **No empty interfaces** — use `type` or `Record<string, never>` if no props.
+- **`use client` directive** not used (no RSC/Next.js — all Vite SPAs).
+- **Avoid default exports** in source code. Prefer named exports.
+
+## Architecture
+
+```
+packages/
+  fable-ui/     — Core Renderer, Component registry, built-in branch/leaf components, HTTP helpers, types
+  shared/       — Base UI primitives (Button, Dialog, Input, etc.) via Radix + CVA
+apps/
+  web/          — Demo site (Vite SPA): shell layout, Home/Docs/Showcase pages, Renderer consumers
+  admin/        — SDUI Admin Editor: JSON editor (CodeMirror), interactive tree editor, orchestrator client
+  orchestrator/ — Hono API server: UI spec CRUD, origin bindings, schema validation (AJV), Postgres, OpenAPI docs
+mock-api/       — Placeholder for Bun-based mock API (no source yet)
+react-template/ — Placeholder for standalone React template (empty)
+```
+
+### Key design
+
+- **Renderer** (`packages/fable-ui/src/components/core/Renderer.tsx`) — accepts `IPage[]` or `TComponentUnion[]`, walks the tree, delegates to `Component` which dispatches to registered branch or leaf renderers.
+- **ComponentRegistry** (`packages/fable-ui/src/registry/`) — pluggable map of `type -> React.ComponentType`. Built-in components registered via `registerDefaultComponents()` (sync) or `registerDefaultComponentsAsync()` (lazy).
+- **Branch components** — containers with children: `card`, `form`, `h_stack`, `v_stack`.
+- **Leaf components** — terminal: `accordion`, `button`, `checkbox`, `datepicker`, `image`, `input`, `markdown`, `pagination`, `select`, `slider`, `subtitle`, `table`, `textarea`, `title`.
+- **Orchestrator** — serves UI documents with ETag support, validates against JSON Schema (AJV), stores in Postgres. Endpoints at `/ui`, `/ui/schema`, `/ui/origins`.
+
+## Workflows
+
+- `pnpm web:dev` — start demo app
+- `pnpm admin:dev` — start admin editor
+- `pnpm orchestrator:dev` — start API server
+- `pnpm lint` — Biome check all
+- `pnpm format` — Biome format all
+- `pnpm build` — Turbo build all
+- `pnpm fable-ui:build` — build library only
+- `pnpm shared:build` — build shared primitives only
