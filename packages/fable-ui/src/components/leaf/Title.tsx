@@ -1,6 +1,6 @@
 import type { ITitleComponent } from "@/models/interfaces/component";
 
-export type TTitleProps = Exclude<ITitleComponent, "type">;
+export type TTitleProps = Omit<ITitleComponent, "type">;
 
 export const Title: React.FC<TTitleProps> = ({ text, hidden }) => {
   if (hidden) {

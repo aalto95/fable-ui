@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import type { IHStackComponent } from "@/models/interfaces/component";
 
-export type THorizontalStackProps = Exclude<IHStackComponent, "type">;
+export type THorizontalStackProps = Omit<IHStackComponent, "type">;
 
 export const HorizontalStack: React.FC<PropsWithChildren<THorizontalStackProps>> = ({
   children,

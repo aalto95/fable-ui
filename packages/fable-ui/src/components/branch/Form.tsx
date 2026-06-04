@@ -7,8 +7,7 @@ import { FormActionsProvider } from "@/contexts/form-actions";
 import { useFormPrefill } from "@/hooks/use-form-prefill";
 import type { IFormComponent } from "@/models/interfaces/component";
 
-export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> &
-  Exclude<IFormComponent, "type">;
+export type TFormProps = React.FormHTMLAttributes<HTMLFormElement> & Omit<IFormComponent, "type">;
 
 export const Form: React.FC<TFormProps> = ({
   dataSource,

@@ -2,7 +2,7 @@ import { cn } from "fable-shared";
 
 import type { IImageComponent } from "@/models/interfaces/component";
 
-export type TImageProps = Exclude<IImageComponent, "type">;
+export type TImageProps = Omit<IImageComponent, "type">;
 
 export const Image: React.FC<TImageProps> = ({
   src,

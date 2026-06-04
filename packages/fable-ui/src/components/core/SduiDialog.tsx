@@ -20,7 +20,7 @@ export const SduiDialog: React.FC = () => {
   return (
     <BaseDialog
       open={!!config}
-      onOpenChange={(open) => {
+      onOpenChange={(open: boolean) => {
         if (!open) setConfig(null);
       }}
     >

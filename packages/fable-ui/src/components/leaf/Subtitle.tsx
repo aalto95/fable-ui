@@ -1,6 +1,6 @@
 import type { ISubtitleComponent } from "@/models/interfaces/component";
 
-export type TSubtitleProps = Exclude<ISubtitleComponent, "type">;
+export type TSubtitleProps = Omit<ISubtitleComponent, "type">;
 
 export const Subtitle: React.FC<TSubtitleProps> = ({ text, hidden }) => {
   if (hidden) {

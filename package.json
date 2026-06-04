@@ -29,6 +29,8 @@
     "vercel:web": "turbo run build --filter=...fable-ui-web",
     "vercel:admin": "turbo run build --filter=...fable-ui-admin",
     "vercel:orchestrator": "turbo run build --filter=...fable-ui-orchestrator",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test -- --coverage",
     "lint": "biome check .",
     "format": "biome format --write .",
     "lint:turbo": "turbo run lint"

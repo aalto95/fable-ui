@@ -1,7 +1,7 @@
 import { BaseField, BaseLabel, BaseTextarea } from "fable-shared";
 import type { ITextareaComponent } from "@/models/interfaces/component";
 
-export type TTextareaProps = Exclude<ITextareaComponent, "type">;
+export type TTextareaProps = Omit<ITextareaComponent, "type">;
 
 export const Textarea: React.FC<TTextareaProps> = ({
   name,

@@ -9,7 +9,7 @@ import {
 import type { PropsWithChildren } from "react";
 import type { ICardComponent } from "@/models/interfaces/component";
 
-export type TCardProps = Exclude<ICardComponent, "type">;
+export type TCardProps = Omit<ICardComponent, "type">;
 
 export const Card: React.FC<PropsWithChildren<TCardProps>> = ({
   title,

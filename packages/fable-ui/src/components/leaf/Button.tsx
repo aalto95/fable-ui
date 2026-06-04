@@ -3,7 +3,7 @@ import { useFormActionsContext } from "@/contexts/form-actions";
 import { useFormButtonActions } from "@/hooks/use-form-button-actions";
 import type { IButtonComponent } from "@/models/interfaces/component";
 
-export type TButtonProps = Exclude<IButtonComponent, "type">;
+export type TButtonProps = Omit<IButtonComponent, "type">;
 
 export const Button: React.FC<TButtonProps> = ({ text, variant, size, expand, actions }) => {
   const handleActions = useFormButtonActions(actions);

@@ -1,7 +1,7 @@
 import { BaseCheckbox, BaseField, BaseLabel } from "fable-shared";
 import type { ICheckboxComponent } from "@/models/interfaces/component";
 
-export type TCheckboxProps = Exclude<ICheckboxComponent, "type">;
+export type TCheckboxProps = Omit<ICheckboxComponent, "type">;
 
 export const Checkbox: React.FC<TCheckboxProps> = ({ name, label, required, checked }) => {
   return (

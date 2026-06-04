@@ -1,7 +1,7 @@
 import { BaseField, BaseInput, BaseLabel } from "fable-shared";
 import type { IInputComponent } from "@/models/interfaces/component";
 
-export type TInputProps = Exclude<IInputComponent, "type">;
+export type TInputProps = Omit<IInputComponent, "type">;
 
 export const Input: React.FC<TInputProps> = ({ name, label, required, defaultValue, hidden }) => {
   return (

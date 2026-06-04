@@ -1,7 +1,7 @@
 import { BaseField, BaseInput, BaseLabel } from "fable-shared";
 import type { IDatepickerComponent } from "@/models/interfaces/component";
 
-export type TDatepickerProps = Exclude<IDatepickerComponent, "type">;
+export type TDatepickerProps = Omit<IDatepickerComponent, "type">;
 
 function toLocalISODateOnly(value?: string | Date) {
   if (!value) {

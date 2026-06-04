@@ -2,7 +2,7 @@ import { BaseField, BaseLabel, BaseSlider } from "fable-shared";
 import { useEffect, useState } from "react";
 import type { ISliderComponent } from "@/models/interfaces/component";
 
-export type TSliderProps = Exclude<ISliderComponent, "type">;
+export type TSliderProps = Omit<ISliderComponent, "type">;
 
 export const Slider: React.FC<TSliderProps> = ({
   name,
@@ -32,7 +32,7 @@ export const Slider: React.FC<TSliderProps> = ({
         min={min}
         max={max}
         step={step}
-        onValueChange={(value) => {
+        onValueChange={(value: number[]) => {
           setValue(value);
         }}
       />

@@ -90,7 +90,7 @@ export const Pagination: React.FC<TPaginationProps> = ({
         <BasePaginationItem>
           <BasePaginationPrevious
             href="#"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
               e.preventDefault();
               handlePrevious();
             }}
@@ -107,7 +107,7 @@ export const Pagination: React.FC<TPaginationProps> = ({
               <BasePaginationLink
                 href="#"
                 isActive={active === page}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   e.preventDefault();
                   handlePageChange(page);
                 }}
@@ -121,7 +121,7 @@ export const Pagination: React.FC<TPaginationProps> = ({
         <BasePaginationItem>
           <BasePaginationNext
             href="#"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
               e.preventDefault();
               handleNext();
             }}

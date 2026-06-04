@@ -14,9 +14,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*", "../shared/src/*"],
+      "fable-shared": ["../shared/src/index.ts"]
     }
   },
   "include": ["src"]

@@ -30,8 +30,8 @@ function BasePaginationItem({ ...props }: React.ComponentProps<"li">) {
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<React.ComponentProps<typeof BaseButton>, "size"> &
-  React.ComponentProps<"a">;
+  size?: React.ComponentProps<typeof BaseButton>["size"];
+} & React.ComponentProps<"a">;
 
 function BasePaginationLink({ className, isActive, size = "icon", ...props }: PaginationLinkProps) {
   return (
@@ -54,8 +54,10 @@ function BasePaginationLink({ className, isActive, size = "icon", ...props }: Pa
 function BasePaginationPrevious({
   className,
   text = "Previous",
+  size: _size,
   ...props
 }: React.ComponentProps<typeof BasePaginationLink> & { text?: string }) {
+  void _size;
   return (
     <BasePaginationLink
       aria-label="Go to previous page"
@@ -72,8 +74,10 @@ function BasePaginationPrevious({
 function BasePaginationNext({
   className,
   text = "Next",
+  size: _size,
   ...props
 }: React.ComponentProps<typeof BasePaginationLink> & { text?: string }) {
+  void _size;
   return (
     <BasePaginationLink
       aria-label="Go to next page"

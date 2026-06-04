@@ -4,7 +4,7 @@ import rehypeSanitize from "rehype-sanitize";
 import remarkGfm from "remark-gfm";
 import type { IMarkdownComponent } from "@/models/interfaces/component";
 
-export type TMarkdownProps = Exclude<IMarkdownComponent, "type">;
+export type TMarkdownProps = Omit<IMarkdownComponent, "type">;
 
 const markdownProse = cn(
   "max-w-none text-sm leading-relaxed text-foreground",

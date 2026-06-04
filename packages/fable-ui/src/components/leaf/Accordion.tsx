@@ -7,7 +7,7 @@ import {
 import type React from "react";
 import type { IAccordionComponent } from "@/models/interfaces/component";
 
-export type TAccordionProps = Exclude<IAccordionComponent, "type">;
+export type TAccordionProps = Omit<IAccordionComponent, "type">;
 
 export const Accordion: React.FC<TAccordionProps> = ({ items }) => {
   return (

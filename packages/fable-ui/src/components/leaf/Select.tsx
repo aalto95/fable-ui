@@ -1,7 +1,7 @@
 import { BaseField, BaseLabel, BaseSelect, BaseSelectOption, cn } from "fable-shared";
 import type { ISelectComponent } from "@/models/interfaces/component";
 
-export type TSelectProps = Exclude<ISelectComponent, "type">;
+export type TSelectProps = Omit<ISelectComponent, "type">;
 
 export const Select: React.FC<TSelectProps> = ({
   name,
