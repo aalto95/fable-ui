@@ -36,28 +36,24 @@ export interface IButtonComponent extends IBaseComponent<"button"> {
   actions?: IAction[];
 }
 
-export interface IInputComponent extends IBaseComponent<"input"> {
+/** Shared fields for form field components (name/label/required/hidden). */
+export interface IFieldComponent<T extends TComponent> extends IBaseComponent<T> {
   name?: string;
   label?: string;
-  defaultValue?: string;
   required?: boolean;
   hidden?: boolean;
 }
 
-export interface ITextareaComponent extends IBaseComponent<"textarea"> {
-  name?: string;
-  label?: string;
+export interface IInputComponent extends IFieldComponent<"input"> {
   defaultValue?: string;
-  required?: boolean;
-  hidden?: boolean;
 }
 
-export interface IDatepickerComponent extends IBaseComponent<"datepicker"> {
-  name?: string;
-  label?: string;
+export interface ITextareaComponent extends IFieldComponent<"textarea"> {
   defaultValue?: string;
-  required?: boolean;
-  hidden?: boolean;
+}
+
+export interface IDatepickerComponent extends IFieldComponent<"datepicker"> {
+  defaultValue?: string;
 }
 
 export interface ISelectOption {
@@ -65,12 +61,8 @@ export interface ISelectOption {
   value: string;
 }
 
-export interface ISelectComponent extends IBaseComponent<"select"> {
-  name?: string;
-  label?: string;
+export interface ISelectComponent extends IFieldComponent<"select"> {
   options?: ISelectOption[];
-  required?: boolean;
-  hidden?: boolean;
 }
 
 export interface ICheckboxComponent extends IBaseComponent<"checkbox"> {
@@ -141,10 +133,7 @@ export interface IPaginationComponent extends IBaseComponent<"pagination"> {
   defaultLimit?: number;
 }
 
-export interface ISliderComponent extends IBaseComponent<"slider"> {
-  name?: string;
-  label?: string;
-  required?: boolean;
+export interface ISliderComponent extends IFieldComponent<"slider"> {
   valueSuffix?: string;
   defaultValue?: number;
   min?: number;

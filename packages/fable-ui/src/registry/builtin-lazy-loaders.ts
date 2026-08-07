@@ -1,8 +1,11 @@
-import type { ComponentType } from "react";
-import { type LazyExoticComponent, lazy } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
+import { lazy } from "react";
 import type { TBranchComponent, TLeafComponent } from "@/models/types/component";
 
-type BuiltinLoader = () => Promise<{ default: ComponentType<any> }>;
+/** Built-in components accept only optional, config-driven props. */
+type AnyComponent = ComponentType<Record<string, never>>;
+
+type BuiltinLoader = () => Promise<{ default: AnyComponent }>;
 
 const BUILTIN_BRANCH_LOADERS = {
   card: () => import("@/components/branch/Card").then((m) => ({ default: m.Card })),
@@ -55,8 +58,8 @@ const BUILTIN_LEAF_LOADERS = {
     })),
 } as const satisfies Record<TLeafComponent, BuiltinLoader>;
 
-const branchLazyCache = new Map<TBranchComponent, LazyExoticComponent<ComponentType<any>>>();
-const leafLazyCache = new Map<TLeafComponent, LazyExoticComponent<ComponentType<any>>>();
+const branchLazyCache = new Map<TBranchComponent, LazyExoticComponent<AnyComponent>>();
+const leafLazyCache = new Map<TLeafComponent, LazyExoticComponent<AnyComponent>>();
 
 export function isBuiltinBranchType(type: string): type is TBranchComponent {
   return type in BUILTIN_BRANCH_LOADERS;
@@ -68,7 +71,7 @@ export function isBuiltinLeafType(type: string): type is TLeafComponent {
 
 export function getCachedLazyBuiltinBranch(
   type: TBranchComponent,
-): LazyExoticComponent<ComponentType<any>> {
+): LazyExoticComponent<AnyComponent> {
   let cached = branchLazyCache.get(type);
   if (!cached) {
     cached = lazy(BUILTIN_BRANCH_LOADERS[type]);
@@ -77,9 +80,7 @@ export function getCachedLazyBuiltinBranch(
   return cached;
 }
 
-export function getCachedLazyBuiltinLeaf(
-  type: TLeafComponent,
-): LazyExoticComponent<ComponentType<any>> {
+export function getCachedLazyBuiltinLeaf(type: TLeafComponent): LazyExoticComponent<AnyComponent> {
   let cached = leafLazyCache.get(type);
   if (!cached) {
     cached = lazy(BUILTIN_LEAF_LOADERS[type]);

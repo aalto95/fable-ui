@@ -19,7 +19,7 @@ Schema-driven React UI rendering system. A published npm package (`fable-ui`) th
 - **Imports:** Use `import type` for type-only imports. Use path aliases (`@/` in packages/apps where configured).
 - **React:** Functional components with explicit `interface` props (e.g., `interface FooProps { ... }`). Avoid default exports.
 - **CSS:** Tailwind utility classes with `cn()` from `fable-shared` (wraps `tailwind-merge` + `clsx`). Use `useSortedClasses` Biome rule.
-- **Types:** Define component schemas in `packages/fable-ui/src/models/interfaces/component.ts`. Union types in `models/types/`. Zod for API validation in orchestrator. No `any` (Biome error) except in `builtin-lazy-loaders.ts`.
+- **Types:** Define component schemas in `packages/fable-ui/src/models/interfaces/component.ts`. Union types in `models/types/`. Zod for API validation in orchestrator. No `any` (Biome error).
 - **Monorepo management:** `pnpm add <pkg> --filter <workspace>` to add deps. Use `catalog:` versions from `pnpm-workspace.yaml` for shared deps.
 - **Use `catalog:` in dependencies** for any package listed in `pnpm-workspace.yaml`'s `catalog:` section (React, Radix, Tailwind, Vite, TypeScript, etc.).
 - **No empty interfaces** — use `type` or `Record<string, never>` if no props.
@@ -36,8 +36,6 @@ apps/
   web/          — Demo site (Vite SPA): shell layout, Home/Docs/Showcase pages, Renderer consumers
   admin/        — SDUI Admin Editor: JSON editor (CodeMirror), interactive tree editor, orchestrator client
   orchestrator/ — Hono API server: UI spec CRUD, origin bindings, schema validation (AJV), Postgres, OpenAPI docs
-mock-api/       — Placeholder for Bun-based mock API (no source yet)
-react-template/ — Placeholder for standalone React template (empty)
 ```
 
 ### Key design

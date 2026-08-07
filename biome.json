@@ -65,16 +65,6 @@
           }
         }
       }
-    },
-    {
-      "includes": ["packages/fable-ui/src/registry/builtin-lazy-loaders.ts"],
-      "linter": {
-        "rules": {
-          "suspicious": {
-            "noExplicitAny": "off"
-          }
-        }
-      }
     }
   ]
 }

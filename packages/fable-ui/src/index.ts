@@ -54,6 +54,7 @@ export type {
   ICardComponent,
   ICheckboxComponent,
   IDatepickerComponent,
+  IFieldComponent,
   IFormComponent,
   IHStackComponent,
   IImageComponent,

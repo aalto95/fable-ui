@@ -37,8 +37,8 @@
     "lint:turbo": "turbo run lint"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,cjs,mjs}": "biome check --write",
-    "*.{json,md,css}": "biome check --write"
+    "*.{ts,tsx,js,jsx,cjs,mjs}": "biome check --write --no-errors-on-unmatched",
+    "*.{json,md,css}": "biome check --write --no-errors-on-unmatched"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
