@@ -116,16 +116,13 @@ export function createApp() {
       { name: "Admin", description: "UI/schema overrides" },
       { name: "Admin Auth", description: "Admin API key management" },
     ],
-    components: {
-      securitySchemes: {
-        bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          description:
-            "Admin API key (or SDUI_ADMIN_API_KEY env master key). Create keys via the CLI (`pnpm admin:create-key`) or POST /admin/api-keys.",
-        },
-      },
-    },
+  });
+
+  app.openAPIRegistry.registerComponent("securitySchemes", "bearerAuth", {
+    type: "http",
+    scheme: "bearer",
+    description:
+      "Admin API key (or SDUI_ADMIN_API_KEY env master key). Create keys via the CLI (`pnpm admin:create-key`) or POST /admin/api-keys.",
   });
 
   app.notFound((c) => c.json({ success: false, message: "Not found" }, 404));
