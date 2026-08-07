@@ -7,7 +7,9 @@ function DialogConsumer() {
   return (
     <div>
       <div data-testid="dialog-state">{config ? (config.title ?? "has-config") : "null"}</div>
-      <button onClick={() => setConfig({ title: "New Config" })}>Set</button>
+      <button type="button" onClick={() => setConfig({ title: "New Config" })}>
+        Set
+      </button>
     </div>
   );
 }

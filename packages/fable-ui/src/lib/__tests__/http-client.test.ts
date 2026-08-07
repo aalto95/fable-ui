@@ -118,7 +118,7 @@ describe("http client", () => {
   it("sets Content-Type header for JSON body requests", async () => {
     const fetchSpy = mockFetch(200, {});
     await http.post("https://api.example.com/resource", { key: "value" });
-    const callArgs = fetchSpy.mock.calls[0]?.[1]!;
+    const callArgs = fetchSpy.mock.calls[0]?.[1] as RequestInit;
     const headers = callArgs.headers as Headers;
     expect(headers.get("Content-Type")).toBe("application/json");
   });

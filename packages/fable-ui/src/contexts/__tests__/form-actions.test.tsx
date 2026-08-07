@@ -10,8 +10,12 @@ function FormActionsConsumer() {
   return (
     <div>
       <div data-testid="pending">{String(ctx.isHttpActionPending)}</div>
-      <button onClick={ctx.beginHttpAction}>Begin</button>
-      <button onClick={ctx.endHttpAction}>End</button>
+      <button type="button" onClick={ctx.beginHttpAction}>
+        Begin
+      </button>
+      <button type="button" onClick={ctx.endHttpAction}>
+        End
+      </button>
     </div>
   );
 }
