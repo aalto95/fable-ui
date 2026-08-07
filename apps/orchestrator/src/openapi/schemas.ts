@@ -64,3 +64,34 @@ export const UiOriginUpsertRequest = z
     specId: z.uuid().nullable().optional(),
   })
   .openapi("UiOriginUpsertRequest");
+
+export const AdminApiKeyInfo = z
+  .object({
+    id: z.uuid(),
+    name: z.string(),
+    keyPrefix: z.string(),
+    createdAt: z.string(),
+    lastUsedAt: z.string().nullable(),
+    revokedAt: z.string().nullable(),
+  })
+  .openapi("AdminApiKeyInfo");
+
+export const AdminApiKeyCreateRequest = z
+  .object({
+    name: z.string().min(1).max(100),
+  })
+  .openapi("AdminApiKeyCreateRequest");
+
+export const AdminApiKeyCreatedResponse = AdminApiKeyInfo.extend({
+  key: z.string(),
+}).openapi("AdminApiKeyCreatedResponse");
+
+export const AdminApiKeysResponse = z
+  .object({
+    keys: z.array(AdminApiKeyInfo),
+  })
+  .openapi("AdminApiKeysResponse");
+
+export const AdminApiKeyParams = z.object({
+  id: z.uuid().openapi({ param: { name: "id", in: "path" } }),
+});

@@ -11,8 +11,8 @@ Schema-driven React UI rendering system. A published npm package (`fable-ui`) th
 - **Framework:** React 19, TypeScript 6, Vite 8
 - **Styling:** Tailwind CSS 4 (`@tailwindcss/vite`), `tw-animate-css`, `tailwind-merge`/`clsx`/CVA, Radix UI, `next-themes`
 - **Linting/formatting:** Biome 2 (organize imports on save, 2-space indent, 100 width)
-- **No testing framework** — no test files exist; do not add tests without explicit instruction
-- **Auth/AuthZ:** Not yet present
+- **Testing:** Vitest 3. `fable-ui` and `fable-shared` use `jsdom` + React Testing Library (`*.test.tsx`); `orchestrator` runs in `node` env with Hono route tests (`app.request()`). DB-backed code is tested by mocking the `@/db/*` repos. Run `pnpm test`.
+- **Auth:** API-key bearer tokens protect all mutating admin endpoints (`PUT/DELETE /ui/:id`, `/ui/schema`, `/ui/origins`, `/admin/api-keys`). Credentials: DB-backed `admin_api_keys` table (SHA-256 hashed) or `SDUI_ADMIN_API_KEY` env master key. Create keys via `pnpm admin:create-key --name <name>` (orchestrator). Read-only SDUI routes are public. Dev-only opt-out: `SDUI_ADMIN_AUTH_DISABLED=true`.
 
 ## Code conventions
 

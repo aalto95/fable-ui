@@ -35,4 +35,16 @@ export async function runMigrations(): Promise<void> {
   await sql`
     create index if not exists idx_ui_origin_bindings_spec_id on ui_origin_bindings (spec_id)
   `;
+
+  await sql`
+    create table if not exists admin_api_keys (
+      id uuid primary key,
+      name text not null,
+      key_hash text not null unique,
+      key_prefix text not null,
+      created_at timestamptz not null default now(),
+      last_used_at timestamptz,
+      revoked_at timestamptz
+    )
+  `;
 }

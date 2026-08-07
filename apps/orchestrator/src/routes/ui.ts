@@ -1,5 +1,6 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import * as uiHandlers from "@/handlers/ui";
+import { requireAdminAuth } from "@/lib/auth";
 import {
   ErrorResponse,
   JsonObject,
@@ -52,8 +53,11 @@ const putUiOriginRoute = createRoute({
   path: "/origins",
   tags: ["Admin", "SDUI"],
   summary: "Create/update origin binding",
-  description: "Creates an origin entry and optionally links it to a UI spec id.",
+  description:
+    "Creates an origin entry and optionally links it to a UI spec id. Requires admin auth.",
   operationId: "putUiOrigin",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   request: {
     body: {
       content: { "application/json": { schema: UiOriginUpsertRequest } },
@@ -77,7 +81,10 @@ const deleteUiOriginRoute = createRoute({
   path: "/origins",
   tags: ["Admin", "SDUI"],
   summary: "Remove origin binding",
+  description: "Requires admin auth.",
   operationId: "deleteUiOrigin",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   request: {
     query: z.object({
       origin: z.string(),
@@ -119,7 +126,10 @@ const putUiSchemaRoute = createRoute({
   path: "/schema",
   tags: ["Admin", "SDUI"],
   summary: "Override UI JSON Schema",
+  description: "Requires admin auth.",
   operationId: "putUiSchemaOverride",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   request: {
     body: {
       content: { "application/json": { schema: JsonObject } },
@@ -139,7 +149,10 @@ const deleteUiSchemaRoute = createRoute({
   path: "/schema",
   tags: ["Admin", "SDUI"],
   summary: "Reset UI JSON Schema to default (fable-ui package)",
+  description: "Requires admin auth.",
   operationId: "deleteUiSchemaOverride",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   responses: {
     200: {
       description: "Reset",
@@ -202,7 +215,10 @@ const putUiByIdRoute = createRoute({
   path: "/{id}",
   tags: ["Admin", "SDUI"],
   summary: "Save UI spec document",
+  description: "Requires admin auth.",
   operationId: "putUiOverride",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   request: {
     params: z.object({
       id: z.string().openapi({ param: { name: "id", in: "path" } }),
@@ -229,7 +245,10 @@ const deleteUiByIdRoute = createRoute({
   path: "/{id}",
   tags: ["Admin", "SDUI"],
   summary: "Reset or remove UI spec",
+  description: "Requires admin auth.",
   operationId: "deleteUiOverride",
+  security: [{ bearerAuth: [] }],
+  middleware: [requireAdminAuth],
   request: {
     params: z.object({
       id: z.string().openapi({ param: { name: "id", in: "path" } }),

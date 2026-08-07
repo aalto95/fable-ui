@@ -52,6 +52,8 @@ See `.env.example` for the full list. Highlights:
 | `PG_IDLE_TIMEOUT_SEC` | No | Idle timeout seconds (default `20`) |
 | `PG_CONNECT_TIMEOUT_SEC` | No | Connect timeout seconds (default `10`) |
 | `BDUI_MOCK_PING_URL` | No | Optional periodic GET (e.g. keep a free tier warm); `0` / `false` / empty disables |
+| `SDUI_ADMIN_API_KEY` | No* | Static admin master key. *Required for any admin mutation unless DB-backed keys exist |
+| `SDUI_ADMIN_AUTH_DISABLED` | No | Dev only — disables admin auth. Never set in production |
 
 **SDUI / CORS-related** (optional): `SDUI_DEFAULT_UI_SPEC_ID`, `SDUI_UI_SPEC_ID_LOCAL`, `SDUI_UI_SPEC_ID_VERCEL`, `SDUI_API_BASE_URL`, `ORCHESTRATOR_PUBLIC_URL`, `PUBLIC_ORCHESTRATOR_URL`, `VERCEL_RENDERER_ORIGIN`, etc. — see `src/config/uiOriginProfiles.ts`, `src/config/uiSpecIdFromEnv.ts`, and OpenAPI descriptions.
 
@@ -61,9 +63,37 @@ See `.env.example` for the full list. Highlights:
 | ---- | ----- |
 | Health | `GET /health` |
 | SDUI | `GET /ui`, `GET /ui/specs`, `GET` / `PUT` / `DELETE /ui/schema`, `GET` / `PUT` / `DELETE /ui/:id` |
+| Admin Auth | `GET` / `POST /admin/api-keys`, `DELETE /admin/api-keys/:id`, `GET /admin/ping` |
 | Docs | `GET /openapi.json` (generated spec), `GET /docs` (Swagger UI) |
 
 OpenAPI is generated from Zod route definitions (`createRoute` + `OpenAPIHono`).
+
+## Admin API auth
+
+Mutating endpoints (`PUT` / `DELETE` on `/ui/:id`, `/ui/schema`, `/ui/origins`, and all
+`/admin/api-keys`) require a **bearer token**:
+
+```
+Authorization: Bearer <api-key>
+```
+
+Two credential types are accepted:
+
+1. **DB-backed API keys** (recommended) — hashed in the `admin_api_keys` table, created/revoked via CLI:
+   ```bash
+   pnpm admin:create-key --name "CI"
+   # Created admin API key "CI":
+   # sdui_<token>
+   ```
+   The raw token is shown once and never stored. Revoke keys via `DELETE /admin/api-keys/:id` (or from Swagger UI with a valid key).
+2. **Env master key** — `SDUI_ADMIN_API_KEY`. A single static credential for bootstrap/serverless; accepts requests when set (matches by constant-time comparison). Generate one with:
+   ```bash
+   node -e "console.log('sdui_' + require('crypto').randomBytes(24).toString('base64url'))"
+   ```
+
+Dev only: set `SDUI_ADMIN_AUTH_DISABLED=true` to skip auth entirely. **Never set this in production.**
+
+Read-only SDUI endpoints (`GET /ui`, `GET /ui/:id`, `GET /ui/schema`, `GET /ui/specs`, `GET /ui/origins`, `GET /health`, docs) remain public.
 
 ## Project branch
 

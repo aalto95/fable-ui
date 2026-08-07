@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { jsonContentType, orchestratorBaseUrl } from "../lib/orchestratorClient";
+import { jsonContentType, orchestratorBaseUrl, withAdminAuth } from "../lib/orchestratorClient";
 import { safeParseJson, withOriginsFirst } from "../lib/uiJson";
 import { isUiSpecsResponse } from "../types/uiSpecs";
 
@@ -78,7 +78,7 @@ export function useSduiAdmin() {
     }
     const res = await fetch(`${base}/ui/${encodeURIComponent(specId)}`, {
       method: "PUT",
-      headers: jsonContentType,
+      headers: withAdminAuth(jsonContentType),
       body: JSON.stringify(parsed.value),
     });
     const text = await res.text();
@@ -90,6 +90,7 @@ export function useSduiAdmin() {
     setUiStatus("Clearing override...");
     const res = await fetch(`${base}/ui/${encodeURIComponent(specId)}`, {
       method: "DELETE",
+      headers: withAdminAuth(),
     });
     const text = await res.text();
     setUiStatus(`${res.ok ? "Cleared.\n" : `HTTP ${res.status}\n`}${text}`);

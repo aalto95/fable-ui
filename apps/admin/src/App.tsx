@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./components/ui/select";
+import { getAdminApiKey, setAdminApiKey, withAdminAuth } from "./lib/orchestratorClient";
 
 const SPEC_SELECT_PENDING = "__sdui_spec_pending__";
 const SPEC_SELECT_ERROR = "__sdui_spec_error__";
@@ -60,6 +61,7 @@ function isUiOriginsResponse(value: unknown): value is UiOriginsResponse {
 const jsonContentType: HeadersInit = { "Content-Type": "application/json" };
 
 export default function App() {
+  const [adminKey, setAdminKey] = useState(() => getAdminApiKey());
   const [specId, setSpecId] = useState("");
   const [uiJson, setUiJson] = useState("");
   const [uiStatus, setUiStatus] = useState("");
@@ -161,7 +163,7 @@ export default function App() {
     }
     const res = await fetch(`${import.meta.env.VITE_API_URL}/ui/${encodeURIComponent(specId)}`, {
       method: "PUT",
-      headers: jsonContentType,
+      headers: withAdminAuth(jsonContentType),
       body: JSON.stringify(parsed.value),
     });
     const text = await res.text();
@@ -173,6 +175,7 @@ export default function App() {
     setUiStatus("Clearing override...");
     const res = await fetch(`${import.meta.env.VITE_API_URL}/ui/${encodeURIComponent(specId)}`, {
       method: "DELETE",
+      headers: withAdminAuth(),
     });
     const text = await res.text();
     setUiStatus(`${res.ok ? "Cleared.\n" : `HTTP ${res.status}\n`}${text}`);
@@ -192,7 +195,7 @@ export default function App() {
       setUiStatus("Saving origin binding...");
       const res = await fetch(`${import.meta.env.VITE_API_URL}/ui/origins`, {
         method: "PUT",
-        headers: jsonContentType,
+        headers: withAdminAuth(jsonContentType),
         body: JSON.stringify({
           origin: value,
           specId: linkedSpecId,
@@ -213,7 +216,7 @@ export default function App() {
       setUiStatus("Removing origin...");
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/ui/origins?origin=${encodeURIComponent(origin)}`,
-        { method: "DELETE" },
+        { method: "DELETE", headers: withAdminAuth() },
       );
       const text = await res.text();
       setUiStatus(`${res.ok ? "Origin removed.\n" : `HTTP ${res.status}\n`}${text}`);
@@ -238,6 +241,11 @@ export default function App() {
     setSpecId(crypto.randomUUID());
   }, []);
 
+  const onAdminKeyChange = useCallback((value: string) => {
+    setAdminKey(value);
+    setAdminApiKey(value);
+  }, []);
+
   useEffect(() => {
     if (specsLoadState !== "ok" || !specId) return;
     void loadUi().catch(() => {
@@ -255,6 +263,34 @@ export default function App() {
           Edit server-driven UI specs and preview structure in one place.
         </p>
       </header>
+
+      <section className="space-y-3 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm">
+        <div className="flex flex-wrap items-center gap-3">
+          <label
+            className="block w-full max-w-[220px] font-medium text-foreground text-sm leading-none"
+            htmlFor="adminApiKey"
+          >
+            Admin API key
+          </label>
+          <input
+            id="adminApiKey"
+            type="password"
+            autoComplete="off"
+            className="min-w-[280px] flex-1 rounded-md border border-input bg-background px-3 py-2 font-mono text-sm"
+            placeholder="sdui_..."
+            value={adminKey}
+            onChange={(e) => onAdminKeyChange(e.target.value)}
+          />
+        </div>
+        <p className="text-muted-foreground text-xs leading-relaxed">
+          Required for mutating actions (Save / Override, Clear, origin bindings). Stored only in
+          this browser. Create keys with{" "}
+          <code className="rounded bg-muted px-1 py-0.5 font-mono">
+            pnpm --filter fable-ui-orchestrator admin:create-key --name "name"
+          </code>
+          .
+        </p>
+      </section>
 
       <section className="space-y-6 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm">
         <div className="flex flex-wrap items-center gap-3">

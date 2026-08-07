@@ -1,8 +1,10 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createApp } from "@/app";
 import { defaultEmptySpec } from "@/lib/uiSchemaStore";
 
 const VALID_UUID = "550e8400-e29b-41d4-a716-446655440000";
+const MASTER_KEY = "test-master-key";
+const AUTH = { Authorization: `Bearer ${MASTER_KEY}` };
 
 vi.mock("@/db/uiSpecsRepo", () => ({
   listUiSpecIds: vi.fn(),
@@ -33,11 +35,17 @@ import * as uiSpecsRepo from "@/db/uiSpecsRepo";
 
 describe("orchestrator app", () => {
   beforeEach(() => {
+    process.env.SDUI_ADMIN_API_KEY = MASTER_KEY;
     vi.mocked(uiSpecsRepo.listUiSpecIds).mockResolvedValue([]);
     vi.mocked(uiSpecsRepo.getUiSpec).mockResolvedValue(undefined);
     vi.mocked(uiSpecsRepo.collectOriginsFromAllUiSpecs).mockResolvedValue([]);
     vi.mocked(uiOriginsRepo.collectAllUiOrigins).mockResolvedValue([]);
     vi.mocked(schemaRepo.getSchemaOverride).mockResolvedValue(null);
+  });
+
+  afterEach(() => {
+    delete process.env.SDUI_ADMIN_API_KEY;
+    delete process.env.SDUI_ADMIN_AUTH_DISABLED;
   });
 
   it("serves a health check", async () => {
@@ -121,11 +129,22 @@ describe("orchestrator app", () => {
   });
 
   describe("PUT /ui/{id}", () => {
+    it("rejects requests without a bearer token", async () => {
+      const app = createApp();
+      const res = await app.request(`/ui/${VALID_UUID}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(defaultEmptySpec()),
+      });
+      expect(res.status).toBe(401);
+      await expect(res.json()).resolves.toMatchObject({ success: false });
+    });
+
     it("rejects malformed spec ids", async () => {
       const app = createApp();
       const res = await app.request("/ui/not-a-uuid", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...AUTH },
         body: JSON.stringify(defaultEmptySpec()),
       });
       expect(res.status).toBe(400);
@@ -135,7 +154,7 @@ describe("orchestrator app", () => {
       const app = createApp();
       const res = await app.request(`/ui/${VALID_UUID}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...AUTH },
         body: JSON.stringify(defaultEmptySpec()),
       });
       expect(res.status).toBe(200);
@@ -146,7 +165,7 @@ describe("orchestrator app", () => {
       const app = createApp();
       const res = await app.request(`/ui/${VALID_UUID}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...AUTH },
         body: JSON.stringify({ notAVeryValidUiDocument: true }),
       });
       expect(res.status).toBe(400);
@@ -169,7 +188,7 @@ describe("orchestrator app", () => {
       const app = createApp();
       const res = await app.request("/ui/origins", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...AUTH },
         body: JSON.stringify({ origin: "https://app.example.com", specId: "nope" }),
       });
       expect(res.status).toBe(400);
@@ -179,7 +198,7 @@ describe("orchestrator app", () => {
       const app = createApp();
       const res = await app.request("/ui/origins", {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...AUTH },
         body: JSON.stringify({ origin: "https://app.example.com", specId: VALID_UUID }),
       });
       expect(res.status).toBe(200);

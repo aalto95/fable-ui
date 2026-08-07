@@ -5,6 +5,7 @@ import { logger } from "hono/logger";
 import type { ZodError } from "zod";
 import { isOriginAllowed } from "@/config/cors";
 import { HealthResponse } from "@/openapi/schemas";
+import { adminRoutes } from "@/routes/admin";
 import { uiRoutes } from "@/routes/ui";
 
 const swaggerDocsHandler = swaggerUI({
@@ -87,6 +88,7 @@ export function createApp() {
   app.get("/", (c) => c.redirect("/docs"));
 
   app.route("/ui", uiRoutes);
+  app.route("/admin", adminRoutes);
 
   app.get("/docs", async (c) => {
     const out = await swaggerDocsHandler(c, async () => {});
@@ -112,7 +114,18 @@ export function createApp() {
       { name: "Health", description: "Liveness" },
       { name: "SDUI", description: "UI document and JSON Schema" },
       { name: "Admin", description: "UI/schema overrides" },
+      { name: "Admin Auth", description: "Admin API key management" },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          description:
+            "Admin API key (or SDUI_ADMIN_API_KEY env master key). Create keys via the CLI (`pnpm admin:create-key`) or POST /admin/api-keys.",
+        },
+      },
+    },
   });
 
   app.notFound((c) => c.json({ success: false, message: "Not found" }, 404));
