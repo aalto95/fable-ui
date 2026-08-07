@@ -7,6 +7,7 @@
     "node": ">=20.10.0"
   },
   "scripts": {
+    "prepare": "husky",
     "build": "turbo run build",
     "publish": "turbo run publish --filter=fable-ui",
     "publish:dry": "turbo run publish --filter=fable-ui -- --dry-run",
@@ -35,8 +36,14 @@
     "format": "biome format --write .",
     "lint:turbo": "turbo run lint"
   },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,cjs,mjs}": "biome check --write",
+    "*.{json,md,css}": "biome check --write"
+  },
   "devDependencies": {
     "@biomejs/biome": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
     "turbo": "catalog:"
   }
 }

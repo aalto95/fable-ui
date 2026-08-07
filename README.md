@@ -31,6 +31,8 @@ Monorepo for **fable-ui**, a schema-driven React library that renders pages and 
 | `pnpm shared:build` | Build only the `fable-shared` library. |
 | `pnpm fable-ui:publish` | Publish `fable-ui` to npm (after build and versioning). |
 
+A **pre-commit hook** (husky + lint-staged) runs Biome on staged files and the full test suite before every commit. Bypass with `git commit --no-verify` (don't, unless you know why).
+
 ## Using the library
 
 Install from npm or depend on the workspace package:

@@ -50,6 +50,8 @@ react-template/ — Placeholder for standalone React template (empty)
 
 ## Workflows
 
+- **Pre-commit hook** — husky + lint-staged: Biome `--write` on staged files, then `pnpm test`. Runs before every commit; bypass with `git commit --no-verify`.
+- **CI** — Vercel builds/deploys on push; `.github/workflows/lint-and-test.yml` runs lint + tests on push to `main` and PRs.
 - `pnpm web:dev` — start demo app
 - `pnpm admin:dev` — start admin editor
 - `pnpm orchestrator:dev` — start API server
